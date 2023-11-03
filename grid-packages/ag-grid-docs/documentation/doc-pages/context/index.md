@@ -21,5 +21,5 @@ The example below demonstrates how the context object can be used. Note the foll
 - When the reporting currency is changed the cell renderer uses the currency supplied in the context object to calculate the value using: `params.context.reportingCurrency`.
 
 - The price column header is updated to show the selected currency using a header value getter using `ctx.reportingCurrency`.
-
-<grid-example title='Context Object' name='context' type='typescript'></grid-example>
+ 
+<grid-example title='Context Object' name='context' type='mixed'></grid-example>

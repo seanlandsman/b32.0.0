@@ -9,19 +9,17 @@ import {
 } from '@ag-grid-community/core';
 
 const columnDefs: ColDef[] = [
-  { headerName: 'Product', field: 'product' },
+  { field: 'product' },
   { headerName: 'Currency', field: 'price.currency' },
   {
     headerName: 'Price Local',
     field: 'price',
-    cellStyle: { 'text-align': 'right' },
     cellRenderer: getCurrencyCellRenderer(),
     cellDataType: false,
   },
   {
     headerName: 'Report Price',
     field: 'price',
-    cellStyle: { 'text-align': 'right' },
     cellRenderer: getCurrencyCellRenderer(),
     valueGetter: reportingCurrencyValueGetter,
     headerValueGetter: 'ctx.reportingCurrency',
@@ -39,12 +37,12 @@ const gridOptions: GridOptions = {
   rowData: getData(),
   context: {
     reportingCurrency: 'EUR',
-  }
+  },
+  enableCellChangeFlash: true,
 }
 
 
 function reportingCurrencyValueGetter(params: ValueGetterParams) {
-  // Rates taken from google at time of writing
   var exchangeRates: Record<string, any> = {
     EUR: {
       GBP: 0.72,
@@ -113,7 +111,12 @@ function getCurrencyCellRenderer(): ICellRendererFunc {
 
 function currencyChanged() {
   var value = (document.getElementById('currency') as any).value
-  gridOptions.context = { reportingCurrency: value }
+  
+  gridApi!.setGridOption('context', {reportingCurrency : value})
+  // Could also mutate the context object directly:
+  // gridOptions.context.reportingCurrency = value;
+  
+  // Refresh all cells after currency change
   gridApi!.refreshCells()
   gridApi!.refreshHeader()
 }
