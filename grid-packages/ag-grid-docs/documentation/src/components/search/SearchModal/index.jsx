@@ -83,17 +83,27 @@ const SearchComponent = ({ closeModal, queryMode }) => {
     const [selectedHit, setSelectedHit] = useState(0);
     const onKeyDown = (evt) => {
         switch (evt.key) {
-            case 'ArrowDown':
-                const aboveIdx = (selectedHit + 1) % hits.length;
-                setSelectedHit(aboveIdx);
-                // small hack, if index === 0, we force scroll to go a bit further by specifying end, allowing the breadcrumb to scroll in too
-                document.querySelector(`[data-hit-index="${aboveIdx}"]`)?.scrollIntoView({ behavior: 'smooth', block: aboveIdx === 0 ? 'end' : 'nearest' });
+            case 'PageUp':
+                const topIdx = 0;
+                setSelectedHit(topIdx);
+                document.querySelector(`[data-hit-index="${topIdx}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                break;
+            case 'PageDown':
+                const bottomIdx = hits.length - 1;
+                setSelectedHit(bottomIdx);
+                document.querySelector(`[data-hit-index="${bottomIdx}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 break;
             case 'ArrowUp':
                 const belowIdx = selectedHit - 1 >= 0 ? selectedHit - 1 : hits.length - 1;
                 setSelectedHit(belowIdx);
                 // small hack, if index === 0, we force scroll to go a bit further by specifying end, allowing the breadcrumb to scroll in too
                 document.querySelector(`[data-hit-index="${belowIdx}"]`)?.scrollIntoView({ behavior: 'smooth', block: belowIdx === 0 ? 'end' : 'nearest' });
+                break;
+            case 'ArrowDown':
+                const aboveIdx = (selectedHit + 1) % hits.length;
+                setSelectedHit(aboveIdx);
+                // small hack, if index === 0, we force scroll to go a bit further by specifying end, allowing the breadcrumb to scroll in too
+                document.querySelector(`[data-hit-index="${aboveIdx}"]`)?.scrollIntoView({ behavior: 'smooth', block: aboveIdx === 0 ? 'end' : 'nearest' });
                 break;
             case 'Enter':
                 navigate(flattenedHits[selectedHit].path);
