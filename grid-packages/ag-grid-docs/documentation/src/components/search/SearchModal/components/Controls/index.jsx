@@ -8,7 +8,6 @@ import styles from './Controls.module.scss';
 
 export default () => (
     <div className={styles.keyboardSection}>
-        <img style={{paddingTop: '7.5px'}} src={LogoSvg} alt="AG Grid"></img>
         <div>
             <img src={EnterSvg} alt="Enter Key"></img>
             to select

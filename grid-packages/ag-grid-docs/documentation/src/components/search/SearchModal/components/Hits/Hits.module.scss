@@ -31,8 +31,9 @@
 }
 
 .title {
-    color: black;
-    text-decoration: underline;
+    color: var(--color-fg-primary);
+    text-decoration: none;
+    font-weight: var(--text-semibold);
 }
 
 [data-selected="true"] .title {
@@ -54,7 +55,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
-    color: rgba(52, 64, 84, 1);
+    color: var(--text-color-secondary);
 }
 
 [data-selected="true"] .text {
@@ -67,11 +68,16 @@
 }
 
 .crumbContainer {
-    margin: 25px 38px;
+    margin-left: 24px;
+    padding-top: 20px;
+    padding-bottom: 8px;
 }
+
 .crumb {
-    color: black;
+    color: var(--color-text-primary);
     font-size: 18px;
+    text-decoration: none;
+    font-weight: var(--text-semibold);
 }
 .gt {
     color: rgba(152, 162, 179, 1);
