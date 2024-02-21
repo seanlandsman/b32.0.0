@@ -1,13 +1,39 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import isDevelopment from 'utils/is-development';
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, useHits, useInstantSearch } from 'react-instantsearch';
+import { InstantSearch, useHits, useInstantSearch, useSearchBox } from 'react-instantsearch';
 import SearchBox from './components/SearchBox';
 import Modal from './components/Modal';
 import Hits from './components/Hits';
+import Controls from './components/Controls';
 import { navigate } from 'gatsby-link';
 
-const searchClient = algoliasearch(process.env.GATSBY_ALGOLIA_APP_ID, process.env.GATSBY_ALGOLIA_SEARCH_KEY);
+const algoliaClient = algoliasearch(process.env.GATSBY_ALGOLIA_APP_ID, process.env.GATSBY_ALGOLIA_SEARCH_KEY);
+/**
+ * We don't want to send a search request if the query is empty, so we override the search method to check for this.
+ */
+const searchClient = {
+    ...algoliaClient,
+    search(requests) {
+        if (requests.every(({ params }) => !params.query)) {
+            return Promise.resolve({
+                results: requests.map(() => ({
+                    hits: [],
+                    nbHits: 0,
+                    nbPages: 0,
+                    page: 0,
+                    processingTimeMS: 0,
+                    hitsPerPage: 0,
+                    exhaustiveNbHits: false,
+                    query: '',
+                    params: '',
+                })),
+            });
+        }
+
+        return algoliaClient.search(requests);
+    },
+};
 
 export default ({ currentFramework, closeModal }) => {
     const index = `ag-grid${isDevelopment() ? '-dev' : ''}_${currentFramework}`;
@@ -23,14 +49,14 @@ export default ({ currentFramework, closeModal }) => {
 
     return (
         <Modal closeModal={closeModal}>
-            <InstantSearch searchClient={searchClient} indexName={index}>
+            <InstantSearch searchClient={searchClient} indexName={index} onSt>
                 <SearchComponent closeModal={closeModal} />
             </InstantSearch>
         </Modal>
     );
 }
 
-const SearchComponent = ({ closeModal }) => {
+const SearchComponent = ({ closeModal, queryMode }) => {
     const { status } = useInstantSearch();
     /**
      * Note for whoever...
@@ -41,6 +67,9 @@ const SearchComponent = ({ closeModal }) => {
      * 
      * currently none of this has been considered, and probably should be, so I have left it here.
      */
+    const {
+        query,
+    } = useSearchBox();
 
     const {hits} = useHits();
     const structuredHits = useMemo(() => getAllCrumbs(hits), [hits]);
@@ -75,12 +104,17 @@ const SearchComponent = ({ closeModal }) => {
     return (
         <div onKeyDown={onKeyDown}>
             <SearchBox />
-            <Hits
-                structuredHits={structuredHits}
-                selectedHit={selectedHit}
-                setSelectedHit={setSelectedHit}
-                closeModal={closeModal}
-            />
+            {
+                query && <>
+                    <Hits
+                        structuredHits={structuredHits}
+                        selectedHit={selectedHit}
+                        setSelectedHit={setSelectedHit}
+                        closeModal={closeModal}
+                    />
+                    <Controls />
+                </>
+            }
         </div>
     );
 }

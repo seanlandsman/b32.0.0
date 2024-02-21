@@ -35,7 +35,7 @@ export default () => {
             <img src={SearchSvg} alt="Search Icon" />
             {/* below is a hack to prevent the text box styles applying, probs a better way but for this spike... */}
             <input ref={inputRef} type="search" className={`ag ${styles.inputEle}`} onChange={onInputChanged} /> 
-            <div className={styles.resultCount}>Results: {hits.length}</div>
+            {/* <div className={styles.resultCount}>Results: {hits.length}</div> */}
         </div>
     );
 }
