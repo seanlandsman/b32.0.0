@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import isDevelopment from 'utils/is-development';
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch } from 'react-instantsearch';
+import { InstantSearch, useHits, useInstantSearch } from 'react-instantsearch';
 import SearchBox from './components/SearchBox';
 import Modal from './components/Modal';
 import Hits from './components/Hits';
-import { useHits } from 'react-instantsearch';
 import { navigate } from 'gatsby-link';
 
 const searchClient = algoliasearch(process.env.GATSBY_ALGOLIA_APP_ID, process.env.GATSBY_ALGOLIA_SEARCH_KEY);
@@ -32,6 +31,17 @@ export default ({ currentFramework, closeModal }) => {
 }
 
 const SearchComponent = ({ closeModal }) => {
+    const { status } = useInstantSearch();
+    /**
+     * Note for whoever...
+     * status === 'loading' means the search is loading
+     * status === 'stalled' means the search is loading, but slower than expected
+     * status === 'error'   means the search failed
+     * status === 'idle'    means the search is done
+     * 
+     * currently none of this has been considered, and probably should be, so I have left it here.
+     */
+
     const {hits} = useHits();
     const structuredHits = useMemo(() => getAllCrumbs(hits), [hits]);
     const flattenedHits = useMemo(() => flattenStructure(structuredHits), [structuredHits]);

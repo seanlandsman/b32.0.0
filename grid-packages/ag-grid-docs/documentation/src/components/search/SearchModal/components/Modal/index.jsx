@@ -13,18 +13,18 @@ export default ({ closeModal, children }) => {
                 {children}
 
                 <div className={styles.keyboardSection}>
-                    <img style={{paddingTop: '7.5px'}} src={LogoSvg}></img>
+                    <img style={{paddingTop: '7.5px'}} src={LogoSvg} alt="AG Grid"></img>
                     <div>
-                        <img src={EnterSvg}></img>
+                        <img src={EnterSvg} alt="Enter Key"></img>
                         to select
                     </div>
                     <div>
-                        <img src={DownSvg}></img>
-                        <img src={UpSvg}></img>
+                        <img src={DownSvg} alt="Down Key"></img>
+                        <img src={UpSvg} alt="Up Key"></img>
                         to navigate
                     </div>
                     <div>
-                        <img src={EscSvg}></img>
+                        <img src={EscSvg} alt="Escape Key"></img>
                         to close
                     </div>
                 </div>

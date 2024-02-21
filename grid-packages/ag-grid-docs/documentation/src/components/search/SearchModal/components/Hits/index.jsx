@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './Hits.module.scss';
-import { Link } from 'gatsby-link';
+import { navigate } from 'gatsby-link';
 import PageResultSvg from './icons/page-result.svg';
 
 export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => {
@@ -43,25 +43,24 @@ export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => 
                             children.map((hit) => {
                                 const idx = hitIndex++;
                                 return (
-                                    <Link to={hit.path} style={{ all: 'unset' }} key={hit.path}>
-                                        <article
-                                            data-selected={selectedHit === idx}
-                                            data-hit-index={idx}
-                                            key={hit.objectID}
-                                            className={styles.hit}
-                                            tabIndex={1}
-                                            onMouseMove={(e) => selectThisHit(idx)}
-                                            onFocus={(e) => selectThisHit(idx)}
-                                            onClick={() => {
-                                                sendEvent('click', hit, 'Hit Clicked');
-                                                closeModal();
-                                            }}
-                                        >
-                                            <img src={PageResultSvg} className={styles.img} />
-                                            <p className={styles.title}>{hit.title}</p>
-                                            <p className={styles.text}>{hit.text}</p>
-                                        </article>
-                                    </Link>
+                                    <article
+                                        data-selected={selectedHit === idx}
+                                        tabIndex={0}
+                                        data-hit-index={idx}
+                                        key={hit.objectID}
+                                        className={styles.hit}
+                                        onMouseMove={(e) => selectThisHit(idx)}
+                                        onFocus={(e) => selectThisHit(idx)}
+                                        onClick={() => {
+                                            sendEvent('click', hit, 'Hit Clicked');
+                                            navigate(hit.path);
+                                            closeModal();
+                                        }}
+                                    >
+                                        <img src={PageResultSvg} className={styles.img} />
+                                        <p className={styles.title}>{hit.title}</p>
+                                        <p className={styles.text}>{hit.text}</p>
+                                    </article>
                                 )
                             })
                         }
