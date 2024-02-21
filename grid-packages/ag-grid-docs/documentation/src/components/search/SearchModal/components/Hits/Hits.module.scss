@@ -1,0 +1,70 @@
+.results {
+    max-height: calc(100vh - 450px);
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+
+.hit {
+    display: grid;
+    grid-template:
+        "i title" min-content
+        "i text" min-content / max-content 1fr
+    ;
+    margin: 8px 16px;
+    font-size: 18px;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+
+    &[data-selected="true"] {
+        background: rgba(4, 75, 147, 1);
+    }
+}
+
+.title {
+    line-height: 28px;
+    text-decoration: underline;
+    grid-area: title;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: black;
+}
+
+[data-selected="true"] > .title {
+    color: white;
+}
+
+.text {
+    grid-area: text;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: rgba(52, 64, 84, 1);
+}
+
+[data-selected="true"] > .text {
+    color: rgba(244, 248, 255, 1);
+}
+
+.img {
+    grid-area: i;
+    margin-right: 16px;
+}
+
+.crumbContainer {
+    margin: 25px 38px;
+}
+.crumb {
+    color: black;
+    font-size: 18px;
+}
+.gt {
+    color: rgba(152, 162, 179, 1);
+    font-size: 18px;
+    padding: 0 7px;
+}
