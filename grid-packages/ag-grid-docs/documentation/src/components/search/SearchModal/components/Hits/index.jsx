@@ -3,6 +3,7 @@ import styles from './Hits.module.scss';
 import { navigate } from 'gatsby-link';
 import PageResultSvg from './icons/page-result.svg';
 import { useHits } from 'react-instantsearch';
+import { ChevronRight } from 'lucide-react'
 
 export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => {
     const { sendEvent } = useHits(); 
@@ -32,12 +33,12 @@ export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => 
                 structuredHits.map(({ breadcrumb, children }) => (
                     <div key={breadcrumb}>
                         <div className={styles.crumbContainer}>
-                            {
+                        {
                                 breadcrumb.split(' > ').map((crumb, index) => (
-                                    <>
-                                        { index > 0 && <span className={styles.gt}> &gt; </span> }
+                                    <React.Fragment key={index}> {/* Ensure a key is provided for each fragment */}
+                                        { index > 0 && <ChevronRight className={styles.gt} /> /* Replace > with ChevronRight component */ }
                                         <span className={styles.crumb}>{crumb}</span>
-                                    </>
+                                    </React.Fragment>
                                 ))
                             }
                         </div>
