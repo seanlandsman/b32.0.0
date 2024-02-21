@@ -56,7 +56,7 @@ export default ({ currentFramework, closeModal }) => {
     );
 }
 
-const SearchComponent = ({ closeModal, queryMode }) => {
+const SearchComponent = ({ closeModal }) => {
     const { status } = useInstantSearch();
     /**
      * Note for whoever...

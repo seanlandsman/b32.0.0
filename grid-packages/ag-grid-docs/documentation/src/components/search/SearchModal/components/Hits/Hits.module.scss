@@ -21,19 +21,29 @@
     }
 }
 
-.title {
+.titleSection {
     line-height: 28px;
-    text-decoration: underline;
     grid-area: title;
     margin: 0;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-
-    color: black;
 }
 
-[data-selected="true"] > .title {
+.title {
+    color: black;
+    text-decoration: underline;
+}
+
+[data-selected="true"] .title {
+    color: white;
+}
+
+.heading {
+    color: rgba(52, 64, 84, 1);
+}
+
+[data-selected="true"] .heading {
     color: white;
 }
 
@@ -47,7 +57,7 @@
     color: rgba(52, 64, 84, 1);
 }
 
-[data-selected="true"] > .text {
+[data-selected="true"] .text {
     color: rgba(244, 248, 255, 1);
 }
 

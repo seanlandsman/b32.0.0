@@ -2,8 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import styles from './Hits.module.scss';
 import { navigate } from 'gatsby-link';
 import PageResultSvg from './icons/page-result.svg';
+import { useHits } from 'react-instantsearch';
 
 export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => {
+    const { sendEvent } = useHits(); 
     const containerRef = useRef();
 
     useEffect(() => {
@@ -58,7 +60,10 @@ export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => 
                                         }}
                                     >
                                         <img src={PageResultSvg} className={styles.img} />
-                                        <p className={styles.title}>{hit.title}</p>
+                                        <p className={styles.titleSection}>
+                                            <span className={styles.title}>{hit.title}</span>
+                                            <span className={styles.heading}>{hit.heading && <> - {hit.heading}</>}</span>
+                                        </p>
                                         <p className={styles.text}>{hit.text}</p>
                                     </article>
                                 )
