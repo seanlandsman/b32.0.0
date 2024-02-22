@@ -1,6 +1,6 @@
 export default {
-  template: `<span style="display: flex; height: 100%; width: 100%; align-items: center;">
-      <img v-for="images in arr" :src="src" style="display: block; width: 15px; height: auto; max-height: 50%;" />
+  template: `<span class="imgSpan">
+      <img v-for="images in arr" :src="src" class="priceIcon" />
       </span>`,
   data: function () {
       return {

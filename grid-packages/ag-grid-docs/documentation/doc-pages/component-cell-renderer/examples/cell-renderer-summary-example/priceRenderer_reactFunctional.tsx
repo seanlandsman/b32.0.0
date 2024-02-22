@@ -20,23 +20,13 @@ export default (params: CustomCellRendererProps) => {
 
   return (
     <span
-      style={{
-        display: "flex",
-        height: "100%",
-        width: "100%",
-        alignItems: "center",
-      }}
+      class="imgSpan"
     >
       {priceArr.map((_, index) => (
         <img
           key={index}
           src="https://www.ag-grid.com/example-assets/pound.png"
-          style={{
-            display: "block",
-            width: "15px",
-            height: "auto",
-            maxHeight: "50%",
-          }}
+          class="priceIcon"
         />
       ))}
     </span>

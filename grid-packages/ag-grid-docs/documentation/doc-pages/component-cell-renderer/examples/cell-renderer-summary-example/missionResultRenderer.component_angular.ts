@@ -8,11 +8,12 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [NgIf],
   template:`
-  <span *ngIf="value" >
+  <span *ngIf="value" :class="missionSpan" >
     <img
       [alt]="value"
       [src]="'https://www.ag-grid.com/example-assets/icons/' + value + '.png'"
       [height]="30"
+      :class="missionIcon"
     />
   </span>
   `,

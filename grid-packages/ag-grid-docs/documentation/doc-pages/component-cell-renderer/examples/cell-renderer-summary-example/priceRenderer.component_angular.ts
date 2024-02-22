@@ -7,11 +7,10 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [NgFor],
   template: `
-      <span>
-          <img *ngFor="let number of arr" [src]="src" />
+      <span :class="imgSpan" >
+          <img *ngFor="let number of arr" [src]="src" :class="priceIcon" />
       </span>
   `,
-  styles: ["img {display: block; width: 15px; height: auto; max-height: 50%;} span {display: flex; height: 100%; width: 100%; align-items: center}"]
 })
 export class PriceRenderer implements ICellRendererAngularComp {
   priceMultiplier: number = 1;

@@ -1,4 +1,4 @@
-import { ICellRendererComp, ICellRendererParams } from "@ag-grid-community/core";
+import { ICellRendererComp, ICellRendererParams } from "@ag-grid-community/core"
 
 export class MissionResultRenderer implements ICellRendererComp {
   eGui!: HTMLSpanElement
@@ -9,13 +9,10 @@ export class MissionResultRenderer implements ICellRendererComp {
     icon.src = `https://www.ag-grid.com/example-assets/icons/${
       params.value ? "tick-in-circle" : "cross-in-circle"
     }.png`
-    icon.setAttribute("style", "width: auto; height: auto;")
+    icon.setAttribute("class", "missionIcon")
 
     this.eGui = document.createElement("span")
-    this.eGui.setAttribute(
-      "style",
-      "display: flex; justify-content: center; height: 100%; align-items: center"
-    )
+    this.eGui.setAttribute("class", "missionSpan")
     this.eGui.appendChild(icon)
   }
 

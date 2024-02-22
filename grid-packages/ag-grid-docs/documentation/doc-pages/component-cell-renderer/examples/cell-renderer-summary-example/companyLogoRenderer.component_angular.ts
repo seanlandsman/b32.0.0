@@ -8,15 +8,15 @@ import { NgIf } from '@angular/common';
   standalone: true,
   imports: [NgIf],
   template: `
-  <span *ngIf="value" >
+  <span *ngIf="value" :class="imgSpan" >
     <img
       [alt]="value"
       [src]="'https://www.ag-grid.com/example-assets/space-company-logos/' + value.toLowerCase() + '.png'"
       [height]="30"
+      :class="logo"
     />
   </span>
   `,
-  styles: ["img {display: block; width: 25px; height: auto; max-height: 50%; margin-right: 12px; filter: brightness(1.1);} span {display: flex; height: 100%; width: 100%; align-items: center}"]
 })
 export class CompanyLogoRenderer implements ICellRendererAngularComp {
   // Init Cell Value

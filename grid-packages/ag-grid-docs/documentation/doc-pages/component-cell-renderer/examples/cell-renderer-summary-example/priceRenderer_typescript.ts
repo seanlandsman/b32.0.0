@@ -17,15 +17,15 @@ export function PriceRenderer(params: ICellRendererParams) {
   
     const priceSpan = document.createElement("span")
     priceSpan.setAttribute(
-      "style",
-      "display: flex; height: 100%; width: 100%; align-items: center"
+      "class",
+      "imgSpan"
     )
     for (let i = 0; i < priceMultiplier; i++) {
       const priceElement = document.createElement("img")
       priceElement.src = `https://www.ag-grid.com/example-assets/pound.png`
       priceElement.setAttribute(
-        "style",
-        "display: block; width: 15px; height: auto; max-height: 50%;"
+        "class",
+        "priceIcon"
       )
       priceSpan.appendChild(priceElement)
     }
