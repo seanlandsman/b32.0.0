@@ -3,19 +3,21 @@ import styles from '@design-system/modules/SearchControls.module.scss';
 import { Icon } from '@components/Icon';
 
 export default () => (
-    <div className={styles.keyboardSection}>
-        <div>
-            <Icon name="return" />
-            to select
+    <div className={styles.controlsOuter}>
+        <div className={styles.keyboardSection}>
+            <span className={styles.kbdIcon}><Icon name="return" /></span>
+            <span>to select</span>
         </div>
-        <div>
-            <Icon name="arrowUp" />
-            <Icon name="arrowDown" />
-            to navigate
+
+        <div className={styles.keyboardSection}>
+            <span className={styles.kbdIcon}><Icon name="arrowUp" /></span>
+            <span className={styles.kbdIcon}><Icon name="arrowDown" /></span>
+            <span>to navigate</span>
         </div>
-        <div>
-            <Icon name="escape" />
-            to close
+        
+        <div className={styles.keyboardSection}>
+            <span className={styles.kbdIcon}><Icon name="escape" /></span>
+            <span>to close</span>
         </div>
     </div>
 );

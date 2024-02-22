@@ -1,13 +1,39 @@
 @use '../core' as *;
 
-.keyboardSection {
-    display: grid;
-    grid-gap: 15px;
-    grid-template-columns: 1fr max-content max-content max-content;
-    border-top: 1px solid var(--color-border-primary);
-    padding: 29px 24px;
+.controlsOuter,
+.keyboardSection,
+.kbdIcon {
+    display: flex;
+    align-items: center;
 }
 
-.keyboardSection img {
-    padding-right: 12px;
+.controlsOuter {
+    justify-content: flex-end;
+    gap: $spacing-size-4;
+    padding: $spacing-size-4 $spacing-size-6;
+    border-top: 1px solid var(--color-border-primary);
+}
+
+.keyboardSection {
+    justify-content: center;
+    gap: $spacing-size-2;
+}
+
+.kbdIcon {
+    justify-content: center;
+    width: $spacing-size-8;
+    height: $spacing-size-8;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-secondary);
+    box-shadow: var(--shadow-xs);
+
+    + .kbdIcon {
+        margin-left: -$spacing-size-1;
+    }
+
+    :global(.icon) {
+        --icon-size: #{$spacing-size-5};
+        --color-icon: var(--color-util-gray-400);
+    }
 }
