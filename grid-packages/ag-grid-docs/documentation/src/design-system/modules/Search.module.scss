@@ -1,0 +1,30 @@
+@use '../core' as *;
+
+.headerSearchBox {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    padding: 7px 16px 7px 32px;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-primary);
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button {
+        display: none;
+    }
+
+    :global(.icon) {
+        --icon-size: 1.25em;
+        --color-icon: var(--color-fg-secondary);
+
+        position: absolute;
+        left: 0.625em;
+    }
+}
+
+input[type='search'].resultsOpen {
+    padding-right: 80px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}

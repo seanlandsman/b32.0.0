@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SearchModal from './SearchModal';
-import styles from '@design-system/modules/SearchBox.module.scss';
+import styles from '@design-system/modules/Search.module.scss';
 /**
  * grid-packages/ag-grid-docs/documentation
  * The website uses Algolia to power its search functionality. This component builds on components provided by Algolia
@@ -28,7 +28,7 @@ const Search = ({ currentFramework }) => {
     }, []);
 
     return <>
-        <div className={styles.searchBox} onClick={() => setOpen(true)}>Search documentation...<kbd>⌘ K</kbd>  </div>
+        <div className={styles.headerSearchBox} onClick={() => setOpen(true)}>Search documentation...<kbd>⌘ K</kbd>  </div>
         { isOpen && <SearchModal currentFramework={currentFramework} closeModal={() => setOpen(false)} /> }
     </>;
 }

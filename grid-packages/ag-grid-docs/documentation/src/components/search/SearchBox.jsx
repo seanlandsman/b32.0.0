@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styles from '@design-system/modules/SearchBox.module.scss';
-import { useSearchBox, useHits } from 'react-instantsearch';
+import { useSearchBox } from 'react-instantsearch';
 import { Icon } from '@components/Icon';
 
 let timeout;
@@ -9,8 +9,6 @@ export default () => {
     const {
         refine,
     } = useSearchBox();
-
-    const { hits } = useHits();
 
     const inputRef = useRef();
 
@@ -32,11 +30,10 @@ export default () => {
     };
 
     return (
-        <div className={styles.container} onClick={onContainerClick}>
-            <Icon name="search" />
-            {/* below is a hack to prevent the text box styles applying, probs a better way but for this spike... */}
-            <input ref={inputRef} type="search" className={`ag ${styles.inputEle}`} onChange={onInputChanged} /> 
-            {/* <div className={styles.resultCount}>Results: {hits.length}</div> */}
+        <div className={styles.searchBox} onClick={onContainerClick}>
+            <Icon name="search" svgClasses={styles.searchIcon}/>
+            
+            <input ref={inputRef} type="search" placeholder='Search documentation...'  className={styles.searchInput} onChange={onInputChanged} /> 
         </div>
     );
 }

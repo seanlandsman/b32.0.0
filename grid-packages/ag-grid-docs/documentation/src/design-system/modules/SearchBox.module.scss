@@ -1,50 +1,40 @@
 @use '../core' as *;
 
-.container {
+.searchBox {
     display: flex;
-    padding: 27px 24px;
+    border-radius: var(--radius-md);
     cursor: text;
 }
 
-.inputEle {
-    all: unset;
-    flex: 1;
-    margin: 0 17px;
+.searchIcon {
+    --icon-size: 28px;
+    --color-icon: var(--color-fg-secondary);
+
+    position: absolute;
+    top: 24px;
+    left: 24px;
+}
+
+input[type='search'].searchInput {
+    width: 100%;
+    padding: $spacing-size-6 $spacing-size-6 $spacing-size-6 $spacing-size-16;
     font-size: 20px;
     line-height: 28px;
+    border: none;
     outline: none;
-}
+    box-shadow: none;
 
-.resultCount {
-    font-size: 14px;
-    line-height: 28px;
-}
+    &:focus,
+    &:focus-visible {
+        box-shadow: none !important; // !important required to override complex input focus selectors
+    }
 
-.searchBox {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    padding: 7px 16px 7px 32px;
-    border-radius: var(--radius-md);
-    background-color: var(--color-bg-primary);
+    &::placeholder {
+        color: var(--color-fg-quinary);
+    }
 
     &::-webkit-search-decoration,
     &::-webkit-search-cancel-button {
         display: none;
     }
-
-    :global(.icon) {
-        --icon-size: 1.25em;
-        --color-icon: var(--color-fg-secondary);
-
-        position: absolute;
-        left: 0.625em;
-    }
-}
-
-input[type='search'].resultsOpen {
-    padding-right: 80px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
 }
