@@ -1,3 +1,4 @@
+@use '../core' as *;
 
 .keyboardSection {
     display: grid;
@@ -7,6 +8,6 @@
     padding: 29px 24px;
 }
 
-.keyboardSection img { 
+.keyboardSection img {
     padding-right: 12px;
 }
