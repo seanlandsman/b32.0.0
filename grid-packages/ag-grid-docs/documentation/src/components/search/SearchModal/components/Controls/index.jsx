@@ -1,24 +1,20 @@
 import React from 'react';
-import LogoSvg from './icons/logo.svg';
-import EnterSvg from './icons/enter-key.svg';
-import UpSvg from './icons/up-key.svg';
-import DownSvg from './icons/down-key.svg';
-import EscSvg from './icons/esc-key.svg';
 import styles from '@design-system/modules/SearchControls.module.scss';
+import { Icon } from '../../../../Icon';
 
 export default () => (
     <div className={styles.keyboardSection}>
         <div>
-            <img src={EnterSvg} alt="Enter Key"></img>
+            <Icon name="return" />
             to select
         </div>
         <div>
-            <img src={DownSvg} alt="Down Key"></img>
-            <img src={UpSvg} alt="Up Key"></img>
+            <Icon name="arrowUp" />
+            <Icon name="arrowDown" />
             to navigate
         </div>
         <div>
-            <img src={EscSvg} alt="Escape Key"></img>
+            <Icon name="escape" />
             to close
         </div>
     </div>

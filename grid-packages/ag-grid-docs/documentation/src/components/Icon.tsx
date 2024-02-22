@@ -21,6 +21,9 @@ import RowsIcon from '../images/inline-svgs/rows.svg';
 import StackBlitzIcon from '../images/inline-svgs/stack-blitz.svg';
 import TakeControlIcon from '../images/inline-svgs/take-control-icon.svg';
 import TickIcon from '../images/inline-svgs/tick.svg';
+import EscapeIcon from '../images/inline-svgs/escape.svg'
+import PageResult from '../images/inline-svgs/page-result.svg'
+import CodeResult from '../images/inline-svgs/code-result.svg'
 import styles from '@design-system/modules/Icon.module.scss';
 
 // Uses IBM Carbon Design System icons as a base
@@ -116,6 +119,7 @@ export const ICON_MAP = {
     arrowRight: CarbonIcon.ArrowRight,
     arrowDown: CarbonIcon.ArrowDown,
     arrowLeft: CarbonIcon.ArrowLeft,
+    return: CarbonIcon.Return,
     link: CarbonIcon.Link,
     chevronUp: BoldChevronUp,
     chevronRight: BoldChevronRight,
@@ -140,6 +144,9 @@ export const ICON_MAP = {
     moon: CarbonIcon.Moon,
     newTab: NewTabIcon,
     sort: CarbonIcon.ChevronSort,
+    escape: EscapeIcon,
+    pageResult: PageResult,
+    codeResult: CodeResult,
     ...SOCIALS_ICON_MAP,
     ...DOCS_CATEGORIES_ICON_MAP,
     ...HOMEPAGE_FEATURES_ICON_MAP,

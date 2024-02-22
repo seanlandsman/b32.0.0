@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import styles from '@design-system/modules/SearchHits.module.scss';
 import { navigate } from 'gatsby-link';
-import PageResultSvg from './icons/page-result.svg';
 import { useHits } from 'react-instantsearch';
 import { ChevronRight } from 'lucide-react'
+import { Icon } from '../../../../Icon';
 
 export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => {
     const { sendEvent } = useHits(); 
@@ -60,7 +60,8 @@ export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => 
                                             closeModal();
                                         }}
                                     >
-                                        <img src={PageResultSvg} className={styles.img} />
+                                        <Icon name="pageResult" />
+
                                         <p className={styles.titleSection}>
                                             <span className={styles.title}>{hit.title}</span>
                                             <span className={styles.heading}>{hit.heading && <> - {hit.heading}</>}</span>
