@@ -28,6 +28,10 @@
     border: 1px solid var(--color-border-secondary);
     box-shadow: var(--shadow-xs);
 
+    #{$selector-darkmode} & {
+        background-color: var(--color-bg-primary);
+    }
+
     + .kbdIcon {
         margin-left: -$spacing-size-1;
     }
@@ -35,5 +39,9 @@
     :global(.icon) {
         --icon-size: #{$spacing-size-5};
         --color-icon: var(--color-util-gray-400);
+
+        #{$selector-darkmode} & {
+            --color-icon: var(--color-fg-primary);
+        }
     }
 }
