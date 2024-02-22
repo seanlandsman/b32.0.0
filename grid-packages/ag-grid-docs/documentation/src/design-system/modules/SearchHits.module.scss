@@ -1,12 +1,15 @@
 @use '../core' as *;
 
 .results {
-    max-height: calc(100vh - 450px);
     padding-top: $spacing-size-2;
     font-size: 18px;
     border-top: 1px solid var(--color-border-primary);
     overflow: auto;
     overscroll-behavior: contain;
+
+    @media screen and (min-width: $breakpoint-docs-search-small) {
+        max-height: calc(100vh - 450px);
+    }
 }
 
 .hit {
@@ -61,6 +64,10 @@
 
     [data-selected='true'] & {
         color: var(--color-bg-primary);
+
+        #{$selector-darkmode} & {
+            color: var(--color-white);
+        }
     }
 }
 
@@ -87,6 +94,10 @@
     font-weight: var(--text-semibold);
     text-decoration: none;
     color: var(--color-text-primary);
+
+    #{$selector-darkmode} & {
+        color: var(--color-white);
+    }
 }
 
 .gt {
