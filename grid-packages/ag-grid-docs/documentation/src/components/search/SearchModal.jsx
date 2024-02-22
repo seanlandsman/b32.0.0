@@ -54,8 +54,15 @@ export default ({ currentFramework, closeModal }) => {
      */
     useEffect(() => {
         const htmlElement = document.getElementsByTagName('html')[0];
+        const scrollbarWidth = window.innerWidth-$(document).width();
+        
         htmlElement.style.overflow = 'hidden';
-        return () => htmlElement.style.overflow = 'unset';
+        htmlElement.style.paddingRight = `${scrollbarWidth}px`;
+
+        return () => {
+          htmlElement.style.overflow = '';
+          htmlElement.style.paddingRight = '';
+        };
     }, []);
 
     return (
