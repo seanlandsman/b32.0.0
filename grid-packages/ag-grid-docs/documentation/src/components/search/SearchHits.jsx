@@ -3,7 +3,7 @@ import styles from '@design-system/modules/SearchHits.module.scss';
 import { navigate } from 'gatsby-link';
 import { useHits } from 'react-instantsearch';
 import { ChevronRight } from 'lucide-react'
-import { Icon } from '../../../../Icon';
+import { Icon } from '@components/Icon';
 
 export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => {
     const { sendEvent } = useHits(); 

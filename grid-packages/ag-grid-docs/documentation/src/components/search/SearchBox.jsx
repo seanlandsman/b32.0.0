@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styles from '@design-system/modules/SearchBox.module.scss';
 import { useSearchBox, useHits } from 'react-instantsearch';
-import { Icon } from '../../../../Icon';
+import { Icon } from '@components/Icon';
 
 let timeout;
 

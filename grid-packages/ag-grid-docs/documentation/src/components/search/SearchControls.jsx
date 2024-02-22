@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '@design-system/modules/SearchControls.module.scss';
-import { Icon } from '../../../../Icon';
+import { Icon } from '@components/Icon';
 
 export default () => (
     <div className={styles.keyboardSection}>

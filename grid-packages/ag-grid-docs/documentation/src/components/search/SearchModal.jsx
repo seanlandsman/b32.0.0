@@ -2,13 +2,14 @@ import React, { useEffect, useState, useMemo } from 'react';
 import isDevelopment from 'utils/is-development';
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, useHits, useInstantSearch, useSearchBox } from 'react-instantsearch';
-import SearchBox from './components/SearchBox';
-import Modal from './components/Modal';
-import Hits from './components/Hits';
-import Controls from './components/Controls';
+import SearchBox from './SearchBox';
+import Hits from './SearchHits';
+import Controls from './SearchControls';
 import { navigate } from 'gatsby-link';
+import styles from '@design-system/modules/SearchModal.module.scss';
 
 const algoliaClient = algoliasearch(process.env.GATSBY_ALGOLIA_APP_ID, process.env.GATSBY_ALGOLIA_SEARCH_KEY);
+
 /**
  * We don't want to send a search request if the query is empty, so we override the search method to check for this.
  */
@@ -34,6 +35,16 @@ const searchClient = {
         return algoliaClient.search(requests);
     },
 };
+
+const Modal = ({ closeModal, children }) => {
+  return (
+      <div className={styles.backdrop} onClick={closeModal}>
+          <div className={styles.container} onClick={evt => evt.stopPropagation()}>
+              {children}
+          </div>
+      </div>
+  );
+}
 
 export default ({ currentFramework, closeModal }) => {
     const index = `ag-grid${isDevelopment() ? '-dev' : ''}_${currentFramework}`;
