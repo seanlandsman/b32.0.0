@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SearchModal from './SearchModal';
-import styles from '../../../../documentation/src/components/search/SearchModal/components/SearchBox/SearchBox.module.scss';
+import styles from '@design-system/modules/SearchBox.module.scss';
 /**
  * grid-packages/ag-grid-docs/documentation
  * The website uses Algolia to power its search functionality. This component builds on components provided by Algolia

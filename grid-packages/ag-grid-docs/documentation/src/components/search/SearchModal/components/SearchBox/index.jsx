@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import styles from './SearchBox.module.scss';
+import styles from '@design-system/modules/SearchBox.module.scss';
 import { useSearchBox, useHits } from 'react-instantsearch';
 import SearchSvg from './icons/search.svg';
 

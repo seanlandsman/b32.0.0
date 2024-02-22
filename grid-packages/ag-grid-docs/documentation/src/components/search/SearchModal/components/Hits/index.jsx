@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import styles from './Hits.module.scss';
+import styles from '@design-system/modules/SearchHits.module.scss';
 import { navigate } from 'gatsby-link';
 import PageResultSvg from './icons/page-result.svg';
 import { useHits } from 'react-instantsearch';

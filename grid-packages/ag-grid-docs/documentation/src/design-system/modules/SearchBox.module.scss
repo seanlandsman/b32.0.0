@@ -1,13 +1,30 @@
-// CSS directly lifted from Grid repo
-
-@use '../core' as *;
+.container {
+    display: flex;
+    padding: 27px 24px;
+    border-bottom: 1px solid var(--color-border-primary);
+    cursor: text;
+}
+.inputEle {
+    all: unset;
+    flex: 1;
+    font-size: 20px;
+    line-height: 28px;
+    margin: 0 17px;
+    outline: none;
+}
+.resultCount {
+    font-size: 14px;
+    line-height: 28px;
+}
 
 .searchBox {
     display: flex;
     align-items: center;
     position: relative;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-primary);
+    padding-right: 16px;
 
-    input[type='search'] {
         width: 100%;
         padding-top: 0.4375em;
         padding-bottom: 0.4375em;
@@ -17,17 +34,7 @@
         &::-webkit-search-cancel-button {
             display: none;
         }
-    }
-
-    #{$selector-darkmode} & {
-        input {
-            background: color-mix(in srgb, var(--color-white), transparent 94%);
-
-            &::placeholder {
-                color: rgba(255, 255, 255, 0.6);
-            }
-        }
-    }
+    
 
     :global(.icon) {
         --icon-size: 1.25em;

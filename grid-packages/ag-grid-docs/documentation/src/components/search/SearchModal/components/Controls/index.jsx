@@ -4,7 +4,7 @@ import EnterSvg from './icons/enter-key.svg';
 import UpSvg from './icons/up-key.svg';
 import DownSvg from './icons/down-key.svg';
 import EscSvg from './icons/esc-key.svg';
-import styles from './Controls.module.scss';
+import styles from '@design-system/modules/SearchControls.module.scss';
 
 export default () => (
     <div className={styles.keyboardSection}>
