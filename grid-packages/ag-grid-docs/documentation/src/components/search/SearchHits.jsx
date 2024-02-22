@@ -60,7 +60,7 @@ export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => 
                                             closeModal();
                                         }}
                                     >
-                                        <Icon name="pageResult" />
+                                        <span className={styles.hitIcon}><Icon name="pageResult" /></span>
 
                                         <p className={styles.titleSection}>
                                             <span className={styles.title}>{hit.title}</span>
