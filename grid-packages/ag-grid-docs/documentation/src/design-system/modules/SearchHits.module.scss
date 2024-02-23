@@ -100,6 +100,23 @@
     }
 }
 
-.gt {
-    color: rgba(152, 162, 179, 1);
+.chevronRight {
+    color: var(--color-fg-quinary);
+}
+
+.noResults {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: $spacing-size-40;
+    border-top: 1px solid var(--color-border-primary);
+    color: var(--color-text-tertiary);
+
+    :global(.icon) {
+        --icon-size: #{$spacing-size-10};
+        --color-icon: var(--color-util-gray-300);
+
+        margin-bottom: $spacing-size-2;
+    }
 }

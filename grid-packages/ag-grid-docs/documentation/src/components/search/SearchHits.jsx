@@ -5,7 +5,7 @@ import { useHits } from 'react-instantsearch';
 import { ChevronRight } from 'lucide-react'
 import { Icon } from '@components/Icon';
 
-export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => {
+export default ({ closeModal, structuredHits, selectedHit, setSelectedHit, query }) => {
     const { sendEvent } = useHits(); 
     const containerRef = useRef();
 
@@ -17,7 +17,10 @@ export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => 
     }, [structuredHits]);
 
     if (structuredHits.length === 0) {
-        return <div>No Results</div>;
+        return <div className={styles.noResults}>
+            <Icon name="search"/>
+            <span>No Results for "<b>{query}</b>"</span>
+        </div>;
     }
 
     // Used for when hovered or focused (tab)
@@ -27,6 +30,7 @@ export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => 
 
     // easy way of capturing the displayed index of each record, for highlighting
     let hitIndex = 0;
+
     return (
         <div className={styles.results} ref={containerRef}>
             {
@@ -36,7 +40,7 @@ export default ({ closeModal, structuredHits, selectedHit, setSelectedHit }) => 
                         {
                                 breadcrumb.split(' > ').map((crumb, index) => (
                                     <React.Fragment key={index}> {/* Ensure a key is provided for each fragment */}
-                                        { index > 0 && <ChevronRight className={styles.gt} /> /* Replace > with ChevronRight component */ }
+                                        { index > 0 && <ChevronRight className={styles.chevronRight} /> /* Replace > with ChevronRight component */ }
                                         <span className={styles.crumb}>{crumb}</span>
                                     </React.Fragment>
                                 ))

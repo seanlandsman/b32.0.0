@@ -38,8 +38,8 @@ const searchClient = {
 
 const Modal = ({ closeModal, children }) => {
   return (
-      <div className={styles.backdrop} onClick={closeModal}>
-          <div className={styles.container} onClick={evt => evt.stopPropagation()}>
+      <div className={styles.backdrop} onClick={closeModal} role="button" tabIndex="0">
+          <div className={styles.container} onClick={evt => evt.stopPropagation()} role="button" tabIndex="0">
               {children}
           </div>
       </div>
@@ -99,6 +99,7 @@ const SearchComponent = ({ closeModal }) => {
     }, [hits]);
 
     const [selectedHit, setSelectedHit] = useState(0);
+    
     const onKeyDown = (evt) => {
         switch (evt.key) {
             case 'PageUp':
@@ -133,12 +134,13 @@ const SearchComponent = ({ closeModal }) => {
         <div onKeyDown={onKeyDown}>
             <SearchBox />
             {
-                query && <>
+                query.length >= 3 && <>
                     <Hits
                         structuredHits={structuredHits}
                         selectedHit={selectedHit}
                         setSelectedHit={setSelectedHit}
                         closeModal={closeModal}
+                        query={query}
                     />
                     <Controls />
                 </>
