@@ -113,7 +113,7 @@ const HeaderNav = ({ path, currentFramework }) => {
     const [isOpen, setIsOpen] = useState(false);
     const { width } = useWindowSize();
     const isDesktop = width >= SITE_HEADER_SMALL_WIDTH;
-    const isDocsUrl = path.includes('-data-grid');
+    const isHomepage = path === '/';
 
     const toggleIsOpen = () => {
         setIsOpen((currentIsOpen) => {
@@ -123,7 +123,7 @@ const HeaderNav = ({ path, currentFramework }) => {
 
     return (
         <>
-            {isDocsUrl ? (
+            {!isHomepage ? (
                 <div className={styles.docsNavBtnSearchContainer}>
                     <button
                         id="mobile-docs-nav-button"
