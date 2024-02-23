@@ -10,7 +10,7 @@ import { CompanyLogoRenderer } from './companyLogoRenderer_typescript'
 import { MissionResultRenderer } from './missionResultRenderer_typescript'
 import { CustomButtonComponent } from './customButtonComponent_typescript'
 import { PriceRenderer } from './priceRenderer_typescript'
-import { CompanyRenderer } from './companyRenderer_typescript.ts'
+import { CompanyRenderer } from './companyRenderer_typescript'
 
 // Grid API: Access to Grid API methods
 let gridApi: GridApi

@@ -19,13 +19,13 @@ export default (params) => {
 
   return (
     <span
-      class="imgSpan"
+      className="imgSpan"
     >
       {priceArr.map((_, index) => (
         <img
           key={index}
           src="https://www.ag-grid.com/example-assets/pound.png"
-          class="priceIcon"
+          className="priceIcon"
         />
       ))}
     </span>

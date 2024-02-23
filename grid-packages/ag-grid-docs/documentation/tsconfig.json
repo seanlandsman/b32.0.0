@@ -31,7 +31,7 @@
         "./doc-pages/**/*.ts",
         "./doc-pages/**/*.tsx",
         "./shared-types/**/*"
-    ],
+, "doc-pages/component-cell-renderer/examples/cell-renderer-summary-example/customButtonComponent_reactFunctional.jsx", "doc-pages/component-cell-renderer/examples/cell-renderer-summary-example/companyRenderer_reactFunctional.jsx"    ],
     "exclude": [
         "./node_modules"
     ]

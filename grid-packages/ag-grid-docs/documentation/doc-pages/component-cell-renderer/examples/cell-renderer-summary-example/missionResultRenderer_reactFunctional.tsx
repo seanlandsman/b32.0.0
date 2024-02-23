@@ -3,7 +3,7 @@ import React from "react";
 
 export default (params: CustomCellRendererProps) => (
   <span
-    class="missionSpan"
+    className="missionSpan"
   >
     {
       <img
@@ -11,7 +11,7 @@ export default (params: CustomCellRendererProps) => (
         src={`https://www.ag-grid.com/example-assets/icons/${
           params.value ? "tick-in-circle" : "cross-in-circle"
         }.png`}
-        class="missionIcon"
+        className="missionIcon"
       />
     }
   </span>
