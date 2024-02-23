@@ -49,6 +49,8 @@ export default ({ closeModal, structuredHits, selectedHit, setSelectedHit, query
                         {
                             children.map((hit) => {
                                 const idx = hitIndex++;
+                                const isApiResult = breadcrumb.substring(0, 3) === 'API';
+
                                 return (
                                     <article
                                         data-selected={selectedHit === idx}
@@ -64,7 +66,7 @@ export default ({ closeModal, structuredHits, selectedHit, setSelectedHit, query
                                             closeModal();
                                         }}
                                     >
-                                        <span className={styles.hitIcon}><Icon name="pageResult" /></span>
+                                        <span className={styles.hitIcon}><Icon name={!isApiResult ? 'pageResult' : 'codeResult'} /></span>
 
                                         <p className={styles.titleSection}>
                                             <span className={styles.title}>{hit.title}</span>
