@@ -30,7 +30,7 @@ in a cell. The grid comes with some Provided Cell Components for common grid tas
 </video-section>
 </framework-specific-section>
 
-The example below shows some Custom Cell Components.
+The example below shows adding images, hyperlinks, and buttons to a cell using Custom Cell Components.
 
 <grid-example title='Simple Cell Renderer' name='cell-renderer-summary-example' type='mixed' options='{ "exampleHeight": 460 }'></grid-example>
 
@@ -232,6 +232,11 @@ md-include:complementing-component-angular.md
 md-include:complementing-component-react.md
 md-include:complementing-component-vue.md
 
+This example shows rendering an image with and without custom props and using custom props to pass a callback to a button.
+The `Refresh Data` button triggers the cell components to refresh by randomising the success data.
+
+<grid-example title='Custom Props' name='custom-props' type='mixed'></grid-example>
+
 md-include:renderer-function-javascript.md
 md-include:renderer-function-angular.md
 md-include:renderer-function-vue.md 
@@ -245,15 +250,6 @@ md-include:renderer-function-vue.md
 </note>
 </framework-specific-section>
 
-## Complex Example
-
-The example below combines many of the features above and shows the following:
-
-- `Max Temp` and `Min Temp` columns uses a function Cell Component.
-- `Sunshine`, `Frost`, and `Rainfall` use functions to display icons.
-- `Randomise Frost` button triggers the cell components to refresh by randomising the frost data.
-
-<grid-example title='Cell Renderer' name='cell-renderer' type='mixed'></grid-example>
 
 ## Accessing Instances
 
