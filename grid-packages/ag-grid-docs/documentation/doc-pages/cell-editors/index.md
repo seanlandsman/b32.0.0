@@ -4,15 +4,9 @@ title: "Edit Components"
 
 A Cell Editor Component is the UI that appears, normally inside the Cell, that takes care of the Edit operation. You can select from the [Provided Cell Editors](/provided-cell-editors/) or create your own [Custom Cell Editor Components](/cell-editors/).
 
-The example below shows some Custom Editor Components.
+The example below shows some Provided Editor Components and some Custom Editor Components.
 
-**NOTE - example needs to change and show: a) editing using provided editors and 2) editing with some simple custom editors, eg simple text editor (similar to provided) and happy / sad editor. Using head names sush as "Provided Text" and "Custom Numeric" would allow not having bullet points before example. The example use cases of doubling numbers is stupid.**
-
-- The `Doubling` Cell Editor will double a given input and reject values over a 1000
-- The `Mood` Cell Editor illustrates a slightly more complicated editor with values changed depending on the smiley chosen
-- The `Numeric` Cell Editor illustrates a slightly more complicated numeric editor to the `Doubling` editor, with increased input validation
-
-<grid-example title='Simple Editor Components' name='component-editor' type='mixed' options='{ "exampleHeight": 370, "includeNgFormsModule" : true }'></grid-example>
+<grid-example title='Simple Editor Components' name='component-editor-2' type='mixed' options='{ "enterprise": true, "modules": ["clientside", "richselect"], "exampleHeight": 370, "includeNgFormsModule" : true, "extras": ["fontawesome"] }'></grid-example>
 
 ## Custom Components
 
@@ -271,15 +265,15 @@ The example below shows using `getCellEditorInstances`. The following can be not
 
 
 
-## Datepicker Cell Editing Example
+<!-- ## Datepicker Cell Editing Example
 
 The example below illustrates:
 
 - 'Date' column uses a Component cell editor that allows you to pick a date using jQuery UI Datepicker.
 
-<grid-example title='Datepicker Cell Editing' name='datepicker-cell-editing' type='generated' options='{ "enterprise": true, "modules": ["clientside", "menu", "columnpanel"], "extras": ["jquery", "jqueryui"] }'></grid-example>
+<grid-example title='Datepicker Cell Editing' name='datepicker-cell-editing' type='generated' options='{ "enterprise": true, "modules": ["clientside", "menu", "columnpanel"], "extras": ["jquery", "jqueryui"] }'></grid-example> -->
 
-## Another Example
+<!-- ## Another Example
 
 - 'Gender' column uses a Component cell editor that allows choices via a 'richSelect' (AG Grid Enterprise only), with values supplied by complementing the editor parameters.
 - 'Age' column uses a Component cell editor that allows simple integer input only.
@@ -287,4 +281,4 @@ The example below illustrates:
 - 'Address' column uses a Component cell editor that allows input of multiline text via a 'largeText'. <kbd>⇥ Tab</kbd> and <kbd>⎋ Esc</kbd> (amongst others) will exit editing in this field, <kbd>⇧ Shift</kbd>+<kbd>↵ Enter</kbd> will allow newlines.
 - 'Country' columns shows using 'richSelect' for a complex object - the cell renderer takes care of only rendering the country name.
 
-<grid-example title='Simple Editor Components' name='component-editor-2' type='mixed' options='{ "enterprise": true, "modules": ["clientside", "richselect"], "exampleHeight": 370, "includeNgFormsModule" : true, "extras": ["fontawesome"] }'></grid-example>
+<grid-example title='Simple Editor Components' name='component-editor-2' type='mixed' options='{ "enterprise": true, "modules": ["clientside", "richselect"], "exampleHeight": 370, "includeNgFormsModule" : true, "extras": ["fontawesome"] }'></grid-example> -->
