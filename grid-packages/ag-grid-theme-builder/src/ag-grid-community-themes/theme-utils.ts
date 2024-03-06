@@ -37,18 +37,13 @@ export const proportionToPercent = (value: number) =>
 
 export type DefinePartArgs<T extends string = string> = Omit<Part<T>, 'params'>;
 
-export const definePart = <T extends string>(args: DefinePartArgs<T>): Part<T> => {
-  const params = Object.keys(args.defaults || {});
-  return {
-    ...args,
-    params: params as T[],
-  };
-};
+export const definePart = <T extends string>(args: DefinePartArgs<T>): Part<T> => ({
+  ...args,
+  params: Object.keys(args.defaults || {}) as T[],
+});
 
 export const camelCase = (str: string) =>
   str.replace(/[\W_]+([a-z])/g, (_, letter) => letter.toUpperCase());
-
-export const presetParamName = (partId: string) => `${camelCase(partId)}Preset`;
 
 export const combineParts = <P extends AnyPart>(
   parts: P[],

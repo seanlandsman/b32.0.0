@@ -1,14 +1,7 @@
 import { logErrorMessageOnce } from '../model/utils';
-import { ParamTypes } from './GENERATED-parts-public';
-import commonStructuralCSS from './css/common-structural.css?inline';
+import { ParamTypes } from './GENERATED-param-types';
 import { AnyPart, CssSource, Part } from './theme-types';
-import {
-  borderValueToCss,
-  camelCase,
-  logErrorMessage,
-  paramToVariableName,
-  presetParamName,
-} from './theme-utils';
+import { borderValueToCss, camelCase, paramToVariableName } from './theme-utils';
 
 export type Theme = {
   css: string;
@@ -39,32 +32,11 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
     Object.assign(mergedParams, part.defaults);
   }
 
-  // apply presets, which override defaults
-  const presetProperties = new Set<string>();
-  for (const part of parts) {
-    if (part.presets) {
-      const presetProperty = presetParamName(part.partId);
-      presetProperties.add(presetProperty);
-      const activePreset =
-        overrideParams[presetProperty] !== undefined
-          ? overrideParams[presetProperty]
-          : mergedParams[presetProperty];
-      if (activePreset) {
-        const preset = part.presets?.[activePreset];
-        if (preset) {
-          Object.assign(mergedParams, preset);
-        } else {
-          logErrorMessage(
-            `Invalid value ${activePreset} for ${presetProperty} (valid values are ${Object.keys(part.presets || {}).join(', ')}`,
-          );
-        }
-      }
-    }
-  }
+  // TODO apply exclusion group
 
   const allowedParams = new Set(parts.flatMap((part) => part.params));
 
-  // apply params passed to this method, which override presets and defaults
+  // apply override params passed to this method
   for (const [name, value] of Object.entries(overrideParams)) {
     if (value === undefined) continue;
     if (allowedParams.has(name)) {
@@ -84,7 +56,7 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
     if (isBorderParam(name)) {
       value = borderValueToCss(value);
     }
-    if (!presetProperties.has(name) && typeof value === 'string' && value) {
+    if (typeof value === 'string' && value) {
       variableDefaults += `\t${paramToVariableName(name)}: ${value};\n`;
       result.paramDefaults[name] = value;
     }
@@ -92,10 +64,10 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
   variableDefaults += '}';
 
   // combine CSS
-  const mainCSS: string[] = [variableDefaults, commonStructuralCSS];
+  const mainCSS: string[] = [variableDefaults];
   for (const part of parts) {
     if (part.css) {
-      mainCSS.push(`/* Part ${part.partId} */`);
+      mainCSS.push(`/* Part ${part.feature}/${part.variant} */`);
       mainCSS.push(...part.css.map((p) => cssPartToString(p, mergedParams)));
     }
   }

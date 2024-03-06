@@ -30,10 +30,6 @@ const makePublicFile = (): string => {
     'export type BorderStyle = ' + cssBorderStyles.map((s) => `'${s}'`).join(' | ') + ';\n\n';
 
   for (const part of allPartsMeta) {
-    if (part.presets) {
-      const presetUnion = part.presets.map((p) => JSON.stringify(p.presetId)).join(' | ');
-      result += `export type ${presetTypeName(part.partId)} = ${presetUnion};\n\n`;
-    }
     if (part.params) {
       const paramsUnion = part.params.map((p) => JSON.stringify(p.property)).join(' | ');
       result += `export type ${paramsUnionName(part.partId)} = ${paramsUnion};\n\n`;
@@ -44,9 +40,6 @@ const makePublicFile = (): string => {
     const args: DefinePartArgs = {
       partId: part.partId,
     };
-    if (part.presets) {
-      args.presets = Object.fromEntries(part.presets.map((p) => [p.presetId, p.paramValues]));
-    }
     if (part.params) {
       args.defaults = {};
       for (const { property, defaultValue } of part.params) {
