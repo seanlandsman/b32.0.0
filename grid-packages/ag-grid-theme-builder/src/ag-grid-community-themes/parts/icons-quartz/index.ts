@@ -1,6 +1,6 @@
 import { definePart } from '../../theme-utils';
-import quartzIconsEmbeddedTsImport from './css/quartz-icons-embedded';
-import quartzIconsCssImport from './css/quartz-icons.css?inline';
+import quartzIconsCss from './GENERATED-icons-quartz';
+import quartzIconsEmbeddedTsImport from './icon-data';
 
 export const quartzIcons = definePart({
   feature: 'icons',
@@ -9,5 +9,5 @@ export const quartzIcons = definePart({
     iconSize: '16px',
     iconStrokeWidth: '1.5px',
   },
-  css: [quartzIconsEmbeddedTsImport, quartzIconsCssImport],
+  css: [quartzIconsEmbeddedTsImport, quartzIconsCss],
 });

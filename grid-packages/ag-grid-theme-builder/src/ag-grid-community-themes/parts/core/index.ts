@@ -9,7 +9,7 @@ import {
   transparentForeground,
 } from '../..';
 import { definePart } from '../../theme-utils';
-import coreCssImport from './css/core.css?inline';
+import coreCssImport from './GENERATED-core-css';
 import indentTsImport from './indent';
 
 /**
