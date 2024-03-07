@@ -1,15 +1,11 @@
-import path, { join } from 'path';
-import * as prettier from 'prettier';
-import { ParamType, getParamDocs, getParamType } from '../metadata/docs';
-import { Part } from '../theme-types';
-import { camelCase, logErrorMessage } from '../theme-utils';
-
-const projectDir = path.join(__dirname, '../');
+import { join } from 'path';
+import { ParamType, getParamDocs, getParamType } from '../../metadata/docs';
+import { Part } from '../../theme-types';
+import { camelCase } from '../../theme-utils';
+import { fatalError, getProjectDir, writeTsFile } from './utils';
 
 export const generateDocsFile = async () => {
-  // Read all parts
-
-  const mainExports = await import(join(__dirname, '..'));
+  const mainExports = await import(getProjectDir());
 
   const allParts = Object.values(mainExports).filter(isPart);
   const corePart = allParts.find((p) => p.feature === 'core');
@@ -38,23 +34,10 @@ export const generateDocsFile = async () => {
   }
   result += `}\n\n`;
 
-  await writeTsFile('GENERATED-param-types.ts', result);
+  await writeTsFile(join(getProjectDir(), 'GENERATED-param-types.ts'), result);
 };
 
 const isPart = (part: any): part is Part => part.feature && part.variant;
-
-const writeTsFile = async (filename: string, content: string) => {
-  const fs = await import('fs');
-  const path = await import('path');
-  const prettierConfig = (await prettier.resolveConfig(__dirname)) || undefined;
-  try {
-    content = await prettier.format(content, { parser: 'typescript', ...prettierConfig });
-  } catch (e) {
-    logErrorMessage(e);
-    content += `\n\nSYNTAX ERROR WHILE FORMATTING:\n\n${(e as any).stack || e}`;
-  }
-  fs.writeFileSync(path.join(projectDir, filename), content);
-};
 
 const paramExtraDocs = (type: ParamType): string[] => {
   switch (type) {
@@ -141,9 +124,3 @@ const generatedWarning = `
 const valueTypeName = (type: ParamType) => `${upperCamelCase(type)}Value`;
 
 const upperCamelCase = (str: string) => camelCase(str[0].toUpperCase() + str.slice(1));
-
-const fatalError = (message: string) => {
-  // eslint-disable-next-line no-console
-  console.error(message);
-  process.exit(1);
-};

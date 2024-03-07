@@ -6,14 +6,12 @@ import postcss from 'postcss';
 import cssImport from 'postcss-import';
 import cssNesting from 'postcss-nesting';
 import cssRtl from 'postcss-rtlcss';
+import { getProjectDir, writeTsFile } from './utils';
 
 const DEV_MODE = process.argv.includes('--dev');
 
 export const generateAllCSSEmbeds = async () => {
-  globSync(join(__dirname, `../parts/*/GENERATED-*`)).forEach((file) => {
-    fs.rmSync(file);
-  });
-  const cssEntryPoints = globSync(join(__dirname, '../parts/*/*.css'));
+  const cssEntryPoints = globSync(join(getProjectDir(), 'parts/*/*.css'));
   for (const cssEntryPoint of cssEntryPoints) {
     await compileCSSEntryPoint(cssEntryPoint);
   }
@@ -26,6 +24,7 @@ const compileCSSEntryPoint = async (file: string) => {
 
 const generateCSSEmbed = async (entry: string) => {
   const dir = dirname(entry);
+  const part = dirname(dir);
   const outputFile = join(dir, `GENERATED-${basename(entry)}`).replace(/\.css$/, '.ts');
   let cssString =
     `/**\n * FILE: ${prettyPath(entry)}\n */\n` + (await loadAndProcessCSSFile(entry));
@@ -42,8 +41,22 @@ const generateCSSEmbed = async (entry: string) => {
       ],
     }),
   );
-  const typescriptContent = 'export default `' + cssString.replaceAll('`', '\\`') + '`;';
-  fs.writeFileSync(outputFile, typescriptContent);
+  let result = 'export default `' + cssString.replaceAll('`', '\\`') + '`;';
+
+  if (DEV_MODE) {
+    result += `
+    if (import.meta.hot) {
+      import.meta.hot.accept((newModule) => {
+        const handler = (window as any).handlePartsCssChange
+        if (newModule && handler) {
+          handler(${JSON.stringify(part)}, newModule.default);
+        }
+      });
+    }
+  `;
+  }
+
+  await writeTsFile(outputFile, result);
 };
 
 const checkAllCssFilesImported = async (entryFile: string) => {
@@ -91,4 +104,4 @@ const fatalError = (message: string) => {
   process.exit(1);
 };
 
-const prettyPath = (path: string) => relative(join(__dirname, '..'), path);
+const prettyPath = (path: string) => relative(getProjectDir(), path);

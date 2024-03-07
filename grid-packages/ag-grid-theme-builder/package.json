@@ -4,15 +4,15 @@
   "version": "31.0.2",
   "scripts": {
     "build": "npm run codegen:prod && tsc && vite build",
-    "dev": "npm run codegen:hot && concurrently vite npm:codegen:watch",
+    "dev": "npm run codegen:dev && concurrently vite npm:codegen:watch",
     "clean": "rimraf ./dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "dev-test": "vitest",
     "build-css": "tsx src/ag-grid-community-themes/scripts/codegen.ts",
     "build-types": "tsx src/ag-grid-community-themes/scripts/codegen.ts",
-    "codegen:prod": "tsx src/ag-grid-community-themes/scripts/codegen.ts && tsx src/ag-grid-community-themes/scripts/build-types.ts",
-    "codegen:dev": "tsx src/ag-grid-community-themes/scripts/codegen.ts --dev && tsx src/ag-grid-community-themes/scripts/build-types.ts",
+    "codegen:prod": "tsx src/ag-grid-community-themes/scripts/codegen.ts",
+    "codegen:dev": "tsx src/ag-grid-community-themes/scripts/codegen.ts --dev",
     "codegen:watch": "chokidar 'src/ag-grid-community-themes/**/*' --ignore '**/GENERATED-*' --command 'npm run codegen:dev'"
   },
   "dependencies": {
