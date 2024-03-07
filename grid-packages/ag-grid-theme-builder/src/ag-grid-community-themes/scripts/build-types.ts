@@ -1,1 +1,149 @@
-console.log('Built types 💪');
+import path, { join } from 'path';
+import * as prettier from 'prettier';
+import { ParamType, getParamDocs, getParamType } from '../metadata/docs';
+import { Part } from '../theme-types';
+import { camelCase, logErrorMessage } from '../theme-utils';
+
+const projectDir = path.join(__dirname, '../');
+
+export const generateDocsFile = async () => {
+  // Read all parts
+
+  const mainExports = await import(join(__dirname, '..'));
+
+  const allParts = Object.values(mainExports).filter(isPart);
+  const corePart = allParts.find((p) => p.feature === 'core');
+  if (!corePart) {
+    throw fatalError('No core part found');
+  }
+
+  const allParams = Array.from(new Set(allParts.flatMap((p) => p.params))).sort();
+
+  let result = generatedWarning;
+
+  const valueTypes = Array.from(new Set(allParams.map(getParamType).map(valueTypeName))).sort();
+
+  result += `import { ${valueTypes.join(', ')} } from ".";\n\n`;
+
+  result += `export type Param = keyof ParamTypes;\n\n`;
+
+  result += `export type ParamTypes = {\n\n`;
+  for (const param of allParams) {
+    const type = getParamType(param);
+    result += docComment({
+      mainComment: getParamDocs(param),
+      extraComment: paramExtraDocs(type),
+    });
+    result += `  ${param}: ${upperCamelCase(type)}Value;\n\n`;
+  }
+  result += `}\n\n`;
+
+  await writeTsFile('GENERATED-param-types.ts', result);
+};
+
+const isPart = (part: any): part is Part => part.feature && part.variant;
+
+const writeTsFile = async (filename: string, content: string) => {
+  const fs = await import('fs');
+  const path = await import('path');
+  const prettierConfig = (await prettier.resolveConfig(__dirname)) || undefined;
+  try {
+    content = await prettier.format(content, { parser: 'typescript', ...prettierConfig });
+  } catch (e) {
+    logErrorMessage(e);
+    content += `\n\nSYNTAX ERROR WHILE FORMATTING:\n\n${(e as any).stack || e}`;
+  }
+  fs.writeFileSync(path.join(projectDir, filename), content);
+};
+
+const paramExtraDocs = (type: ParamType): string[] => {
+  switch (type) {
+    case 'color':
+      return [
+        'A CSS color value e.g. "red" or "#ff0088". The following shorthands are accepted:',
+        '- `true` -> "solid 1px var(--ag-border-color)"',
+        '- `false` -> "none".',
+        // TODO add {ref: 'paramName'} when implemented as well as color extensions
+      ];
+    case 'border':
+      return [
+        'A CSS border value e.g. "solid 1px red". See https://developer.mozilla.org/en-US/docs/Web/CSS/border. The following shorthands are accepted:',
+        '- `true` -> "solid 1px var(--ag-border-color)"',
+        '- `false` -> "none".',
+      ];
+    case 'border-style':
+      return [
+        'A CSS line-style value e.g. "solid" or "dashed". See https://developer.mozilla.org/en-US/docs/Web/CSS/line-style.',
+      ];
+    case 'display':
+      return [
+        'A CSS display value, "block" to show the element and "none" to hide it. It is recommended to use the boolean shorthands:',
+        '- `true` -> "block" (show)',
+        '- `false` -> "none" (hide).',
+      ];
+    case 'length':
+      return [
+        'A CSS dimension value with length units, e.g. "1px" or "2em". A JavaScript number will be interpreted as a length in pixel units, e.g.',
+        '- `4` -> "4px"',
+        // TODO add {ref: 'paramName'} when implemented as well as length extensions
+      ];
+    case 'duration':
+      return ['A CSS time value with second or millisecond units e.g. `"0.3s"` or `"300ms"`.'];
+    case 'shadow':
+      return [
+        'A CSS box shadow value e.g. "10px 5px 5px red;". See https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow',
+      ];
+    case 'image':
+      return [
+        'A CSS image value e.g. `"url(data:image/png;base64,base64-encoded-image...)". See https://developer.mozilla.org/en-US/docs/Web/CSS/image`',
+      ];
+    case 'font-family':
+      return ['A CSS font-family value e.g. `\'"Times New Roman", serif\'`'];
+    case 'font-weight':
+      return ['A CSS font-weight value e.g. `500` or `"bold"`'];
+  }
+  fatalError(`Unknown param type: ${type as string}`);
+};
+
+const docComment = (arg: {
+  mainComment: string;
+  extraComment?: string[] | null;
+  defaultValue?: any;
+  defaultValueComment?: string;
+}) => {
+  const newline = `\n * `;
+  let result = '/**';
+  result += newline + arg.mainComment;
+  if (arg.extraComment) {
+    result += newline + newline + arg.extraComment.join(newline);
+  }
+  if (arg.defaultValue !== undefined) {
+    let defaultValueString = JSON.stringify(arg.defaultValue);
+    if (arg.defaultValueComment) {
+      defaultValueString += ` (${arg.defaultValueComment})`;
+    }
+    result += newline;
+    result += ` * @default ${defaultValueString}`;
+  }
+  result += '\n */\n';
+  return result;
+};
+
+const generatedWarning = `
+//
+// NOTE: THIS FILE IS GENERATED DO NOT EDIT IT DIRECTLY!
+// It can be regenerated by running \`npm run codegen\` or
+// \`npm run codegen:watch\` to regenerate on changes.
+//
+
+`;
+
+const valueTypeName = (type: ParamType) => `${upperCamelCase(type)}Value`;
+
+const upperCamelCase = (str: string) => camelCase(str[0].toUpperCase() + str.slice(1));
+
+const fatalError = (message: string) => {
+  // eslint-disable-next-line no-console
+  console.error(message);
+  process.exit(1);
+};

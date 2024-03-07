@@ -1,10 +1,26 @@
-export type ParamType = 'color' | 'length' | 'border' | 'shadow';
+export type ParamType =
+  | 'color'
+  | 'length'
+  | 'border'
+  | 'border-style'
+  | 'shadow'
+  | 'image'
+  | 'font-family'
+  | 'font-weight'
+  | 'display'
+  | 'duration';
 
 export const getParamType = (param: string): ParamType => {
   if (/Color$/.test(param)) return 'color';
-  if (/(Padding|Spacing|Size|Width|Height)$/.test(param)) return 'length';
+  if (/(Padding|Spacing|Size|Width|Height|Radius|Indent)$/.test(param)) return 'length';
   if (/Border$/.test(param)) return 'border';
+  if (/BorderStyle$/.test(param)) return 'border-style';
   if (/Shadow$/.test(param)) return 'shadow';
+  if (/Image$/.test(param)) return 'image';
+  if (/[fF]ontFamily$/.test(param)) return 'font-family';
+  if (/[fF]ontWeight$/.test(param)) return 'font-weight';
+  if (/Duration$/.test(param)) return 'font-family';
+  if (/Display$/.test(param)) return 'display';
   throw new Error(`Param "${param}" does not have a recognised suffix.`);
 };
 
@@ -181,6 +197,8 @@ const docs: Record<string, string | undefined> = {
   filterToolPanelGroupIndent:
     'How much to indent child columns in the filters tool panel relative to their parent',
   iconButtonHoverBackgroundColor: 'Background color of clickable icons when hovered',
+  iconSize: 'The size of square icons and icon-buttons',
+  iconStrokeWidth: 'Width of lines making up the icon',
 };
 
 export const getParamDocs = (param: string) => {

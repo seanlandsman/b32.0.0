@@ -1,4 +1,4 @@
-import { Param } from './GENERATED-param-types';
+import { Param, ParamTypes } from './GENERATED-param-types';
 
 export type CssSource = string | ((params: Record<string, any>) => string);
 
@@ -26,6 +26,16 @@ export type ColorValue = string;
 
 export type LengthValue = string; // TODO allow number and treat as px
 
-export type BorderValue = string | boolean;
+export type BorderValue = string | boolean; // TODO allow boolean and treat as treat as "1px solid var(--ag-border-color)" / "none"
 
 export type ShadowValue = string; // TODO object shorthand for common shadows? Or maybe just allow var(accentColor) in value
+
+export type BorderStyleValue = string;
+
+export type DisplayValue = string; // TODO allow boolean and treat as block/none
+
+export type FontFamilyValue = string;
+
+export type FontWeightValue = string; // TODO allow number and treat as unitless
+
+export type ImageValue = string;
