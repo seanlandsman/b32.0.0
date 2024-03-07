@@ -9,8 +9,8 @@ import {
   transparentForeground,
 } from '../..';
 import { definePart } from '../../theme-utils';
-import coreCssImport from './css/core/core.css?inline';
-import indentTsImport from './css/indent';
+import coreCssImport from './css/core.css?inline';
+import indentTsImport from './indent';
 
 /**
  * Test docs!

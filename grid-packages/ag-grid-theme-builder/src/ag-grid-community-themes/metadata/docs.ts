@@ -183,8 +183,6 @@ const docs: Record<string, string | undefined> = {
   iconButtonHoverBackgroundColor: 'Background color of clickable icons when hovered',
 };
 
-Next up: wire up to codegen
-
 export const getParamDocs = (param: string) => {
   const doc = docs[param];
   if (!doc) throw new Error(`No documentation found for param "${param}"`);

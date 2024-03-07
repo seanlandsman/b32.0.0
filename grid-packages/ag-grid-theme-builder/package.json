@@ -3,14 +3,17 @@
   "private": true,
   "version": "31.0.2",
   "scripts": {
-    "build": "npm run codegen && tsc && vite build",
-    "dev": "vite",
+    "build": "npm run codegen:prod && tsc && vite build",
+    "dev": "npm run codegen:hot && concurrently vite npm:codegen:watch",
     "clean": "rimraf ./dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "dev-test": "vitest",
-    "codegen": "tsx src/ag-grid-community-themes/scripts/codegen.ts",
-    "codegen:watch": "tsx --watch src/ag-grid-community-themes/scripts/codegen.ts --hot-reload"
+    "build-css": "tsx src/ag-grid-community-themes/scripts/build-css.ts",
+    "build-types": "tsx src/ag-grid-community-themes/scripts/build-css.ts",
+    "codegen:prod": "tsx src/ag-grid-community-themes/scripts/build-css.ts && tsx src/ag-grid-community-themes/scripts/build-types.ts",
+    "codegen:dev": "tsx src/ag-grid-community-themes/scripts/build-css.ts --dev && tsx src/ag-grid-community-themes/scripts/build-types.ts",
+    "codegen:watch": "npm run codegen:dev; chokidar 'src/ag-grid-community-themes/**/*' --ignore '**/GENERATED-*' --command 'npm run codegen:dev'"
   },
   "dependencies": {
     "@ag-grid-community/client-side-row-model": "^31.1.1",
@@ -33,6 +36,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/joy": "^5.0.0-beta.18",
     "ag-charts-enterprise": "^9.1.1",
+    "concurrently": "^8.2.2",
     "jotai": "^2.4.2",
     "react": "18.2.0",
     "react-collapse": "^5.1.1",
@@ -50,6 +54,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react-swc": "^3.3.2",
+    "chokidar-cli": "^3.0.0",
     "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",

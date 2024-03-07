@@ -30,6 +30,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-redundant-type-constituents': 'off',
     'no-restricted-imports': [
       'error',
       {
@@ -39,6 +40,15 @@ module.exports = {
           // ... except for this private API designed for THeme Builder to use
           '!*ag-grid-community-themes/metadata',
         ],
+      },
+    ],
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        types: {
+          '{}': false,
+        },
+        extendDefaults: true,
       },
     ],
   },
