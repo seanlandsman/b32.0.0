@@ -1,3 +1,4 @@
+export * from './GENERATED-param-types';
 export * from './Theme';
 export * from './css-helpers';
 export * from './parts/colors';
