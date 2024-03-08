@@ -1,9 +1,7 @@
-import { styled } from '@mui/joy';
+import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { memo } from 'react';
 import { GridConfigDropdownButton } from '../features/grid-config/GridConfigDropdown';
-import { ParamsEditor } from '../features/params-editor/ParamsEditor';
-import { PartsEditor } from '../features/parts-editor/PartsEditor';
 import { renderedThemeAtom } from '../model/rendered-theme';
 import { CopyButton } from './CopyButton';
 import { DiscardChangesButton } from './DiscardChangesButton';
@@ -21,8 +19,8 @@ export const RootContainer = memo(() => {
           <DiscardChangesButton />
         </Header>
         <Menu>
-          <PartsEditor />
-          <ParamsEditor />
+          {/* <PartsEditor /> */}
+          {/* <ParamsEditor /> */}
         </Menu>
         <Main>
           <GridPreview />

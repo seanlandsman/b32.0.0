@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
-import { Theme, defineTheme, installTheme } from '../ag-grid-community-themes';
+import { Theme, core, defineTheme, installTheme } from '../ag-grid-community-themes';
 import { allParamModels } from './ParamModel';
-import { allPartModels } from './PartModel';
+// import { allPartModels } from './PartModel';
 import { Store } from './store';
 
 const changeDetection = atom(0);
@@ -19,11 +19,12 @@ export const renderedThemeAtom = atom((get, set): Theme => {
     allParamModels().map((param) => [param.property, get(param.valueAtom)]),
   );
 
-  const themeParts = allPartModels()
-    .filter((part) => get(part.enabledAtom))
-    .map((part) => part.themePart);
+  // const themeParts = allPartModels()
+  //   .filter((part) => get(part.enabledAtom))
+  //   .map((part) => part.themePart);
 
-  const theme = defineTheme(themeParts, paramValues);
+  // TODO defineTheme should not need core passed to it
+  const theme = defineTheme(core, paramValues);
 
   const container = get(shadowDomContainerAtom);
   if (container) {
