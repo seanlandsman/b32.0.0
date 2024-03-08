@@ -1,6 +1,5 @@
 import { atom, useAtom } from 'jotai';
 import { ParamTypes, Part } from '../ag-grid-community-themes';
-import { PartMeta, PresetMeta, allPartsMeta } from '../ag-grid-community-themes/metadata';
 import { PersistentAtom, atomWithJSONStorage } from './JSONStorage';
 import { ParamModel } from './ParamModel';
 import { logErrorMessageOnce, memoize, titleCase } from './utils';
