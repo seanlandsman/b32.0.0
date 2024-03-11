@@ -2,6 +2,7 @@ import { ChevronRight, TableAlias, WarningAltFilled } from '@carbon/icons-react'
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { Checkbox } from '../../components/Checkbox';
+import { Tooltip } from '../../components/Tooltip';
 import { UIDropdownButton } from '../../components/UIDropdownButton';
 import { gridConfigBooleanFields } from '../../model/grid-options';
 import { titleCase } from '../../model/utils';
@@ -35,18 +36,16 @@ const GridConfigDropdown = () => {
             {showFiltersWarning && <WarningAltFilled color="var(--color-warning-500)" />}
           </Checkbox>
         );
-        return item;
-        // TODO Tooltip component
-        // return showFiltersWarning ? (
-        //   <Tooltip
-        //     key={property}
-        //     title="Advanced Filter does not work with Filters Tool Panel. Filters Tool Panel has been disabled."
-        //   >
-        //     {item}
-        //   </Tooltip>
-        // ) : (
-        //   item
-        // );
+        return showFiltersWarning ? (
+          <Tooltip
+            key={property}
+            title="Advanced Filter does not work with Filters Tool Panel. Filters Tool Panel has been disabled."
+          >
+            {item}
+          </Tooltip>
+        ) : (
+          item
+        );
       })}
     </Container>
   );

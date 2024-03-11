@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
+import { ReactNode, forwardRef } from 'react';
 import { combineClassNames } from './component-utils';
 
 export type CheckboxProps = {
@@ -10,16 +10,18 @@ export type CheckboxProps = {
   className?: string;
 };
 
-export const Checkbox = ({ checked, onChange, children, disabled, className }: CheckboxProps) => (
-  <Container className={combineClassNames(className, disabled && 'is-disabled')}>
-    <input
-      type="checkbox"
-      checked={checked}
-      onChange={(e) => onChange(e.target.checked)}
-      disabled={disabled}
-    />
-    {children}
-  </Container>
+export const Checkbox = forwardRef<HTMLLabelElement, CheckboxProps>(
+  ({ checked, onChange, children, disabled, className }, ref) => (
+    <Container ref={ref} className={combineClassNames(className, disabled && 'is-disabled')}>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        disabled={disabled}
+      />
+      {children}
+    </Container>
+  ),
 );
 
 const Container = styled('label')`
