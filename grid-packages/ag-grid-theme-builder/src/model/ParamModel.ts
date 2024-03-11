@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { core } from '../ag-grid-community-themes';
-import { getParamDocs } from '../ag-grid-community-themes/metadata/docs';
+import { ParamType, getParamDocs, getParamType } from '../ag-grid-community-themes/metadata/docs';
 import { paramToVariableName } from '../ag-grid-community-themes/theme-utils';
 import { PersistentAtom, atomWithJSONStorage } from './JSONStorage';
 import { Store } from './store';
@@ -11,12 +11,14 @@ const paramModels: Record<string, ParamModel> = {};
 export class ParamModel {
   readonly label: string;
   readonly docs: string;
+  readonly type: ParamType;
   readonly valueAtom: PersistentAtom<any>;
 
   private constructor(readonly property: string) {
     this.label = titleCase(property);
     this.valueAtom = atomWithJSONStorage(`param.${property}`, undefined);
     this.docs = getParamDocs(property);
+    this.type = getParamType(property);
   }
 
   hasValue = (store: Store) => store.get(this.valueAtom) != null;

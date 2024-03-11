@@ -2,11 +2,11 @@ export type ParamType =
   | 'color'
   | 'length'
   | 'border'
-  | 'border-style'
+  | 'borderStyle'
   | 'shadow'
   | 'image'
-  | 'font-family'
-  | 'font-weight'
+  | 'fontFamily'
+  | 'fontWeight'
   | 'display'
   | 'duration';
 
@@ -14,12 +14,12 @@ export const getParamType = (param: string): ParamType => {
   if (/Color$/.test(param)) return 'color';
   if (/(Padding|Spacing|Size|Width|Height|Radius|Indent)$/.test(param)) return 'length';
   if (/Border$/.test(param)) return 'border';
-  if (/BorderStyle$/.test(param)) return 'border-style';
+  if (/BorderStyle$/.test(param)) return 'borderStyle';
   if (/Shadow$/.test(param)) return 'shadow';
   if (/Image$/.test(param)) return 'image';
-  if (/[fF]ontFamily$/.test(param)) return 'font-family';
-  if (/[fF]ontWeight$/.test(param)) return 'font-weight';
-  if (/Duration$/.test(param)) return 'font-family';
+  if (/[fF]ontFamily$/.test(param)) return 'fontFamily';
+  if (/[fF]ontWeight$/.test(param)) return 'fontWeight';
+  if (/Duration$/.test(param)) return 'duration';
   if (/Display$/.test(param)) return 'display';
   throw new Error(`Param "${param}" does not have a recognised suffix.`);
 };

@@ -13,8 +13,8 @@ import {
   styled,
 } from '@mui/joy';
 import { useEffect, useState } from 'react';
-import { Cell, TwoColumnTable } from '../../components/Table';
 import { useChangeHandler } from '../../components/component-utils';
+import { Cell, TwoColumnTable } from '../../components/layout';
 import { allParamModels } from '../../model/ParamModel';
 import { singleOrFirst, titleCase } from '../../model/utils';
 import { ColorSwatch } from './ColorSwatch';

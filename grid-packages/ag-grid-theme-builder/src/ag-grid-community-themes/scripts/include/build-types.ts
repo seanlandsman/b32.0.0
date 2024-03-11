@@ -28,7 +28,7 @@ export const generateDocsFile = async () => {
     const type = getParamType(param);
     result += docComment({
       mainComment: getParamDocs(param),
-      extraComment: paramExtraDocs(type),
+      extraComment: paramExtraDocs[type],
     });
     result += `  ${param}: ${upperCamelCase(type)}Value;\n\n`;
   }
@@ -39,53 +39,40 @@ export const generateDocsFile = async () => {
 
 const isPart = (part: any): part is Part => part.feature && part.variant;
 
-const paramExtraDocs = (type: ParamType): string[] => {
-  switch (type) {
-    case 'color':
-      return [
-        'A CSS color value e.g. "red" or "#ff0088". The following shorthands are accepted:',
-        '- `true` -> "solid 1px var(--ag-border-color)"',
-        '- `false` -> "none".',
-        // TODO add {ref: 'paramName'} when implemented as well as color extensions
-      ];
-    case 'border':
-      return [
-        'A CSS border value e.g. "solid 1px red". See https://developer.mozilla.org/en-US/docs/Web/CSS/border. The following shorthands are accepted:',
-        '- `true` -> "solid 1px var(--ag-border-color)"',
-        '- `false` -> "none".',
-      ];
-    case 'border-style':
-      return [
-        'A CSS line-style value e.g. "solid" or "dashed". See https://developer.mozilla.org/en-US/docs/Web/CSS/line-style.',
-      ];
-    case 'display':
-      return [
-        'A CSS display value, "block" to show the element and "none" to hide it. It is recommended to use the boolean shorthands:',
-        '- `true` -> "block" (show)',
-        '- `false` -> "none" (hide).',
-      ];
-    case 'length':
-      return [
-        'A CSS dimension value with length units, e.g. "1px" or "2em". A JavaScript number will be interpreted as a length in pixel units, e.g.',
-        '- `4` -> "4px"',
-        // TODO add {ref: 'paramName'} when implemented as well as length extensions
-      ];
-    case 'duration':
-      return ['A CSS time value with second or millisecond units e.g. `"0.3s"` or `"300ms"`.'];
-    case 'shadow':
-      return [
-        'A CSS box shadow value e.g. "10px 5px 5px red;". See https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow',
-      ];
-    case 'image':
-      return [
-        'A CSS image value e.g. `"url(data:image/png;base64,base64-encoded-image...)". See https://developer.mozilla.org/en-US/docs/Web/CSS/image`',
-      ];
-    case 'font-family':
-      return ['A CSS font-family value e.g. `\'"Times New Roman", serif\'`'];
-    case 'font-weight':
-      return ['A CSS font-weight value e.g. `500` or `"bold"`'];
-  }
-  fatalError(`Unknown param type: ${type as string}`);
+const paramExtraDocs: Record<ParamType, string[]> = {
+  color: [
+    'A CSS color value e.g. "red" or "#ff0088". The following shorthands are accepted:',
+    '- `true` -> "solid 1px var(--ag-border-color)"',
+    '- `false` -> "none".',
+    // TODO add {ref: 'paramName'} when implemented as well as color extensions
+  ],
+  border: [
+    'A CSS border value e.g. "solid 1px red". See https://developer.mozilla.org/en-US/docs/Web/CSS/border. The following shorthands are accepted:',
+    '- `true` -> "solid 1px var(--ag-border-color)"',
+    '- `false` -> "none".',
+  ],
+  borderStyle: [
+    'A CSS line-style value e.g. "solid" or "dashed". See https://developer.mozilla.org/en-US/docs/Web/CSS/line-style.',
+  ],
+  display: [
+    'A CSS display value, "block" to show the element and "none" to hide it. It is recommended to use the boolean shorthands:',
+    '- `true` -> "block" (show)',
+    '- `false` -> "none" (hide).',
+  ],
+  length: [
+    'A CSS dimension value with length units, e.g. "1px" or "2em". A JavaScript number will be interpreted as a length in pixel units, e.g.',
+    '- `4` -> "4px"',
+    // TODO add {ref: 'paramName'} when implemented as well as length extensions
+  ],
+  duration: ['A CSS time value with second or millisecond units e.g. `"0.3s"` or `"300ms"`.'],
+  shadow: [
+    'A CSS box shadow value e.g. "10px 5px 5px red;". See https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow',
+  ],
+  image: [
+    'A CSS image value e.g. `"url(data:image/png;base64,base64-encoded-image...)". See https://developer.mozilla.org/en-US/docs/Web/CSS/image`',
+  ],
+  fontFamily: ['A CSS font-family value e.g. `\'"Times New Roman", serif\'`'],
+  fontWeight: ['A CSS font-weight value e.g. `500` or `"bold"`'],
 };
 
 const docComment = (arg: {

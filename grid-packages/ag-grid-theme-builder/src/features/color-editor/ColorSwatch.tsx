@@ -1,4 +1,5 @@
-import { Card, Tooltip, styled } from '@mui/joy';
+import styled from '@emotion/styled';
+import { Tooltip } from '../../components/Tooltip';
 
 export type ColorSwatchProps = {
   color: string;
@@ -55,7 +56,8 @@ const ColorOverOpaqueBackground = styled('div')`
   border: solid 5px;
 `;
 
-const ColorSwatchCard = styled(Card)`
+const ColorSwatchCard = styled('div')`
+  padding: 16px;
   height: 60px;
   padding: 0;
   border-width: 2px;

@@ -39,3 +39,5 @@ export type FontFamilyValue = string;
 export type FontWeightValue = string; // TODO allow number and treat as unitless
 
 export type ImageValue = string;
+
+export type DurationValue = string;

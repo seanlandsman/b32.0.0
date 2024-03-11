@@ -2,7 +2,7 @@ import { Add, ChevronDown, TrashCan } from '@carbon/icons-react';
 import { Dropdown, IconButton, Menu, MenuButton, MenuItem, Stack, styled } from '@mui/joy';
 import { FC, ReactNode } from 'react';
 import { withErrorBoundary } from '../../components/ErrorBoundary';
-import { Cell } from '../../components/Table';
+import { Cell } from '../../components/layout';
 import {
   PartModel,
   allPartModels,

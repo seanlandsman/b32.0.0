@@ -15,3 +15,24 @@ export const Cell = styled('div')`
   display: flex;
   align-items: center;
 `;
+
+export const Stack = styled('div')`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const WideStack = styled('div')`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+export const SmallNote = styled('div')`
+  font-size: 0.85em;
+`;
+
+export const Divider = styled('div')`
+  border-bottom: 1px solid var(--ag-border-color);
+  margin: 8px 0;
+`;

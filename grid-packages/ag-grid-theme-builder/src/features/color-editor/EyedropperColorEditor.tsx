@@ -1,7 +1,8 @@
 import { Eyedropper } from '@carbon/icons-react';
-import { Button, Stack, Typography } from '@mui/joy';
 import { useState } from 'react';
+import { Button } from '../../components/Button';
 import { useChangeHandler } from '../../components/component-utils';
+import { SmallNote, Stack } from '../../components/layout';
 import { ColorSwatch } from './ColorSwatch';
 import { UncontrolledColorEditorProps } from './color-editor-utils';
 
@@ -16,13 +17,13 @@ export const EyedropperColorEditor = ({ initialValue, onChange }: UncontrolledCo
   if (!EyeDropper) {
     return (
       <Stack>
-        <Typography level="body-sm">
+        <SmallNote>
           Your browser does not support the EyeDropper API. In{' '}
           <a href="https://caniuse.com/?search=eyedropper" rel="noreferrer" target="_blank">
             supported browsers
           </a>{' '}
           this allows you to pick colours from your website or design.
-        </Typography>
+        </SmallNote>
       </Stack>
     );
   }
@@ -31,21 +32,19 @@ export const EyedropperColorEditor = ({ initialValue, onChange }: UncontrolledCo
     <Stack>
       <ColorSwatch color={value} splitBackground />
       <Button
-        variant="soft"
-        startDecorator={<Eyedropper />}
         onClick={() => {
           setOpen(true);
           void new EyeDropper().open().then(({ sRGBHex }) => setValue(sRGBHex));
         }}
       >
-        pick color
+        <Eyedropper /> pick color
       </Button>
 
-      <Typography level="body-sm">
+      <SmallNote>
         {open
           ? 'Click anywhere on your screen to select that colour, or hit ESC to cancel'
           : 'Open your website or design in another window and pick colours from it.'}
-      </Typography>
+      </SmallNote>
     </Stack>
   );
 };

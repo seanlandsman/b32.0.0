@@ -1,7 +1,7 @@
-import { Divider, Input, Slider, Stack, styled } from '@mui/joy';
 import { useEffect, useRef, useState } from 'react';
-import { Cell, TwoColumnTable } from '../../components/Table';
+import { Input } from '../../components/Input';
 import { useChangeHandler } from '../../components/component-utils';
+import { Cell, TwoColumnTable, WideStack } from '../../components/layout';
 import { logErrorMessage, singleOrFirst } from '../../model/utils';
 import { ColorSwatch } from './ColorSwatch';
 import { HSLAColor } from './HSLAColor';
@@ -83,18 +83,18 @@ export const InputColorEditor = ({
   }, [editorValue]);
 
   return (
-    <Stack gap={2}>
+    <WideStack>
       <ColorSwatch color={value} splitBackground />
       <TwoColumnTable>
         <Cell>CSS</Cell>
         <Input
           value={editorValue}
           placeholder="e.g. #ff00aa, rgb(255,0,170))"
-          onChange={(e) => handleEditorValueChange(e.target.value)}
+          onChange={(newValue) => handleEditorValueChange(newValue)}
           onBlur={() => {
             handleEditorValueChange(getInitialEditorValue(value));
           }}
-          error={!valid}
+          isError={!valid}
         />
         <SpanningDivider />
 
@@ -155,7 +155,7 @@ export const InputColorEditor = ({
           valueLabelFormat={formatProportionAsPercent}
         />
       </TwoColumnTable>
-    </Stack>
+    </WideStack>
   );
 };
 

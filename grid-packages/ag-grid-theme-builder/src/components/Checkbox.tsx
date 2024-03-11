@@ -5,7 +5,7 @@ import { combineClassNames } from './component-utils';
 export type CheckboxProps = {
   checked: boolean;
   onChange: (checked: boolean) => void;
-  children: ReactNode;
+  children?: ReactNode;
   disabled?: boolean;
   className?: string;
 };

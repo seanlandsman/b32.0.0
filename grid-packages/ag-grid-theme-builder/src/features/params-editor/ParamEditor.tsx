@@ -1,9 +1,10 @@
 import { Close } from '@carbon/icons-react';
+import styled from '@emotion/styled';
 import { ReactElement } from 'react';
 import { borderValueToCss } from '../../ag-grid-community-themes/theme-utils';
 import { Checkbox } from '../../components/Checkbox';
-import { Cell } from '../../components/Table';
 import { Tooltip } from '../../components/Tooltip';
+import { Cell } from '../../components/layout';
 import { ParamModel, useParamAtom } from '../../model/ParamModel';
 import { ColorParamEditor } from './ColorParamEditor';
 import { CssParamEditor } from './CssParamEditor';
@@ -18,15 +19,14 @@ export const ParamEditor = ({ param }: ParamEditorProps) => {
   if (value == null) return null;
 
   const renderEditor = (): ReactElement => {
-    const { meta } = param;
-    switch (meta.type) {
+    switch (param.type) {
       case 'color':
-        return <ColorParamEditor param={param} meta={meta} />;
+        return <ColorParamEditor param={param} />;
       case 'border':
         return (
           <Checkbox
             checked={borderValueToCss(value) === borderValueToCss(true)}
-            onChange={(e) => setValue(e.target.checked)}
+            onChange={(newValue) => setValue(newValue)}
           />
         );
       case 'borderStyle':
@@ -38,8 +38,7 @@ export const ParamEditor = ({ param }: ParamEditorProps) => {
             <option>none</option>
           </select>
         );
-      case 'length':
-      case 'css':
+      default:
         return <CssParamEditor param={param} />;
     }
   };
@@ -47,14 +46,13 @@ export const ParamEditor = ({ param }: ParamEditorProps) => {
   return (
     <>
       <LabelCell>
-        <Tooltip title={param.meta.docs}>
+        <Tooltip title={param.docs}>
           <span>{param.label}:</span>
         </Tooltip>
       </LabelCell>
       {renderEditor()}
-      <IconButton onClick={() => setValue(undefined)}>
-        <RemoveIcon />
-      </IconButton>
+      {/* TODO use a button with hover effect */}
+      <RemoveIcon onClick={() => setValue(undefined)} />
     </>
   );
 };

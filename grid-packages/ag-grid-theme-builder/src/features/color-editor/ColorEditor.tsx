@@ -1,5 +1,5 @@
 import { ChevronRight } from '@carbon/icons-react';
-import { styled } from '@mui/system';
+import styled from '@emotion/styled';
 import { UIDropdownButton } from '../../components/UIDropdownButton';
 import { ColorSwatch } from './ColorSwatch';
 import { TabbedColorEditor } from './TabbedColorEditor';
