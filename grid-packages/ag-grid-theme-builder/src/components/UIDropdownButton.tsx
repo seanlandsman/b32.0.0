@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-import { autoUpdate, size, useFloating } from '@floating-ui/react';
+import { UseFloatingOptions, autoUpdate, size, useFloating } from '@floating-ui/react';
 import { ReactNode, useEffect, useRef, useState } from 'react';
-import { flushSync } from 'react-dom';
 import { Button } from './Button';
 import { combineClassNames } from './component-utils';
 
@@ -17,18 +16,7 @@ export type WidgetDropdownProps = {
  * A version of MUI's menu component that can contain interactive UI in the dropdown. It doesn't close until you click outside the dropdown.
  */
 export const UIDropdownButton = (props: WidgetDropdownProps) => {
-  const { refs, floatingStyles, elements } = useFloating({
-    whileElementsMounted: autoUpdate,
-    placement: 'right-start',
-    middleware: [
-      size({
-        apply({ availableHeight }) {
-          flushSync(() => setMaxHeight(availableHeight));
-        },
-      }),
-    ],
-  });
-  const [maxHeight, setMaxHeight] = useState<number>();
+  const { refs, floatingStyles, elements } = useFloating(floatingOptions);
   const [show, setShow] = useState(false);
 
   useClickAwayListener(() => setShow(false), [elements.domReference, elements.floating]);
@@ -46,15 +34,24 @@ export const UIDropdownButton = (props: WidgetDropdownProps) => {
         {props.endDecorator}
       </StyledButton>
       {show && (
-        <DropdownArea
-          ref={refs.setFloating}
-          style={{ ...floatingStyles, maxHeight: maxHeight ? maxHeight - 8 : undefined }}
-        >
+        <DropdownArea ref={refs.setFloating} style={floatingStyles}>
           {props.dropdownContent}
         </DropdownArea>
       )}
     </>
   );
+};
+
+const floatingOptions: Partial<UseFloatingOptions> = {
+  whileElementsMounted: autoUpdate,
+  placement: 'right-start',
+  middleware: [
+    size({
+      apply({ availableHeight, elements }) {
+        elements.floating.style.maxHeight = availableHeight ? `${availableHeight - 8}px` : '';
+      },
+    }),
+  ],
 };
 
 const useClickAwayListener = (
