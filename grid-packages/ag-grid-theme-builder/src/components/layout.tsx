@@ -22,6 +22,13 @@ export const Stack = styled('div')`
   gap: 8px;
 `;
 
+export const HStack = styled('div')`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+`;
+
 export const WideStack = styled('div')`
   display: flex;
   flex-direction: column;

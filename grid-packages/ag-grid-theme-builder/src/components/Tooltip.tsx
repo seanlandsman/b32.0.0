@@ -9,10 +9,10 @@ import {
   useHover,
   useInteractions,
 } from '@floating-ui/react';
-import { ReactElement, cloneElement, useRef, useState } from 'react';
+import { ReactElement, ReactNode, cloneElement, useRef, useState } from 'react';
 
 export type TooltipProps = {
-  title: string;
+  title: ReactNode;
   children: ReactElement;
 };
 

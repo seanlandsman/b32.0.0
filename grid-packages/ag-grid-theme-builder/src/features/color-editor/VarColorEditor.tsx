@@ -1,22 +1,12 @@
 import { Information } from '@carbon/icons-react';
-import {
-  Autocomplete,
-  AutocompleteOption,
-  Box,
-  Button,
-  List,
-  ListItem,
-  Slider,
-  Stack,
-  Tooltip,
-  Typography,
-  styled,
-} from '@mui/joy';
+import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
+import { Button } from '../../components/Button';
+import { Tooltip } from '../../components/Tooltip';
 import { useChangeHandler } from '../../components/component-utils';
-import { Cell, TwoColumnTable } from '../../components/layout';
+import { Cell, HStack, SmallNote, Stack, TwoColumnTable } from '../../components/layout';
 import { allParamModels } from '../../model/ParamModel';
-import { singleOrFirst, titleCase } from '../../model/utils';
+import { titleCase } from '../../model/utils';
 import { ColorSwatch } from './ColorSwatch';
 import { RGBAColor } from './RGBAColor';
 import { VarColor } from './VarColor';
@@ -36,10 +26,10 @@ export const VarColorEditor = ({ initialValue, onChange }: UncontrolledColorEdit
   if (!editorState) {
     return (
       <Stack>
-        <Typography level="body-sm">
+        <SmallNote>
           Specify colours as semi-transparent versions of other colours
           <InfoTooltip />
-        </Typography>
+        </SmallNote>
         <Button
           onClick={() => {
             enableChangeEvents();
@@ -49,7 +39,6 @@ export const VarColorEditor = ({ initialValue, onChange }: UncontrolledColorEdit
               variable: allVariableInfos[0],
             });
           }}
-          variant="soft"
         >
           Enable % colours
         </Button>
@@ -68,13 +57,14 @@ export const VarColorEditor = ({ initialValue, onChange }: UncontrolledColorEdit
   return (
     <Stack>
       <ColorSwatch color={value} splitBackground />
-      <Box>
+      <span>
         {feedback}
         <InfoTooltip />
-      </Box>
+      </span>
       <TwoColumnTable rowGap={1}>
         <Cell>Color</Cell>
-        <Autocomplete
+        {/* TODO restore me */}
+        {/* <Autocomplete
           options={allVariableInfos}
           value={editorState.variable}
           onChange={(_, variable) => {
@@ -93,21 +83,18 @@ export const VarColorEditor = ({ initialValue, onChange }: UncontrolledColorEdit
             </AutocompleteOption>
           )}
           slotProps={{ listbox: { sx: { minWidth: '400px' } } }}
-        />
+        /> */}
         <Cell>Alpha</Cell>
-        <Slider
+        <input
+          type="range"
           value={editorState.alpha}
           min={0}
           max={1}
           step={0.001}
-          size="sm"
-          onChange={(_, newAlpha) => {
+          onChange={(e) => {
             enableChangeEvents();
-            setEditorState({ ...editorState, alpha: singleOrFirst(newAlpha) });
+            setEditorState({ ...editorState, alpha: e.target.valueAsNumber });
           }}
-          valueLabelDisplay="auto"
-          sx={{ '--Slider-size': '15px' }}
-          valueLabelFormat={formatProportionAs3dpPercent}
         />
       </TwoColumnTable>
     </Stack>
@@ -141,13 +128,13 @@ const formatVariable = (variable: string) => titleCase(variable.replace(/^--ag-/
 
 const VariableOption = ({ variable }: { variable: string }) => {
   return (
-    <Stack direction="row" alignItems="center">
+    <HStack>
       <VarColorSwatch color={`var(${variable})`} />
-      <Stack gap={0}>
+      <div>
         {formatVariable(variable)}
         <VariableNameHint>var({variable})</VariableNameHint>
-      </Stack>
-    </Stack>
+      </div>
+    </HStack>
   );
 };
 
@@ -165,9 +152,9 @@ const VarColorSwatch = styled(ColorSwatch)`
 const InfoTooltip = () => (
   <Tooltip
     title={
-      <InfoBox padding={1}>
+      <InfoBox>
         Tips:
-        <InfoList marker="disc">
+        <InfoList>
           <InfoListItem>
             Specify related colours as semi-transparent versions of each other where possible
           </InfoListItem>
@@ -185,21 +172,23 @@ const InfoTooltip = () => (
   </Tooltip>
 );
 
-const InfoBox = styled(Box)`
+const InfoBox = styled('div')`
   color: inherit;
   font-size: inherit;
   margin: 0;
   line-height: inherit;
+  padding: 8px;
 `;
 
-const InfoList = styled(List)`
+const InfoList = styled('ul')`
   color: inherit;
   font-size: inherit;
   line-height: inherit;
   margin: 0;
+  list-style: disc;
 `;
 
-const InfoListItem = styled(ListItem)`
+const InfoListItem = styled('li')`
   color: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -226,6 +215,6 @@ const allVariableInfos: VariableInfo[] = [
   variableInfo('--ag-background-color', true),
   variableInfo('--ag-accent-color', true),
   ...allParamModels()
-    .filter((param) => param.meta.type === 'color')
+    .filter((param) => param.type === 'color')
     .map((param) => variableInfo(param.variableName)),
 ];

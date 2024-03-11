@@ -34,9 +34,6 @@ export const logErrorMessageOnce = (message: string) => {
   logErrorMessage(message);
 };
 
-export const singleOrFirst = <T>(items: T | readonly T[]): T =>
-  Array.isArray(items) ? (items[0] as T) : (items as T);
-
 export const indexBy = <T, K extends keyof T>(list: readonly T[], property: K): Record<string, T> =>
   Object.fromEntries(list.map((item) => [String(item[property]), item]));
 

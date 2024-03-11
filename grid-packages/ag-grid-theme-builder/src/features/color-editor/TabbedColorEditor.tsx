@@ -1,6 +1,6 @@
 import { Eyedropper, Percentage, SettingsAdjust } from '@carbon/icons-react';
-import { Tab, TabList, TabPanel, Tabs, styled } from '@mui/joy';
-import { useState } from 'react';
+import styled from '@emotion/styled';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { EyedropperColorEditor } from './EyedropperColorEditor';
 import { InputColorEditor } from './InputColorEditor';
 import { VarColor } from './VarColor';
@@ -8,14 +8,10 @@ import { VarColorEditor } from './VarColorEditor';
 import { UncontrolledColorEditorProps } from './color-editor-utils';
 
 export const TabbedColorEditor = (props: UncontrolledColorEditorProps) => {
-  const [tab, setTab] = useState<string | number | null>(() =>
-    VarColor.parseCss(props.initialValue) ? 'var' : 'input',
-  );
-
   const showVarTab = !props.preventTransparency && !props.preventVariables;
 
   return (
-    <Container variant="outlined" value={tab} onChange={(_, newTab) => setTab(newTab)}>
+    <Container defaultIndex={showVarTab && VarColor.parseCss(props.initialValue) ? 1 : 0}>
       <TabList>
         <Tab value="input">
           <SettingsAdjust />

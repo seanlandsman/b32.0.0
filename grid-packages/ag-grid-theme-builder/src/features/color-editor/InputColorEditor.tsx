@@ -1,8 +1,9 @@
+import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
 import { Input } from '../../components/Input';
 import { useChangeHandler } from '../../components/component-utils';
-import { Cell, TwoColumnTable, WideStack } from '../../components/layout';
-import { logErrorMessage, singleOrFirst } from '../../model/utils';
+import { Cell, Divider, TwoColumnTable, WideStack } from '../../components/layout';
+import { logErrorMessage } from '../../model/utils';
 import { ColorSwatch } from './ColorSwatch';
 import { HSLAColor } from './HSLAColor';
 import { RGBAColor } from './RGBAColor';
@@ -209,15 +210,12 @@ const ColorPartSlider = ({
   part: keyof SliderValues;
   valueLabelFormat?: (n: number) => string;
 }) => (
-  <Slider
+  <input
+    type="range"
     value={value[part]}
     min={0}
     max={1}
     step={0.001}
-    size="sm"
-    onChange={(_, newValue) => onChange(singleOrFirst(newValue), part)}
-    valueLabelDisplay="auto"
-    sx={{ '--Slider-size': '15px' }}
-    valueLabelFormat={valueLabelFormat}
+    onChange={(e) => onChange(e.target.valueAsNumber, part)}
   />
 );

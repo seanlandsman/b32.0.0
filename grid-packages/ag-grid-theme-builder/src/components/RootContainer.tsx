@@ -24,8 +24,6 @@ export const RootContainer = memo(() => {
           <ParamEditor param={ParamModel.for('foregroundColor')} />
           <ParamEditor param={ParamModel.for('backgroundColor')} />
           <ParamEditor param={ParamModel.for('accentColor')} />
-          {/* <PartsEditor /> */}
-          {/* <ParamsEditor /> */}
         </Menu>
         <Main>
           <GridPreview />
