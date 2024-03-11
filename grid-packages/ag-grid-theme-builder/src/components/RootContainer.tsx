@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { memo } from 'react';
 import { GridConfigDropdownButton } from '../features/grid-config/GridConfigDropdown';
+import { ParamEditor } from '../features/params-editor/ParamEditor';
+import { ParamModel } from '../model/ParamModel';
 import { renderedThemeAtom } from '../model/rendered-theme';
 import { CopyButton } from './CopyButton';
 import { DiscardChangesButton } from './DiscardChangesButton';
@@ -19,6 +21,9 @@ export const RootContainer = memo(() => {
           <DiscardChangesButton />
         </Header>
         <Menu>
+          <ParamEditor param={ParamModel.for('foregroundColor')} />
+          <ParamEditor param={ParamModel.for('backgroundColor')} />
+          <ParamEditor param={ParamModel.for('accentColor')} />
           {/* <PartsEditor /> */}
           {/* <ParamsEditor /> */}
         </Menu>

@@ -1,9 +1,9 @@
 import { Close } from '@carbon/icons-react';
-import { Checkbox, IconButton, Option, Select, Tooltip, styled } from '@mui/joy';
 import { ReactElement } from 'react';
-import { cssBorderStyles } from '../../ag-grid-community-themes/metadata';
 import { borderValueToCss } from '../../ag-grid-community-themes/theme-utils';
+import { Checkbox } from '../../components/Checkbox';
 import { Cell } from '../../components/Table';
+import { Tooltip } from '../../components/Tooltip';
 import { ParamModel, useParamAtom } from '../../model/ParamModel';
 import { ColorParamEditor } from './ColorParamEditor';
 import { CssParamEditor } from './CssParamEditor';
@@ -31,17 +31,13 @@ export const ParamEditor = ({ param }: ParamEditorProps) => {
         );
       case 'borderStyle':
         return (
-          <Select value={value || null} onChange={(_, newValue) => setValue(newValue)}>
-            {cssBorderStyles.map((borderStyle) => (
-              <Option key={borderStyle} value={borderStyle}>
-                {borderStyle}
-              </Option>
-            ))}
-          </Select>
+          <select value={value || null} onChange={(e) => setValue(e.target.value)}>
+            <option>solid</option>
+            <option>dotted</option>
+            <option>dashed</option>
+            <option>none</option>
+          </select>
         );
-      case 'preset':
-        // presets don't have param editors, they're handled by part editors
-        return <span />;
       case 'length':
       case 'css':
         return <CssParamEditor param={param} />;
