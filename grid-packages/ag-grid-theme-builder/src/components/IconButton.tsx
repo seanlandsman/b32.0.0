@@ -1,15 +1,17 @@
 import styled from '@emotion/styled';
 import { ComponentType } from 'react';
+import { combineClassNames } from './component-utils';
 
 type IconButtonProps = {
   label: string;
   onClick: () => void;
   icon: ComponentType;
+  className?: string;
 };
 
-export const IconButton = ({ label, onClick, icon: IconComponent }: IconButtonProps) => {
+export const IconButton = ({ label, onClick, icon: IconComponent, className }: IconButtonProps) => {
   return (
-    <Button onClick={onClick} className="button-secondary">
+    <Button onClick={onClick} className={combineClassNames('button-secondary', className)}>
       <Label>
         <LabelText>{label}</LabelText>
         <IconComponent />

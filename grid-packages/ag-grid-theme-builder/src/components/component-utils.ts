@@ -41,3 +41,6 @@ export const useChangeHandler = <T>(
     suppressRef.current = false;
   };
 };
+
+export const combineClassNames = (...classNames: (string | undefined | false)[]) =>
+  classNames.filter(Boolean).join(' ') || undefined;

@@ -1,8 +1,10 @@
 import { ChevronRight, TableAlias, WarningAltFilled } from '@carbon/icons-react';
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
+import { Checkbox } from '../../components/Checkbox';
 import { UIDropdownButton } from '../../components/UIDropdownButton';
 import { gridConfigBooleanFields } from '../../model/grid-options';
+import { titleCase } from '../../model/utils';
 import { gridConfigAtom } from './grid-config-atom';
 
 export const GridConfigDropdownButton = () => {
@@ -22,19 +24,16 @@ const GridConfigDropdown = () => {
       {gridConfigBooleanFields.toSorted().map((property) => {
         const showFiltersWarning = filtersConflict && property === 'filtersToolPanel';
         const item = (
-          <Item key={property}>
-            <input
-              type="checkbox"
-              checked={!!gridConfig[property]}
-              onChange={() => setGridConfig({ ...gridConfig, [property]: !gridConfig[property] })}
-              // TODO component with label and disabled
-              // label={titleCase(String(property))}
-              // sx={{
-              //   opacity: showFiltersWarning ? 0.5 : undefined,
-              // }}
-            />
-            {showFiltersWarning && <WarningAltFilled color="var(--joy-palette-warning-400)" />}
-          </Item>
+          <Checkbox
+            key={property}
+            checked={!!gridConfig[property]}
+            onChange={() => setGridConfig({ ...gridConfig, [property]: !gridConfig[property] })}
+          >
+            <Label className={showFiltersWarning ? 'has-warning' : undefined}>
+              {titleCase(String(property))}
+            </Label>
+            {showFiltersWarning && <WarningAltFilled color="var(--color-warning-500)" />}
+          </Checkbox>
         );
         return item;
         // TODO Tooltip component
@@ -58,10 +57,11 @@ const Container = styled('div')`
   flex-direction: column;
   gap: 8px;
 `;
-const Item = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+
+const Label = styled('span')`
+  &.has-warning {
+    opacity: 0.5;
+  }
 `;
 
 const DropdownIcon = styled(ChevronRight)`

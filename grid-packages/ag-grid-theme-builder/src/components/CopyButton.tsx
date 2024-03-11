@@ -3,19 +3,21 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { logErrorMessage } from '../model/utils';
 import { Button } from './Button';
+import { combineClassNames } from './component-utils';
 
 type CopyButtonProps = {
   children: string;
   getText: () => string;
+  className?: string;
 };
 
-export const CopyButton = ({ children, getText }: CopyButtonProps) => {
+export const CopyButton = ({ children, getText, className }: CopyButtonProps) => {
   const [copied, setCopied] = useState(false);
   const copiedClass = copied ? 'is-copied' : '';
 
   return (
     <StyledButton
-      className={copiedClass}
+      className={combineClassNames(className, copiedClass)}
       onClick={() =>
         void (async () => {
           try {
