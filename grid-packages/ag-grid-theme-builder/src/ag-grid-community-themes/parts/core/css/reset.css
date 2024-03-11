@@ -1,4 +1,4 @@
-[class^='ag-'] {
+:where([class^='ag-']) {
   &*,
   &:focus,
   &::after,
@@ -8,9 +8,9 @@
     outline: none;
   }
 
-  &button,
-  &input,
-  &textarea {
+  &:where(button),
+  &:where(input),
+  &:where(textarea) {
     border: none;
     padding: 0;
     margin: 0;
@@ -22,7 +22,7 @@
     cursor: pointer;
   }
 
-  &button {
+  &:where(button) {
     font-weight: inherit;
   }
 

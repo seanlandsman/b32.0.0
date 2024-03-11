@@ -1,6 +1,6 @@
-import { ClickAwayListener, Popper } from '@mui/base';
-import { Button, styled } from '@mui/joy';
+import styled from '@emotion/styled';
 import { ReactNode, useRef, useState } from 'react';
+import { Button } from './Button';
 
 export type WidgetDropdownProps = {
   dropdownContent: ReactNode;
@@ -10,60 +10,49 @@ export type WidgetDropdownProps = {
   className?: string;
 };
 
-let idCounter = 0;
 /**
  * A version of MUI's menu component that can contain interactive UI in the dropdown. It doesn't close until you click outside the dropdown.
  */
 export const UIDropdownButton = (props: WidgetDropdownProps) => {
-  const [popperId] = useState(() => String(++idCounter));
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = !!anchorEl;
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   return (
-    <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
-      <Container>
-        <DropdownTriggerButton
-          className={props.className}
-          ref={buttonRef}
-          variant="outlined"
-          color="neutral"
-          size="sm"
-          onClick={() => {
-            setAnchorEl(open ? null : buttonRef.current);
-          }}
-        >
-          {props.startDecorator}
-          {props.children}
-          {props.endDecorator}
-        </DropdownTriggerButton>
-        <StyledPopper id={popperId} open={open} anchorEl={anchorEl} placement="auto-end">
+    // TODO
+    // <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
+    <>
+      <Button
+        className={props.className}
+        ref={buttonRef}
+        color="neutral"
+        onClick={() => {
+          setAnchorEl(open ? null : buttonRef.current);
+        }}
+      >
+        {props.startDecorator}
+        {props.children}
+        {props.endDecorator}
+      </Button>
+      <DropdownArea>{props.dropdownContent}</DropdownArea>
+      {/* <StyledPopper id={popperId} open={open} anchorEl={anchorEl} placement="auto-end">
           {open && (
-            <DropdownArea ref={dropdownRef} sx={{ boxShadow: 10 }}>
+            <DropdownArea ref={dropdownRef}>
               {props.dropdownContent}
             </DropdownArea>
           )}
-        </StyledPopper>
-      </Container>
-    </ClickAwayListener>
+        </StyledPopper> */}
+    </>
+    // </ClickAwayListener>
   );
 };
 
-const Container = styled('div')`
-  pointer-events: none;
-`;
-
-const DropdownTriggerButton = styled(Button)`
-  font-weight: 500;
-  pointer-events: all;
-  gap: 8px;
-`;
-
-const StyledPopper = styled(Popper)`
-  z-index: 1;
-`;
-
 const DropdownArea = styled('div')`
+  position: absolute;
+  background-color: var(--color-bg-primary);
+  padding: 16px;
+  border: solid 2px var(--color-border-primary);
+  border-radius: 6px;
   pointer-events: all;
-  margin-left: 4px;
+  box-shadow: var(--shadow-md);
 `;

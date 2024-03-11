@@ -85,6 +85,7 @@ export const core = definePart({
     widgetHorizontalSpacing: calc('gridSize * 1.5'),
     widgetVerticalSpacing: ref('gridSize'),
     listItemHeight: calc('iconSize + widgetVerticalSpacing'),
+    iconSize: '16px',
     inputBackgroundColor: ref('backgroundColor'),
     inputDisabledBackgroundColor: opaqueForeground(0.06),
     inputDisabledForegroundColor: transparentForeground(0.5),

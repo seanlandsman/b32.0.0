@@ -1,4 +1,4 @@
-import { styled } from '@mui/joy';
+import styled from '@emotion/styled';
 import { borderValueToCss } from '../../../ag-grid-community-themes/theme-utils';
 import { PresetModel } from '../../../model/PartModel';
 

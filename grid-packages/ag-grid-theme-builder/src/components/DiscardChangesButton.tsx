@@ -1,10 +1,9 @@
 import { TrashCan } from '@carbon/icons-react';
-import { Button } from '@mui/joy';
 import { STORAGE_KEY_PREFIX } from '../model/JSONStorage';
+import { Button } from './Button';
 
 export const DiscardChangesButton = () => (
   <Button
-    startDecorator={<TrashCan />}
     onClick={() => {
       if (confirm('Discard all of your theme customisations?')) {
         const keys = Array(localStorage.length)
@@ -19,6 +18,6 @@ export const DiscardChangesButton = () => (
       }
     }}
   >
-    Discard changes
+    <TrashCan /> Discard changes
   </Button>
 );

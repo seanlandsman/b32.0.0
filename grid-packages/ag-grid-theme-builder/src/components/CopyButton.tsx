@@ -1,7 +1,8 @@
 import { Checkmark, Copy } from '@carbon/icons-react';
-import { Button, styled } from '@mui/joy';
+import styled from '@emotion/styled';
 import { useState } from 'react';
 import { logErrorMessage } from '../model/utils';
+import { Button } from './Button';
 
 type CopyButtonProps = {
   children: string;
@@ -47,7 +48,6 @@ export const CopyButton = ({ children, getText }: CopyButtonProps) => {
 const StyledButton = styled(Button)`
   transition: background-color 0.4s;
   position: relative;
-  display: flex;
   justify-content: center;
 
   &.is-copied {

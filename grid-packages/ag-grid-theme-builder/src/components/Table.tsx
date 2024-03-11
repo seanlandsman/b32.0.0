@@ -1,4 +1,4 @@
-import { styled } from '@mui/joy';
+import styled from '@emotion/styled';
 
 type TwoColumnTableProps = {
   rowGap?: number;

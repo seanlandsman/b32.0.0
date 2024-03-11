@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { Theme, core, defineTheme, installTheme } from '../ag-grid-community-themes';
+import { Theme, core, defineTheme, iconsQuartz, installTheme } from '../ag-grid-community-themes';
 import { allParamModels } from './ParamModel';
 // import { allPartModels } from './PartModel';
 import { Store } from './store';
@@ -24,7 +24,7 @@ export const renderedThemeAtom = atom((get, set): Theme => {
   //   .map((part) => part.themePart);
 
   // TODO defineTheme should not need core passed to it
-  const theme = defineTheme(core, paramValues);
+  const theme = defineTheme([core, iconsQuartz], paramValues);
 
   const container = get(shadowDomContainerAtom);
   if (container) {

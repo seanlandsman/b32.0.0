@@ -12,7 +12,7 @@ import { RichSelectModule } from '@ag-grid-enterprise/rich-select';
 import { RowGroupingModule } from '@ag-grid-enterprise/row-grouping';
 import { SetFilterModule } from '@ag-grid-enterprise/set-filter';
 import { StatusBarModule } from '@ag-grid-enterprise/status-bar';
-import { styled } from '@mui/joy';
+import styled from '@emotion/styled';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { memo, useMemo, useState } from 'react';
 import root from 'react-shadow';

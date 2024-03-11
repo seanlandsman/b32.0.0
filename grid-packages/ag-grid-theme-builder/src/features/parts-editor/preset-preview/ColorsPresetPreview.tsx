@@ -1,4 +1,4 @@
-import { styled } from '@mui/joy';
+import styled from '@emotion/styled';
 import { PresetModel } from '../../../model/PartModel';
 
 type ColorsPresetPreviewProps = {
