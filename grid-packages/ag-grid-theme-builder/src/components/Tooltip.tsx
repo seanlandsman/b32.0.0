@@ -5,6 +5,7 @@ import {
   arrow,
   flip,
   offset,
+  shift,
   useFloating,
   useHover,
   useInteractions,
@@ -27,6 +28,7 @@ export const Tooltip = ({ title, children }: TooltipProps) => {
     middleware: [
       offset(8),
       flip(),
+      shift({ padding: 8 }),
       arrow({
         element: arrowRef,
       }),

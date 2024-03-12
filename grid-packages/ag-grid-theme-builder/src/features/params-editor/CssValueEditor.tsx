@@ -1,15 +1,10 @@
 import { useState } from 'react';
 import { ParamType } from '../../ag-grid-community-themes/metadata/docs';
 import { Input } from '../../components/Input';
-import { ParamModel, useParamAtom } from '../../model/ParamModel';
+import { ValueEditorProps } from './ValueEditorProps';
 
-export type CssParamEditorProps = {
-  param: ParamModel;
-};
-
-export const CssParamEditor = ({ param }: CssParamEditorProps) => {
-  const [paramValue, setParamValue] = useParamAtom<string | null>(param);
-  const [editorValue, setEditorValue] = useState(paramValue == null ? '' : String(paramValue));
+export const CssValueEditor = ({ param, value, onChange }: ValueEditorProps) => {
+  const [editorValue, setEditorValue] = useState(value == null ? '' : String(value));
   const [valid, setValid] = useState(() => cssStringIsValid(editorValue, param.type));
 
   return (
@@ -21,7 +16,7 @@ export const CssParamEditor = ({ param }: CssParamEditorProps) => {
         setEditorValue(newValue);
         setValid(isValid);
         if (isValid) {
-          setParamValue(newValue);
+          onChange(newValue);
         }
       }}
     />
