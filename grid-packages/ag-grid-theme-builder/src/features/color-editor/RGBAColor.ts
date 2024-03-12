@@ -24,6 +24,10 @@ export class RGBAColor {
     return hex;
   }
 
+  equals(other: RGBAColor): boolean {
+    return this.a === other.a && this.r === other.r && this.g === other.g && this.b === other.b;
+  }
+
   withAlpha(a: number): RGBAColor {
     return new RGBAColor(this.r, this.g, this.b, a);
   }

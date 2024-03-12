@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 import { Tooltip } from '../../components/Tooltip';
+import { RGBAColor } from './RGBAColor';
 
 export type ColorSwatchProps = {
   color: string;
@@ -59,19 +60,26 @@ const ColorSwatchCard = styled('div')`
   position: relative;
 `;
 
-export const LargeColorSwatch = (props: ColorSwatchProps) => (
-  <LargeColorSwatchContainer {...props}>
-    <Tooltip title="This shows your color on top of the background">
-      <OpaqueBackground color="var(--ag-background-color)">
-        <ColorOverOpaqueBackground
-          style={{
-            borderColor: props.color,
-          }}
-        />
-      </OpaqueBackground>
-    </Tooltip>
-  </LargeColorSwatchContainer>
-);
+export const LargeColorSwatch = (props: ColorSwatchProps) => {
+  const bg = RGBAColor.reinterpretCss('var(--ag-background-color)');
+  const color = RGBAColor.reinterpretCss(props.color);
+  const colorIsBackground = bg && color && bg.equals(color);
+  return (
+    <LargeColorSwatchContainer {...props}>
+      {!colorIsBackground && (
+        <Tooltip title="This shows your color on top of the background">
+          <OpaqueBackground color="var(--ag-background-color)">
+            <ColorOverOpaqueBackground
+              style={{
+                borderColor: props.color,
+              }}
+            />
+          </OpaqueBackground>
+        </Tooltip>
+      )}
+    </LargeColorSwatchContainer>
+  );
+};
 
 const LargeColorSwatchContainer = styled(ColorSwatch)`
   box-shadow: 0 0 7px 2px var(--color-border-primary);
