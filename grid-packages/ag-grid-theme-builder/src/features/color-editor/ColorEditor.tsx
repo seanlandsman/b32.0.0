@@ -33,12 +33,17 @@ const SwatchButton = styled(UIDropdownButton)`
   gap: 0;
   justify-content: space-between;
 
-  border: solid 2px color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 20%);
-  background-color: color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 20%);
+  border: solid 2px color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 30%);
+  background-color: color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 30%);
 
   &:hover {
-    border: solid 2px color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 30%);
-    background-color: color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 30%);
+    border-color: color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 40%);
+    background-color: color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 40%);
+  }
+
+  &.is-dropdown-visible {
+    border-color: var(--color-button-primary-bg);
+    background-color: var(--color-button-primary-bg);
   }
 `;
 

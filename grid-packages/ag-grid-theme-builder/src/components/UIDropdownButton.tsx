@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { UseFloatingOptions, autoUpdate, size, useFloating } from '@floating-ui/react';
+import { UseFloatingOptions, autoUpdate, shift, useFloating } from '@floating-ui/react';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { Button } from './Button';
 import { combineClassNames } from './component-utils';
@@ -45,13 +45,7 @@ export const UIDropdownButton = (props: WidgetDropdownProps) => {
 const floatingOptions: Partial<UseFloatingOptions> = {
   whileElementsMounted: autoUpdate,
   placement: 'right-start',
-  middleware: [
-    size({
-      apply({ availableHeight, elements }) {
-        elements.floating.style.maxHeight = availableHeight ? `${availableHeight - 8}px` : '';
-      },
-    }),
-  ],
+  middleware: [shift({ padding: 8 })],
 };
 
 const useClickAwayListener = (
@@ -73,16 +67,16 @@ const useClickAwayListener = (
       }
     };
 
-    document.body.addEventListener('mousedown', handleStart);
-    document.body.addEventListener('touchstart', handleStart);
-    document.body.addEventListener('mouseup', handleEnd);
-    document.body.addEventListener('touchend', handleEnd);
+    document.addEventListener('mousedown', handleStart);
+    document.addEventListener('touchstart', handleStart);
+    document.addEventListener('mouseup', handleEnd);
+    document.addEventListener('touchend', handleEnd);
 
     return () => {
-      document.body.removeEventListener('mousedown', handleStart);
-      document.body.removeEventListener('touchstart', handleStart);
-      document.body.removeEventListener('mouseup', handleEnd);
-      document.body.removeEventListener('touchend', handleEnd);
+      document.removeEventListener('mousedown', handleStart);
+      document.removeEventListener('touchstart', handleStart);
+      document.removeEventListener('mouseup', handleEnd);
+      document.removeEventListener('touchend', handleEnd);
     };
   }, [onHide]);
 };
@@ -98,11 +92,14 @@ const DropdownArea = styled('div')`
   z-index: 1000;
   position: absolute;
   background-color: var(--color-bg-primary);
-  padding: 16px;
   border: solid 2px var(--color-button-primary-bg);
   border-radius: 6px;
   border-top-left-radius: 0;
   pointer-events: all;
   box-shadow: var(--shadow-md);
   overflow-y: auto;
+  max-height: calc(100vh - 16px);
+  > * {
+    margin: 16px;
+  }
 `;

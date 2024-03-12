@@ -4,7 +4,7 @@ import { Input } from '../../components/Input';
 import { useChangeHandler } from '../../components/component-utils';
 import { Cell, Divider, TwoColumnTable, WideStack } from '../../components/layout';
 import { logErrorMessage } from '../../model/utils';
-import { ColorSwatch } from './ColorSwatch';
+import { LargeColorSwatch } from './ColorSwatch';
 import { HSLAColor } from './HSLAColor';
 import { RGBAColor } from './RGBAColor';
 import {
@@ -85,7 +85,7 @@ export const InputColorEditor = ({
 
   return (
     <WideStack>
-      <ColorSwatch color={value} splitBackground />
+      <LargeColorSwatch color={value} />
       <TwoColumnTable>
         <Cell>CSS</Cell>
         <Input

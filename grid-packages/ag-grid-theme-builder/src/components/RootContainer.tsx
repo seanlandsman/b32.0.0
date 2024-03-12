@@ -35,8 +35,8 @@ export const RootContainer = memo(() => {
 });
 
 const Container = styled('div')`
-  position: absolute;
-  inset: 12px;
+  padding: 8px;
+  height: 100%;
 `;
 
 const Grid = styled('div')`

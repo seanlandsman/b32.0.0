@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from '../../components/Button';
 import { useChangeHandler } from '../../components/component-utils';
 import { SmallNote, Stack } from '../../components/layout';
-import { ColorSwatch } from './ColorSwatch';
+import { LargeColorSwatch } from './ColorSwatch';
 import { UncontrolledColorEditorProps } from './color-editor-utils';
 
 export const EyedropperColorEditor = ({ initialValue, onChange }: UncontrolledColorEditorProps) => {
@@ -30,7 +30,7 @@ export const EyedropperColorEditor = ({ initialValue, onChange }: UncontrolledCo
 
   return (
     <Stack>
-      <ColorSwatch color={value} splitBackground />
+      <LargeColorSwatch color={value} />
       <Button
         onClick={() => {
           setOpen(true);

@@ -7,7 +7,7 @@ import { useChangeHandler } from '../../components/component-utils';
 import { Cell, HStack, SmallNote, Stack, TwoColumnTable } from '../../components/layout';
 import { allParamModels } from '../../model/ParamModel';
 import { titleCase } from '../../model/utils';
-import { ColorSwatch } from './ColorSwatch';
+import { ColorSwatch, LargeColorSwatch } from './ColorSwatch';
 import { RGBAColor } from './RGBAColor';
 import { VarColor } from './VarColor';
 import { UncontrolledColorEditorProps, formatProportionAs3dpPercent } from './color-editor-utils';
@@ -56,7 +56,7 @@ export const VarColorEditor = ({ initialValue, onChange }: UncontrolledColorEdit
 
   return (
     <Stack>
-      <ColorSwatch color={value} splitBackground />
+      <LargeColorSwatch color={value} />
       <span>
         {feedback}
         <InfoTooltip />
