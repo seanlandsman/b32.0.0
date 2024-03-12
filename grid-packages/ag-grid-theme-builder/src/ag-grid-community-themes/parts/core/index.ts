@@ -15,7 +15,7 @@ import indentTsImport from './indent';
 /**
  * Test docs!
  */
-export const core = definePart({
+export const corePart = definePart({
   feature: 'core',
   variant: 'core',
   defaults: {

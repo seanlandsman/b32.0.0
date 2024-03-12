@@ -16,7 +16,7 @@ export const CssValueEditor = ({ param, value, onChange }: ValueEditorProps) => 
         setEditorValue(newValue);
         setValid(isValid);
         if (isValid) {
-          onChange(newValue);
+          onChange(newValue.trim() || null);
         }
       }}
     />

@@ -1,12 +1,12 @@
 import { definePart } from '../../theme-utils';
 
-export const colorsLight = definePart({
+export const colorsLightPart = definePart({
   feature: 'colors',
   variant: 'light',
   defaults: {},
 });
 
-export const colorsDark = definePart({
+export const colorsDarkPart = definePart({
   feature: 'colors',
   variant: 'dark',
   defaults: {

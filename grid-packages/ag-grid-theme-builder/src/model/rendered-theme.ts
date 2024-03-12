@@ -1,5 +1,11 @@
-import { atom } from 'jotai';
-import { Theme, core, defineTheme, iconsQuartz, installTheme } from '../ag-grid-community-themes';
+import { atom, useAtomValue } from 'jotai';
+import {
+  Theme,
+  corePart,
+  defineTheme,
+  iconsQuartzPart,
+  installTheme,
+} from '../ag-grid-community-themes';
 import { allParamModels } from './ParamModel';
 // import { allPartModels } from './PartModel';
 import { Store } from './store';
@@ -24,7 +30,7 @@ export const renderedThemeAtom = atom((get): Theme => {
   //   .map((part) => part.themePart);
 
   // TODO defineTheme should not need core passed to it
-  const theme = defineTheme([core, iconsQuartz], paramValues);
+  const theme = defineTheme([corePart, iconsQuartzPart], paramValues);
 
   const container = get(shadowDomContainerAtom);
   if (container) {
@@ -42,3 +48,5 @@ export const renderedThemeAtom = atom((get): Theme => {
 
   return theme;
 });
+
+export const useRenderedTheme = () => useAtomValue(renderedThemeAtom);

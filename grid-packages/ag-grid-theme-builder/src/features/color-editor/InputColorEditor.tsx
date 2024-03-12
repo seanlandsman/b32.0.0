@@ -203,7 +203,6 @@ const ColorPartSlider = ({
   value,
   part,
   onChange,
-  valueLabelFormat,
 }: {
   value: SliderValues;
   onChange: (newValue: number, part: keyof SliderValues) => void;

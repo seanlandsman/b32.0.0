@@ -62,6 +62,7 @@ const ColorSwatchCard = styled('div')`
   padding: 0;
   border-width: 2px;
   overflow: hidden;
+  background-color: var(--color-bg-primary);
   background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>');
   position: relative;
 `;

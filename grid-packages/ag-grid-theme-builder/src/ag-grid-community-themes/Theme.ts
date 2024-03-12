@@ -1,7 +1,7 @@
 import { logErrorMessageOnce } from '../model/utils';
 import { ParamTypes } from './GENERATED-param-types';
-import { AnyPart, CssSource, Part } from './theme-types';
-import { borderValueToCss, camelCase, paramToVariableName } from './theme-utils';
+import { AnyPart, CssSource, Part, borderValueToCss } from './theme-types';
+import { camelCase, paramToVariableName } from './theme-utils';
 
 export type Theme = {
   css: string;

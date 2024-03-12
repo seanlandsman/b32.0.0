@@ -32,6 +32,14 @@ const SwatchButton = styled(UIDropdownButton)`
   width: 80px;
   gap: 0;
   justify-content: space-between;
+
+  border: solid 2px color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 20%);
+  background-color: color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 20%);
+
+  &:hover {
+    border: solid 2px color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 30%);
+    background-color: color-mix(in srgb, var(--color-bg-primary), var(--color-fg-primary) 30%);
+  }
 `;
 
 const DropdownIcon = styled(ChevronRight)`

@@ -1,16 +1,15 @@
 import styled from '@emotion/styled';
-import { useAtomValue } from 'jotai';
 import { memo } from 'react';
 import { GridConfigDropdownButton } from '../features/grid-config/GridConfigDropdown';
 import { ParamEditor, ParamEditorsTable } from '../features/params-editor/ParamEditor';
 import { ParamModel } from '../model/ParamModel';
-import { renderedThemeAtom } from '../model/rendered-theme';
+import { useRenderedTheme } from '../model/rendered-theme';
 import { CopyButton } from './CopyButton';
 import { DiscardChangesButton } from './DiscardChangesButton';
 import { GridPreview } from './GridPreview';
 
 export const RootContainer = memo(() => {
-  const theme = useAtomValue(renderedThemeAtom);
+  const theme = useRenderedTheme();
   return (
     <Container>
       <Grid>

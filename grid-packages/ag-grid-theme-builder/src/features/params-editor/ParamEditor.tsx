@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
-import { useAtomValue } from 'jotai';
 import { FC } from 'react';
 import { ParamType } from '../../ag-grid-community-themes/metadata/docs';
 import { Tooltip } from '../../components/Tooltip';
 import { Cell } from '../../components/layout';
 import { ParamModel, useParamAtom } from '../../model/ParamModel';
-import { renderedThemeAtom } from '../../model/rendered-theme';
+import { useRenderedTheme } from '../../model/rendered-theme';
 import { BorderStyleValueEditor } from './BorderStyleValueEditor';
 import { BorderValueEditor } from './BorderValueEditor';
 import { ColorValueEditor } from './ColorValueEditor';
@@ -19,12 +18,12 @@ export type ParamEditorProps = {
 export const ParamEditor = ({ param }: ParamEditorProps) => {
   const [value, setValue] = useParamAtom(param);
 
-  const theme = useAtomValue(renderedThemeAtom);
+  const theme = useRenderedTheme();
   const editorValue = value != null ? value : theme.paramDefaults[param.property];
 
   if (editorValue == null) return null;
 
-  const EditorComponent = paramEditorComponents[param.type] || CssValueEditor;
+  const ValueEditorComponent = valueEditors[param.type] || CssValueEditor;
 
   return (
     <>
@@ -33,12 +32,12 @@ export const ParamEditor = ({ param }: ParamEditorProps) => {
           <span>{param.label}:</span>
         </Tooltip>
       </LabelCell>
-      {<EditorComponent param={param} value={value} onChange={setValue} />}
+      {<ValueEditorComponent param={param} value={value} onChange={setValue} />}
     </>
   );
 };
 
-const paramEditorComponents: Record<ParamType, FC<ValueEditorProps>> = {
+const valueEditors: Record<ParamType, FC<ValueEditorProps>> = {
   color: ColorValueEditor,
   length: CssValueEditor,
   border: BorderValueEditor,
