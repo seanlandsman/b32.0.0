@@ -3,7 +3,7 @@ import {
   FloatingArrow,
   FloatingPortal,
   arrow,
-  flip,
+  autoPlacement,
   offset,
   shift,
   useFloating,
@@ -27,8 +27,8 @@ export const Tooltip = ({ title, children }: TooltipProps) => {
     placement: 'top',
     middleware: [
       offset(8),
-      flip(),
       shift({ padding: 8 }),
+      autoPlacement({}),
       arrow({
         element: arrowRef,
       }),

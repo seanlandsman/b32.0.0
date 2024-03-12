@@ -11,7 +11,9 @@ export const TabbedColorEditor = (props: UncontrolledColorEditorProps) => {
   const showVarTab = !props.preventTransparency && !props.preventVariables;
 
   return (
-    <Container defaultIndex={showVarTab && VarColor.parseCss(props.initialValue) ? 1 : 0}>
+    <TabbedColorEditorContainer
+      defaultIndex={showVarTab && VarColor.parseCss(props.initialValue) ? 1 : 0}
+    >
       <TabList>
         <Tab value="input">
           <SettingsAdjust />
@@ -36,12 +38,11 @@ export const TabbedColorEditor = (props: UncontrolledColorEditorProps) => {
       <TabPanel value="eyedropper">
         <EyedropperColorEditor {...props} />
       </TabPanel>
-    </Container>
+    </TabbedColorEditorContainer>
   );
 };
 
-const Container = styled(Tabs)`
-  width: 300px;
+const TabbedColorEditorContainer = styled(Tabs)`
   border-radius: 8px;
   overflow: hidden;
   margin: 0;

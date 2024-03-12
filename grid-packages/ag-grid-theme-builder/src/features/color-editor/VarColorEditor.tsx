@@ -2,9 +2,10 @@ import { Information } from '@carbon/icons-react';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
+import { Select } from '../../components/Select';
 import { Tooltip } from '../../components/Tooltip';
 import { useChangeHandler } from '../../components/component-utils';
-import { Cell, HStack, SmallNote, Stack, TwoColumnTable } from '../../components/layout';
+import { Cell, SmallNote, Stack, TwoColumnTable } from '../../components/layout';
 import { allParamModels } from '../../model/ParamModel';
 import { titleCase } from '../../model/utils';
 import { ColorSwatch, LargeColorSwatch } from './ColorSwatch';
@@ -46,60 +47,64 @@ export const VarColorEditor = ({ initialValue, onChange }: UncontrolledColorEdit
     );
   }
 
-  const feedback =
-    editorState.alpha === 1
-      ? `Same as ${titleCase(formatVariable(editorState.variable.variable))}`
-      : titleCase(formatVariable(editorState.variable.variable)) +
-        ' with ' +
-        formatProportionAs3dpPercent(editorState.alpha) +
-        ' alpha';
-
   return (
     <Stack>
-      <LargeColorSwatch color={value} />
       <span>
-        {feedback}
+        Define a colour based on another colour
         <InfoTooltip />
       </span>
-      <TwoColumnTable rowGap={1}>
-        <Cell>Color</Cell>
-        {/* TODO restore me */}
-        {/* <Autocomplete
-          options={allVariableInfos}
-          value={editorState.variable}
-          onChange={(_, variable) => {
-            enableChangeEvents();
-            if (variable) {
-              setEditorState({ ...editorState, variable });
-            }
-          }}
-          placeholder="Choose a color"
-          getOptionLabel={({ label }) => label}
-          getOptionKey={({ id }) => id}
-          groupBy={({ group }) => group}
-          renderOption={(props, option) => (
-            <AutocompleteOption {...props}>
-              <VariableOption variable={option.variable} />
-            </AutocompleteOption>
-          )}
-          slotProps={{ listbox: { sx: { minWidth: '400px' } } }}
-        /> */}
-        <Cell>Alpha</Cell>
-        <input
-          type="range"
-          value={editorState.alpha}
-          min={0}
-          max={1}
-          step={0.001}
-          onChange={(e) => {
-            enableChangeEvents();
-            setEditorState({ ...editorState, alpha: e.target.valueAsNumber });
-          }}
-        />
-      </TwoColumnTable>
+      <LargeColorSwatch color={value} />
+      <VarEditorTable>
+        <Cell>Based on:</Cell>
+        <Cell>
+          <Select
+            options={allVariableInfos}
+            value={editorState.variable}
+            getLabel={(v) => v.label}
+            getGroupLabel={(v) => v.group}
+            onChange={(variable) => {
+              enableChangeEvents();
+              if (variable) {
+                setEditorState({ ...editorState, variable });
+              }
+            }}
+          />
+        </Cell>
+        <Cell>Alpha:</Cell>
+        <AlphaCell>
+          <input
+            type="range"
+            value={editorState.alpha}
+            min={0}
+            max={1}
+            step={0.001}
+            onChange={(e) => {
+              enableChangeEvents();
+              setEditorState({ ...editorState, alpha: e.target.valueAsNumber });
+            }}
+          />
+          <span>{formatProportionAs3dpPercent(editorState.alpha)}</span>
+        </AlphaCell>
+      </VarEditorTable>
     </Stack>
   );
 };
+
+const VarEditorTable = styled(TwoColumnTable)`
+  grid-row-gap: 8px;
+`;
+
+const AlphaCell = styled(Cell)`
+  display: flex;
+  gap: 16px;
+
+  input {
+    flex: 1;
+  }
+  span {
+    flex: 0;
+  }
+`;
 
 const InformationIcon = styled(Information)`
   color: var(--joy-palette-primary-400);
@@ -125,18 +130,6 @@ const getInitialEditorState = (initialValue: string): EditorState | null => {
 };
 
 const formatVariable = (variable: string) => titleCase(variable.replace(/^--ag-/i, ''));
-
-const VariableOption = ({ variable }: { variable: string }) => {
-  return (
-    <HStack>
-      <VarColorSwatch color={`var(${variable})`} />
-      <div>
-        {formatVariable(variable)}
-        <VariableNameHint>var({variable})</VariableNameHint>
-      </div>
-    </HStack>
-  );
-};
 
 const VariableNameHint = styled('span')`
   font-size: 0.8em;
@@ -206,7 +199,7 @@ const variableInfo = (name: string, common?: boolean): VariableInfo => ({
   variable: name,
   id: common ? `common/${name}` : name,
   label: formatVariable(name),
-  group: common ? 'Common variables' : 'All variables',
+  group: common ? 'Common variables' : 'All variables (TODO smaller set for launch)',
 });
 
 // TODO this list should be computed from the variables actually defined by the application

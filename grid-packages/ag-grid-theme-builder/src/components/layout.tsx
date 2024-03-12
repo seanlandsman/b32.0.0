@@ -1,14 +1,9 @@
 import styled from '@emotion/styled';
 
-type TwoColumnTableProps = {
-  rowGap?: number;
-};
-
 export const TwoColumnTable = styled('div')`
   display: grid;
   grid-template-columns: auto 1fr;
   grid-column-gap: 16px;
-  grid-row-gap: ${(props: TwoColumnTableProps) => `${(props.rowGap ?? 0) * 8}px`};
 `;
 
 export const Cell = styled('div')`
@@ -40,6 +35,6 @@ export const SmallNote = styled('div')`
 `;
 
 export const Divider = styled('div')`
-  border-bottom: 1px solid var(--ag-border-color);
+  border-bottom: 1px solid var(--color-border-primary);
   margin: 8px 0;
 `;

@@ -45,7 +45,7 @@ export const UIDropdownButton = (props: WidgetDropdownProps) => {
 const floatingOptions: Partial<UseFloatingOptions> = {
   whileElementsMounted: autoUpdate,
   placement: 'right-start',
-  middleware: [shift({ padding: 8 })],
+  middleware: [shift({ padding: 8 }), ],
 };
 
 const useClickAwayListener = (

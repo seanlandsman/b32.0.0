@@ -42,9 +42,13 @@ const OpaqueBackground = styled('div')`
 
 const ColorOverOpaqueBackground = styled('div')`
   position: absolute;
-  inset: 20%;
-  border-radius: 100%;
-  background-color: var(--ag-background-color);
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  margin-top: -20px;
+  border-radius: 20px;
   border: solid 5px;
 `;
 
