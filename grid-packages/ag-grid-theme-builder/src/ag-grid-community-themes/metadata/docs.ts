@@ -36,6 +36,9 @@ const docs: Record<string, string | undefined> = {
   rowBorder: 'Borders between rows.',
   footerBorder: 'Horizontal borders above footer components like the pagination and status bars',
   columnBorder: 'Vertical borders separating columns.',
+  columnHeaderBorder: 'Vertical borders separating column headers.',
+  columnHeaderBorderHeight:
+    'Height of the border between column headers. Percentage values are relative to the header height.',
   pinnedColumnBorder: 'Borders between the grid and columns that are pinned to the left or right',
   pinnedRowBorder: 'Borders between the grid and rows that are pinned to the top or bottom',
   sidePanelBorder:

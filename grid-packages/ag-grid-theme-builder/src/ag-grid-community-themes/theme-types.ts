@@ -13,6 +13,8 @@ export type Part<T extends string = string> = {
   icons?: Record<string, string>;
 };
 
+export type ParamDefaults<T extends string> = { [K in T]: K extends Param ? ParamTypes[K] : any };
+
 export type CombinedParts<T extends string> = {
   params: T[];
   componentParts: AnyPart[];

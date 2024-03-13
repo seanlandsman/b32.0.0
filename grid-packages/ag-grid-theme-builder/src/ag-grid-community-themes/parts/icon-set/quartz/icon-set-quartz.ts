@@ -5,7 +5,7 @@ import quartzIconsEmbeddedTsImport from './quartz-icon-data';
 export const iconSetQuartz = definePart({
   partId: 'iconSet',
   variantId: 'quartz',
-  defaults: {
+  additionalParams: {
     iconStrokeWidth: '1.5px',
   },
   css: [quartzIconsEmbeddedTsImport, iconSetQuartzCSS],

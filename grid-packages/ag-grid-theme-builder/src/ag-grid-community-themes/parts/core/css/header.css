@@ -8,6 +8,7 @@
   color: var(--ag-header-foreground-color);
   border-bottom: var(--ag-header-border);
   font-weight: var(--ag-header-font-weight);
+  font-weight: 500;
 }
 
 /* HEADER ROW */
@@ -15,7 +16,6 @@
 .ag-header-row {
   position: absolute;
   height: var(--ag-header-height);
-  font-weight: 500;
 }
 
 .ag-header-row:not(:first-child) {
@@ -150,13 +150,14 @@ on top of any custom colour that the application has given this cell */
 
 /* COLUMN SEPARATOR */
 
-.ag-header-cell::before,
-.ag-header-group-cell:not(.ag-header-span-height.ag-header-group-cell-no-group)::before {
+.ag-header-cell::after,
+.ag-header-group-cell:not(.ag-header-span-height.ag-header-group-cell-no-group)::after {
   content: '';
   position: absolute;
   z-index: 1;
-  height: 100%;
-  border-right: var(--ag-column-border);
+  height: var(--ag-column-header-border-height);
+  top: calc(50% - var(--ag-column-header-border-height) * 0.5);
+  border-right: var(--ag-column-header-border);
   right: 0;
 }
 

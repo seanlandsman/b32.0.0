@@ -1,4 +1,5 @@
-import { AnyPart, CombinedParts, Part } from './theme-types';
+import { CoreParam } from '.';
+import { AnyPart, CombinedParts, ParamDefaults, Part } from './theme-types';
 
 /**
  * Version of Object.entries typed to allow easy iteration over objects. Callers
@@ -35,12 +36,19 @@ export const logErrorMessage = (message: unknown, error?: unknown) => {
 export const proportionToPercent = (value: number) =>
   Math.round(Math.max(0, Math.min(1, value)) * 1000) / 10;
 
-export type DefinePartArgs<T extends string = string> = Omit<Part<T>, 'params'>;
+export type DefinePartArgs<T extends string = string> = Omit<Part<T>, 'params' | 'defaults'> & {
+  overrideParams?: Partial<ParamDefaults<CoreParam>>;
+  additionalParams?: ParamDefaults<T>;
+};
 
-export const definePart = <T extends string>(args: DefinePartArgs<T>): Part<T> => ({
-  ...args,
-  params: Object.keys(args.defaults || {}) as T[],
-});
+export const definePart = <T extends string = never>(args: DefinePartArgs<T>): Part<T> => {
+  const defaults: any = Object.assign({}, args.additionalParams || {}, args.overrideParams || {});
+  return {
+    ...args,
+    defaults,
+    params: Object.keys(defaults || {}) as T[],
+  };
+};
 
 export const camelCase = (str: string) =>
   str.replace(/[\W_]+([a-z])/g, (_, letter) => letter.toUpperCase());

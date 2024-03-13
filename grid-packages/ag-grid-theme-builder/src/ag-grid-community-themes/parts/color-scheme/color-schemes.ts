@@ -4,13 +4,13 @@ import { definePart } from '../../theme-utils';
 export const colorSchemeLightNeutral = definePart({
   partId: 'colorScheme',
   variantId: 'lightNeutral',
-  defaults: {},
+  overrideParams: {},
 });
 
 export const colorSchemeLightWarm = definePart({
   partId: 'colorScheme',
   variantId: 'lightWarm',
-  defaults: {
+  overrideParams: {
     foregroundColor: '#000000de',
     borderColor: '#60300026',
     chromeBackgroundColor: '#60300005',
@@ -20,17 +20,17 @@ export const colorSchemeLightWarm = definePart({
 export const colorSchemeLightCold = definePart({
   partId: 'colorScheme',
   variantId: 'lightCold',
-  defaults: {
+  overrideParams: {
     foregroundColor: '#000',
     backgroundColor: '#fff',
-    chromeBackgroundColor: '#f5f7f7',
+    chromeBackgroundColor: '#f3f8f8',
   },
 });
 
 export const colorSchemeDarkNeutral = definePart({
   partId: 'colorScheme',
   variantId: 'darkNeutral',
-  defaults: {
+  overrideParams: {
     backgroundColor: 'hsl(217, 0%, 17%)',
     foregroundColor: '#FFF',
     chromeBackgroundColor: opaqueForeground(0.05),
@@ -40,7 +40,7 @@ export const colorSchemeDarkNeutral = definePart({
 export const colorSchemeDarkWarm = definePart({
   partId: 'colorScheme',
   variantId: 'darkWarm',
-  defaults: {
+  overrideParams: {
     backgroundColor: 'hsl(29, 10%, 17%)',
     foregroundColor: '#FFF',
     chromeBackgroundColor: opaqueForeground(0.05),
@@ -50,7 +50,7 @@ export const colorSchemeDarkWarm = definePart({
 export const colorSchemeDarkBlue = definePart({
   partId: 'colorScheme',
   variantId: 'darkBlue',
-  defaults: {
+  overrideParams: {
     backgroundColor: '#1f2836',
     foregroundColor: '#FFF',
     chromeBackgroundColor: opaqueForeground(0.07),

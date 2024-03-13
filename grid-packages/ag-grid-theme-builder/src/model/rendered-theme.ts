@@ -21,8 +21,9 @@ export const renderedThemeAtom = atom((get): Theme => {
 
   const colorScheme = get(PartModel.for('colorScheme').variantAtom);
   const icons = get(PartModel.for('iconSet').variantAtom);
+  const design = get(PartModel.for('design').variantAtom);
 
-  const theme = defineTheme([colorScheme.part, icons.part], paramValues);
+  const theme = defineTheme([colorScheme.part, design.part, icons.part], paramValues);
 
   const container = get(shadowDomContainerAtom);
   if (container) {
