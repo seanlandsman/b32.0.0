@@ -26,10 +26,11 @@ export const RootContainer = memo(() => {
           <TwoColumnTable>
             <VariantSelector feature={PartModel.for('colorScheme')} />
             <VariantSelector feature={PartModel.for('design')} />
-            <ParamEditor param={ParamModel.for('foregroundColor')} />
-            <ParamEditor param={ParamModel.for('backgroundColor')} />
+            <ParamEditor param={ParamModel.for('gridSize')} />
+            {/* <ParamEditor param={ParamModel.for('foregroundColor')} />
+            <ParamEditor param={ParamModel.for('backgroundColor')} />*/}
             <ParamEditor param={ParamModel.for('accentColor')} />
-            <ParamEditor param={ParamModel.for('borderColor')} />
+            {/* <ParamEditor param={ParamModel.for('borderColor')} /> */}
           </TwoColumnTable>
         </Menu>
         <Main>

@@ -55,7 +55,7 @@ const GridPreview = () => {
   return (
     <Wrapper>
       <root.div style={{ height: '100%' }}>
-        <div ref={setContainerEl} style={{ height: '100%' }}>
+        <div ref={setContainerEl} className="ag-theme-change-trigger" style={{ height: '100%' }}>
           <AgGridReact
             onGridReady={({ api }) => {
               if (config.showIntegratedChartPopup) {

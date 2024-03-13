@@ -44,6 +44,8 @@ export const designMaterial = definePart({
   partId: 'design',
   variantId: 'material',
   overrideParams: {
+    borderRadius: '0',
+    wrapperBorderRadius: '0',
     wrapperBorder: false,
     sidePanelBorder: false,
     sideButtonSelectedBorder: false,

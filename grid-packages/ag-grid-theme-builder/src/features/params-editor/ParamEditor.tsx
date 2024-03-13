@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import { FC } from 'react';
 import { ParamType } from '../../ag-grid-community-themes/metadata/docs';
 import { Tooltip } from '../../components/Tooltip';
@@ -9,6 +8,7 @@ import { BorderStyleValueEditor } from './BorderStyleValueEditor';
 import { BorderValueEditor } from './BorderValueEditor';
 import { ColorValueEditor } from './ColorValueEditor';
 import { CssValueEditor } from './CssValueEditor';
+import { LengthValueEditor } from './LengthValueEditor';
 import { ValueEditorProps } from './ValueEditorProps';
 
 export type ParamEditorProps = {
@@ -27,11 +27,11 @@ export const ParamEditor = ({ param }: ParamEditorProps) => {
 
   return (
     <>
-      <LabelCell>
+      <Cell>
         <Tooltip title={param.docs}>
           <span>{param.label}:</span>
         </Tooltip>
-      </LabelCell>
+      </Cell>
       {<ValueEditorComponent param={param} value={value} onChange={setValue} />}
     </>
   );
@@ -39,7 +39,7 @@ export const ParamEditor = ({ param }: ParamEditorProps) => {
 
 const valueEditors: Record<ParamType, FC<ValueEditorProps>> = {
   color: ColorValueEditor,
-  length: CssValueEditor,
+  length: LengthValueEditor,
   border: BorderValueEditor,
   borderStyle: BorderStyleValueEditor,
   shadow: CssValueEditor,
@@ -49,7 +49,3 @@ const valueEditors: Record<ParamType, FC<ValueEditorProps>> = {
   display: CssValueEditor,
   duration: CssValueEditor,
 };
-
-const LabelCell = styled(Cell)`
-  font-size: 0.9em;
-`;
