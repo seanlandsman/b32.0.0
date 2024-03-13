@@ -1,13 +1,13 @@
 import { definePart } from '../../theme-utils';
 
 export const colorSchemeLightNeutral = definePart({
-  featureId: 'colorScheme',
+  partId: 'colorScheme',
   variantId: 'lightNeutral',
   defaults: {},
 });
 
 export const colorSchemeLightWarm = definePart({
-  featureId: 'colorScheme',
+  partId: 'colorScheme',
   variantId: 'lightWarm',
   defaults: {
     foregroundColor: '#000000de',
@@ -17,7 +17,7 @@ export const colorSchemeLightWarm = definePart({
 });
 
 export const colorSchemeLightCold = definePart({
-  featureId: 'colorScheme',
+  partId: 'colorScheme',
   variantId: 'lightCold',
   defaults: {
     foregroundColor: '#000',
@@ -27,7 +27,7 @@ export const colorSchemeLightCold = definePart({
 });
 
 export const colorSchemeDarkNeutral = definePart({
-  featureId: 'colorScheme',
+  partId: 'colorScheme',
   variantId: 'darkNeutral',
   defaults: {
     backgroundColor: 'hsl(217, 0%, 17%)',
@@ -36,7 +36,7 @@ export const colorSchemeDarkNeutral = definePart({
 });
 
 export const colorSchemeDarkWarm = definePart({
-  featureId: 'colorScheme',
+  partId: 'colorScheme',
   variantId: 'darkWarm',
   defaults: {
     backgroundColor: 'hsl(29, 10%, 17%)',
@@ -45,7 +45,7 @@ export const colorSchemeDarkWarm = definePart({
 });
 
 export const colorSchemeDarkBlue = definePart({
-  featureId: 'colorScheme',
+  partId: 'colorScheme',
   variantId: 'darkBlue',
   defaults: {
     backgroundColor: '#1f2836',

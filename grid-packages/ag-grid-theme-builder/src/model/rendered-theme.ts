@@ -2,7 +2,7 @@ import { atom, useAtomValue } from 'jotai';
 import { Theme, defineTheme, installTheme } from '../ag-grid-community-themes';
 import { allParamModels } from './ParamModel';
 // import { allPartModels } from './PartModel';
-import { FeatureModel } from './FeatureModel';
+import { PartModel } from './PartModel';
 import { Store } from './store';
 
 const changeDetection = atom(0);
@@ -20,8 +20,8 @@ export const renderedThemeAtom = atom((get): Theme => {
     allParamModels().map((param) => [param.property, get(param.valueAtom)]),
   );
 
-  const colorScheme = get(FeatureModel.for('colorScheme').variantAtom);
-  const icons = get(FeatureModel.for('iconSet').variantAtom);
+  const colorScheme = get(PartModel.for('colorScheme').variantAtom);
+  const icons = get(PartModel.for('iconSet').variantAtom);
 
   const theme = defineTheme([colorScheme.part, icons.part], paramValues);
 

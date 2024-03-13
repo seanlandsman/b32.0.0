@@ -9,14 +9,14 @@ import {
   transparentForeground,
 } from '../..';
 import { definePart } from '../../theme-utils';
-import coreCssImport from './GENERATED-core';
-import indentTsImport from './indent';
+import { coreCSS } from './GENERATED-core';
+import indent from './indent';
 
 /**
  * Test docs!
  */
 export const corePart = definePart({
-  featureId: 'core',
+  partId: 'core',
   variantId: 'part',
   defaults: {
     backgroundColor: '#FFF',
@@ -149,5 +149,5 @@ export const corePart = definePart({
     filterToolPanelGroupIndent: calc('gridSize'),
     iconButtonHoverBackgroundColor: transparentForeground(0.1),
   },
-  css: [coreCssImport, indentTsImport],
+  css: [coreCSS, indent],
 });

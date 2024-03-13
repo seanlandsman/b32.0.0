@@ -3,8 +3,8 @@ import { memo } from 'react';
 import { GridConfigDropdownButton } from '../features/grid-config/GridConfigDropdown';
 import { ParamEditor } from '../features/params-editor/ParamEditor';
 import { VariantSelector } from '../features/variant-selector/VariantSelector';
-import { FeatureModel } from '../model/FeatureModel';
 import { ParamModel } from '../model/ParamModel';
+import { PartModel } from '../model/PartModel';
 import { useRenderedTheme } from '../model/rendered-theme';
 import { CopyButton } from './CopyButton';
 import { DiscardChangesButton } from './DiscardChangesButton';
@@ -24,7 +24,8 @@ export const RootContainer = memo(() => {
         </Header>
         <Menu>
           <TwoColumnTable>
-            <VariantSelector feature={FeatureModel.for('colorScheme')} />
+            <VariantSelector feature={PartModel.for('colorScheme')} />
+            <VariantSelector feature={PartModel.for('design')} />
             <ParamEditor param={ParamModel.for('foregroundColor')} />
             <ParamEditor param={ParamModel.for('backgroundColor')} />
             <ParamEditor param={ParamModel.for('accentColor')} />

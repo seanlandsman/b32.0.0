@@ -1,33 +1,35 @@
 import { join } from 'path';
+import { Part } from '../..';
 import { ParamType, getParamDocs, getParamType } from '../../metadata/docs';
-import { camelCase, isPart } from '../../theme-utils';
+import { allParts } from '../../parts/parts';
+import { camelCase } from '../../theme-utils';
 import { fatalError, getProjectDir, writeTsFile } from './utils';
 
 export const generateDocsFile = async () => {
   const mainExports = await import(getProjectDir());
 
-  const allParts = Object.values(mainExports).filter(isPart);
-  const corePart = allParts.find((p) => p.featureId === 'core');
-  if (!corePart) {
-    throw fatalError('No core part found');
-  }
-
+  const exportedParts = new Set<Part>();
   for (const [exportName, exportValue] of Object.entries(mainExports)) {
-    if (isPart(exportValue)) {
-      const expectedName = exportValue.featureId + upperCamelCase(exportValue.variantId);
+    const part = exportValue as Part;
+    if (part.partId && part.variantId) {
+      exportedParts.add(part);
+      const expectedName = part.partId + upperCamelCase(part.variantId);
       if (exportName !== expectedName) {
         throw fatalError(
-          `Part ${exportValue.featureId}/${exportValue.variantId} should be exported with name "${expectedName}"`,
+          `Part ${part.partId}/${part.variantId} should be exported with name "${expectedName}"`,
         );
       }
     }
   }
 
   for (const part of allParts) {
+    if (!exportedParts.has(part)) {
+      throw fatalError(`Part ${part.partId}/${part.variantId} is not exported`);
+    }
     try {
       part.params.forEach(getParamType);
     } catch (e: any) {
-      throw fatalError(`Error in part ${part.featureId}/${part.variantId}: ${e.message}`);
+      throw fatalError(`Error in part ${part.partId}/${part.variantId}: ${e.message}`);
     }
   }
 

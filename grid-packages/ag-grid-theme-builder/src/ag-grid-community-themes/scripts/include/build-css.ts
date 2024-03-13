@@ -6,12 +6,15 @@ import postcss from 'postcss';
 import cssImport from 'postcss-import';
 import cssNesting from 'postcss-nesting';
 import cssRtl from 'postcss-rtlcss';
+import { camelCase } from '../../theme-utils';
 import { getProjectDir, writeTsFile } from './utils';
 
 const DEV_MODE = process.argv.includes('--dev');
 
 export const generateAllCSSEmbeds = async () => {
-  const cssEntryPoints = globSync(join(getProjectDir(), 'parts/**/*.css'));
+  const cssEntryPoints = globSync(join(getProjectDir(), 'parts/**/*.css')).filter(
+    (path) => !path.includes('/css/'),
+  );
   for (const cssEntryPoint of cssEntryPoints) {
     await compileCSSEntryPoint(cssEntryPoint);
   }
@@ -24,8 +27,8 @@ const compileCSSEntryPoint = async (file: string) => {
 
 const generateCSSEmbed = async (entry: string) => {
   const dir = dirname(entry);
-  const part = dirname(dir);
-  const outputFile = join(dir, `GENERATED-${basename(entry)}`).replace(/\.css$/, '.ts');
+  const entryName = basename(entry, '.css');
+  const outputFile = join(dir, `GENERATED-${entryName}.ts`);
   let cssString =
     `/**\n * FILE: ${prettyPath(entry)}\n */\n` + (await loadAndProcessCSSFile(entry));
   cssString = await applyPostcssPlugin(
@@ -41,15 +44,18 @@ const generateCSSEmbed = async (entry: string) => {
       ],
     }),
   );
-  let result = 'export default `' + cssString.replaceAll('`', '\\`') + '`;';
+  const exportName = camelCase(entryName) + 'CSS';
+  let result = `export let ${exportName} = \`${cssString.replaceAll('`', '\\`')}\`;`;
 
   if (DEV_MODE) {
     result += `
     if (import.meta.hot) {
+      const path = ${JSON.stringify(outputFile)};
+      const updateFunctions: Record<string, (css: string) => void> = ((globalThis as any)._cssHmrUpdateFunctions ||= {});
       import.meta.hot.accept((newModule) => {
         const handler = (window as any).handlePartsCssChange
         if (newModule && handler) {
-          handler(${JSON.stringify(part)}, newModule.default);
+          handler(${exportName}, newModule.${exportName});
         }
       });
     }

@@ -69,7 +69,7 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
   const mainCSS: string[] = [variableDefaults];
   for (const part of parts) {
     if (part.css) {
-      mainCSS.push(`/* Part ${part.featureId}/${part.variantId} */`);
+      mainCSS.push(`/* Part ${part.partId}/${part.variantId} */`);
       mainCSS.push(...part.css.map((p) => cssPartToString(p, mergedParams)));
     }
   }

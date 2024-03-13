@@ -1,9 +1,9 @@
 import { Select } from '../../components/Select';
 import { Cell } from '../../components/layout';
-import { FeatureModel, useSelectedVariant } from '../../model/FeatureModel';
+import { PartModel, useSelectedVariant } from '../../model/PartModel';
 
 export type VariantSelectorProps = {
-  feature: FeatureModel;
+  feature: PartModel;
 };
 
 export const VariantSelector = ({ feature }: VariantSelectorProps) => {
