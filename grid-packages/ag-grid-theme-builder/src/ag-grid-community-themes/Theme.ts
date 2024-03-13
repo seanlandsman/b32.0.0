@@ -15,7 +15,7 @@ export type PickVariables<P extends AnyPart, V extends object> = {
 };
 
 export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
-  partOrParts: P | readonly P[],
+  partOrParts: P | P[],
   parameters: PickVariables<P, V>,
 ): Theme => {
   const result: Theme = {
@@ -24,8 +24,13 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
     paramDefaults: {},
   };
 
-  const parts = [corePart];
-  flattenParts(Array.isArray(partOrParts) ? partOrParts : [partOrParts], parts);
+  // only allow one variant of each part, last variant wins
+  const removeDuplicates: Record<string, Part> = { [corePart.partId]: corePart };
+  for (const part of flattenParts(partOrParts)) {
+    removeDuplicates[part.partId] = part;
+  }
+  const parts = Object.values(removeDuplicates);
+
   const overrideParams = parameters as Record<string, any>;
   const mergedParams: Record<string, any> = {};
 
@@ -33,8 +38,6 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
   for (const part of parts) {
     Object.assign(mergedParams, part.defaults);
   }
-
-  // TODO apply exclusion group
 
   const allowedParams = new Set<string>(parts.flatMap((part) => part.params));
 
@@ -135,8 +138,8 @@ const describeValue = (value: any): string => {
   return `${typeof value} ${value}`;
 };
 
-const flattenParts = (parts: readonly AnyPart[], accumulator: Part[]) => {
-  for (const part of parts) {
+const flattenParts = (parts: AnyPart | AnyPart[], accumulator: Part[] = []) => {
+  for (const part of Array.isArray(parts) ? parts : [parts]) {
     if ('componentParts' in part) {
       flattenParts(part.componentParts, accumulator);
     } else {

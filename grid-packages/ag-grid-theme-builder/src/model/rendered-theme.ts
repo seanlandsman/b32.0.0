@@ -1,7 +1,6 @@
 import { atom, useAtomValue } from 'jotai';
 import { Theme, defineTheme, installTheme } from '../ag-grid-community-themes';
 import { allParamModels } from './ParamModel';
-// import { allPartModels } from './PartModel';
 import { PartModel } from './PartModel';
 import { Store } from './store';
 

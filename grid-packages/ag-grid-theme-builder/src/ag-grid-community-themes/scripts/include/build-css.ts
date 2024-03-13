@@ -45,7 +45,7 @@ const generateCSSEmbed = async (entry: string) => {
     }),
   );
   const exportName = camelCase(entryName) + 'CSS';
-  let result = `export let ${exportName} = \`${cssString.replaceAll('`', '\\`')}\`;`;
+  let result = `export const ${exportName} = \`${cssString.replaceAll('`', '\\`')}\`;`;
 
   if (DEV_MODE) {
     result += `
