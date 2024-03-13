@@ -24,7 +24,7 @@ export const writeTsFile = async (path: string, content: string) => {
 
 export const getProjectDir = () => join(__dirname, '..', '..');
 
-export const removeAllGeneratedFiled = () => {
+export const removeAllGeneratedFiles = () => {
   globSync(join(getProjectDir(), `**/GENERATED-*`)).forEach((file) => {
     fs.rmSync(file);
   });

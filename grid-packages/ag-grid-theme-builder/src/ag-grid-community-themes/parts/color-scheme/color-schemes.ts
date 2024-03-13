@@ -1,3 +1,4 @@
+import { opaqueForeground } from '../..';
 import { definePart } from '../../theme-utils';
 
 export const colorSchemeLightNeutral = definePart({
@@ -32,6 +33,7 @@ export const colorSchemeDarkNeutral = definePart({
   defaults: {
     backgroundColor: 'hsl(217, 0%, 17%)',
     foregroundColor: '#FFF',
+    chromeBackgroundColor: opaqueForeground(0.05),
   },
 });
 
@@ -41,6 +43,7 @@ export const colorSchemeDarkWarm = definePart({
   defaults: {
     backgroundColor: 'hsl(29, 10%, 17%)',
     foregroundColor: '#FFF',
+    chromeBackgroundColor: opaqueForeground(0.05),
   },
 });
 
@@ -50,6 +53,7 @@ export const colorSchemeDarkBlue = definePart({
   defaults: {
     backgroundColor: '#1f2836',
     foregroundColor: '#FFF',
+    chromeBackgroundColor: opaqueForeground(0.07),
   },
 });
 

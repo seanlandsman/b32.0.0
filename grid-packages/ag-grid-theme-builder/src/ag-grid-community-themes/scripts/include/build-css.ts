@@ -50,8 +50,6 @@ const generateCSSEmbed = async (entry: string) => {
   if (DEV_MODE) {
     result += `
     if (import.meta.hot) {
-      const path = ${JSON.stringify(outputFile)};
-      const updateFunctions: Record<string, (css: string) => void> = ((globalThis as any)._cssHmrUpdateFunctions ||= {});
       import.meta.hot.accept((newModule) => {
         const handler = (window as any).handlePartsCssChange
         if (newModule && handler) {

@@ -12,7 +12,7 @@
     "build-css": "tsx src/ag-grid-community-themes/scripts/codegen.ts",
     "build-types": "tsx src/ag-grid-community-themes/scripts/codegen.ts",
     "codegen:prod": "tsx src/ag-grid-community-themes/scripts/codegen.ts",
-    "codegen:dev": "tsx src/ag-grid-community-themes/scripts/codegen.ts --dev",
+    "codegen:dev": "tsx src/ag-grid-community-themes/scripts/codegen.ts --dev --no-clean",
     "codegen:watch": "chokidar 'src/ag-grid-community-themes/**/*' --ignore '**/GENERATED-*' --command 'npm run codegen:dev'"
   },
   "dependencies": {
