@@ -1,8 +1,8 @@
-import { Param, ParamTypes } from './GENERATED-param-types';
+import type { Param, ParamTypes } from './GENERATED-param-types';
 
 export type CssSource = string | ((params: Record<string, any>) => string);
 
-export type FeatureId = 'core' | 'colorScheme' | 'icons' | 'design';
+export type FeatureId = 'core' | 'colorScheme' | 'iconSet' | 'design';
 
 export type Part<T extends string = string> = {
   featureId: FeatureId;

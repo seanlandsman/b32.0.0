@@ -1,6 +1,6 @@
 import { corePart } from '.';
 import { logErrorMessageOnce } from '../model/utils';
-import { ParamTypes } from './GENERATED-param-types';
+import type { ParamTypes } from './GENERATED-param-types';
 import { AnyPart, CssSource, Part, borderValueToCss } from './theme-types';
 import { camelCase, paramToVariableName } from './theme-utils';
 
@@ -36,7 +36,7 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
 
   // TODO apply exclusion group
 
-  const allowedParams = new Set(parts.flatMap((part) => part.params));
+  const allowedParams = new Set<string>(parts.flatMap((part) => part.params));
 
   // apply override params passed to this method
   for (const [name, value] of Object.entries(overrideParams)) {

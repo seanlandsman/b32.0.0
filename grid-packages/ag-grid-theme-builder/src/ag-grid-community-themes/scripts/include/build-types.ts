@@ -23,6 +23,14 @@ export const generateDocsFile = async () => {
     }
   }
 
+  for (const part of allParts) {
+    try {
+      part.params.forEach(getParamType);
+    } catch (e: any) {
+      throw fatalError(`Error in part ${part.featureId}/${part.variantId}: ${e.message}`);
+    }
+  }
+
   const allParams = Array.from(new Set(allParts.flatMap((p) => p.params))).sort();
 
   let result = generatedWarning;

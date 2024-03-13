@@ -1,4 +1,4 @@
-import { Param } from './GENERATED-param-types';
+import type { Param } from './GENERATED-param-types';
 import { kebabCase, proportionToPercent } from './theme-utils';
 
 /**

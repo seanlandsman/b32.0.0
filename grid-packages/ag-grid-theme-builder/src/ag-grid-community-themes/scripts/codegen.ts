@@ -1,4 +1,8 @@
+import { removeAllGeneratedFiled } from './include/utils';
+
 const main = async () => {
+  removeAllGeneratedFiled();
+
   const { generateAllCSSEmbeds } = await import('./include/build-css');
   await generateAllCSSEmbeds();
   console.log('Generated CSS embeds 🚀');

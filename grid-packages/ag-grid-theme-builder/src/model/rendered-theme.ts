@@ -21,7 +21,7 @@ export const renderedThemeAtom = atom((get): Theme => {
   );
 
   const colorScheme = get(FeatureModel.for('colorScheme').variantAtom);
-  const icons = get(FeatureModel.for('icons').variantAtom);
+  const icons = get(FeatureModel.for('iconSet').variantAtom);
 
   const theme = defineTheme([colorScheme.part, icons.part], paramValues);
 

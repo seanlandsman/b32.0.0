@@ -21,7 +21,7 @@ export const colorSchemeLightCold = definePart({
   variantId: 'lightCold',
   defaults: {
     foregroundColor: '#000',
-    background: '#fff',
+    backgroundColor: '#fff',
     chromeBackgroundColor: '#f5f7f7',
   },
 });
@@ -52,3 +52,12 @@ export const colorSchemeDarkBlue = definePart({
     foregroundColor: '#FFF',
   },
 });
+
+export const allColorSchemes = [
+  colorSchemeLightNeutral,
+  colorSchemeLightWarm,
+  colorSchemeLightCold,
+  colorSchemeDarkNeutral,
+  colorSchemeDarkWarm,
+  colorSchemeDarkBlue,
+];

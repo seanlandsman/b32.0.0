@@ -11,7 +11,7 @@ import { getProjectDir, writeTsFile } from './utils';
 const DEV_MODE = process.argv.includes('--dev');
 
 export const generateAllCSSEmbeds = async () => {
-  const cssEntryPoints = globSync(join(getProjectDir(), 'parts/*/*.css'));
+  const cssEntryPoints = globSync(join(getProjectDir(), 'parts/**/*.css'));
   for (const cssEntryPoint of cssEntryPoints) {
     await compileCSSEntryPoint(cssEntryPoint);
   }

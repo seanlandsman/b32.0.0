@@ -14,7 +14,7 @@ const partsByFeatureId: Record<FeatureId, Part[]> = {
     themes.colorSchemeDarkBlue,
   ],
   design: [],
-  icons: [themes.iconsQuartz],
+  iconSet: [themes.iconSetQuartz],
   core: [themes.corePart],
 };
 
