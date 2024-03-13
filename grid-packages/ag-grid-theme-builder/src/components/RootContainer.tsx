@@ -1,12 +1,15 @@
 import styled from '@emotion/styled';
 import { memo } from 'react';
 import { GridConfigDropdownButton } from '../features/grid-config/GridConfigDropdown';
-import { ParamEditor, ParamEditorsTable } from '../features/params-editor/ParamEditor';
+import { ParamEditor } from '../features/params-editor/ParamEditor';
+import { VariantSelector } from '../features/variant-selector/VariantSelector';
+import { FeatureModel } from '../model/FeatureModel';
 import { ParamModel } from '../model/ParamModel';
 import { useRenderedTheme } from '../model/rendered-theme';
 import { CopyButton } from './CopyButton';
 import { DiscardChangesButton } from './DiscardChangesButton';
 import { GridPreview } from './GridPreview';
+import { TwoColumnTable } from './layout';
 
 export const RootContainer = memo(() => {
   const theme = useRenderedTheme();
@@ -20,12 +23,13 @@ export const RootContainer = memo(() => {
           <DiscardChangesButton />
         </Header>
         <Menu>
-          <ParamEditorsTable>
+          <TwoColumnTable>
+            <VariantSelector feature={FeatureModel.for('colorScheme')} />
             <ParamEditor param={ParamModel.for('foregroundColor')} />
             <ParamEditor param={ParamModel.for('backgroundColor')} />
             <ParamEditor param={ParamModel.for('accentColor')} />
             <ParamEditor param={ParamModel.for('borderColor')} />
-          </ParamEditorsTable>
+          </TwoColumnTable>
         </Menu>
         <Main>
           <GridPreview />

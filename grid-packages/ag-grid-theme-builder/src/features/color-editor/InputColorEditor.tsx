@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
 import { Input } from '../../components/Input';
 import { useChangeHandler } from '../../components/component-utils';
-import { Cell, Divider, TwoColumnTable, WideStack } from '../../components/layout';
+import { Cell, Divider, TightTwoColumnTable, WideStack } from '../../components/layout';
 import { logErrorMessage } from '../../model/utils';
 import { LargeColorSwatch } from './ColorSwatch';
 import { HSLAColor } from './HSLAColor';
@@ -86,7 +86,7 @@ export const InputColorEditor = ({
   return (
     <WideStack>
       <LargeColorSwatch color={value} />
-      <TwoColumnTable>
+      <TightTwoColumnTable>
         <Cell>CSS</Cell>
         <Input
           value={editorValue}
@@ -155,7 +155,7 @@ export const InputColorEditor = ({
           part="l"
           valueLabelFormat={formatProportionAsPercent}
         />
-      </TwoColumnTable>
+      </TightTwoColumnTable>
     </WideStack>
   );
 };

@@ -1,9 +1,13 @@
 import styled from '@emotion/styled';
 
-export const TwoColumnTable = styled('div')`
+export const TightTwoColumnTable = styled('div')`
   display: grid;
   grid-template-columns: auto 1fr;
   grid-column-gap: 16px;
+`;
+
+export const TwoColumnTable = styled(TightTwoColumnTable)`
+  grid-row-gap: 8px;
 `;
 
 export const Cell = styled('div')`

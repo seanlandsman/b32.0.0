@@ -1,16 +1,26 @@
 import { join } from 'path';
 import { ParamType, getParamDocs, getParamType } from '../../metadata/docs';
-import { Part } from '../../theme-types';
-import { camelCase } from '../../theme-utils';
+import { camelCase, isPart } from '../../theme-utils';
 import { fatalError, getProjectDir, writeTsFile } from './utils';
 
 export const generateDocsFile = async () => {
   const mainExports = await import(getProjectDir());
 
   const allParts = Object.values(mainExports).filter(isPart);
-  const corePart = allParts.find((p) => p.feature === 'core');
+  const corePart = allParts.find((p) => p.featureId === 'core');
   if (!corePart) {
     throw fatalError('No core part found');
+  }
+
+  for (const [exportName, exportValue] of Object.entries(mainExports)) {
+    if (isPart(exportValue)) {
+      const expectedName = exportValue.featureId + upperCamelCase(exportValue.variantId);
+      if (exportName !== expectedName) {
+        throw fatalError(
+          `Part ${exportValue.featureId}/${exportValue.variantId} should be exported with name "${expectedName}"`,
+        );
+      }
+    }
   }
 
   const allParams = Array.from(new Set(allParts.flatMap((p) => p.params))).sort();
@@ -36,8 +46,6 @@ export const generateDocsFile = async () => {
 
   await writeTsFile(join(getProjectDir(), 'GENERATED-param-types.ts'), result);
 };
-
-const isPart = (part: any): part is Part => part.feature && part.variant;
 
 const paramExtraDocs: Record<ParamType, string[]> = {
   color: [

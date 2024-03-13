@@ -37,14 +37,13 @@ export const logErrorMessageOnce = (message: string) => {
 export const indexBy = <T, K extends keyof T>(list: readonly T[], property: K): Record<string, T> =>
   Object.fromEntries(list.map((item) => [String(item[property]), item]));
 
-export const memoize = <T>(fn: () => T): (() => T) => {
-  let value: T;
-  let called = false;
-  return () => {
-    if (!called) {
-      value = fn();
-      called = true;
+export const memoize = <R, A = void>(fn: (arg: A) => R): ((arg: A) => R) => {
+  const values = new Map<string, R>();
+  return (a) => {
+    const key = String(a);
+    if (!values.has(key)) {
+      values.set(key, fn(a));
     }
-    return value;
+    return values.get(key)!;
   };
 };

@@ -50,14 +50,6 @@ const valueEditors: Record<ParamType, FC<ValueEditorProps>> = {
   duration: CssValueEditor,
 };
 
-export const ParamEditorsTable = styled('div')`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-column-gap: 16px;
-  grid-row-gap: 8px;
-  align-items: center;
-`;
-
 const LabelCell = styled(Cell)`
   font-size: 0.9em;
 `;

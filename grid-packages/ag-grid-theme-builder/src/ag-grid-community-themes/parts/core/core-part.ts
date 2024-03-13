@@ -16,8 +16,8 @@ import indentTsImport from './indent';
  * Test docs!
  */
 export const corePart = definePart({
-  feature: 'core',
-  variant: 'core',
+  featureId: 'core',
+  variantId: 'part',
   defaults: {
     backgroundColor: '#FFF',
     foregroundColor: '#181d1f',

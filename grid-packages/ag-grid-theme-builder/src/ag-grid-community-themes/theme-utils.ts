@@ -37,10 +37,18 @@ export const proportionToPercent = (value: number) =>
 
 export type DefinePartArgs<T extends string = string> = Omit<Part<T>, 'params'>;
 
+const partMarker = Symbol('part');
+
 export const definePart = <T extends string>(args: DefinePartArgs<T>): Part<T> => ({
   ...args,
   params: Object.keys(args.defaults || {}) as T[],
+  [partMarker as any]: true,
 });
+
+/**
+ * Check whether an object is a part created with `definePart`
+ */
+export const isPart = (part: any): part is Part<any> => !!part?.[partMarker];
 
 export const camelCase = (str: string) =>
   str.replace(/[\W_]+([a-z])/g, (_, letter) => letter.toUpperCase());

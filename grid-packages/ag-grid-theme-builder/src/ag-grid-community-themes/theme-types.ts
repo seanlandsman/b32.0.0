@@ -2,9 +2,11 @@ import { Param, ParamTypes } from './GENERATED-param-types';
 
 export type CssSource = string | ((params: Record<string, any>) => string);
 
+export type FeatureId = 'core' | 'colorScheme' | 'icons' | 'design';
+
 export type Part<T extends string = string> = {
-  feature: string;
-  variant: string;
+  featureId: FeatureId;
+  variantId: string;
   params: T[];
   defaults?: { [K in T]: K extends Param ? ParamTypes[K] : any };
   css?: CssSource[];

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 export type SelectProps<T extends {}> = {
   value: T | null | undefined;
-  onChange?: (newValue: T | null) => void;
+  onChange?: (newValue: T) => void;
   options: T[];
   getLabel?: (option: T) => string;
   getGroupLabel?: (option: T) => string;
@@ -12,7 +12,7 @@ export function Select<T extends {}>({
   options,
   value,
   onChange,
-  getLabel = String,
+  getLabel = defaultGetLabel,
   getGroupLabel,
 }: SelectProps<T>) {
   const currentStringValue = value != null ? getLabel(value) : null;
@@ -64,3 +64,6 @@ export function Select<T extends {}>({
     </select>
   );
 }
+
+const defaultGetLabel = (option: any) =>
+  typeof option?.label === 'string' ? option.label : String(option);

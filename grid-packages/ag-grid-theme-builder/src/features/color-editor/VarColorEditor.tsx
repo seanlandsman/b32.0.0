@@ -8,7 +8,7 @@ import { useChangeHandler } from '../../components/component-utils';
 import { Cell, SmallNote, Stack, TwoColumnTable } from '../../components/layout';
 import { allParamModels } from '../../model/ParamModel';
 import { titleCase } from '../../model/utils';
-import { ColorSwatch, LargeColorSwatch } from './ColorSwatch';
+import { LargeColorSwatch } from './ColorSwatch';
 import { RGBAColor } from './RGBAColor';
 import { VarColor } from './VarColor';
 import { UncontrolledColorEditorProps, formatProportionAs3dpPercent } from './color-editor-utils';
@@ -49,18 +49,17 @@ export const VarColorEditor = ({ initialValue, onChange }: UncontrolledColorEdit
 
   return (
     <Stack>
-      <span>
+      <Note>
         Define a colour based on another colour
         <InfoTooltip />
-      </span>
+      </Note>
       <LargeColorSwatch color={value} />
-      <VarEditorTable>
+      <TwoColumnTable>
         <Cell>Based on:</Cell>
         <Cell>
           <Select
             options={allVariableInfos}
             value={editorState.variable}
-            getLabel={(v) => v.label}
             getGroupLabel={(v) => v.group}
             onChange={(variable) => {
               enableChangeEvents();
@@ -85,13 +84,15 @@ export const VarColorEditor = ({ initialValue, onChange }: UncontrolledColorEdit
           />
           <span>{formatProportionAs3dpPercent(editorState.alpha)}</span>
         </AlphaCell>
-      </VarEditorTable>
+      </TwoColumnTable>
     </Stack>
   );
 };
 
-const VarEditorTable = styled(TwoColumnTable)`
-  grid-row-gap: 8px;
+const Note = styled('div')`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 
 const AlphaCell = styled(Cell)`
@@ -104,13 +105,6 @@ const AlphaCell = styled(Cell)`
   span {
     flex: 0;
   }
-`;
-
-const InformationIcon = styled(Information)`
-  color: var(--joy-palette-primary-400);
-  vertical-align: middle;
-  display: inline-block;
-  margin-left: 8px;
 `;
 
 type EditorState = {
@@ -131,17 +125,6 @@ const getInitialEditorState = (initialValue: string): EditorState | null => {
 
 const formatVariable = (variable: string) => titleCase(variable.replace(/^--ag-/i, ''));
 
-const VariableNameHint = styled('span')`
-  font-size: 0.8em;
-  color: var(--joy-palette-neutral-400);
-`;
-
-const VarColorSwatch = styled(ColorSwatch)`
-  width: 40px;
-  height: 40px;
-  border-radius: 6px;
-`;
-
 const InfoTooltip = () => (
   <Tooltip
     title={
@@ -161,7 +144,7 @@ const InfoTooltip = () => (
       </InfoBox>
     }
   >
-    <InformationIcon />
+    <Information />
   </Tooltip>
 );
 

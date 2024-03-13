@@ -1,3 +1,4 @@
+import { corePart } from '.';
 import { logErrorMessageOnce } from '../model/utils';
 import { ParamTypes } from './GENERATED-param-types';
 import { AnyPart, CssSource, Part, borderValueToCss } from './theme-types';
@@ -23,7 +24,8 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
     paramDefaults: {},
   };
 
-  const parts = flattenParts(Array.isArray(partOrParts) ? partOrParts : [partOrParts]);
+  const parts = [corePart];
+  flattenParts(Array.isArray(partOrParts) ? partOrParts : [partOrParts], parts);
   const overrideParams = parameters as Record<string, any>;
   const mergedParams: Record<string, any> = {};
 
@@ -67,7 +69,7 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
   const mainCSS: string[] = [variableDefaults];
   for (const part of parts) {
     if (part.css) {
-      mainCSS.push(`/* Part ${part.feature}/${part.variant} */`);
+      mainCSS.push(`/* Part ${part.featureId}/${part.variantId} */`);
       mainCSS.push(...part.css.map((p) => cssPartToString(p, mergedParams)));
     }
   }
@@ -133,16 +135,15 @@ const describeValue = (value: any): string => {
   return `${typeof value} ${value}`;
 };
 
-const flattenParts = (parts: readonly AnyPart[]): Part[] => {
-  const result: Part[] = [];
+const flattenParts = (parts: readonly AnyPart[], accumulator: Part[]) => {
   for (const part of parts) {
     if ('componentParts' in part) {
-      result.push(...flattenParts(part.componentParts));
+      flattenParts(part.componentParts, accumulator);
     } else {
-      result.push(part);
+      accumulator.push(part);
     }
   }
-  return result;
+  return accumulator;
 };
 
 export const installTheme = (theme: Theme, container?: HTMLElement | null) => {

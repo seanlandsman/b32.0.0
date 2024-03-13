@@ -1,3 +1,4 @@
+import { WritableAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { logErrorMessage } from '../model/utils';
 
@@ -38,4 +39,4 @@ export const atomWithJSONStorage = <T>(key: string, initialValue: T) => {
   return atomWithStorage(key, storage.getItem(key, initialValue), storage);
 };
 
-export type PersistentAtom<T> = ReturnType<typeof atomWithJSONStorage<T>>;
+export type PersistentAtom<T> = WritableAtom<T, [arg: T], void>;

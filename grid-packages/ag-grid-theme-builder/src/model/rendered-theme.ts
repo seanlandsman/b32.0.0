@@ -1,13 +1,8 @@
 import { atom, useAtomValue } from 'jotai';
-import {
-  Theme,
-  corePart,
-  defineTheme,
-  iconsQuartzPart,
-  installTheme,
-} from '../ag-grid-community-themes';
+import { Theme, defineTheme, installTheme } from '../ag-grid-community-themes';
 import { allParamModels } from './ParamModel';
 // import { allPartModels } from './PartModel';
+import { FeatureModel } from './FeatureModel';
 import { Store } from './store';
 
 const changeDetection = atom(0);
@@ -25,12 +20,10 @@ export const renderedThemeAtom = atom((get): Theme => {
     allParamModels().map((param) => [param.property, get(param.valueAtom)]),
   );
 
-  // const themeParts = allPartModels()
-  //   .filter((part) => get(part.enabledAtom))
-  //   .map((part) => part.themePart);
+  const colorScheme = get(FeatureModel.for('colorScheme').variantAtom);
+  const icons = get(FeatureModel.for('icons').variantAtom);
 
-  // TODO defineTheme should not need core passed to it
-  const theme = defineTheme([corePart, iconsQuartzPart], paramValues);
+  const theme = defineTheme([colorScheme.part, icons.part], paramValues);
 
   const container = get(shadowDomContainerAtom);
   if (container) {
