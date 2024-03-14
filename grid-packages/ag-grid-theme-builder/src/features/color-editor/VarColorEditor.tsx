@@ -54,7 +54,7 @@ export const VarColorEditor = ({ initialValue, onChange }: UncontrolledColorEdit
         <InfoTooltip />
       </Note>
       <LargeColorSwatch color={value} />
-      <TwoColumnTable>
+      <TwoColumnTable rowGap>
         <Cell>Based on:</Cell>
         <Cell>
           <Select

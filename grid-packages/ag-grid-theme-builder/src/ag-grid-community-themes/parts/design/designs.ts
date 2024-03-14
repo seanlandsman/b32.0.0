@@ -60,7 +60,7 @@ export const designMaterial = definePart({
     .ag-header {
         font-weight: 600;
     }
-    .ag-filter-toolpanel-group-level-0-header {
+    .ag-filter-toolpanel-group-level-0-header, .ag-column-drop-horizontal {
         background-color: color-mix(in srgb, transparent, var(--ag-foreground-color) 7%);
     }
   `,

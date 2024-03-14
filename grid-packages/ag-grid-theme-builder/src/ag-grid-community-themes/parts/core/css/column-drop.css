@@ -79,9 +79,9 @@
 
 .ag-column-drop-cell {
   background: var(--ag-column-drop-cell-background-color);
-  border-radius: calc(var(--ag-grid-size) * 4);
-  height: calc(var(--ag-grid-size) * 4);
-  padding: 0 calc(var(--ag-grid-size) * 0.5);
+  border-radius: 500px;
+  padding: calc(var(--ag-grid-size) * 0.5);
+  padding-left: calc(var(--ag-grid-size) * 0.75);
   border: var(--ag-column-drop-cell-border);
 
   &:focus-visible {
@@ -179,12 +179,6 @@
 .ag-column-drop-horizontal-half-width:not(:last-child) {
   /* should be rtl */
   border-right: var(--ag-column-border);
-}
-
-.ag-column-drop-cell {
-  border-radius: calc(var(--ag-grid-size) * 3);
-  height: calc(var(--ag-grid-size) * 3);
-  padding: 0 var(--ag-grid-size);
 }
 
 .ag-column-drop-cell-button {

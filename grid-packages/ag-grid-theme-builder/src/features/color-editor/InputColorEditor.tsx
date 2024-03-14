@@ -86,7 +86,7 @@ export const InputColorEditor = ({
   return (
     <WideStack>
       <LargeColorSwatch color={value} />
-      <TwoColumnTable rowGap>
+      <TwoColumnTable>
         <Cell>CSS</Cell>
         <Input
           value={editorValue}

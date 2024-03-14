@@ -1,6 +1,7 @@
 import { atom, useAtom } from 'jotai';
 import * as themes from '../ag-grid-community-themes';
 import { Part, PartId } from '../ag-grid-community-themes';
+import { quartzTheme } from '../ag-grid-community-themes/themes/quartz-theme';
 import { PersistentAtom, atomWithJSONStorage } from './JSONStorage';
 import { titleCase } from './utils';
 
@@ -18,11 +19,14 @@ const featureModels: Record<string, PartModel> = {};
 export class PartModel {
   readonly label: string;
   readonly variants: VariantModel[];
+  readonly defaultVariant: VariantModel;
   readonly variantAtom: PersistentAtom<VariantModel>;
 
   private constructor(readonly partId: PartId) {
     this.label = titleCase(partId);
     this.variants = variantsByPartId[partId].map((part) => new VariantModel(this, part));
+    this.defaultVariant =
+      this.variants.find((v) => quartzTheme.componentParts.includes(v.variant)) || this.variants[0];
     this.variantAtom = createFeatureAtom(this);
   }
 
@@ -38,7 +42,7 @@ const createFeatureAtom = (part: PartModel) => {
   return atom(
     (get) => {
       const variantId = get(backingAtom) || '';
-      return part.variants.find((v) => v.variantId === variantId) || part.variants[0];
+      return part.variants.find((v) => v.variantId === variantId) || part.defaultVariant;
     },
     (_get, set, newVariant: VariantModel) => set(backingAtom, newVariant.variantId),
   );
