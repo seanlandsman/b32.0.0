@@ -60,7 +60,7 @@ const iconNameToSvgFragment: Record<string, string | undefined> = {
   'small-right': '<path d="m9 18 6-6-6-6"/>',
   'small-up': '<path d="m18 15-6-6-6 6"/>',
   tick: '<path d="M20 6 9 17l-5-5"/>',
-  'tree-closed': '<path d="m6 9 6 6 6-6"/>',
+  'tree-closed': '<path d="m9 18 6-6-6-6"/>',
   'tree-indeterminate': '<path d="M5 12h14"/>',
   'tree-open': '<path d="m6 9 6 6 6-6"/>',
   unlinked:
