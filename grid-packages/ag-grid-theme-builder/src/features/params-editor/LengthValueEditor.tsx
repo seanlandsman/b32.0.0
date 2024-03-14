@@ -2,21 +2,24 @@ import { isBorderStyleValue } from '../../ag-grid-community-themes';
 import { useRenderedTheme } from '../../model/rendered-theme';
 import { ValueEditorProps } from './ValueEditorProps';
 
-export const LengthValueEditor = (props: ValueEditorProps) => {
+const minMaxStep: Record<string, { min?: number; max?: number; step?: number } | undefined> = {
+  gridSize: { min: 1, max: 20, step: 0.5 },
+};
+
+export const LengthValueEditor = ({ value, onChange, param }: ValueEditorProps) => {
   const theme = useRenderedTheme();
-  const value = isBorderStyleValue(props.value)
-    ? props.value
-    : theme.paramDefaults[props.param.property];
+  const displayValue = isBorderStyleValue(value) ? value : theme.paramDefaults[param.property];
   return (
     <input
       type="range"
-      min={0}
-      max={20}
-      value={parseFloat(value)}
+      min={minMaxStep[param.property]?.min ?? 0}
+      max={minMaxStep[param.property]?.max ?? 50}
+      step={minMaxStep[param.property]?.step ?? 1}
+      value={parseFloat(displayValue)}
       onChange={(e) => {
         const value = e.target.valueAsNumber;
         if (!isNaN(value)) {
-          props.onChange(`${value}px`);
+          onChange(`${value}px`);
         }
       }}
     />

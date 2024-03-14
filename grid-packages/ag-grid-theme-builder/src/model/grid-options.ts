@@ -48,6 +48,7 @@ export const buildGridOptions = (config: GridConfig): GridOptions => {
     enableRtl: config.rightToLeft,
     domLayout: config.printLayout ? 'print' : undefined,
     columnMenu: config.legacyColumnMenu ? 'legacy' : 'new',
+    animateRows: false,
   };
 
   if (config.advancedFilter) {
