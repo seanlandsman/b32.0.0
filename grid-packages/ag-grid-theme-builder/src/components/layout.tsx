@@ -1,13 +1,19 @@
 import styled from '@emotion/styled';
 
-export const TightTwoColumnTable = styled('div')`
+export type TwoColumnTableProps = {
+  rowGap?: boolean;
+  rowMinHeight?: string;
+};
+
+export const TwoColumnTable = styled('div')`
   display: grid;
   grid-template-columns: auto 1fr;
   grid-column-gap: 16px;
-`;
+  grid-row-gap: ${(props: TwoColumnTableProps) => (props.rowGap ? '8px' : '0px')};
 
-export const TwoColumnTable = styled(TightTwoColumnTable)`
-  grid-row-gap: 8px;
+  > * {
+    min-height: ${(props) => props.rowMinHeight || 0};
+  }
 `;
 
 export const Cell = styled('div')`
