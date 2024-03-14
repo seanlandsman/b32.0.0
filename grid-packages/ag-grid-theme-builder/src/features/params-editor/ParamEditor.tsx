@@ -32,7 +32,7 @@ export const ParamEditor = ({ param }: ParamEditorProps) => {
           <span>{param.label}:</span>
         </Tooltip>
       </Cell>
-      {<ValueEditorComponent param={param} value={value} onChange={setValue} />}
+      <ValueEditorComponent param={param} value={value} onChange={setValue} />
     </>
   );
 };

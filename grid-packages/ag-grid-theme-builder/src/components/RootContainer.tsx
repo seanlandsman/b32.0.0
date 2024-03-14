@@ -23,15 +23,12 @@ export const RootContainer = memo(() => {
           <DiscardChangesButton />
         </Header>
         <Menu>
-          <TwoColumnTable rowGap>
+          <TwoColumnTable rowMinHeight="36px" rowGap>
             <VariantSelector part={PartModel.for('colorScheme')} />
             <VariantSelector part={PartModel.for('design')} />
-            <VariantSelector part={PartModel.for('iconSet')} />
             <ParamEditor param={ParamModel.for('gridSize')} />
-            {/* <ParamEditor param={ParamModel.for('foregroundColor')} />
-            <ParamEditor param={ParamModel.for('backgroundColor')} />*/}
             <ParamEditor param={ParamModel.for('accentColor')} />
-            {/* <ParamEditor param={ParamModel.for('borderColor')} /> */}
+            <VariantSelector part={PartModel.for('iconSet')} />
           </TwoColumnTable>
         </Menu>
         <Main>
