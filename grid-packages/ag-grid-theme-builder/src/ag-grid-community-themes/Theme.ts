@@ -1,7 +1,7 @@
 import { corePart } from '.';
 import { logErrorMessageOnce } from '../model/utils';
 import type { ParamTypes } from './GENERATED-param-types';
-import { AnyPart, CssSource, Part, borderValueToCss } from './theme-types';
+import { AnyPart, Part, borderValueToCss } from './theme-types';
 import { camelCase, paramToVariableName } from './theme-utils';
 
 export type Theme = {
@@ -73,7 +73,7 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
   for (const part of parts) {
     if (part.css) {
       mainCSS.push(`/* Part ${part.partId}/${part.variantId} */`);
-      mainCSS.push(...part.css.map((p) => cssPartToString(p, mergedParams)));
+      mainCSS.push(...part.css.map((p) => (typeof p === 'function' ? p() : p)));
     }
   }
   result.css = mainCSS.join('\n');
@@ -98,12 +98,6 @@ export const checkForUnsupportedVariables = (css: string, params: string[]) => {
     }
   }
 };
-
-const cssPartToString = (p: CssSource, params: Record<string, any>): string =>
-  // TODO allowing part functions to take params is a hack for icons to include
-  // the stroke width in the embedded SVG, when we implement inline SVGs combine
-  // all part CSS at build time and treat it as a string
-  typeof p === 'function' ? p(params) : p;
 
 const isBorderParam = (property: string) =>
   property.startsWith('borders') || property.endsWith('Border');

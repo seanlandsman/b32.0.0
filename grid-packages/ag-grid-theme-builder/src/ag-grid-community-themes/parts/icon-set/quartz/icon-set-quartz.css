@@ -1,6 +1,5 @@
 .ag-icon {
   display: block;
-  speak: none;
   width: var(--ag-icon-size);
   height: var(--ag-icon-size);
 
@@ -32,23 +31,3 @@
 .ag-column-select-column-readonly .ag-icon-grip {
   opacity: 0.35;
 }
-
-/*
-    TODO restore once we move back to inline SVG icons
-  .ag-icon {
-    width: var(--ag-icon-size);
-    height: var(--ag-icon-size);
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke: currentColor;
-    stroke-width: var(--ag-icon-stroke-width);
-
-    > * {
-      vector-effect: non-scaling-stroke;
-    }
-
-    .ag-icon-grip {
-      fill: currentColor;
-    }
-  } */

@@ -24,8 +24,9 @@ export const RootContainer = memo(() => {
         </Header>
         <Menu>
           <TwoColumnTable rowGap>
-            <VariantSelector feature={PartModel.for('colorScheme')} />
-            <VariantSelector feature={PartModel.for('design')} />
+            <VariantSelector part={PartModel.for('colorScheme')} />
+            <VariantSelector part={PartModel.for('design')} />
+            <VariantSelector part={PartModel.for('iconSet')} />
             <ParamEditor param={ParamModel.for('gridSize')} />
             {/* <ParamEditor param={ParamModel.for('foregroundColor')} />
             <ParamEditor param={ParamModel.for('backgroundColor')} />*/}

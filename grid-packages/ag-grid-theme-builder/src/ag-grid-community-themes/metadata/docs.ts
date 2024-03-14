@@ -201,7 +201,6 @@ const docs: Record<string, string | undefined> = {
     'How much to indent child columns in the filters tool panel relative to their parent',
   iconButtonHoverBackgroundColor: 'Background color of clickable icons when hovered',
   iconSize: 'The size of square icons and icon-buttons',
-  iconStrokeWidth: 'Width of lines making up the icon',
 };
 
 export const getParamDocs = (param: string) => {

@@ -1,4 +1,6 @@
-export const agIconNameToSvgFragment: Record<string, string | undefined> = {
+import { iconSetQuartzCSS } from './GENERATED-icon-set-quartz';
+
+const iconNameToSvgFragment: Record<string, string | undefined> = {
   aggregation: '<path d="M18 7V4H6l6 8-6 8h12v-3"/>',
   arrows:
     '<polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="22"/>',
@@ -69,19 +71,19 @@ export const agIconNameToSvgFragment: Record<string, string | undefined> = {
     '<g stroke="none" fill="currentColor"><circle cx="5" cy="8" r="1"/><circle cx="12" cy="8" r="1"/><circle cx="19" cy="8" r="1"/><circle cx="5" cy="16" r="1"/><circle cx="12" cy="16" r="1"/><circle cx="19" cy="16" r="1"/></g>',
 };
 
-export default (params: Record<string, any>) => {
-  let result = '';
-  for (const iconName of Object.keys(agIconNameToSvgFragment)) {
-    const iconSvg = buildSvg(iconName, params.iconStrokeWidth || '1.5px');
+export const getQuartzIconsCss = (args: { strokeWidth?: number } = {}) => {
+  let result = iconSetQuartzCSS;
+  for (const iconName of Object.keys(iconNameToSvgFragment)) {
+    const iconSvg = quartzIconSvg(iconName, args.strokeWidth || 1.5);
     result += `.ag-icon-${iconName}::before { mask-image: url('data:image/svg+xml,${encodeURIComponent(iconSvg)}'); }\n`;
   }
   return result;
 };
 
-const buildSvg = (name: string, strokeWidth: string): string => {
-  const svgFragment = agIconNameToSvgFragment[name];
+const quartzIconSvg = (name: string, strokeWidth: number): string => {
+  const svgFragment = iconNameToSvgFragment[name];
+  if (!svgFragment) throw new Error(`Missing icon data for ${name}`);
   return (
-    // TODO remove superfluous attributes when we move to inline SVGs
     `<svg xmlns="http://www.w3.org/2000/svg" class="ag-icon ag-icon-${name}" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="black" stroke-width="${strokeWidth}" viewBox="0 0 24 24">` +
     '<style>* { vector-effect: non-scaling-stroke; }</style>' +
     svgFragment +

@@ -3,15 +3,15 @@ import { Cell } from '../../components/layout';
 import { PartModel, useSelectedVariant } from '../../model/PartModel';
 
 export type VariantSelectorProps = {
-  feature: PartModel;
+  part: PartModel;
 };
 
-export const VariantSelector = ({ feature }: VariantSelectorProps) => {
-  const [variant, setVariant] = useSelectedVariant(feature);
+export const VariantSelector = ({ part }: VariantSelectorProps) => {
+  const [variant, setVariant] = useSelectedVariant(part);
   return (
     <>
-      <Cell>{feature.label}</Cell>
-      <Select options={feature.variants} value={variant} onChange={setVariant} />
+      <Cell>{part.label}</Cell>
+      <Select options={part.variants} value={variant} onChange={setVariant} />
     </>
   );
 };

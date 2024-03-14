@@ -31,14 +31,14 @@ export class PartModel {
   }
 }
 
-export const useSelectedVariant = (feature: PartModel) => useAtom(feature.variantAtom);
+export const useSelectedVariant = (part: PartModel) => useAtom(part.variantAtom);
 
-const createFeatureAtom = (feature: PartModel) => {
-  const backingAtom = atomWithJSONStorage<string | null>(`feature.${feature.partId}`, null);
+const createFeatureAtom = (part: PartModel) => {
+  const backingAtom = atomWithJSONStorage<string | null>(`part-variant.${part.partId}`, null);
   return atom(
     (get) => {
       const variantId = get(backingAtom) || '';
-      return feature.variants.find((v) => v.variantId === variantId) || feature.variants[0];
+      return part.variants.find((v) => v.variantId === variantId) || part.variants[0];
     },
     (_get, set, newVariant: VariantModel) => set(backingAtom, newVariant.variantId),
   );
@@ -49,10 +49,10 @@ export class VariantModel {
   readonly variantId: string;
 
   constructor(
-    readonly feature: PartModel,
-    readonly part: Part,
+    readonly part: PartModel,
+    readonly variant: Part,
   ) {
-    this.label = titleCase(part.variantId);
-    this.variantId = part.variantId;
+    this.label = titleCase(variant.variantId);
+    this.variantId = variant.variantId;
   }
 }

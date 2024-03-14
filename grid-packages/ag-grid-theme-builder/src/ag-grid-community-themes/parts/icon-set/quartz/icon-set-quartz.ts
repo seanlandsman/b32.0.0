@@ -1,12 +1,20 @@
 import { definePart } from '../../../theme-utils';
-import { iconSetQuartzCSS } from './GENERATED-icon-set-quartz';
-import quartzIconsEmbeddedTsImport from './quartz-icon-data';
+import { getQuartzIconsCss } from './quartz-icon-data';
 
-export const iconSetQuartz = definePart({
+export const iconSetQuartzLight = definePart({
   partId: 'iconSet',
-  variantId: 'quartz',
-  additionalParams: {
-    iconStrokeWidth: '1.5px',
-  },
-  css: [quartzIconsEmbeddedTsImport, iconSetQuartzCSS],
+  variantId: 'quartzLight',
+  css: [() => getQuartzIconsCss({ strokeWidth: 1 })],
+});
+
+export const iconSetQuartzRegular = definePart({
+  partId: 'iconSet',
+  variantId: 'quartzRegular',
+  css: [getQuartzIconsCss],
+});
+
+export const iconSetQuartzBold = definePart({
+  partId: 'iconSet',
+  variantId: 'quartzBold',
+  css: [() => getQuartzIconsCss({ strokeWidth: 2 })],
 });
