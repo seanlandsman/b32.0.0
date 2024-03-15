@@ -6,6 +6,7 @@ import postcss from 'postcss';
 import cssImport from 'postcss-import';
 import cssNesting from 'postcss-nesting';
 import cssRtl from 'postcss-rtlcss';
+import cssUrl from 'postcss-url';
 import { camelCase } from '../../theme-utils';
 import { getProjectDir, writeTsFile } from './utils';
 
@@ -81,7 +82,13 @@ const checkAllCssFilesImported = async (entryFile: string) => {
 
 const loadAndProcessCSSFile = async (cssPath: string) => {
   let css = fs.readFileSync(cssPath, 'utf8');
-  css = await applyPostcssPlugin(css, cssPath, cssImport(), cssNesting());
+  css = await applyPostcssPlugin(
+    css,
+    cssPath,
+    cssImport(),
+    cssNesting(),
+    cssUrl({ url: 'inline' }),
+  );
   css = await applyPostcssPlugin(
     css,
     cssPath,

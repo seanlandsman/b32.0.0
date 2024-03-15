@@ -70,7 +70,7 @@ const iconNameToSvgFragment: Record<string, string | undefined> = {
 };
 
 export const getQuartzIconsCss = (args: { strokeWidth?: number } = {}) => {
-  let result = `.ag-icon::before {content:'';display:block;width:100%;height:100%;background-color:currentColor;}`;
+  let result = `.ag-icon::before {content:'';display:block;width:var(--ag-icon-size);height:var(--ag-icon-size);background-color:currentColor;mask-size: contain;}`;
   for (const iconName of Object.keys(iconNameToSvgFragment)) {
     const iconSvg = quartzIconSvg(iconName, args.strokeWidth || 1.5);
     result += `.ag-icon-${iconName}::before { mask-image: url('data:image/svg+xml,${encodeURIComponent(iconSvg)}'); }\n`;
