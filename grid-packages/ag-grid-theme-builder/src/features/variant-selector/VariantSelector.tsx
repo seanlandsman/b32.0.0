@@ -1,4 +1,5 @@
 import { Select } from '../../components/Select';
+import { Tooltip } from '../../components/Tooltip';
 import { Cell } from '../../components/layout';
 import { PartModel, useSelectedVariant } from '../../model/PartModel';
 
@@ -10,7 +11,11 @@ export const VariantSelector = ({ part }: VariantSelectorProps) => {
   const [variant, setVariant] = useSelectedVariant(part);
   return (
     <>
-      <Cell>{part.label}</Cell>
+      <Cell>
+        <Tooltip title={part.docs}>
+          <span>{part.label}:</span>
+        </Tooltip>
+      </Cell>
       <Select options={part.variants} value={variant} onChange={setVariant} />
     </>
   );

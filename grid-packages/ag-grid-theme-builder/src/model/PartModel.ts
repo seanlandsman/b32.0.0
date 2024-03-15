@@ -16,14 +16,24 @@ export const getVariantsByPartId = (partId: PartId) => variantsByPartId[partId];
 
 const featureModels: Record<string, PartModel> = {};
 
+const partDocs: Record<PartId, string | null> = {
+  colorScheme: null,
+  design:
+    'Selecting a design applies many default settings to create a consistent look that you can then customise.',
+  iconSet: null,
+  core: null,
+};
+
 export class PartModel {
   readonly label: string;
+  readonly docs: string | null;
   readonly variants: VariantModel[];
   readonly defaultVariant: VariantModel;
   readonly variantAtom: PersistentAtom<VariantModel>;
 
   private constructor(readonly partId: PartId) {
     this.label = titleCase(partId);
+    this.docs = partDocs[partId];
     this.variants = variantsByPartId[partId].map((part) => new VariantModel(this, part));
     this.defaultVariant =
       this.variants.find((v) => quartzTheme.componentParts.includes(v.variant)) || this.variants[0];

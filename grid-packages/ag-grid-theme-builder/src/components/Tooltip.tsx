@@ -3,7 +3,7 @@ import {
   FloatingArrow,
   FloatingPortal,
   arrow,
-  autoPlacement,
+  flip,
   offset,
   shift,
   useFloating,
@@ -13,11 +13,14 @@ import {
 import { ReactElement, ReactNode, cloneElement, useRef, useState } from 'react';
 
 export type TooltipProps = {
-  title: ReactNode;
+  title: ReactNode | null;
   children: ReactElement;
 };
 
-export const Tooltip = ({ title, children }: TooltipProps) => {
+export const Tooltip = (props: TooltipProps) =>
+  props.title ? <TooltipImpl {...props} /> : props.children;
+
+const TooltipImpl = ({ title, children }: TooltipProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const arrowRef = useRef(null);
 
@@ -28,7 +31,8 @@ export const Tooltip = ({ title, children }: TooltipProps) => {
     middleware: [
       offset(8),
       shift({ padding: 8 }),
-      autoPlacement({}),
+      flip({ crossAxis: true, mainAxis: true }),
+      // autoPlacement({}),
       arrow({
         element: arrowRef,
       }),
