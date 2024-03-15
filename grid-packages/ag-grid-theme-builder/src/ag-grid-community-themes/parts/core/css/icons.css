@@ -1,3 +1,10 @@
+.ag-icon {
+  display: block;
+  position: relative;
+  width: var(--ag-icon-size);
+  height: var(--ag-icon-size);
+}
+
 .ag-disabled,
 .ag-column-select-column-group-readonly,
 [disabled] {

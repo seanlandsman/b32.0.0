@@ -1,5 +1,3 @@
-import { iconSetQuartzCSS } from './GENERATED-icon-set-quartz';
-
 const iconNameToSvgFragment: Record<string, string | undefined> = {
   aggregation: '<path d="M18 7V4H6l6 8-6 8h12v-3"/>',
   arrows:
@@ -72,7 +70,7 @@ const iconNameToSvgFragment: Record<string, string | undefined> = {
 };
 
 export const getQuartzIconsCss = (args: { strokeWidth?: number } = {}) => {
-  let result = iconSetQuartzCSS;
+  let result = `.ag-icon::before {content:'';display:block;width:100%;height:100%;background-color:currentColor;}`;
   for (const iconName of Object.keys(iconNameToSvgFragment)) {
     const iconSvg = quartzIconSvg(iconName, args.strokeWidth || 1.5);
     result += `.ag-icon-${iconName}::before { mask-image: url('data:image/svg+xml,${encodeURIComponent(iconSvg)}'); }\n`;
