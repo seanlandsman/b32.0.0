@@ -6,7 +6,6 @@ import { camelCase, paramToVariableName } from './theme-utils';
 
 export type Theme = {
   css: string;
-  icons: Record<string, string>;
   paramDefaults: Record<string, string>;
 };
 
@@ -20,7 +19,6 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
 ): Theme => {
   const result: Theme = {
     css: '',
-    icons: {},
     paramDefaults: {},
   };
 
@@ -80,11 +78,6 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
 
   checkForUnsupportedVariables(result.css, Object.keys(mergedParams));
 
-  // combine icons
-  for (const part of parts) {
-    Object.assign(result.icons, part.icons);
-  }
-
   return result;
 };
 
@@ -125,7 +118,7 @@ const validateParam = (property: string, value: unknown, allowedParams: Set<stri
 };
 
 const invalidParamMessage =
-  'It may be misspelled, or your theme may not include the part that defines it.';
+  "It may be misspelled, or defined by a theme part that you aren't currently using";
 
 const describeValue = (value: any): string => {
   if (value == null) return String(value);
