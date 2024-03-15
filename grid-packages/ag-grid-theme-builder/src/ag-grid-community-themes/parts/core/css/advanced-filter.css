@@ -29,7 +29,6 @@
   align-items: center;
   border: 0;
   background-color: unset;
-  color: var(--ag-foreground-color);
   font-size: var(--ag-font-size);
   font-weight: 600;
   padding: var(--ag-grid-size);
@@ -186,7 +185,7 @@
   }
 
   .ag-advanced-filter-builder-value-empty {
-    color: var(--ag-subtle-foreground-color);
+    color: var(--ag-subtle-text-color);
   }
 }
 
@@ -205,25 +204,21 @@
 }
 
 .ag-advanced-filter-builder-join-pill {
-  color: var(--ag-foreground-color);
   background-color: var(--ag-advanced-filter-builder-join-pill-color);
   cursor: pointer;
 }
 
 .ag-advanced-filter-builder-column-pill {
-  color: var(--ag-foreground-color);
   background-color: var(--ag-advanced-filter-builder-column-pill-color);
   cursor: pointer;
 }
 
 .ag-advanced-filter-builder-option-pill {
-  color: var(--ag-foreground-color);
   background-color: var(--ag-advanced-filter-builder-option-pill-color);
   cursor: pointer;
 }
 
 .ag-advanced-filter-builder-value-pill {
-  color: var(--ag-foreground-color);
   background-color: var(--ag-advanced-filter-builder-value-pill-color);
   cursor: text;
   max-width: 140px;
@@ -240,7 +235,7 @@
 .ag-advanced-filter-builder-item-button {
   position: relative;
   cursor: pointer;
-  color: var(--ag-subtle-foreground-color);
+  color: var(--ag-subtle-text-color);
 }
 
 .ag-advanced-filter-builder-item-button-disabled {
@@ -274,6 +269,6 @@
 
 .ag-advanced-filter-builder-invalid {
   margin: 0 var(--ag-grid-size);
-  color: var(--ag-foreground-color);
+  color: var(--ag-invalid-color);
   cursor: default;
 }

@@ -173,7 +173,6 @@
 
 .ag-picker-field-button {
   background-color: var(--ag-background-color);
-  color: var(--ag-foreground-color);
 }
 
 .ag-dialog.ag-color-dialog {

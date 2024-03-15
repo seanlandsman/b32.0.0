@@ -1,10 +1,3 @@
-/* TODO move elsewhere */
-.ag-sticky-top,
-.ag-dnd-ghost {
-  background-color: var(--ag-background-color);
-  color: var(--ag-foreground-color);
-}
-
 .ag-root-wrapper {
   line-height: normal;
   cursor: default;
@@ -21,7 +14,7 @@
     height: 100%;
   }
 
-  color: var(--ag-foreground-color);
+  color: var(--ag-text-color);
   background-color: var(--ag-background-color);
   border: var(--ag-wrapper-border);
   border-radius: var(--ag-wrapper-border-radius);

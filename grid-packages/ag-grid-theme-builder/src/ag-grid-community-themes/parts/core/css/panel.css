@@ -19,7 +19,7 @@
   flex: none;
   align-items: center;
   cursor: default;
-  color: var(--ag-header-foreground-color);
+  color: var(--ag-header-text-color);
   background-color: var(--ag-panel-title-bar-background-color);
   height: var(--ag-header-height);
   padding: var(--ag-grid-size) var(--ag-cell-horizontal-padding);
@@ -34,7 +34,7 @@
 .ag-panel-title-bar-title {
   flex: 1 1 auto;
   font-weight: 500;
-  color: var(--ag-header-foreground-color);
+  color: var(--ag-header-text-color);
 }
 
 .ag-panel-title-bar-buttons {

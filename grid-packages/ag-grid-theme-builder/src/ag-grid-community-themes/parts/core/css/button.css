@@ -1,6 +1,5 @@
 .ag-button {
   border-radius: 0px;
-  color: var(--ag-foreground-color);
 }
 
 .ag-button:hover {
@@ -27,7 +26,7 @@
   }
 
   &:disabled {
-    color: var(--ag-input-disabled-foreground-color);
+    color: var(--ag-input-disabled-text-color);
     background-color: var(--ag-input-disabled-background-color);
     border: var(--ag-input-disabled-border);
   }

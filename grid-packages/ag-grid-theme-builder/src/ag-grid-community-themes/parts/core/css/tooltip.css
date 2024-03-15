@@ -2,7 +2,7 @@
   position: absolute;
   padding: var(--ag-widget-container-vertical-padding) var(--ag-widget-container-horizontal-padding);
   background-color: var(--ag-tooltip-background-color);
-  color: var(--ag-tooltip-foreground-color);
+  color: var(--ag-tooltip-text-color);
   border: var(--ag-tooltip-border);
   border-radius: var(--ag-border-radius);
   white-space: normal;

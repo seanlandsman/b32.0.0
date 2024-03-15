@@ -5,7 +5,7 @@
   white-space: nowrap;
   overflow: hidden;
   background-color: var(--ag-header-background-color);
-  color: var(--ag-header-foreground-color);
+  color: var(--ag-header-text-color);
   border-bottom: var(--ag-header-border);
   font-weight: var(--ag-header-font-weight);
   font-weight: 500;

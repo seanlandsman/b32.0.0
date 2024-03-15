@@ -31,6 +31,7 @@ export const RootContainer = memo(() => {
             <VariantSelector part={PartModel.for('iconSet')} />
             <ParamEditor param={ParamModel.for('iconSize')} />
             <ParamEditor param={ParamModel.for('fontSize')} />
+            <ParamEditor param={ParamModel.for('textColor')} />
           </TwoColumnTable>
         </Menu>
         <Main>

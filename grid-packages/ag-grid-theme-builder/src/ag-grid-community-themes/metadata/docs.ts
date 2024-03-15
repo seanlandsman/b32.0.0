@@ -25,8 +25,11 @@ export const getParamType = (param: string): ParamType => {
 };
 
 const docs: Record<string, string | undefined> = {
-  backgroundColor: 'Background colour of the grid.',
-  foregroundColor: 'Foreground colour of the grid, and default text colour.',
+  backgroundColor:
+    'Background colour of the grid. Many UI elements are semi-transparent, so their colour blends with the background colour.',
+  foregroundColor:
+    'Default colour for neutral UI elements. Most text, borders and backgrounds are defined as semi-transparent versions of this colour, resulting in a blend between the background and foreground colours.',
+  textColor: 'Default colour for all text',
   accentColor:
     "The 'brand colour' for the grid, used wherever a non-neutral colour is required. Selections, focus outlines and checkboxes use the accent colour by default.",
   invalidColor: 'The colour for inputs and UI controls in an invalid state.',
@@ -52,13 +55,12 @@ const docs: Record<string, string | undefined> = {
     'Background colour for non-data areas of the grid. Headers, tool panels and menus use this colour by default.',
   headerBackgroundColor: 'Background colour for header and header-like.',
   headerFontWeight: 'Weight of text in the header',
-  headerForegroundColor: 'Colour of text in the header',
+  headerTextColor: 'Colour of text in the header',
   headerCellHoverBackgroundColor: 'Rollover colour for header cells.',
   headerCellHoverBackgroundTransitionDuration:
     'Duration of header cell hover transition, if --ag-header-cell-hover-background-color is set.',
   dataColor: 'Colour of text in grid cells.',
-  subtleForegroundColor:
-    'Colour of text and UI elements that should stand out less than the default.',
+  subtleTextColor: 'Colour of text and UI elements that should stand out less than the default.',
   rangeSelectionBorderStyle: 'Style of the border around range selections.',
   rangeSelectionBorderColor:
     'The color used for borders around range selections. The selection background defaults to a semi-transparent version of this colour.',
@@ -125,7 +127,7 @@ const docs: Record<string, string | undefined> = {
     'Height of items in scrolling lists e.g. dropdown select inputs and column menu set filters.',
   inputBackgroundColor: 'Background colour for text inputs.',
   inputDisabledBackgroundColor: 'Background colour for disabled text inputs.',
-  inputDisabledForegroundColor: 'Text colour for disabled text inputs.',
+  inputDisabledTextColor: 'Text colour for disabled text inputs.',
   inputBorder: 'Borders around text inputs.',
   inputDisabledBorder: 'Borders around text inputs.',
   inputInvalidBorder: 'Borders around text inputs.',
@@ -159,7 +161,7 @@ const docs: Record<string, string | undefined> = {
   radioCheckedShapeImage: 'An image defining the shape of the mark on checked radio buttons',
   menuBorder: 'Border around menus e.g. column menu and right-click context menu',
   menuBackgroundColor: 'Background colour for menus e.g. column menu and right-click context menu',
-  menuForegroundColor: 'Text colour for menus e.g. column menu and right-click context menu',
+  menuTextColor: 'Text colour for menus e.g. column menu and right-click context menu',
   menuShadow: 'Shadow for menus e.g. column menu and right-click context menu',
   menuSeparatorColor:
     'Colour of the dividing line between sections of menus e.g. column menu and right-click context menu',
@@ -182,7 +184,7 @@ const docs: Record<string, string | undefined> = {
   toolPanelSeparatorBorder:
     'Colour of the dividing line between sections of menus e.g. column menu and right-click context menu',
   tooltipBackgroundColor: 'Background colour for tooltips',
-  tooltipForegroundColor: 'Text colour for tooltips',
+  tooltipTextColor: 'Text colour for tooltips',
   tooltipBorder: 'Border for tooltips',
   columnDropCellBackgroundColor:
     'Background colour for the representation of columns within the column drop component',

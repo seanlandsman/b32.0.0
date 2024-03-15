@@ -541,6 +541,7 @@ ag-grid-aurelia {
   position: absolute;
   display: flex;
   width: 100%;
+  background-color: var(--ag-background-color);
 }
 
 .ag-pinned-left-sticky-top,

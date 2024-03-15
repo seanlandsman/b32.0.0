@@ -17,7 +17,7 @@ export const designBalham = definePart({
     columnHeaderBorder: true,
     columnHeaderBorderHeight: '50%',
     oddRowBackgroundColor: transparentRef('chromeBackgroundColor', 0.5),
-    headerForegroundColor: transparentRef('foregroundColor', 0.5),
+    headerTextColor: transparentRef('foregroundColor', 0.5),
     fontFamily:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
     fontSize: '12px',

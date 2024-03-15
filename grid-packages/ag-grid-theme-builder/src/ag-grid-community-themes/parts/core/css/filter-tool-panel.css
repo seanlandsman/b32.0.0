@@ -98,5 +98,5 @@
 .ag-filter-toolpanel-header,
 .ag-filter-toolpanel-search {
   font-weight: 500;
-  color: var(--ag-header-foreground-color);
+  color: var(--ag-header-text-color);
 }

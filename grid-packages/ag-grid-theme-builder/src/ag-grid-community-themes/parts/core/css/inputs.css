@@ -108,7 +108,7 @@
   padding-left: var(--ag-grid-size);
 
   &:disabled {
-    color: var(--ag-input-disabled-foreground-color);
+    color: var(--ag-input-disabled-text-color);
     background-color: var(--ag-input-disabled-background-color);
     border: var(--ag-input-disabled-border);
   }
