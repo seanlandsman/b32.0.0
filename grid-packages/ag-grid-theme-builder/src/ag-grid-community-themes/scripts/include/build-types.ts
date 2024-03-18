@@ -16,7 +16,7 @@ export const generateDocsFile = async () => {
       const expectedName = part.partId + upperCamelCase(part.variantId);
       if (exportName !== expectedName) {
         throw fatalError(
-          `Part ${part.partId}/${part.variantId} should be exported with name "${expectedName}"`,
+          `Part ${part.partId}/${part.variantId} should be exported with name "${expectedName}" (actual: "${exportName}")`,
         );
       }
     }

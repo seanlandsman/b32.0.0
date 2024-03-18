@@ -46,18 +46,28 @@ const generateCSSEmbed = async (entry: string) => {
     }),
   );
   const exportName = camelCase(entryName) + 'CSS';
-  let result = `export const ${exportName} = \`${cssString.replaceAll('`', '\\`')}\`;`;
+  const declType = DEV_MODE ? 'let' : 'const';
+  let result = `${declType} _css = {text: \`${cssString.replaceAll('`', '\\`')}\`};\n`;
+  result += `export const ${exportName} = () => _css.text;\n`;
 
   if (DEV_MODE) {
     result += `
-    if (import.meta.hot) {
-      import.meta.hot.accept((newModule) => {
-        const handler = (window as any).handlePartsCssChange
-        if (newModule && handler) {
-          handler(${exportName}, newModule.${exportName});
-        }
-      });
-    }
+      export const _hmrUpdateCSS = (newCss: { text: string }) => {
+        _css = newCss;
+      };
+      
+      if (import.meta.hot) {
+        import.meta.hot.accept((newModule) => {
+          const handler = (window as any).handlePartsCssChange;
+          if (newModule && handler) {
+            _css.text = newModule.${exportName}();
+            // For HMR we overwrite the _css object in the new module, ensuring that there is only
+            // one object shared by all versions of the module
+            newModule._hmrUpdateCSS(_css);
+            handler();
+          }
+        });
+      }
   `;
   }
 

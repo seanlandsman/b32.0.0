@@ -1,0 +1,41 @@
+.ag-tabs-header {
+  display: flex;
+}
+
+.ag-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: var(--ag-grid-size);
+  border-left: solid 1px transparent;
+  border-right: solid 1px transparent;
+
+  &:focus-visible {
+    box-shadow: inset var(--ag-focus-shadow);
+  }
+}
+
+.ag-tab-selected {
+  background-color: var(--ag-background-color);
+
+  &:not(:first-of-type) {
+    border-left-color: var(--ag-border-color);
+  }
+  &:not(:last-of-type) {
+    border-right-color: var(--ag-border-color);
+  }
+}
+
+.ag-tab:not(.ag-tab-selected) {
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.ag-tabs-header {
+  border-bottom: solid 1px var(--ag-menu-separator-color);
+  display: flex;
+  background-color: color-mix(in srgb, transparent, var(--ag-foreground-color) 5%);
+}

@@ -6,7 +6,13 @@ import {
   iconSetQuartzRegular,
 } from './quartz/icon-set-quartz';
 
-export * from './quartz/icon-set-quartz';
+export {
+  iconSetAlpine,
+  iconSetMaterial,
+  iconSetQuartzBold,
+  iconSetQuartzLight,
+  iconSetQuartzRegular,
+};
 
 export const allIconSets = [
   iconSetQuartzLight,

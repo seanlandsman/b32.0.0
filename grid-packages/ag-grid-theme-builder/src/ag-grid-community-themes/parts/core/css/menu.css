@@ -115,22 +115,6 @@
   min-width: 290px;
 }
 
-.ag-tabs-header {
-  display: flex;
-}
-
-.ag-tab {
-  display: flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-  &:focus-visible {
-    box-shadow: inset var(--ag-focus-shadow);
-  }
-}
-
 .ag-filter-separator {
   border-top: solid 1px var(--menu-separator-color);
 }
@@ -266,37 +250,6 @@ TODO introduce variable
   flex-direction: column;
   padding: var(--ag-widget-container-vertical-padding) var(--ag-widget-container-horizontal-padding);
   gap: var(--ag-widget-vertical-spacing);
-}
-
-.ag-tab {
-  padding: var(--ag-grid-size);
-  border-left: solid 1px transparent;
-  border-right: solid 1px transparent;
-  flex: 1 1 auto;
-}
-
-.ag-tab-selected {
-  background-color: var(--ag-background-color);
-
-  &:not(:first-of-type) {
-    border-left-color: var(--ag-border-color);
-  }
-  &:not(:last-of-type) {
-    border-right-color: var(--ag-border-color);
-  }
-}
-
-.ag-tab:not(.ag-tab-selected) {
-  opacity: 0.7;
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.ag-tabs-header {
-  border-bottom: solid 1px var(--ag-menu-separator-color);
-  display: flex;
-  background-color: color-mix(in srgb, transparent, var(--ag-foreground-color) 5%);
 }
 
 .ag-menu-option .ag-icon {
