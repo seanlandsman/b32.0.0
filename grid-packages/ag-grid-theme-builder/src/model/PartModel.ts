@@ -38,7 +38,7 @@ export class PartModel {
     this.docs = partDocs[partId];
     this.variants = variantsByPartId[partId].map((part) => new VariantModel(this, part));
     this.defaultVariant =
-      this.variants.find((v) => quartzTheme.componentParts.includes(v.variant)) || this.variants[0];
+      this.variants.find((v) => quartzTheme.dependencies?.includes(v.variant)) || this.variants[0];
     this.variantAtom = createFeatureAtom(this);
   }
 
@@ -68,7 +68,7 @@ export class VariantModel {
     readonly part: PartModel,
     readonly variant: Part,
   ) {
-    this.label = titleCase(variant.variantId);
-    this.variantId = variant.variantId;
+    this.label = titleCase(variant.variantId || '');
+    this.variantId = variant.variantId || '';
   }
 }

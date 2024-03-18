@@ -203,10 +203,22 @@ const docs: Record<string, string | undefined> = {
     'How much to indent child columns in the filters tool panel relative to their parent',
   iconButtonHoverBackgroundColor: 'Background color of clickable icons when hovered',
   iconSize: 'The size of square icons and icon-buttons',
+
+  tabBarBackgroundColor:
+    'Background color of the container for tabs in the chart settings menu and legacy column menu',
+  tabBarBorder:
+    'Border below the container for tabs in the chart settings menu and legacy column menu',
+  tabPadding: 'Padding inside tabs in the chart settings menu and legacy column menu',
+  tabSelectedBackgroundColor:
+    'Background color of selected tabs in the chart settings menu and legacy column menu',
+  tabSelectedBorder:
+    'Border to left and right of selected tabs in the chart settings menu and legacy column menu',
+  tabSelectedUnderlineColor:
+    'Color of line drawn under selected tabs in the chart settings menu and legacy column menu',
+  tabSelectedUnderlineWidth:
+    'Width of line drawn under selected tabs in the chart settings menu and legacy column menu',
+  tabSelectedUnderlineTransitionDuration:
+    'The time that the line drawn under selected tabs takes to fade in and out.',
 };
 
-export const getParamDocs = (param: string) => {
-  const doc = docs[param];
-  if (!doc) throw new Error(`No documentation found for param "${param}"`);
-  return doc;
-};
+export const getParamDocs = (param: string): string | undefined => docs[param];

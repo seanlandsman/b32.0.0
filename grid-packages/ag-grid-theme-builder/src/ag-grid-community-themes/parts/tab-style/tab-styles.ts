@@ -1,4 +1,4 @@
-import { ref, transparentForeground } from '../..';
+import { calc, ref, transparentForeground } from '../..';
 import { definePart } from '../../theme-utils';
 import { tabStyleRolodexCSS } from './GENERATED-tab-style-rolodex';
 import { tabStyleSimpleCSS } from './GENERATED-tab-style-simple';
@@ -29,6 +29,17 @@ export const tabStyleSimple = definePart({
 export const tabStyleRolodex = definePart({
   partId: 'tabStyle',
   variantId: 'rolodex',
+  additionalParams: {
+    tabBarBackgroundColor: ref('chromeBackgroundColor'),
+    tabBarHorizontalPadding: ref('gridSize'),
+    tabBarVerticalPadding: ref('gridSize'),
+    tabHorizontalPadding: calc('gridSize * 2'),
+    tabVerticalPadding: calc('gridSize'),
+    tabSpacing: calc('gridSize'),
+    tabSelectedBackgroundColor: ref('chromeBackgroundColor'),
+    tabSelectedBorderColor: ref('borderColor'),
+    tabSelectedBorderWidth: '1px',
+  },
   css: [tabStyleRolodexCSS],
 });
 

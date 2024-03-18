@@ -2,8 +2,8 @@ import { join } from 'path';
 import { Part } from '../..';
 import { ParamType, getParamDocs, getParamType } from '../../metadata/docs';
 import { allParts } from '../../parts/parts';
-import { camelCase } from '../../theme-utils';
-import { fatalError, getProjectDir, writeTsFile } from './utils';
+import { camelCase, logErrorMessage } from '../../theme-utils';
+import { DEV_MODE, fatalError, getProjectDir, writeTsFile } from './utils';
 
 export const generateDocsFile = async () => {
   const mainExports = await import(getProjectDir());
@@ -46,8 +46,18 @@ export const generateDocsFile = async () => {
   result += `export type ParamTypes = {\n\n`;
   for (const param of allParams) {
     const type = getParamType(param);
+    let mainComment = getParamDocs(param);
+    if (!mainComment) {
+      const message = `No documentation for param ${param}`;
+      if (DEV_MODE) {
+        logErrorMessage(`💥 IGNORING FATAL ERROR IN DEV MODE: ${message}`);
+        mainComment = message;
+      } else {
+        throw fatalError(message);
+      }
+    }
     result += docComment({
-      mainComment: getParamDocs(param),
+      mainComment,
       extraComment: paramExtraDocs[type],
     });
     result += `  ${param}: ${upperCamelCase(type)}Value;\n\n`;

@@ -1,7 +1,6 @@
 .ag-tabs-header {
   background-color: var(--ag-tab-bar-background-color);
   border-bottom: var(--ag-tab-bar-border);
-  display: flex;
 }
 
 .ag-tab {

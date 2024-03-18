@@ -6,19 +6,13 @@ export type Part<T extends string = string> = {
   partId: PartId;
   variantId: string;
   params: T[];
+  dependencies?: Part[];
   defaults?: { [K in T]: K extends Param ? ParamTypes[K] : any };
   css?: Array<string | (() => string)>;
   icons?: Record<string, string>;
 };
 
 export type ParamDefaults<T extends string> = { [K in T]: K extends Param ? ParamTypes[K] : any };
-
-export type CombinedParts<T extends string> = {
-  params: T[];
-  componentParts: AnyPart[];
-};
-
-export type AnyPart = Part<string> | CombinedParts<string>;
 
 // TODO introduce references, and use branded types to filter the keys on
 // ParamTypes so that you can only reference values of the correct type export

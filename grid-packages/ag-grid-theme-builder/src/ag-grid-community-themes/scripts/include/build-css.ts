@@ -8,9 +8,7 @@ import cssNesting from 'postcss-nesting';
 import cssRtl from 'postcss-rtlcss';
 import cssUrl from 'postcss-url';
 import { camelCase } from '../../theme-utils';
-import { getProjectDir, writeTsFile } from './utils';
-
-const DEV_MODE = process.argv.includes('--dev');
+import { DEV_MODE, getProjectDir, writeTsFile } from './utils';
 
 export const generateAllCSSEmbeds = async () => {
   const cssEntryPoints = globSync(join(getProjectDir(), 'parts/**/*.css')).filter(

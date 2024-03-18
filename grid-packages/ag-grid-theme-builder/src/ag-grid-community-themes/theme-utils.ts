@@ -1,5 +1,5 @@
 import { CoreParam } from '.';
-import { AnyPart, CombinedParts, ParamDefaults, Part } from './theme-types';
+import { ParamDefaults, Part } from './theme-types';
 
 /**
  * Version of Object.entries typed to allow easy iteration over objects. Callers
@@ -53,9 +53,11 @@ export const definePart = <T extends string = never>(args: DefinePartArgs<T>): P
 export const camelCase = (str: string) =>
   str.replace(/[\W_]+([a-z])/g, (_, letter) => letter.toUpperCase());
 
-export const combineParts = <P extends AnyPart>(
-  parts: P[],
-): CombinedParts<P['params'][number]> => ({
+let combinedCount = 0;
+export const combineParts = <P extends Part>(parts: P[]): Part<P['params'][number]> => ({
+  // TODO replace this with a proper way to combine parts, are we going to define a new part kind e.g. "theme" or introduce a concept of anonymous parts?
+  partId: `combined_${combinedCount++}` as any,
+  variantId: 'hack',
   params: parts.flatMap((part) => part.params),
-  componentParts: parts,
+  dependencies: parts,
 });

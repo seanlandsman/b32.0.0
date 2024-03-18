@@ -1,7 +1,7 @@
 import { corePart } from '.';
 import { logErrorMessageOnce } from '../model/utils';
 import type { ParamTypes } from './GENERATED-param-types';
-import { AnyPart, Part, borderValueToCss } from './theme-types';
+import { Part, borderValueToCss } from './theme-types';
 import { camelCase, paramToVariableName } from './theme-utils';
 
 export type Theme = {
@@ -9,11 +9,11 @@ export type Theme = {
   paramDefaults: Record<string, string>;
 };
 
-export type PickVariables<P extends AnyPart, V extends object> = {
+export type PickVariables<P extends Part, V extends object> = {
   [K in P['params'][number]]?: K extends keyof V ? V[K] : never;
 };
 
-export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
+export const defineTheme = <P extends Part, V extends object = ParamTypes>(
   partOrParts: P | P[],
   parameters: PickVariables<P, V>,
 ): Theme => {
@@ -22,7 +22,7 @@ export const defineTheme = <P extends AnyPart, V extends object = ParamTypes>(
     paramDefaults: {},
   };
 
-  // only allow one variant of each part, last variant wins
+  // For parts with a partId, only allow one variant allowed, last variant wins
   const removeDuplicates: Record<string, Part> = { [corePart.partId]: corePart };
   for (const part of flattenParts(partOrParts)) {
     removeDuplicates[part.partId] = part;
@@ -125,13 +125,12 @@ const describeValue = (value: any): string => {
   return `${typeof value} ${value}`;
 };
 
-const flattenParts = (parts: AnyPart | AnyPart[], accumulator: Part[] = []) => {
+const flattenParts = (parts: Part | Part[], accumulator: Part[] = []) => {
   for (const part of Array.isArray(parts) ? parts : [parts]) {
-    if ('componentParts' in part) {
-      flattenParts(part.componentParts, accumulator);
-    } else {
-      accumulator.push(part);
+    if (part.dependencies) {
+      flattenParts(part.dependencies, accumulator);
     }
+    accumulator.push(part);
   }
   return accumulator;
 };

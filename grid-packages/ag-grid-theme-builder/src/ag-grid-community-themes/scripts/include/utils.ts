@@ -29,3 +29,5 @@ export const removeAllGeneratedFiles = () => {
     fs.rmSync(file);
   });
 };
+
+export const DEV_MODE = process.argv.includes('--dev');
