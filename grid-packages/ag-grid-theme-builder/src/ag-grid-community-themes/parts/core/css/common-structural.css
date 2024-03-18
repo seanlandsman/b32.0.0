@@ -43,8 +43,13 @@ ag-grid-aurelia {
   user-select: text;
 }
 
+.ag-tabs-header {
+  display: flex;
+}
+
 .ag-tab {
   position: relative;
+  cursor: pointer;
 }
 
 .ag-tab-guard {
