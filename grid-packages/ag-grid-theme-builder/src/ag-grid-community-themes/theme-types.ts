@@ -6,10 +6,9 @@ export type Part<T extends string = string> = {
   partId: PartId;
   variantId: string;
   params: T[];
-  dependencies?: Part[];
-  defaults?: { [K in T]: K extends Param ? ParamTypes[K] : any };
-  css?: Array<string | (() => string)>;
-  icons?: Record<string, string>;
+  dependencies: Part[];
+  defaults: { [K in T]: K extends Param ? ParamTypes[K] : any };
+  css: Array<string | (() => string)>;
 };
 
 export type ParamDefaults<T extends string> = { [K in T]: K extends Param ? ParamTypes[K] : any };

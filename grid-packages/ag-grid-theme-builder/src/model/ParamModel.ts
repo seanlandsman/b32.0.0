@@ -17,7 +17,7 @@ export class ParamModel {
   private constructor(readonly property: string) {
     this.label = titleCase(property);
     this.valueAtom = atomWithJSONStorage(`param.${property}`, undefined);
-    this.docs = getParamDocs(property);
+    this.docs = getParamDocs(property) || '';
     this.type = getParamType(property);
   }
 

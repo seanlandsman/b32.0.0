@@ -1,5 +1,5 @@
-import { calc, ref, transparentForeground } from '../..';
-import { definePart } from '../../theme-utils';
+import { calc, ref, transparentAccent, transparentForeground } from '../..';
+import { definePart, extendPart } from '../../theme-utils';
 import { tabStyleRolodexCSS } from './GENERATED-tab-style-rolodex';
 import { tabStyleSimpleCSS } from './GENERATED-tab-style-simple';
 
@@ -10,16 +10,30 @@ export const tabStyleSimple = definePart({
   partId: 'tabStyle',
   variantId: 'simple',
   additionalParams: {
-    tabBarBackgroundColor: transparentForeground(0.05),
-    tabBarBorder: true,
+    tabBarBackgroundColor: ref('chromeBackgroundColor'),
+    tabBarBorder: false,
     tabPadding: ref('gridSize'),
-    tabSelectedBackgroundColor: ref('backgroundColor'),
-    tabSelectedBorder: true,
+    tabSelectedBackgroundColor: transparentAccent(0.1),
+    tabSelectedBorder: false,
     tabSelectedUnderlineColor: ref('accentColor'),
     tabSelectedUnderlineWidth: '0',
     tabSelectedUnderlineTransitionDuration: '0',
   },
   css: [tabStyleSimpleCSS],
+});
+
+/**
+ * Tabs based on the "simple" tab part, styled for the Quartz theme
+ */
+export const tabStyleQuartz = extendPart(tabStyleSimple, {
+  partId: 'tabStyle',
+  variantId: 'quartz',
+  overrideParams: {
+    tabBarBackgroundColor: transparentForeground(0.05),
+    tabBarBorder: true,
+    tabSelectedBorder: true,
+    tabSelectedBackgroundColor: ref('backgroundColor'),
+  },
 });
 
 /**
@@ -43,4 +57,4 @@ export const tabStyleRolodex = definePart({
   css: [tabStyleRolodexCSS],
 });
 
-export const allTabStyles = [tabStyleSimple, tabStyleRolodex];
+export const allTabStyles = [tabStyleSimple, tabStyleQuartz, tabStyleRolodex];

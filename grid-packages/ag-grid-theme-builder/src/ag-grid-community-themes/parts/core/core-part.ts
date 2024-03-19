@@ -24,7 +24,7 @@ const coreDefaults = {
   headerBorder: true,
   rowBorder: true,
   footerBorder: true,
-  columnBorder: false,
+  columnBorder: 'solid 1px transparent',
   columnHeaderBorder: ref('columnBorder'),
   columnHeaderBorderHeight: '100%',
   pinnedColumnBorder: true,
