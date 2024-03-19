@@ -1,5 +1,5 @@
 import { CoreParam } from '.';
-import { ParamDefaults, Part, PartId } from './theme-types';
+import { InferParams, ParamDefaults, Part, PartId } from './theme-types';
 
 /**
  * Version of Object.entries typed to allow easy iteration over objects. Callers
@@ -36,19 +36,36 @@ export const logErrorMessage = (message: unknown, error?: unknown) => {
 export const proportionToPercent = (value: number) =>
   Math.round(Math.max(0, Math.min(1, value)) * 1000) / 10;
 
-export type DefinePartArgs<T extends string, O extends string> = {
+export type DefinePartArgs<T extends string, O extends string, D extends Part<string>[]> = {
   partId: PartId;
   variantId: string;
+  /**
+   * Override params already defined by core or the extended part.
+   */
   overrideParams?: Partial<ParamDefaults<O>>;
+  /**
+   * Additional params made available by this part. These are added to the
+   * inferred params type of the part.
+   */
   additionalParams?: ParamDefaults<T>;
-  dependencies?: Part<T>[];
+  /**
+   * Parts that this part depends on. The params of the dependent parts will be
+   * added to this part's inferred params type.
+   */
+  dependencies?: D;
+  /**
+   * CSS to be included in the theme when this part is used, either as a string
+   * or a functions that returns one.
+   */
   css?: Array<string | (() => string)>;
-  icons?: Record<string, string>;
 };
 
-export const definePart = <T extends string = never>(
-  args: DefinePartArgs<T, CoreParam>,
-): Part<T> => {
+/**
+ * Define a theme part, inferring its params type.
+ */
+export const definePart = <T extends string = never, D extends Part<string>[] = Part<never>[]>(
+  args: DefinePartArgs<T, CoreParam, D>,
+): Part<T | InferParams<D>> => {
   const defaults: any = Object.assign({}, args.additionalParams || {}, args.overrideParams || {});
   return {
     ...args,
@@ -59,36 +76,33 @@ export const definePart = <T extends string = never>(
   };
 };
 
-export const extendPart = <E extends string, T extends string>(
-  parent: Part<E>,
-  ext: DefinePartArgs<T, CoreParam | E>,
-): Part<E | T> => {
+/**
+ * Define a part based on an existing part. The content and inferred params type
+ * of the base part will be merged with the new definitions.
+ */
+export const extendPart = <
+  E extends string,
+  T extends string,
+  D extends Part<string>[] = Part<never>[],
+>(
+  base: Part<E>,
+  ext: DefinePartArgs<T, CoreParam | E, D>,
+): Part<E | T | InferParams<D>> => {
   const defaults: any = Object.assign(
     {},
-    parent.defaults,
+    base.defaults,
     ext.additionalParams || {},
     ext.overrideParams || {},
   );
   return {
     partId: ext.partId,
     variantId: ext.variantId,
-    params: parent.params.concat(Object.keys(defaults) as any[]),
-    dependencies: parent.dependencies.concat(ext.dependencies || []),
+    params: base.params.concat(Object.keys(defaults) as any[]),
+    dependencies: base.dependencies.concat(ext.dependencies || []),
     defaults,
-    css: parent.css.concat(ext.css || []),
+    css: base.css.concat(ext.css || []),
   };
 };
 
 export const camelCase = (str: string) =>
   str.replace(/[\W_]+([a-z])/g, (_, letter) => letter.toUpperCase());
-
-let combinedCount = 0;
-export const combineParts = <P extends Part>(parts: P[]): Part<P['params'][number]> => ({
-  // TODO replace this with a proper way to combine parts, are we going to define a new part kind e.g. "theme" or introduce a concept of anonymous parts?
-  partId: `combined_${combinedCount++}` as any,
-  variantId: 'hack',
-  params: parts.flatMap((part) => part.params),
-  dependencies: parts,
-  defaults: {} as any,
-  css: [],
-});

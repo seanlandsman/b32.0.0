@@ -6,7 +6,7 @@ import { logErrorMessage } from '../../theme-utils';
 
 export const fatalError = (message: string) => {
   // eslint-disable-next-line no-console
-  console.error(`💥 FATAL ERROR: ${message}`);
+  console.error(`🔥 FATAL ERROR: ${message}`);
   process.exit(1);
 };
 

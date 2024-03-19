@@ -1,7 +1,6 @@
 import { atom, useAtom } from 'jotai';
 import * as themes from '../ag-grid-community-themes';
 import { Part, PartId } from '../ag-grid-community-themes';
-import { quartzTheme } from '../ag-grid-community-themes/themes/quartz-theme';
 import { PersistentAtom, atomWithJSONStorage } from './JSONStorage';
 import { titleCase } from './utils';
 
@@ -38,7 +37,8 @@ export class PartModel {
     this.docs = partDocs[partId];
     this.variants = variantsByPartId[partId].map((part) => new VariantModel(this, part));
     this.defaultVariant =
-      this.variants.find((v) => quartzTheme.dependencies?.includes(v.variant)) || this.variants[0];
+      this.variants.find((v) => themes.designQuartz.dependencies?.includes(v.variant)) ||
+      this.variants[0];
     this.variantAtom = createFeatureAtom(this);
   }
 

@@ -12,6 +12,11 @@ export const generateDocsFile = async () => {
   for (const [exportName, exportValue] of Object.entries(mainExports)) {
     const part = exportValue as Part;
     if (part.partId && part.variantId) {
+      if (!allParts.includes(part)) {
+        throw fatalError(
+          `Part ${part.partId}/${part.variantId} is exported but not listed in allParts`,
+        );
+      }
       exportedParts.add(part);
       const expectedName = part.partId + upperCamelCase(part.variantId);
       if (exportName !== expectedName) {
@@ -50,7 +55,7 @@ export const generateDocsFile = async () => {
     if (!mainComment) {
       const message = `No documentation for param ${param}`;
       if (DEV_MODE) {
-        logErrorMessage(`💥 IGNORING FATAL ERROR IN DEV MODE: ${message}`);
+        logErrorMessage(`🧯 IGNORING FATAL ERROR IN DEV MODE: ${message}`);
         mainComment = message;
       } else {
         throw fatalError(message);

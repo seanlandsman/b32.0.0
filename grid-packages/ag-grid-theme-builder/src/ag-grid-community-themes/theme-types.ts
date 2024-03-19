@@ -11,6 +11,12 @@ export type Part<T extends string = string> = {
   css: Array<string | (() => string)>;
 };
 
+export type InferParams<T extends Part | Part[]> = T extends Part[]
+  ? InferParams<T[number]>
+  : T extends Part<infer P>
+    ? P
+    : never;
+
 export type ParamDefaults<T extends string> = { [K in T]: K extends Param ? ParamTypes[K] : any };
 
 // TODO introduce references, and use branded types to filter the keys on

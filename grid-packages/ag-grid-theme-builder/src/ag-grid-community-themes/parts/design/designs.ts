@@ -1,10 +1,13 @@
 import { ref, transparentRef } from '../..';
 import { definePart } from '../../theme-utils';
+import { colorSchemeLightNeutral } from '../color-scheme/color-schemes';
+import { iconSetQuartzRegular } from '../icon-set/icon-sets';
 
 export const designQuartz = definePart({
   partId: 'design',
   variantId: 'quartz',
   overrideParams: {},
+  dependencies: [colorSchemeLightNeutral, iconSetQuartzRegular],
 });
 
 export const designBalham = definePart({
