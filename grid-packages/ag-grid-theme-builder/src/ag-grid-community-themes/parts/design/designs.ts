@@ -1,14 +1,17 @@
-import { ref, transparentRef } from '../..';
+import {
+  colorSchemeLightNeutral,
+  iconSetQuartzRegular,
+  ref,
+  tabStyleQuartz,
+  transparentRef,
+} from '../..';
 import { definePart } from '../../theme-utils';
-import { colorSchemeLightNeutral } from '../color-scheme/color-schemes';
-import { iconSetQuartzRegular } from '../icon-set/icon-sets';
-import { tabStyleQuartz } from '../tab-style/tab-styles';
 
 export const designQuartz = definePart({
   partId: 'design',
   variantId: 'quartz',
   overrideParams: {},
-  dependencies: [colorSchemeLightNeutral, iconSetQuartzRegular, tabStyleQuartz],
+  dependencies: () => [colorSchemeLightNeutral, iconSetQuartzRegular, tabStyleQuartz],
 });
 
 export const designBalham = definePart({

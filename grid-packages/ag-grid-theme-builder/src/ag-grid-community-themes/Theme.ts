@@ -131,7 +131,7 @@ const describeValue = (value: any): string => {
 const flattenParts = (parts: Part | Part[], accumulator: Part[] = []) => {
   for (const part of Array.isArray(parts) ? parts : [parts]) {
     if (part.dependencies) {
-      flattenParts(part.dependencies, accumulator);
+      flattenParts(part.dependencies(), accumulator);
     }
     accumulator.push(part);
   }

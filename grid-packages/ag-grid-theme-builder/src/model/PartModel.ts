@@ -37,7 +37,7 @@ export class PartModel {
     this.docs = partDocs[partId];
     this.variants = variantsByPartId[partId].map((part) => new VariantModel(this, part));
     this.defaultVariant =
-      this.variants.find((v) => themes.designQuartz.dependencies?.includes(v.variant)) ||
+      this.variants.find((v) => themes.designQuartz.dependencies().includes(v.variant)) ||
       this.variants[0];
     this.variantAtom = createFeatureAtom(this);
   }

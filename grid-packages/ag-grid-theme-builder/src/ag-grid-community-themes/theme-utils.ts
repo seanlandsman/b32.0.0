@@ -52,7 +52,7 @@ export type DefinePartArgs<T extends string, O extends string, D extends Part<st
    * Parts that this part depends on. The params of the dependent parts will be
    * added to this part's inferred params type.
    */
-  dependencies?: D;
+  dependencies?: () => D;
   /**
    * CSS to be included in the theme when this part is used, either as a string
    * or a functions that returns one.
@@ -70,7 +70,7 @@ export const definePart = <T extends string = never, D extends Part<string>[] = 
     ...args,
     defaults: { ...args.additionalParams, ...args.overrideParams } as any,
     css: args.css || [],
-    dependencies: args.dependencies || [],
+    dependencies: args.dependencies || (() => []),
   };
 };
 
@@ -89,7 +89,7 @@ export const extendPart = <
   return {
     partId: base.partId,
     variantId: ext.variantId,
-    dependencies: base.dependencies.concat(ext.dependencies || []),
+    dependencies: () => base.dependencies().concat(ext.dependencies?.() || []),
     defaults: { ...base.defaults, ...ext.additionalParams, ...ext.overrideParams } as any,
     css: base.css.concat(ext.css || []),
   };
