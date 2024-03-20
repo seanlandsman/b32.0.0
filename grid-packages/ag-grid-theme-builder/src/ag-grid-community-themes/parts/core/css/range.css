@@ -9,6 +9,7 @@
 
 /* TODO check range inputs */
 input[class^='ag-'][type='range'] {
+  padding: 0;
   -webkit-appearance: none;
   width: 100%;
   height: 100%;
@@ -58,8 +59,6 @@ input[class^='ag-'][type='range'] {
   }
 
   &:focus {
-    outline: none;
-
     &::-webkit-slider-thumb {
       box-shadow: var(--ag-focus-shadow);
       border-color: var(--ag-accent-color);

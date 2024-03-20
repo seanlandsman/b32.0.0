@@ -1,7 +1,7 @@
 import { calc, ref, transparentForeground, transparentRef } from '../..';
 import { definePart, extendPart } from '../../theme-utils';
+import { tabStyleBaseCSS } from './GENERATED-tab-style-base';
 import { tabStyleRolodexCSS } from './GENERATED-tab-style-rolodex';
-import { tabStyleSimpleCSS } from './GENERATED-tab-style-simple';
 
 export const tabParamDocs = {};
 
@@ -36,7 +36,7 @@ export const tabStyleBase = definePart({
     tabSelectedUnderlineTransitionDuration: '0',
     tabBarBorder: false,
   },
-  css: [tabStyleSimpleCSS],
+  css: [tabStyleBaseCSS],
 });
 
 /**

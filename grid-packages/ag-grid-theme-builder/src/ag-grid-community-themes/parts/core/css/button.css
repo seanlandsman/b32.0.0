@@ -31,3 +31,7 @@
     border: var(--ag-input-disabled-border);
   }
 }
+
+:where(input[class^='ag-'][type='button'], button[class^='ag-']):focus-visible {
+  box-shadow: var(--ag-focus-shadow);
+}

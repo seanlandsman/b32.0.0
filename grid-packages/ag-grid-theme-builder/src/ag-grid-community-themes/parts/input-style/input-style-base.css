@@ -1,0 +1,45 @@
+:where(input[class^='ag-'][type='number']:not(.ag-number-field-input-stepper)) {
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+:where(
+    input[class^='ag-']:not([type]),
+    input[class^='ag-'][type='text'],
+    input[class^='ag-'][type='number'],
+    input[class^='ag-'][type='tel'],
+    input[class^='ag-'][type='date'],
+    input[class^='ag-'][type='datetime-local'],
+    textarea[class^='ag-']
+  ) {
+  background-color: var(--ag-input-background-color);
+  --ag-internal-input-border: var(--ag-input-border);
+  border: var(--ag-input-border);
+  border-radius: var(--ag-input-border-radius);
+  color: var(--ag-input-text-color);
+  padding-left: var(--ag-input-padding-start);
+  min-height: var(--ag-input-height);
+
+  &:focus {
+    box-shadow: var(--ag-input-focus-shadow);
+    background-color: var(--ag-input-focus-background-color);
+    --ag-internal-input-border: var(--ag-input-focus-border);
+    color: var(--ag-input-focus-text-color);
+  }
+
+  &:disabled {
+    background-color: var(--ag-input-disabled-background-color);
+    --ag-internal-input-border: var(--ag-input-disabled-border);
+    color: var(--ag-input-disabled-text-color);
+  }
+
+  &:invalid {
+    background-color: var(--ag-input-invalid-background-color);
+    --ag-internal-input-border: var(--ag-input-invalid-border);
+    color: var(--ag-input-invalid-text-color);
+  }
+}

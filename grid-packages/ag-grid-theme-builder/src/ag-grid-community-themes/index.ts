@@ -5,5 +5,6 @@ export * from './parts/color-scheme/color-schemes';
 export * from './parts/core/core-part';
 export * from './parts/design/designs';
 export * from './parts/icon-set/icon-sets';
+export * from './parts/input-style/input-styles';
 export * from './parts/tab-style/tab-styles';
 export * from './theme-types';

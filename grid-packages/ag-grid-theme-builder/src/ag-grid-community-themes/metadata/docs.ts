@@ -12,7 +12,12 @@ export type ParamType =
 
 export const getParamType = (param: string): ParamType => {
   if (/Color$/.test(param)) return 'color';
-  if (/(Padding|Spacing|Size|Width|Height|Radius|Indent)$/.test(param)) return 'length';
+  if (
+    /(Padding|Spacing|Size|Width|Height|Radius|Indent)(Start|End|Top|Bottom|Horizontal|Vertical)?$/.test(
+      param,
+    )
+  )
+    return 'length';
   if (/Border$/.test(param)) return 'border';
   if (/BorderStyle$/.test(param)) return 'borderStyle';
   if (/Shadow$/.test(param)) return 'shadow';
@@ -125,15 +130,6 @@ const docs: Record<string, string | undefined> = {
   widgetVerticalSpacing: 'The spacing between widgets in containers arrange widgets vertically',
   listItemHeight:
     'Height of items in scrolling lists e.g. dropdown select inputs and column menu set filters.',
-  inputBackgroundColor: 'Background colour for text inputs.',
-  inputDisabledBackgroundColor: 'Background colour for disabled text inputs.',
-  inputDisabledTextColor: 'Text colour for disabled text inputs.',
-  inputBorder: 'Borders around text inputs.',
-  inputDisabledBorder: 'Borders around text inputs.',
-  inputInvalidBorder: 'Borders around text inputs.',
-  inputFocusBorder: 'Borders around focussed text inputs.',
-  inputHorizontalPadding: 'Padding inside text inputs.',
-  inputBorderRadius: 'Padding inside text inputs.',
   toggleButtonWidth: 'Width of the whole toggle button component',
   toggleButtonHeight: 'Height of the whole toggle button component',
   toggleButtonBorderWidth: 'Size of the toggle button outer border',
@@ -233,8 +229,34 @@ const docs: Record<string, string | undefined> = {
   tabSelectedUnderlineWidth: 'Width of line drawn under selected tabs',
   tabSelectedUnderlineTransitionDuration:
     'The time that the line drawn under selected tabs takes to fade in and out',
+
+  //
+  // INPUTS
+  //
+  inputBackgroundColor: 'Background color for text inputs',
+  inputBorder:
+    'Border around text inputs. By default the border is drawn all around the input, when using Material Design inputs the border is drawn underneath',
+  inputBorderRadius: 'Corner radius of the border around text inputs',
+  inputTextColor: 'Color of text within text inputs',
+  inputPaddingStart: 'Padding before text in text inputs',
+  inputHeight: 'Minimum height of text inputs',
+  inputFocusBackgroundColor: 'Background color for focussed text inputs',
+  inputFocusBorder:
+    'Border around focussed text inputs. By default the border is drawn all around the input, when using Material Design inputs the border is drawn underneath',
+  inputFocusShadow: 'Shadow around focussed text inputs',
+  inputFocusTextColor: 'Color of text within focussed text inputs',
+  inputDisabledBackgroundColor: 'Background color for disabled text inputs',
+  inputDisabledBorder:
+    'Border around disabled text inputs. By default the border is drawn all around the input, when using Material Design inputs the border is drawn underneath',
+  inputDisabledTextColor: 'Color of text within disabled text inputs',
+  inputInvalidBackgroundColor: 'Background color for text inputs in an invalid state',
+  inputInvalidBorder:
+    'Border around text inputs in an invalid state. By default the border is drawn all around the input, when using Material Design inputs the border is drawn underneath',
+  inputInvalidTextColor: 'Color of text within text inputs in an invalid state',
 };
 
-export const getParamDocs = (param: string): string | undefined => docs[param];
+export const getParamDocs = (param: string): string | undefined => {
+  return docs[param];
+};
 
 export const getParamDocsKeys = () => Object.keys(docs);

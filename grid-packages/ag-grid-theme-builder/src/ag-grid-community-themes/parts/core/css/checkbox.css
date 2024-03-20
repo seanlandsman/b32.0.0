@@ -35,7 +35,6 @@
 
   &:focus-within,
   &:active {
-    outline: none;
     box-shadow: var(--ag-focus-shadow);
   }
 

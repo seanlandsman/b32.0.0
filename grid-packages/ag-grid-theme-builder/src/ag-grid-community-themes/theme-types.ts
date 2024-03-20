@@ -1,6 +1,6 @@
 import type { Param, ParamTypes } from './GENERATED-param-types';
 
-export type PartId = 'core' | 'colorScheme' | 'iconSet' | 'design' | 'tabStyle';
+export type PartId = 'core' | 'colorScheme' | 'iconSet' | 'design' | 'tabStyle' | 'inputStyle';
 
 export type Part<T extends string = string> = {
   partId: PartId;

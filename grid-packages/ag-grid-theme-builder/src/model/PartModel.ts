@@ -10,6 +10,7 @@ const variantsByPartId: Record<PartId, Part[]> = {
   iconSet: themes.allIconSets,
   core: [themes.corePart],
   tabStyle: themes.allTabStyles,
+  inputStyle: themes.allInputStyles,
 };
 
 export const getVariantsByPartId = (partId: PartId) => variantsByPartId[partId];
@@ -22,7 +23,8 @@ const partDocs: Record<PartId, string | null> = {
     'Selecting a design applies many default settings to create a consistent look that you can then customise.',
   iconSet: null,
   core: null,
-  tabStyle: 'The style of tabs in chart settings and legacy column menu',
+  tabStyle: 'The appearance of tabs in chart settings and legacy column menu',
+  inputStyle: 'The appearance of text input fields',
 };
 
 export class PartModel {

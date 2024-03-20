@@ -23,9 +23,10 @@ export const renderedThemeAtom = atom((get): Theme => {
   const icons = get(PartModel.for('iconSet').variantAtom);
   const design = get(PartModel.for('design').variantAtom);
   const tabStyle = get(PartModel.for('tabStyle').variantAtom);
+  const inputStyle = get(PartModel.for('inputStyle').variantAtom);
 
   const theme = defineTheme(
-    [colorScheme.variant, design.variant, icons.variant, tabStyle.variant],
+    [colorScheme.variant, design.variant, icons.variant, tabStyle.variant, inputStyle.variant],
     paramValues,
   );
 

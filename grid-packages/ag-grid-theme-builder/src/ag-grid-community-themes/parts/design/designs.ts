@@ -1,6 +1,7 @@
 import {
   colorSchemeLightNeutral,
   iconSetQuartzRegular,
+  inputStyleBordered,
   ref,
   tabStyleQuartz,
   transparentRef,
@@ -11,7 +12,12 @@ export const designQuartz = definePart({
   partId: 'design',
   variantId: 'quartz',
   overrideParams: {},
-  dependencies: () => [colorSchemeLightNeutral, iconSetQuartzRegular, tabStyleQuartz],
+  dependencies: () => [
+    colorSchemeLightNeutral,
+    iconSetQuartzRegular,
+    tabStyleQuartz,
+    inputStyleBordered,
+  ],
 });
 
 export const designBalham = definePart({

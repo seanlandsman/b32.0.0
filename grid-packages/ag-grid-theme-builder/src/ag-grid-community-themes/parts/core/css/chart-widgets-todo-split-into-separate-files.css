@@ -165,7 +165,6 @@
 
   &.ag-picker-has-focus,
   &:focus-within {
-    outline: none;
     box-shadow: var(--ag-focus-shadow);
     border: var(--ag-input-focus-border);
   }

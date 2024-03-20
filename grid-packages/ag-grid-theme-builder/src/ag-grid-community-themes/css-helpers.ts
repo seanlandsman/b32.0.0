@@ -46,11 +46,13 @@ export const transparentRef = (name: Param, alpha: number) =>
 export const foregroundBorder = (alpha: number = 1) => 'solid 1px ' + transparentForeground(alpha);
 
 /**
- * Create a solid 1px border with a transparent accent color
+ * Create a solid 1px border with a named color, optionally semi-transparent
  *
+ * @param name - the color of the border e.g. "accentColor"
  * @param alpha - 0 for fully transparent, 1 for fully opaque
  */
-export const accentBorder = (alpha: number = 1) => 'solid 1px ' + transparentAccent(alpha);
+export const refBorder = (name: Param, alpha: number = 1) =>
+  'solid 1px ' + transparentRef(name, alpha);
 
 /**
  * Create a CSS color-mix expression that blends two color variables

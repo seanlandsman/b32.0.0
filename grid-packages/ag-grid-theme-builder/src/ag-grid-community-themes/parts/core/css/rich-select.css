@@ -1,6 +1,5 @@
 .ag-rich-select {
   cursor: default;
-  outline: none;
   height: 100%;
 }
 
@@ -16,7 +15,7 @@
     }
   }
   background-color: var(--ag-input-background-color);
-  padding: var(--ag-input-horizontal-padding);
+  padding: var(--ag-grid-size);
 }
 
 .ag-rich-select-list {
@@ -41,7 +40,7 @@
   white-space: nowrap;
   overflow: hidden;
   height: 100%;
-  padding: 0 var(--ag-input-horizontal-padding);
+  padding: 0 var(--ag-grid-size);
 }
 
 .ag-rich-select-row-selected {
@@ -64,7 +63,7 @@
       opacity: 0.8;
     }
   }
-  left: var(--ag-input-horizontal-padding);
+  left: var(--ag-grid-size);
 }
 
 .ag-popup-editor .ag-rich-select-value {
