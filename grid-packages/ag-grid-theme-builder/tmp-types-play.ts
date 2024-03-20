@@ -44,7 +44,7 @@ const definePart = <
 
 const a = definePart(() => ({
   id: 'a',
-  addParams: { amberbois: 4, fuug: 5, quang: 'g' },
+  addParams: { a: 1 },
   overrideParams: {},
 }));
 
@@ -54,51 +54,29 @@ const blarty = definePart(() => ({
   overrideParams: {},
 }));
 
-const extie = definePart(() => ({
-  id: 'extie',
-  addParams: { extieA: 'a', extieB: 'b', nextie: 'c' },
-  overrideParams: {},
-}));
-
 const b = definePart(() => ({
   id: 'b',
   extend: a,
-  addParams: { b: 8, wollo: 5 },
-}));
-
-const b2 = definePart(() => ({
-  id: 'b2',
-  includeByDefault: [a],
   addParams: { b: 8 },
 }));
 
-const b3 = definePart(() => ({
-  id: 'b3',
-  extend: extie,
-  includeByDefault: [a, blarty],
-  addParams: { __b: 8 },
-  overrideParams: {
-    // amberbois: 5,
-    // wollo: 6,
-  },
+const c = definePart(() => ({
+  id: 'c',
+  addParams: { c: 5 },
+}));
+
+const ace = definePart(() => ({
+  id: 'ace',
+  includeByDefault: [a, c],
+  addParams: { e: 8 },
 }));
 
 const switcheroo = definePart((dongle?: boolean) => ({
-  id: 'b3',
-  extend: extie,
-  includeByDefault: [a, blarty],
+  id: 'switcheroo',
+  extend: ace,
+  includeByDefault: [blarty],
   addParams: { __b: dongle ? 8 : 18 },
-  overrideParams: {
-    // amberbois: 5,
-    // wollo: 6,
-  },
-}));
-
-const bValue = b();
-
-const usesbValue = definePart(() => ({
-  id: 'b3',
-  extend: bValue,
-  addParams: { u: 8 },
   overrideParams: {},
 }));
+
+const switcherooValue = switcheroo();
