@@ -204,21 +204,37 @@ const docs: Record<string, string | undefined> = {
   iconButtonHoverBackgroundColor: 'Background color of clickable icons when hovered',
   iconSize: 'The size of square icons and icon-buttons',
 
-  tabBarBackgroundColor:
-    'Background color of the container for tabs in the chart settings menu and legacy column menu',
-  tabBarBorder:
-    'Border below the container for tabs in the chart settings menu and legacy column menu',
-  tabPadding: 'Padding inside tabs in the chart settings menu and legacy column menu',
-  tabSelectedBackgroundColor:
-    'Background color of selected tabs in the chart settings menu and legacy column menu',
-  tabSelectedBorder:
-    'Border to left and right of selected tabs in the chart settings menu and legacy column menu',
-  tabSelectedUnderlineColor:
-    'Color of line drawn under selected tabs in the chart settings menu and legacy column menu',
-  tabSelectedUnderlineWidth:
-    'Width of line drawn under selected tabs in the chart settings menu and legacy column menu',
+  materialPrimaryColor:
+    'Application primary colour as defined to the Material Design specification. Only used by Material theme parts.',
+
+  //
+  // TABS
+  //
+  tabBarBackgroundColor: 'Background color of the container for tabs',
+  tabBarBorder: 'Border below the container for tabs',
+  tabBarTopPadding: 'Padding at the top of the container for tabs',
+  tabBarHorizontalPadding: 'Padding at the left and right of the container for tabs',
+
+  tabBackgroundColor: 'Background color of tabs',
+  tabTextColor: 'Color of text within tabs',
+  tabSpacing: 'Gap between tabs',
+  tabHorizontalPadding: 'Padding inside the top and bottom sides of the container for tabs',
+  tabTopPadding: 'Padding at the top of the container for tabs',
+  tabBottomPadding: 'Padding at the bottom of the container for tabs',
+
+  tabHoverBackgroundColor: 'Background color of tabs when hovered over',
+  tabHoverTextColor: 'Color of text within tabs when hovered over',
+
+  tabSelectedTextColor: 'Color of text within the selected tabs',
+  tabSelectedBackgroundColor: 'Background color of selected tabs',
+  tabSelectedBorderWidth: 'Color of the border around selected tabs',
+  tabSelectedBorderColor: 'Color of the border around selected tabs',
+  tabSelectedUnderlineColor: 'Color of line drawn under selected tabs',
+  tabSelectedUnderlineWidth: 'Width of line drawn under selected tabs',
   tabSelectedUnderlineTransitionDuration:
-    'The time that the line drawn under selected tabs takes to fade in and out.',
+    'The time that the line drawn under selected tabs takes to fade in and out',
 };
 
 export const getParamDocs = (param: string): string | undefined => docs[param];
+
+export const getParamDocsKeys = () => Object.keys(docs);

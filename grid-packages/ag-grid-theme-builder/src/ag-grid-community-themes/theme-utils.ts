@@ -66,11 +66,9 @@ export type DefinePartArgs<T extends string, O extends string, D extends Part<st
 export const definePart = <T extends string = never, D extends Part<string>[] = Part<never>[]>(
   args: DefinePartArgs<T, CoreParam, D>,
 ): Part<T | InferParams<D>> => {
-  const defaults: any = Object.assign({}, args.additionalParams || {}, args.overrideParams || {});
   return {
     ...args,
-    defaults,
-    params: Object.keys(defaults || {}) as T[],
+    defaults: { ...args.additionalParams, ...args.overrideParams } as any,
     css: args.css || [],
     dependencies: args.dependencies || [],
   };
@@ -82,24 +80,17 @@ export const definePart = <T extends string = never, D extends Part<string>[] = 
  */
 export const extendPart = <
   E extends string,
-  T extends string,
-  D extends Part<string>[] = Part<never>[],
+  T extends never,
+  D extends Part<never>[] = Part<never>[],
 >(
   base: Part<E>,
-  ext: DefinePartArgs<T, CoreParam | E, D>,
+  ext: Omit<DefinePartArgs<T, CoreParam | E, D>, 'partId'>,
 ): Part<E | T | InferParams<D>> => {
-  const defaults: any = Object.assign(
-    {},
-    base.defaults,
-    ext.additionalParams || {},
-    ext.overrideParams || {},
-  );
   return {
-    partId: ext.partId,
+    partId: base.partId,
     variantId: ext.variantId,
-    params: base.params.concat(Object.keys(defaults) as any[]),
     dependencies: base.dependencies.concat(ext.dependencies || []),
-    defaults,
+    defaults: { ...base.defaults, ...ext.additionalParams, ...ext.overrideParams } as any,
     css: base.css.concat(ext.css || []),
   };
 };

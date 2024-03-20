@@ -2,12 +2,13 @@ import { ref, transparentRef } from '../..';
 import { definePart } from '../../theme-utils';
 import { colorSchemeLightNeutral } from '../color-scheme/color-schemes';
 import { iconSetQuartzRegular } from '../icon-set/icon-sets';
+import { tabStyleQuartz } from '../tab-style/tab-styles';
 
 export const designQuartz = definePart({
   partId: 'design',
   variantId: 'quartz',
   overrideParams: {},
-  dependencies: [colorSchemeLightNeutral, iconSetQuartzRegular],
+  dependencies: [colorSchemeLightNeutral, iconSetQuartzRegular, tabStyleQuartz],
 });
 
 export const designBalham = definePart({
@@ -56,6 +57,9 @@ export const designMaterial = definePart({
     headerBackgroundColor: ref('backgroundColor'),
     fontFamily:
       'Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
+  },
+  additionalParams: {
+    materialPrimaryColor: '#3f51b5',
   },
   css: [
     `

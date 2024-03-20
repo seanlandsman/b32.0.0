@@ -1,7 +1,7 @@
 import { corePart } from '.';
 import { logErrorMessageOnce } from '../model/utils';
 import type { ParamTypes } from './GENERATED-param-types';
-import { Part, borderValueToCss } from './theme-types';
+import { InferParams, Part, borderValueToCss, getPartParams } from './theme-types';
 import { camelCase, paramToVariableName } from './theme-utils';
 
 export type Theme = {
@@ -10,7 +10,7 @@ export type Theme = {
 };
 
 export type PickVariables<P extends Part, V extends object> = {
-  [K in P['params'][number]]?: K extends keyof V ? V[K] : never;
+  [K in InferParams<P>]?: K extends keyof V ? V[K] : never;
 };
 
 export const defineTheme = <P extends Part, V extends object = ParamTypes>(
@@ -25,6 +25,9 @@ export const defineTheme = <P extends Part, V extends object = ParamTypes>(
   // For parts with a partId, only allow one variant allowed, last variant wins
   const removeDuplicates: Record<string, Part> = { [corePart.partId]: corePart };
   for (const part of flattenParts(partOrParts)) {
+    // remove any existing item before overwriting, so that the newly added part
+    // is ordered at the end of the list
+    delete removeDuplicates[part.partId];
     removeDuplicates[part.partId] = part;
   }
   const parts = Object.values(removeDuplicates);
@@ -37,7 +40,7 @@ export const defineTheme = <P extends Part, V extends object = ParamTypes>(
     Object.assign(mergedParams, part.defaults);
   }
 
-  const allowedParams = new Set<string>(parts.flatMap((part) => part.params));
+  const allowedParams = new Set<string>(parts.flatMap((part) => getPartParams(part)));
 
   // apply override params passed to this method
   for (const [name, value] of Object.entries(overrideParams)) {

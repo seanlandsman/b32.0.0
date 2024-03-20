@@ -3,21 +3,34 @@ import { definePart, extendPart } from '../../theme-utils';
 import { tabStyleRolodexCSS } from './GENERATED-tab-style-rolodex';
 import { tabStyleSimpleCSS } from './GENERATED-tab-style-simple';
 
+export const tabParamDocs = {};
+
 /**
- * Tabs with configurable colours and borders, with an optional underline for the selected tab.
+ * This base tab style adds no visual styling, it provides a base upon which a
+ * tab style can be built by setting the tab-related params
  */
-export const tabStyleSimple = definePart({
+export const tabStyleBase = definePart({
   partId: 'tabStyle',
-  variantId: 'simple',
+  variantId: 'base',
   additionalParams: {
-    tabBackgroundColor: ref('chromeBackgroundColor'),
+    tabBarBackgroundColor: 'transparent',
+    tabBarHorizontalPadding: '0',
+    tabBarTopPadding: '0',
+
+    tabBackgroundColor: 'transparent',
     tabTextColor: ref('textColor'),
-    tabPadding: ref('gridSize'),
+    tabHorizontalPadding: calc('gridSize'),
+    tabTopPadding: calc('gridSize'),
+    tabBottomPadding: calc('gridSize'),
+    tabSpacing: '0',
+
     tabHoverBackgroundColor: ref('tabBackgroundColor'),
     tabHoverTextColor: ref('tabTextColor'),
+
     tabSelectedBackgroundColor: ref('tabBackgroundColor'),
     tabSelectedTextColor: ref('tabTextColor'),
-    tabSelectedBorder: false,
+    tabSelectedBorderWidth: '1px',
+    tabSelectedBorderColor: 'transparent',
     tabSelectedUnderlineColor: 'transparent',
     tabSelectedUnderlineWidth: '0',
     tabSelectedUnderlineTransitionDuration: '0',
@@ -27,48 +40,45 @@ export const tabStyleSimple = definePart({
 });
 
 /**
- * Tabs based on the "simple" tab part, styled for the Quartz theme
+ * Tabs styled for the Quartz theme
  */
-export const tabStyleQuartz = extendPart(tabStyleSimple, {
-  partId: 'tabStyle',
+export const tabStyleQuartz = extendPart(tabStyleBase, {
   variantId: 'quartz',
   overrideParams: {
     tabBarBorder: true,
-    tabBackgroundColor: transparentForeground(0.05),
+    tabBarBackgroundColor: transparentForeground(0.05),
     tabTextColor: transparentRef('textColor', 0.7),
     tabSelectedTextColor: ref('textColor'),
     tabHoverTextColor: ref('textColor'),
-    tabSelectedBorder: true,
+    tabSelectedBorderColor: ref('borderColor'),
     tabSelectedBackgroundColor: ref('backgroundColor'),
   },
 });
 
 /**
- * Tabs based on the "simple" tab part, styled for the Quartz theme
+ * Tabs styled for the Material theme
  */
-export const tabStyleMaterial = extendPart(tabStyleSimple, {
-  partId: 'tabStyle',
+export const tabStyleMaterial = extendPart(tabStyleBase, {
   variantId: 'material',
-  additionalParams: {
-    materialPrimaryColor: ref('accentColor'),
-  },
   overrideParams: {
-    tabBackgroundColor: ref('chromeBackgroundColor'),
+    tabBarBackgroundColor: ref('chromeBackgroundColor'),
     tabSelectedUnderlineColor: ref('materialPrimaryColor'),
     tabSelectedUnderlineWidth: '2px',
     tabSelectedUnderlineTransitionDuration: '0',
   },
+  additionalParams: {
+    materialPrimaryColor: '#3f51b5',
+  },
 });
 
 /**
- * Tabs based on the "simple" tab part, styled for the Quartz theme
+ * Tabs styled for the Alpine theme
  */
-export const tabStyleAlpine = extendPart(tabStyleSimple, {
-  partId: 'tabStyle',
+export const tabStyleAlpine = extendPart(tabStyleBase, {
   variantId: 'alpine',
   overrideParams: {
     tabBarBorder: true,
-    tabBackgroundColor: ref('chromeBackgroundColor'),
+    tabBarBackgroundColor: ref('chromeBackgroundColor'),
     tabHoverTextColor: ref('accentColor'),
     tabSelectedTextColor: ref('accentColor'),
     tabSelectedUnderlineColor: ref('accentColor'),
@@ -81,25 +91,27 @@ export const tabStyleAlpine = extendPart(tabStyleSimple, {
  * Tabs where the selected tab appears raised and attached the the active
  * content, like a rolodex or operating system tabs.
  */
-export const tabStyleRolodex = definePart({
-  partId: 'tabStyle',
+export const tabStyleRolodex = extendPart(tabStyleBase, {
   variantId: 'rolodex',
-  additionalParams: {
+  overrideParams: {
     tabBarBackgroundColor: ref('chromeBackgroundColor'),
     tabBarHorizontalPadding: ref('gridSize'),
-    tabBarVerticalPadding: ref('gridSize'),
+    tabBarTopPadding: ref('gridSize'),
+    tabBarBorder: true,
+
     tabHorizontalPadding: calc('gridSize * 2'),
-    tabVerticalPadding: calc('gridSize'),
+    tabTopPadding: calc('gridSize'),
+    tabBottomPadding: calc('gridSize'),
     tabSpacing: calc('gridSize'),
-    tabSelectedBackgroundColor: ref('chromeBackgroundColor'),
+
     tabSelectedBorderColor: ref('borderColor'),
-    tabSelectedBorderWidth: '1px',
+    tabSelectedBackgroundColor: ref('backgroundColor'),
   },
   css: [tabStyleRolodexCSS],
 });
 
 export const allTabStyles = [
-  tabStyleSimple,
+  tabStyleBase,
   tabStyleQuartz,
   tabStyleAlpine,
   tabStyleMaterial,

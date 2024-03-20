@@ -5,7 +5,6 @@ export type PartId = 'core' | 'colorScheme' | 'iconSet' | 'design' | 'tabStyle';
 export type Part<T extends string = string> = {
   partId: PartId;
   variantId: string;
-  params: T[];
   dependencies: Part[];
   defaults: { [K in T]: K extends Param ? ParamTypes[K] : any };
   css: Array<string | (() => string)>;
@@ -16,6 +15,9 @@ export type InferParams<T extends Part | Part[]> = T extends Part[]
   : T extends Part<infer P>
     ? P
     : never;
+
+export const getPartParams = <T extends string>(part: Part<T>): T[] =>
+  Object.keys(part.defaults) as T[];
 
 export type ParamDefaults<T extends string> = { [K in T]: K extends Param ? ParamTypes[K] : any };
 

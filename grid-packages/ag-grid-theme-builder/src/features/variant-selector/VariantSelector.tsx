@@ -16,7 +16,11 @@ export const VariantSelector = ({ part }: VariantSelectorProps) => {
           <span>{part.label}:</span>
         </Tooltip>
       </Cell>
-      <Select options={part.variants} value={variant} onChange={setVariant} />
+      <Select
+        options={part.variants.filter((v) => v.variantId !== 'base')}
+        value={variant}
+        onChange={setVariant}
+      />
     </>
   );
 };

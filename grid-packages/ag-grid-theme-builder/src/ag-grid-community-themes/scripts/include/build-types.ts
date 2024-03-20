@@ -1,6 +1,6 @@
 import { join } from 'path';
-import { Part } from '../..';
-import { ParamType, getParamDocs, getParamType } from '../../metadata/docs';
+import { Part, getPartParams } from '../..';
+import { ParamType, getParamDocs, getParamDocsKeys, getParamType } from '../../metadata/docs';
 import { allParts } from '../../parts/parts';
 import { camelCase, logErrorMessage } from '../../theme-utils';
 import { DEV_MODE, fatalError, getProjectDir, writeTsFile } from './utils';
@@ -32,13 +32,19 @@ export const generateDocsFile = async () => {
       throw fatalError(`Part ${part.partId}/${part.variantId} is not exported`);
     }
     try {
-      part.params.forEach(getParamType);
+      getPartParams(part).forEach(getParamType);
     } catch (e: any) {
       throw fatalError(`Error in part ${part.partId}/${part.variantId}: ${e.message}`);
     }
   }
 
-  const allParams = Array.from(new Set(allParts.flatMap((p) => p.params))).sort();
+  const allParams = Array.from(new Set<string>(allParts.flatMap((p) => getPartParams(p)))).sort();
+
+  const allParamsSet = new Set(allParams);
+  const superfluousParamDocs = getParamDocsKeys().filter((p) => !allParamsSet.has(p));
+  if (superfluousParamDocs.length) {
+    fatalErrorInProdOnly(`Superfluous param docs: ${superfluousParamDocs.join(', ')}`);
+  }
 
   let result = generatedWarning;
 
@@ -54,12 +60,8 @@ export const generateDocsFile = async () => {
     let mainComment = getParamDocs(param);
     if (!mainComment) {
       const message = `No documentation for param ${param}`;
-      if (DEV_MODE) {
-        logErrorMessage(`🧯 IGNORING FATAL ERROR IN DEV MODE: ${message}`);
-        mainComment = message;
-      } else {
-        throw fatalError(message);
-      }
+      fatalErrorInProdOnly(message);
+      mainComment = message;
     }
     result += docComment({
       mainComment,
@@ -70,6 +72,14 @@ export const generateDocsFile = async () => {
   result += `}\n\n`;
 
   await writeTsFile(join(getProjectDir(), 'GENERATED-param-types.ts'), result);
+};
+
+const fatalErrorInProdOnly = (message: string) => {
+  if (DEV_MODE) {
+    logErrorMessage(`🧯 IGNORING FATAL ERROR IN DEV MODE: ${message}`);
+  } else {
+    throw fatalError(message);
+  }
 };
 
 const paramExtraDocs: Record<ParamType, string[]> = {
