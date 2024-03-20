@@ -1,9 +1,15 @@
 import {
+  colorSchemeLightCold,
   colorSchemeLightNeutral,
+  iconSetAlpine,
+  iconSetMaterial,
   iconSetQuartzRegular,
   inputStyleBordered,
+  inputStyleUnderlined,
   ref,
+  tabStyleMaterial,
   tabStyleQuartz,
+  tabStyleRolodex,
   transparentRef,
 } from '../..';
 import { definePart } from '../../theme-utils';
@@ -46,6 +52,7 @@ export const designBalham = definePart({
     }
   `,
   ],
+  dependencies: () => [colorSchemeLightCold, iconSetAlpine, tabStyleRolodex, inputStyleBordered],
 });
 
 // - [ ]
@@ -68,6 +75,9 @@ export const designMaterial = definePart({
     rangeSelectionBorderColor: ref('primaryColor'),
     fontFamily:
       'Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
+    // TODO fix typing problem, this should work because inputStyleUnderlined is
+    // in the dependencies. Moving to function parts may well fix this
+    ['inputFocusBorder' as any]: 'solid 2px var(--ag-primary-color)',
   },
   additionalParams: {
     primaryColor: '#3f51b5',
@@ -83,6 +93,7 @@ export const designMaterial = definePart({
     }
   `,
   ],
+  dependencies: () => [iconSetMaterial, tabStyleMaterial, inputStyleUnderlined],
 });
 
 export const allDesigns = [designQuartz, designBalham, designMaterial];

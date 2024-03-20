@@ -3,7 +3,7 @@
   "private": true,
   "version": "31.0.2",
   "scripts": {
-    "build": "npm run codegen:prod && tsc && vite build",
+    "build": "npm run codegen:prod && tsc --project src && vite build",
     "dev": "npm run codegen:dev && concurrently vite npm:codegen:watch",
     "clean": "rimraf ./dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

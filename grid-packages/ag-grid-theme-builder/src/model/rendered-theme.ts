@@ -1,5 +1,5 @@
 import { atom, useAtomValue } from 'jotai';
-import { Theme, defineTheme, installTheme } from '../ag-grid-community-themes';
+import { PartId, Theme, defineTheme, installTheme } from '../ag-grid-community-themes';
 import { allParamModels } from './ParamModel';
 import { PartModel } from './PartModel';
 import { Store } from './store';
@@ -20,15 +20,18 @@ export const renderedThemeAtom = atom((get): Theme => {
   );
 
   const colorScheme = get(PartModel.for('colorScheme').variantAtom);
-  const icons = get(PartModel.for('iconSet').variantAtom);
   const design = get(PartModel.for('design').variantAtom);
-  const tabStyle = get(PartModel.for('tabStyle').variantAtom);
-  const inputStyle = get(PartModel.for('inputStyle').variantAtom);
+  const parts = [colorScheme.variant, design.variant];
+  const addIfDifferentFromDesign = (part: PartId) => {
+    const { variant } = get(PartModel.for(part).variantAtom);
+    if (!design.variant.dependencies().includes(variant)) {
+      parts.push(variant);
+    }
+  };
+  addIfDifferentFromDesign('tabStyle');
+  addIfDifferentFromDesign('inputStyle');
 
-  const theme = defineTheme(
-    [colorScheme.variant, design.variant, icons.variant, tabStyle.variant, inputStyle.variant],
-    paramValues,
-  );
+  const theme = defineTheme(parts, paramValues);
 
   const container = get(shadowDomContainerAtom);
   if (container) {
