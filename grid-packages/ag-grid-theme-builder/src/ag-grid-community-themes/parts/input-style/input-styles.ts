@@ -58,12 +58,14 @@ export const inputStyleUnderlined = extendPart(inputStyleBase, {
   overrideParams: {
     inputBorder: 'solid 2px ' + transparentForeground(0.3),
     inputPaddingStart: ref('gridSize'),
+
     inputFocusBorder: 'solid 2px var(--ag-accent-color)',
 
     inputDisabledTextColor: transparentRef('textColor', 0.5),
     inputDisabledBorder: 'solid 1px var(--ag-border-color)',
 
-    inputInvalidBorder: refBorder('invalidColor'),
+    // TODO inline syntax 'solid 2px var(invalidColor)' would work well here
+    inputInvalidBorder: 'solid 2px ' + ref('invalidColor'),
   },
   css: [inputStyleUnderlinedCSS],
 });

@@ -17,29 +17,34 @@
     textarea[class^='ag-']
   ) {
   background-color: var(--ag-input-background-color);
-  --ag-internal-input-border: var(--ag-input-border);
   border: var(--ag-input-border);
   border-radius: var(--ag-input-border-radius);
   color: var(--ag-input-text-color);
   padding-left: var(--ag-input-padding-start);
   min-height: var(--ag-input-height);
 
-  &:focus {
-    box-shadow: var(--ag-input-focus-shadow);
-    background-color: var(--ag-input-focus-background-color);
-    --ag-internal-input-border: var(--ag-input-focus-border);
-    color: var(--ag-input-focus-text-color);
-  }
-
-  &:disabled {
+  &:where(:disabled) {
     background-color: var(--ag-input-disabled-background-color);
-    --ag-internal-input-border: var(--ag-input-disabled-border);
+    border: var(--ag-input-disabled-border);
     color: var(--ag-input-disabled-text-color);
   }
 
-  &:invalid {
+  &:where(:focus) {
+    box-shadow: var(--ag-input-focus-shadow);
+    background-color: var(--ag-input-focus-background-color);
+    border: var(--ag-input-focus-border);
+    color: var(--ag-input-focus-text-color);
+  }
+
+  &:where(:invalid) {
     background-color: var(--ag-input-invalid-background-color);
-    --ag-internal-input-border: var(--ag-input-invalid-border);
+    border: var(--ag-input-invalid-border);
+    color: var(--ag-input-invalid-text-color);
+  }
+
+  &:where(.invalid) {
+    background-color: var(--ag-input-invalid-background-color);
+    border: var(--ag-input-invalid-border);
     color: var(--ag-input-invalid-text-color);
   }
 }
