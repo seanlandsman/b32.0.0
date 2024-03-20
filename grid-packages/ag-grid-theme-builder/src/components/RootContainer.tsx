@@ -28,6 +28,7 @@ export const RootContainer = memo(() => {
             <VariantSelector part={PartModel.for('design')} />
             <ParamEditor param={ParamModel.for('gridSize')} />
             <ParamEditor param={ParamModel.for('accentColor')} />
+            <ParamEditor param={ParamModel.for('primaryColor')} />
             <VariantSelector part={PartModel.for('iconSet')} />
             <ParamEditor param={ParamModel.for('iconSize')} />
             <VariantSelector part={PartModel.for('tabStyle')} />

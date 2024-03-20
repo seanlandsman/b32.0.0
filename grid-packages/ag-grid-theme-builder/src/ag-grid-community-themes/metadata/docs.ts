@@ -204,7 +204,7 @@ const docs: Record<string, string | undefined> = {
   iconButtonHoverBackgroundColor: 'Background color of clickable icons when hovered',
   iconSize: 'The size of square icons and icon-buttons',
 
-  materialPrimaryColor:
+  primaryColor:
     'Application primary colour as defined to the Material Design specification. Only used by Material theme parts.',
 
   //

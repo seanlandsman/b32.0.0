@@ -58,11 +58,13 @@ export const designMaterial = definePart({
     sideButtonSelectedBorder: false,
     headerColumnResizeHandleDisplay: 'none',
     headerBackgroundColor: ref('backgroundColor'),
+    rangeSelectionBackgroundColor: transparentRef('primaryColor', 0.2),
+    rangeSelectionBorderColor: ref('primaryColor'),
     fontFamily:
       'Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
   },
   additionalParams: {
-    materialPrimaryColor: '#3f51b5',
+    primaryColor: '#3f51b5',
   },
   css: [
     `

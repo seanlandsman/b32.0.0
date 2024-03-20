@@ -62,12 +62,12 @@ export const tabStyleMaterial = extendPart(tabStyleBase, {
   variantId: 'material',
   overrideParams: {
     tabBarBackgroundColor: ref('chromeBackgroundColor'),
-    tabSelectedUnderlineColor: ref('materialPrimaryColor'),
+    tabSelectedUnderlineColor: ref('primaryColor'),
     tabSelectedUnderlineWidth: '2px',
     tabSelectedUnderlineTransitionDuration: '0',
   },
   additionalParams: {
-    materialPrimaryColor: '#3f51b5',
+    primaryColor: '#3f51b5',
   },
 });
 
