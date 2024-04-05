@@ -1,3 +1,4 @@
+import cssAutoPrefix from 'autoprefixer';
 import cssNano from 'cssnano';
 import fs from 'fs';
 import { globSync } from 'glob';
@@ -7,6 +8,7 @@ import cssImport from 'postcss-import';
 import cssNesting from 'postcss-nesting';
 import cssRtl from 'postcss-rtlcss';
 import cssUrl from 'postcss-url';
+
 import { camelCase } from '../../theme-utils';
 import { DEV_MODE, getProjectDir, writeTsFile } from './utils';
 
@@ -39,6 +41,7 @@ const generateCSSEmbed = async (entry: string) => {
         {
           discardComments: !DEV_MODE,
           normalizeWhitespace: !DEV_MODE,
+          minifySelectors: !DEV_MODE,
         },
       ],
     }),
@@ -96,6 +99,7 @@ const loadAndProcessCSSFile = async (cssPath: string) => {
     cssImport(),
     cssNesting(),
     cssUrl({ url: 'inline' }),
+    cssAutoPrefix(),
   );
   css = await applyPostcssPlugin(
     css,
@@ -103,6 +107,7 @@ const loadAndProcessCSSFile = async (cssPath: string) => {
     cssRtl({
       ltrPrefix: '.ag-ltr',
       rtlPrefix: '.ag-rtl',
+      bothPrefix: ':is(.ag-ltr, .ag-rtl)',
     }),
   );
   return css;

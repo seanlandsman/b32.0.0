@@ -1,6 +1,7 @@
 .ag-icon {
   display: block;
   position: relative;
+  user-select: none;
   width: var(--ag-icon-size);
   height: var(--ag-icon-size);
 }

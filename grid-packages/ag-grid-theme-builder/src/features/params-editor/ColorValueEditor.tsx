@@ -4,7 +4,7 @@ import { ColorEditor } from '../color-editor/ColorEditor';
 import { ValueEditorProps } from './ValueEditorProps';
 
 const preventTransparency = new Set(['backgroundColor']);
-const preventVariables = new Set(['backgroundColor', 'foregroundColor', 'accentColor']);
+const preventVariables = new Set(['backgroundColor', 'foregroundColor']);
 
 export const ColorValueEditor = (props: ValueEditorProps) => {
   const theme = useRenderedTheme();
