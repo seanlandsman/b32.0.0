@@ -53,6 +53,7 @@
       "community-modules/core",
       "community-modules/client-side-row-model",
       "community-modules/styles",
+      "community-modules/theming",
       "community-modules/csv-export",
       "community-modules/infinite-row-model",
       "community-modules/angular",

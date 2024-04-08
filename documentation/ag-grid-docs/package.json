@@ -38,6 +38,7 @@
     "@astrojs/markdoc": "^0.8.2",
     "@astrojs/react": "^3.0.9",
     "@astrojs/sitemap": "^3.1.1",
+    "@ag-grid-enterprise/theming": "31.2.0",
     "@carbon/icons-react": "^11.33.0",
     "@nanostores/persistent": "^0.9.1",
     "@nanostores/react": "^0.7.1",
