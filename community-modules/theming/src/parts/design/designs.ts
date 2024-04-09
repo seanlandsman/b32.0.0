@@ -1,18 +1,10 @@
-import {
-    colorSchemeLightCold,
-    colorSchemeLightNeutral,
-    iconSetAlpine,
-    iconSetMaterial,
-    iconSetQuartzRegular,
-    inputStyleBordered,
-    inputStyleUnderlined,
-    ref,
-    tabStyleMaterial,
-    tabStyleQuartz,
-    tabStyleRolodex,
-    transparentRef,
-} from '../..';
+
+import { ref, transparentRef } from '../../css-helpers';
 import { definePart } from '../../theme-utils';
+import { colorSchemeLightCold, colorSchemeLightNeutral } from '../color-scheme/color-schemes';
+import { iconSetAlpine, iconSetMaterial, iconSetQuartzRegular } from '../icon-set/icon-sets';
+import { inputStyleBordered, inputStyleUnderlined } from '../input-style/input-styles';
+import { tabStyleMaterial, tabStyleQuartz, tabStyleRolodex } from '../tab-style/tab-styles';
 
 export const designQuartz = definePart({
     partId: 'design',

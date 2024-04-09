@@ -3,7 +3,6 @@
     "version": "31.2.0",
     "description": "Advanced Data Grid / Data Table supporting Javascript / Typescript / React / Angular / Vue",
     "scripts": {
-        "build": "npm run codegen:prod",
         "codegen:prod": "tsx scripts/codegen.ts",
         "codegen:dev": "tsx scripts/codegen.ts --dev --no-clean",
         "codegen:watch": "chokidar 'src/**/*' --ignore '**/GENERATED-*' --command 'npm run codegen:dev'"

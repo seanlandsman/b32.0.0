@@ -1,4 +1,4 @@
-import { calc, opaqueForeground, ref, refBorder, transparentForeground, transparentRef } from '../..';
+import { calc, opaqueForeground, ref, refBorder, transparentForeground, transparentRef } from '../../css-helpers';
 import { definePart, extendPart } from '../../theme-utils';
 import { inputStyleBaseCSS } from './GENERATED-input-style-base';
 import { inputStyleUnderlinedCSS } from './GENERATED-input-style-underlined';

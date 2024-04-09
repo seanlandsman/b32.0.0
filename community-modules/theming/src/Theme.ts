@@ -1,5 +1,5 @@
-import { corePart } from '.';
 import type { ParamTypes } from './GENERATED-param-types';
+import { corePart } from './parts/core/core-part';
 import { InferParams, Part, borderValueToCss, getPartParams } from './theme-types';
 import { camelCase, paramToVariableName } from './theme-utils';
 

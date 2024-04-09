@@ -6,7 +6,7 @@
   "targets": {
     "build": {
       "executor": "nx:noop",
-      "dependsOn": ["build:types", "build:package"],
+      "dependsOn": ["build:codegen", "build:types", "build:package"],
       "inputs": [],
       "outputs": [],
       "configurations": {

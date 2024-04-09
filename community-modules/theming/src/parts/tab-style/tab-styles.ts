@@ -1,4 +1,4 @@
-import { calc, ref, transparentForeground, transparentRef } from '../..';
+import { calc, ref, transparentForeground, transparentRef } from '../../css-helpers';
 import { definePart, extendPart } from '../../theme-utils';
 import { tabStyleBaseCSS } from './GENERATED-tab-style-base';
 import { tabStyleRolodexCSS } from './GENERATED-tab-style-rolodex';

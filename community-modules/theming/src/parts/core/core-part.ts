@@ -1,13 +1,4 @@
-import {
-    calc,
-    foregroundBorder,
-    opaqueForeground,
-    ref,
-    transparentAccent,
-    transparentBackground,
-    transparentForeground,
-    transparentRef,
-} from '../..';
+import { calc, foregroundBorder, opaqueForeground, ref, transparentAccent, transparentBackground, transparentForeground, transparentRef } from '../../css-helpers';
 import { definePart } from '../../theme-utils';
 import { coreCSS } from './GENERATED-core';
 import indent from './indent';

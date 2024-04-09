@@ -8,4 +8,5 @@ export * from './parts/icon-set/icon-sets';
 export * from './parts/input-style/input-styles';
 export * from './parts/tab-style/tab-styles';
 export * from './theme-types';
+export * from './metadata/docs';
 export { VERSION } from './version';

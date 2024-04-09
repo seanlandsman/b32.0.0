@@ -1,4 +1,4 @@
-import { opaqueForeground } from '../..';
+import { opaqueForeground } from '../../css-helpers';
 import { definePart } from '../../theme-utils';
 
 export const colorSchemeLightNeutral = definePart({

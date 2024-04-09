@@ -1,4 +1,4 @@
-import { CoreParam } from '.';
+import { CoreParam } from './main';
 import { InferParams, ParamDefaults, Part, PartId } from './theme-types';
 
 /**

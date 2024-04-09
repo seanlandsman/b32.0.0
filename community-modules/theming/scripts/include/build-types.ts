@@ -49,7 +49,7 @@ export const generateDocsFile = async () => {
 
     const valueTypes = Array.from(new Set(allParams.map(getParamType).map(valueTypeName))).sort();
 
-    result += `import { ${valueTypes.join(', ')} } from ".";\n\n`;
+    result += `import { ${valueTypes.join(', ')} } from "./main";\n\n`;
 
     result += `export type Param = keyof ParamTypes;\n\n`;
 
