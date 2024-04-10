@@ -1,15 +1,24 @@
 import styled from '@emotion/styled';
 
-import { GridPreview } from './GridPreview';
 import { useRenderedTheme } from '../../model/rendered-theme';
+import { GridConfigDropdownButton } from '../grid-config/GridConfigDropdown';
+import { GridPreview } from './GridPreview';
+import { DownloadThemeButton } from './Download';
+import { EditorPanel } from '../editors/EditorPanel';
 
 export const RootContainer = () => {
     useRenderedTheme();
     return (
         <Container>
             <Grid>
-                <Header>Header</Header>
-                <Menu>Menu</Menu>
+                <Menu>
+                    <EditorPanel />
+                </Menu>
+                <MenuBottom>
+                    <DownloadThemeButton />
+                    <Spacer />
+                    <GridConfigDropdownButton />
+                </MenuBottom>
                 <Main>
                     <GridPreview />
                 </Main>
@@ -22,16 +31,17 @@ const Container = styled('div')`
     padding: 8px;
     width: 100%;
     height: calc(100vh - var(--header-nav-height));
+    margin-bottom: 40px;
 `;
 
 const Grid = styled('div')`
     height: 100%;
     display: grid;
     grid-template-areas:
-        'header header'
-        'menu main';
+        'menu main'
+        'menu-bottom main';
     grid-template-columns: 400px auto;
-    grid-template-rows: min-content auto;
+    grid-template-rows: auto min-content;
     gap: 20px;
 
     font-family: 'IBM Plex Sans', sans-serif;
@@ -39,12 +49,6 @@ const Grid = styled('div')`
     .tooltip {
         max-width: 400px;
     }
-`;
-
-const Header = styled('div')`
-    grid-area: header;
-    display: flex;
-    gap: 16px;
 `;
 
 const Spacer = styled('div')`
@@ -55,6 +59,13 @@ const Menu = styled('div')`
     grid-area: menu;
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+`;
+
+const MenuBottom = styled('div')`
+    grid-area: menu-bottom;
+    display: flex;
     gap: 20px;
 `;
 

@@ -1,5 +1,5 @@
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-import { ModuleRegistry } from '@ag-grid-community/core';
+import { GridApi, ModuleRegistry } from '@ag-grid-community/core';
 import { AgGridReact } from '@ag-grid-community/react';
 import { AdvancedFilterModule } from '@ag-grid-enterprise/advanced-filter';
 import { GridChartsModule } from '@ag-grid-enterprise/charts-enterprise';
@@ -12,15 +12,13 @@ import { RichSelectModule } from '@ag-grid-enterprise/rich-select';
 import { RowGroupingModule } from '@ag-grid-enterprise/row-grouping';
 import { SetFilterModule } from '@ag-grid-enterprise/set-filter';
 import { StatusBarModule } from '@ag-grid-enterprise/status-bar';
-import { buildGridOptions } from '@components/theme-builder/model/grid-options';
-import { shadowDomContainerAtom } from '@components/theme-builder/model/rendered-theme';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
-import { memo, useMemo, useState } from 'react';
+import { memo } from 'react';
 import root from 'react-shadow';
-
-import { useGridConfig } from '../grid-config/grid-config-atom';
+import { useGridOptions } from '../grid-config/grid-config-atom';
 import { withErrorBoundary } from './ErrorBoundary';
+import { shadowDomContainerAtom } from '@components/theme-builder/model/rendered-theme';
 
 ModuleRegistry.registerModules([
     ClientSideRowModelModule,
@@ -39,17 +37,10 @@ ModuleRegistry.registerModules([
 
 ModuleRegistry.registerModules([SetFilterModule]);
 
-const GridPreview = () => {
-    const config = useGridConfig();
-    const options = useMemo(() => {
-        return buildGridOptions(config);
-    }, [config]);
+const AgGridReactUntyped = AgGridReact as any;
 
-    const [internalState] = useState({ id: 1, prevConfig: config });
-    if (config !== internalState.prevConfig) {
-        internalState.id += 1;
-        internalState.prevConfig = config;
-    }
+const GridPreview = () => {
+    const {config, gridOptions, updateCount} = useGridOptions();
 
     const setContainerEl = useSetAtom(shadowDomContainerAtom);
 
@@ -57,8 +48,8 @@ const GridPreview = () => {
         <Wrapper>
             <root.div style={{ height: '100%' }}>
                 <div ref={setContainerEl} className="ag-theme-change-trigger" style={{ height: '100%' }}>
-                    <AgGridReact
-                        onGridReady={({ api }) => {
+                    <AgGridReactUntyped
+                        onGridReady={({ api }: {api: GridApi}) => {
                             if (config.showIntegratedChartPopup) {
                                 api.createRangeChart({
                                     cellRange: {
@@ -86,8 +77,8 @@ const GridPreview = () => {
                                 api.showLoadingOverlay();
                             }
                         }}
-                        key={internalState.id}
-                        {...options}
+                        key={updateCount}
+                        {...gridOptions}
                     />
                 </div>
             </root.div>
