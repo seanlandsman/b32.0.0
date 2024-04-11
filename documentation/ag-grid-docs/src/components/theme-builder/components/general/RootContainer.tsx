@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useRenderedTheme } from '../../model/rendered-theme';
 import { EditorPanel } from '../editors/EditorPanel';
 import { GridConfigDropdownButton } from '../grid-config/GridConfigDropdown';
+import { PresetSelector } from '../presets/PresetSelector';
 import { DownloadThemeButton } from './Download';
 import { GridPreview } from './GridPreview';
 
@@ -20,6 +21,7 @@ export const RootContainer = () => {
                     <GridConfigDropdownButton />
                 </MenuBottom>
                 <Main>
+                    <PresetSelector />
                     <GridPreview />
                 </Main>
             </Grid>
@@ -29,7 +31,8 @@ export const RootContainer = () => {
 
 const Container = styled('div')`
     width: 100%;
-    height: calc(100vh - var(--header-nav-height) - 16px);
+    height: calc(100vh - var(--header-nav-height) - 32px);
+    min-height: 600px;
     margin-top: 16px;
     margin-bottom: 40px;
 `;
@@ -85,4 +88,8 @@ const MenuBottom = styled('div')`
 const Main = styled('div')`
     grid-area: main;
     padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 30px;
 `;

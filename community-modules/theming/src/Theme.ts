@@ -55,7 +55,7 @@ export const defineTheme = <P extends Part, V extends object = ParamTypes>(
 
     // render variable defaults using :where(:root) to ensure lowest specificity so that
     // `html { --ag-foreground-color: red; }` will override this
-    let variableDefaults = ':where(:root) {\n';
+    let variableDefaults = ':where(:root, :host > *) {\n';
     for (const name of Object.keys(mergedParams)) {
         let value = mergedParams[name];
         if (isBorderParam(name)) {

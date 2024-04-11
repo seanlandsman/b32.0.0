@@ -12,13 +12,15 @@ import { RichSelectModule } from '@ag-grid-enterprise/rich-select';
 import { RowGroupingModule } from '@ag-grid-enterprise/row-grouping';
 import { SetFilterModule } from '@ag-grid-enterprise/set-filter';
 import { StatusBarModule } from '@ag-grid-enterprise/status-bar';
+import { shadowDomContainerAtom } from '@components/theme-builder/model/rendered-theme';
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import root from 'react-shadow';
+
 import { useGridOptions } from '../grid-config/grid-config-atom';
+import { useSetGridRoot } from '../presets/grid-root-atom';
 import { withErrorBoundary } from './ErrorBoundary';
-import { shadowDomContainerAtom } from '@components/theme-builder/model/rendered-theme';
 
 ModuleRegistry.registerModules([
     ClientSideRowModelModule,
@@ -40,48 +42,65 @@ ModuleRegistry.registerModules([SetFilterModule]);
 const AgGridReactUntyped = AgGridReact as any;
 
 const GridPreview = () => {
-    const {config, gridOptions, updateCount} = useGridOptions();
+    const { config, gridOptions, updateCount } = useGridOptions();
 
-    const setContainerEl = useSetAtom(shadowDomContainerAtom);
+    const setShadowDomContainer = useSetAtom(shadowDomContainerAtom);
+    const [container, setContainer] = useState<HTMLDivElement | null>(null);
+    const setGridRoot = useSetGridRoot();
 
     return (
         <Wrapper>
-            <root.div style={{ height: '100%' }}>
-                <div ref={setContainerEl} className="ag-theme-change-trigger" style={{ height: '100%' }}>
-                    <AgGridReactUntyped
-                        onGridReady={({ api }: {api: GridApi}) => {
-                            if (config.showIntegratedChartPopup) {
-                                api.createRangeChart({
-                                    cellRange: {
-                                        rowStartIndex: 0,
-                                        rowEndIndex: 14,
-                                        columns: ['model', 'year', 'price'],
-                                    },
-                                    chartType: 'groupedColumn',
-                                    chartThemeOverrides: {
-                                        common: {
-                                            title: {
-                                                enabled: true,
-                                                text: 'Top 5 Medal Winners',
-                                            },
-                                        },
-                                    },
-                                });
-                                setTimeout(() => {
-                                    document
-                                        .querySelector('.ag-chart .ag-icon-expanded')
-                                        ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-                                }, 1);
-                            }
-                            if (config.showOverlay) {
-                                api.showLoadingOverlay();
-                            }
+            <GridSizer>
+                <root.div style={{ height: '100%' }}>
+                    <div
+                        ref={(el) => {
+                            setContainer(el);
+                            setShadowDomContainer(el);
                         }}
-                        key={updateCount}
-                        {...gridOptions}
-                    />
-                </div>
-            </root.div>
+                        className="ag-theme-change-trigger"
+                        style={{ height: '100%' }}
+                    >
+                        {container && (
+                            <AgGridReactUntyped
+                                onGridReady={({ api }: { api: GridApi }) => {
+                                    api.getAdvancedFilterModel;
+                                    if (config.showIntegratedChartPopup) {
+                                        api.createRangeChart({
+                                            cellRange: {
+                                                rowStartIndex: 0,
+                                                rowEndIndex: 14,
+                                                columns: ['model', 'year', 'price'],
+                                            },
+                                            chartType: 'groupedColumn',
+                                            chartThemeOverrides: {
+                                                common: {
+                                                    title: {
+                                                        enabled: true,
+                                                        text: 'Top 5 Medal Winners',
+                                                    },
+                                                },
+                                            },
+                                        });
+                                        setTimeout(() => {
+                                            document
+                                                .querySelector('.ag-chart .ag-icon-expanded')
+                                                ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+                                        }, 1);
+                                    }
+                                    if (config.showOverlay) {
+                                        api.showLoadingOverlay();
+                                    }
+                                }}
+                                onFirstDataRendered={() => {
+                                    setGridRoot(container.querySelector('.ag-root-wrapper') as HTMLDivElement);
+                                }}
+                                key={updateCount}
+                                {...gridOptions}
+                            />
+                        )}
+                    </div>
+                </root.div>
+            </GridSizer>
         </Wrapper>
     );
 };
@@ -93,6 +112,12 @@ export { GridPreviewWrapped as GridPreview };
 const Wrapper = styled('div')`
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background-color: color-mix(in srgb, transparent, var(--color-fg-primary) 3%);
+    border: solid 1px color-mix(in srgb, transparent, var(--color-fg-primary) 7%);
 
     /* These styles should not be applied to the grid because we render in a Shadow DOM */
     .ag-root-wrapper {
@@ -102,4 +127,9 @@ const Wrapper = styled('div')`
             content: 'Warning: page styles are leaking into the grid';
         }
     }
+`;
+
+const GridSizer = styled('div')`
+    width: min(80%, 800px);
+    height: min(80%, 500px);
 `;
