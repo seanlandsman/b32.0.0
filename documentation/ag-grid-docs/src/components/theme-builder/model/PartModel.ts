@@ -1,9 +1,9 @@
-import * as themes from '@ag-grid-community/theming';
 import type { Part, PartId } from '@ag-grid-community/theming';
+import * as themes from '@ag-grid-community/theming';
 import { atom, useAtom } from 'jotai';
 
-import { atomWithJSONStorage } from './JSONStorage';
 import type { PersistentAtom } from './JSONStorage';
+import { atomWithJSONStorage } from './JSONStorage';
 import { titleCase } from './utils';
 
 const variantsByPartId: Record<PartId, Part[]> = {

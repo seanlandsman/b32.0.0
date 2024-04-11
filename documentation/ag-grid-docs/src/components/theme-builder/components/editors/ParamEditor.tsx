@@ -2,40 +2,35 @@ import { ParamModel, useParamAtom } from '@components/theme-builder/model/ParamM
 import { useRenderedTheme } from '@components/theme-builder/model/rendered-theme';
 import styled from '@emotion/styled';
 
+import { withErrorBoundary } from '../general/ErrorBoundary';
+import { FormField } from './FormField';
+
 export type ParamEditorProps = {
     param: string;
     label?: string;
+    showDocs?: boolean;
 };
 
-export const ParamEditor = (props: ParamEditorProps) => {
+export const ParamEditor = withErrorBoundary((props: ParamEditorProps) => {
     const param = ParamModel.for(props.param);
     const [value, setValue] = useParamAtom(param);
 
     const theme = useRenderedTheme();
-    const editorValue = value != null ? value : theme.paramDefaults[param.property];
-
-    if (editorValue == null) return null;
+    let editorValue = value;
+    if (editorValue == null) {
+        if (param.property in theme.paramDefaults) {
+            editorValue = theme.paramDefaults[param.property];
+        } else {
+            throw new Error(`Param "${param.property}" does not exist.`);
+        }
+    }
 
     return (
-        <Wrapper>
-            <Label>{props.label || param.label}</Label>
+        <FormField label={props.label || param.label} docs={props.showDocs ? param.docs : null}>
             <Input type="text" value={editorValue} onChange={(e) => setValue(e.target.value)} />
-        </Wrapper>
+        </FormField>
     );
-};
-
-const Wrapper = styled('div')`
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-`;
-
-const Label = styled('span')`
-    color: var(--color-fg-quinary);
-    font-size: 14px;
-    font-weight: 500;
-`;
-
+});
 
 const Input = styled('input')`
     width: 100%;

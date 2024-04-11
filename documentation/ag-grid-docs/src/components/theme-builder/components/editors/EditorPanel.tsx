@@ -1,14 +1,15 @@
+import { ChevronDown } from '@carbon/icons-react';
 import styled from '@emotion/styled';
 import * as Accordion from '@radix-ui/react-accordion';
-import type { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 import { ParamEditor } from './ParamEditor';
-import { ChevronDown } from '@carbon/icons-react';
+import { PartEditor } from './PartEditor';
 
 export const EditorPanel = () => {
     return (
-        <Root type="multiple" defaultValue={['General']}>
-            <Item heading="General">
+        <AccordionRoot type="multiple" defaultValue={['General']}>
+            <Section heading="General">
                 <LeftBiasRow>
                     <ParamEditor param="fontFamily" />
                     <ParamEditor param="fontSize" />
@@ -16,57 +17,84 @@ export const EditorPanel = () => {
                 <ParamEditor param="backgroundColor" />
                 <ParamEditor param="foregroundColor" />
                 <ParamEditor param="accentColor" />
-                <ParamEditor param="gridSize" label="Spacing" />
+                <ParamEditor param="gridSize" label="Spacing" showDocs />
                 <EvenSplitRow>
-                    <ParamEditor param="wrapperBorderRadius" label="Wrapper radius" />
-                    <ParamEditor param="borderRadius" label="Widget radius" />
+                    <ParamEditor param="wrapperBorderRadius" label="Wrapper radius" showDocs />
+                    <ParamEditor param="borderRadius" label="Widget radius" showDocs />
                 </EvenSplitRow>
-            </Item>
-            <Item heading="Header">
-                <ParamEditor param="headerVerticalPadding" label="Vertical padding" />
+            </Section>
+            <Section heading="Header">
+                <ParamEditor param="headerVerticalAdjust" label="Vertical size" />
                 <ParamEditor param="headerBackgroundColor" label="Background color" />
                 <ParamEditor param="headerForegroundColor" label="Foreground color" />
                 <LeftBiasRow>
                     <ParamEditor param="headerFontFamily" label="Font family" />
                     <ParamEditor param="headerFontSize" label="Font size" />
                 </LeftBiasRow>
-            </Item>
-        </Root>
+                <ParamEditor param="headerFontWeight" label="Font weight" />
+            </Section>
+            <Section heading="Cells">
+                <ParamEditor param="oddRowBackgroundColor" label="Odd row background" />
+                <ParamEditor param="rowVerticalAdjust" label="Adjust height" />
+                <ParamEditor param="rowHorizontalAdjust" label="Adjust horizontal padding" />
+            </Section>
+            <Section heading="Icons">
+                <PartEditor part="iconSet" />
+                <ParamEditor param="iconSize" label="Size" />
+            </Section>
+        </AccordionRoot>
     );
 };
 
-const X = styled(Accordion.Root)`
-`;
-
-const Root = styled(Accordion.Root)`
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-`;
-
-const Item = (props: { heading: string; children: ReactNode }) => (
-    <Accordion.Item value={props.heading}>
-        <Accordion.Header>
-            <Trigger>{props.heading} <ChevronDown /></Trigger>
-        </Accordion.Header>
-        <Content>{props.children}</Content>
-    </Accordion.Item>
+const Section = (props: { heading: string; children: ReactNode }) => (
+    <AccordionItem value={props.heading}>
+        <AccordionHeader>
+            <Trigger>
+                {props.heading} <OpenCloseChevron />
+            </Trigger>
+        </AccordionHeader>
+        <AccordionContent>
+            <SectionContent>{props.children}</SectionContent>
+        </AccordionContent>
+    </AccordionItem>
 );
 
-const Content = styled(Accordion.Content)`
+const SectionContent = styled('div')`
     display: flex;
     flex-direction: column;
     gap: 12px;
     width: 100%;
+    margin-bottom: 32px;
+`;
 
+const AccordionRoot = styled(Accordion.Root)`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+`;
+
+const AccordionItem = styled(Accordion.Item)`
+    margin: 0;
+`;
+
+const AccordionHeader = styled(Accordion.Header)`
+    margin-bottom: 16px;
+    padding-left: 6px;
+    padding-right: 10px;
+`;
+
+const AccordionContent = styled(Accordion.Content)`
     overflow: hidden;
+    margin: 0;
+    padding-left: 6px;
+    padding-right: 10px;
 
     &[data-state='open'] {
-        animation: slideDown 300ms ease-out;
+        animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1) forwards;
     }
+
     &[data-state='closed'] {
-        animation: slideUp 300ms ease-out;
+        animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1) forwards;
     }
 
     @keyframes slideDown {
@@ -90,8 +118,8 @@ const Content = styled(Accordion.Content)`
 
 const Trigger = styled(Accordion.Trigger)`
     all: unset;
-    color: var(--color-fg-primary)!important;
-    background: none!important;
+    color: var(--color-fg-primary) !important;
+    background: none !important;
     font-size: 16px;
     font-weight: 600;
     display: flex;
@@ -112,10 +140,17 @@ const EvenSplitRow = styled('div')`
 const LeftBiasRow = styled('div')`
     display: flex;
     gap: 12px;
-    > :nth-child(1) {
+    > :nth-of-type(1) {
         flex: 2;
     }
-    > :nth-child(2) {
+    > :nth-of-type(2) {
         flex: 1;
+    }
+`;
+
+const OpenCloseChevron = styled(ChevronDown)`
+    transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+    [data-state='open'] & {
+        transform: rotate(180deg);
     }
 `;

@@ -79,8 +79,8 @@ const docs: Record<string, string | undefined> = {
     selectedRowBackgroundColor: 'Background color of selected rows in the grid and in dropdown menus.',
     modalOverlayBackgroundColor: 'Background color of the overlay shown over the grid e.g. a data loading indicator.',
     oddRowBackgroundColor: 'Background colour applied to every other row',
-    borderRadius: 'Border radius applied to many elements such as menus, dialogs and form widgets.',
-    wrapperBorderRadius: 'Border radius applied to the outermost container around the grid.',
+    borderRadius: 'Default rounding for many UI elements such as menus, dialogs and form widgets.',
+    wrapperBorderRadius: 'Rounding of the outermost container around the grid.',
     cellWidgetSpacing:
         'Horizontal spacing between widgets inside cells (e.g. row group expand buttons and row selection checkboxes).',
     labelWidgetSpacing: 'Horizontal spacing between icons and text inside labels, e.g. in the header and sidebar tabs',
@@ -93,7 +93,7 @@ const docs: Record<string, string | undefined> = {
     valueChangeValueHighlightBackgroundColor:
         'Colour to apply when a cell value changes and enableCellChangeFlash is enabled',
     gridSize:
-        'Control how tightly data and UI elements are packed together. All padding and spacing in the grid is defined as a multiple of the grid size, so increasing it will make most components larger by increasing their internal white space while leaving the size of text and icons unchanged.',
+        'Spacing around and inside UI elements. All padding and margins in the grid are defined as a multiple of this value.',
     cellHorizontalPadding: 'Colour to apply when a cell value changes and enableCellChangeFlash is enabled',
     fontSize: 'Height of grid rows',
     rowHeight: 'Height of grid rows',
