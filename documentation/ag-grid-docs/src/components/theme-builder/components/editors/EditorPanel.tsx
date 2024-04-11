@@ -3,6 +3,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import type { ReactNode } from 'react';
 
 import { ParamEditor } from './ParamEditor';
+import { ChevronDown } from '@carbon/icons-react';
 
 export const EditorPanel = () => {
     return (
@@ -15,24 +16,27 @@ export const EditorPanel = () => {
                 <ParamEditor param="backgroundColor" />
                 <ParamEditor param="foregroundColor" />
                 <ParamEditor param="accentColor" />
-                <ParamEditor param="gridSize" />
+                <ParamEditor param="gridSize" label="Spacing" />
                 <EvenSplitRow>
                     <ParamEditor param="wrapperBorderRadius" label="Wrapper radius" />
                     <ParamEditor param="borderRadius" label="Widget radius" />
                 </EvenSplitRow>
             </Item>
             <Item heading="Header">
-                <ParamEditor param="headerVerticalPadding" label='Vertical padding' />
-                <ParamEditor param="headerBackgroundColor" label='Background color' />
-                <ParamEditor param="headerForegroundColor" label='Foreground color' />
+                <ParamEditor param="headerVerticalPadding" label="Vertical padding" />
+                <ParamEditor param="headerBackgroundColor" label="Background color" />
+                <ParamEditor param="headerForegroundColor" label="Foreground color" />
                 <LeftBiasRow>
-                    <ParamEditor param="headerFontFamily" label='Font family' />
-                    <ParamEditor param="headerFontSize"  label='Font size'/>
+                    <ParamEditor param="headerFontFamily" label="Font family" />
+                    <ParamEditor param="headerFontSize" label="Font size" />
                 </LeftBiasRow>
             </Item>
         </Root>
     );
 };
+
+const X = styled(Accordion.Root)`
+`;
 
 const Root = styled(Accordion.Root)`
     display: flex;
@@ -44,7 +48,7 @@ const Root = styled(Accordion.Root)`
 const Item = (props: { heading: string; children: ReactNode }) => (
     <Accordion.Item value={props.heading}>
         <Accordion.Header>
-            <Trigger>{props.heading}</Trigger>
+            <Trigger>{props.heading} <ChevronDown /></Trigger>
         </Accordion.Header>
         <Content>{props.children}</Content>
     </Accordion.Item>
@@ -57,7 +61,6 @@ const Content = styled(Accordion.Content)`
     width: 100%;
 
     overflow: hidden;
-    transition: height 300ms ease-in-out;
 
     &[data-state='open'] {
         animation: slideDown 300ms ease-out;
@@ -87,14 +90,15 @@ const Content = styled(Accordion.Content)`
 
 const Trigger = styled(Accordion.Trigger)`
     all: unset;
+    color: var(--color-fg-primary)!important;
+    background: none!important;
     font-size: 16px;
     font-weight: 600;
-
-    &:hover {
-        all: unset;
-        font-size: 16px;
-        font-weight: 600;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
 `;
 
 const EvenSplitRow = styled('div')`

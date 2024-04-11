@@ -30,7 +30,8 @@ export const RootContainer = () => {
 const Container = styled('div')`
     padding: 8px;
     width: 100%;
-    height: calc(100vh - var(--header-nav-height));
+    height: calc(100vh - var(--header-nav-height) - 16px);
+    margin-top: 16px;
     margin-bottom: 40px;
 `;
 
