@@ -11,20 +11,20 @@ export const RootContainer = () => {
     useRenderedTheme();
     return (
         <Container>
-            <Grid>
-                <Menu>
+            <Menu>
+                <EditorScroller>
                     <EditorPanel />
-                </Menu>
+                </EditorScroller>
                 <MenuBottom>
                     <DownloadThemeButton />
                     <Spacer />
                     <GridConfigDropdownButton />
                 </MenuBottom>
-                <Main>
-                    <PresetSelector />
-                    <GridPreview />
-                </Main>
-            </Grid>
+            </Menu>
+            <Main>
+                <PresetSelector />
+                <GridPreview />
+            </Main>
         </Container>
     );
 };
@@ -35,16 +35,7 @@ const Container = styled('div')`
     min-height: 600px;
     margin-top: 16px;
     margin-bottom: 40px;
-`;
-
-const Grid = styled('div')`
-    height: 100%;
-    display: grid;
-    grid-template-areas:
-        'menu main'
-        'menu-bottom main';
-    grid-template-columns: 400px auto;
-    grid-template-rows: auto min-content;
+    display: flex;
 
     font-family: 'IBM Plex Sans', sans-serif;
 
@@ -53,24 +44,31 @@ const Grid = styled('div')`
     }
 `;
 
+const EditorScroller = styled('div')`
+    position: absolute;
+    inset: 0 0 48px 0;
+    overflow-y: auto;
+`;
+
 const Spacer = styled('div')`
     flex-grow: 1;
 `;
 
 const Menu = styled('div')`
-    grid-area: menu;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    overflow-y: auto;
+    min-width: 300px;
+    flex: 0;
+    position: relative;
 `;
 
 const MenuBottom = styled('div')`
-    grid-area: menu-bottom;
+    z-index: 100000;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     gap: 20px;
     padding-right: 20px;
-    position: relative;
 
     &:after {
         content: '';
@@ -88,6 +86,7 @@ const MenuBottom = styled('div')`
 const Main = styled('div')`
     grid-area: main;
     padding-left: 10px;
+    flex: 1;
     display: flex;
     flex-direction: column;
     position: relative;

@@ -1,6 +1,6 @@
-import type { Theme } from '@ag-grid-community/theming';
-import { defineTheme, inputStyleBordered, installTheme, tabStyleQuartz } from '@ag-grid-community/theming';
-import { atom, useAtomValue } from 'jotai';
+import type { GridApi } from '@ag-grid-community/core';
+import { type Theme, defineTheme, inputStyleBordered, installTheme, tabStyleQuartz } from '@ag-grid-community/theming';
+import { atom, useAtomValue, useSetAtom } from 'jotai';
 
 import { allParamModels } from './ParamModel';
 import { PartModel } from './PartModel';
@@ -12,7 +12,11 @@ export const rerenderTheme = (store: Store) => {
     store.set(changeDetection, (n) => n + 1);
 };
 
-export const shadowDomContainerAtom = atom<HTMLDivElement | null>(null);
+const previewGridContainer = atom<HTMLDivElement | null>(null);
+export const useSetPreviewGridContainer = () => useSetAtom(previewGridContainer);
+
+const previewGridApi = atom<GridApi | null>(null);
+export const useSetPreviewGridApi = () => useSetAtom(previewGridApi);
 
 export const renderedThemeAtom = atom((get): Theme => {
     get(changeDetection);
@@ -23,15 +27,17 @@ export const renderedThemeAtom = atom((get): Theme => {
 
     const theme = defineTheme([iconSet, tabStyleQuartz, inputStyleBordered], paramValues);
 
-    const container = get(shadowDomContainerAtom);
+    const container = get(previewGridContainer);
     if (container) {
         installTheme(theme, container);
-        // TODO replace with a different mechanism. The only purpose of this line is
-        // to get the grid to re-measure itself every time the theme re-renders. It
-        // works because environment.ts detects parent elements with `ag-theme-*`
-        // classes on them and listens for changes, and `classList.add` triggers this
-        // listener even if the element already has the class.
-        container.classList.add('ag-theme-change-trigger');
+        const api: any = get(previewGridApi);
+        setTimeout(() => {
+            if (api && !api.destroyCalled) {
+                console.log('CHANG!');
+                api.gos.environment.calculatedSizes = {};
+                api.eventService.dispatchEvent({ type: 'gridStylesChanged' });
+            }
+        }, 1);
     }
 
     // also install the theme at the top level, as its variables are used in UI controls

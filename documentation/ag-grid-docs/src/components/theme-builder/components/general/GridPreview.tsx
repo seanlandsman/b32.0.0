@@ -12,9 +12,8 @@ import { RichSelectModule } from '@ag-grid-enterprise/rich-select';
 import { RowGroupingModule } from '@ag-grid-enterprise/row-grouping';
 import { SetFilterModule } from '@ag-grid-enterprise/set-filter';
 import { StatusBarModule } from '@ag-grid-enterprise/status-bar';
-import { shadowDomContainerAtom } from '@components/theme-builder/model/rendered-theme';
+import { useSetPreviewGridApi, useSetPreviewGridContainer } from '@components/theme-builder/model/rendered-theme';
 import styled from '@emotion/styled';
-import { useSetAtom } from 'jotai';
 import { memo, useState } from 'react';
 import root from 'react-shadow';
 
@@ -44,7 +43,8 @@ const AgGridReactUntyped = AgGridReact as any;
 const GridPreview = () => {
     const { config, gridOptions, updateCount } = useGridOptions();
 
-    const setShadowDomContainer = useSetAtom(shadowDomContainerAtom);
+    const setPreviewGridContainer = useSetPreviewGridContainer();
+    const setPreviewGridApi = useSetPreviewGridApi();
     const [container, setContainer] = useState<HTMLDivElement | null>(null);
     const setGridDom = useSetGridDom();
 
@@ -55,7 +55,7 @@ const GridPreview = () => {
                     <div
                         ref={(el) => {
                             setContainer(el);
-                            setShadowDomContainer(el);
+                            setPreviewGridContainer(el);
                         }}
                         className="ag-theme-change-trigger"
                         style={{ height: '100%' }}
@@ -63,7 +63,7 @@ const GridPreview = () => {
                         {container && (
                             <AgGridReactUntyped
                                 onGridReady={({ api }: { api: GridApi }) => {
-                                    api.getAdvancedFilterModel;
+                                    setPreviewGridApi(api);
                                     if (config.showIntegratedChartPopup) {
                                         api.createRangeChart({
                                             cellRange: {
