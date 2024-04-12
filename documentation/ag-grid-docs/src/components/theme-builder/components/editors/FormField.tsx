@@ -1,8 +1,8 @@
+import { Information } from '@carbon/icons-react';
 import styled from '@emotion/styled';
 import type { ReactNode } from 'react';
 
 import { Tooltip } from '../general/Tooltip';
-import { Information } from '@carbon/icons-react';
 
 export type FormFieldProps = {
     label?: string | null;

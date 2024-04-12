@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import * as Accordion from '@radix-ui/react-accordion';
 import { type ReactNode } from 'react';
 
+import { FormField } from './FormField';
 import { ParamEditor } from './ParamEditor';
 import { PartEditor } from './PartEditor';
 
@@ -24,19 +25,22 @@ export const EditorPanel = () => {
                 </EvenSplitRow>
             </Section>
             <Section heading="Header">
-                <ParamEditor param="headerVerticalAdjust" label="Vertical size" />
                 <ParamEditor param="headerBackgroundColor" label="Background color" />
-                <ParamEditor param="headerForegroundColor" label="Foreground color" />
+                <ParamEditor param="headerTextColor" label="Text color" />
                 <LeftBiasRow>
                     <ParamEditor param="headerFontFamily" label="Font family" />
                     <ParamEditor param="headerFontSize" label="Font size" />
                 </LeftBiasRow>
                 <ParamEditor param="headerFontWeight" label="Font weight" />
+                <ParamEditor param="headerVerticalPaddingScale" label="Adjust vertical padding" />
+                <FormField label="Adjust horizontal padding">
+                    <Note>(See cell horizontal padding)</Note>
+                </FormField>
             </Section>
             <Section heading="Cells">
                 <ParamEditor param="oddRowBackgroundColor" label="Odd row background" />
-                <ParamEditor param="rowVerticalAdjust" label="Adjust height" />
-                <ParamEditor param="rowHorizontalAdjust" label="Adjust horizontal padding" />
+                <ParamEditor param="rowVerticalPaddingScale" label="Adjust vertical padding" />
+                <ParamEditor param="cellHorizontalPaddingScale" label="Adjust horizontal padding" />
             </Section>
             <Section heading="Icons">
                 <PartEditor part="iconSet" />
@@ -58,6 +62,13 @@ const Section = (props: { heading: string; children: ReactNode }) => (
         </AccordionContent>
     </AccordionItem>
 );
+
+const Note = styled('div')`
+    color: var(--color-fg-tertiary);
+    font-size: 14px;
+    font-style: italic;
+    margin-left: 12px;
+`;
 
 const SectionContent = styled('div')`
     display: flex;

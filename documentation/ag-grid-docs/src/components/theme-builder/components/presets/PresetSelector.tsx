@@ -32,6 +32,8 @@ const presets: Preset[] = [
             backgroundColor: 'rgb(241, 237, 225)',
             foregroundColor: 'rgb(46, 55, 66)',
             chromeBackgroundColor: ref('backgroundColor'),
+            fontFamily: 'monospace',
+            gridSize: '4px',
         },
     },
 ];
@@ -75,10 +77,6 @@ const SelectButton = ({ preset }: SelectButtonProps) => {
                 store.set(valueAtom, preset.params[property] || null);
             }
         }
-        // for (const [key, value] of Object.entries(preset.params)) {
-        //     const param = ParamModel.for(key);
-        //     store.set(param.valueAtom, value);
-        // }
     };
 
     return (

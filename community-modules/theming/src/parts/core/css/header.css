@@ -7,8 +7,9 @@
     background-color: var(--ag-header-background-color);
     color: var(--ag-header-text-color);
     border-bottom: var(--ag-header-border);
+    font-size: var(--ag-header-font-size);
+    font-family: var(--ag-header-font-family);
     font-weight: var(--ag-header-font-weight);
-    font-weight: 500;
 }
 
 /* HEADER ROW */
