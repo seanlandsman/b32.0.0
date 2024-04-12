@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
-import { atom, useAtomValue } from 'jotai';
 
-import { gridRootAtom } from './grid-root-atom';
+import { useGridPreviewHTML } from './grid-dom';
 
 export const PresetPreview = () => {
-    const previewHTML = useAtomValue(gridPreviewHTML);
+    const previewHTML = useGridPreviewHTML();
     return (
         <Wrapper>
             <GridContainer dangerouslySetInnerHTML={{ __html: previewHTML }} />
@@ -31,43 +30,3 @@ const GridContainer = styled('div')`
     height: 500px;
     /* pointer-events: none; */
 `;
-
-const gridPreviewHTML = atom((get) => {
-    const gridRoot = get(gridRootAtom);
-    if (!gridRoot) return '';
-    const gridRootClone = gridRoot.cloneNode(true) as HTMLDivElement;
-    const munge = (selectors: string[], set: Partial<CSSStyleDeclaration>) => {
-        for (const selector of selectors) {
-            for (const el of gridRootClone.querySelectorAll(selector)) {
-                const row = el as HTMLElement;
-                Object.entries(set).forEach(([key, value]) => {
-                    (row.style as any)[key] = value;
-                });
-            }
-        }
-    };
-    const deleteFrom = (selector: string, n: number) => {
-        const rows = Array.from(gridRootClone.querySelectorAll(selector));
-        for (let i = n; i < rows.length; i++) {
-            rows[i]?.remove();
-        }
-    };
-    deleteFrom('.ag-row', 7);
-    munge(['.ag-row', '.ag-header-row'], {
-        height: '',
-        minHeight: '',
-        maxHeight: '',
-        transform: '',
-        position: 'static',
-    });
-    munge(['.ag-header-cell', '.ag-header'], {
-        height: '',
-        minHeight: '',
-        maxHeight: '',
-    });
-    munge(['.ag-header'], {
-        minHeight: 'var(--ag-header-height)',
-    });
-    // gridRootClone.querySelectorAll('.ag-header')!.style.minHeight = 'var(--ag-header-height)';
-    return gridRootClone.outerHTML;
-});

@@ -19,7 +19,7 @@ import { memo, useState } from 'react';
 import root from 'react-shadow';
 
 import { useGridOptions } from '../grid-config/grid-config-atom';
-import { useSetGridRoot } from '../presets/grid-root-atom';
+import { useSetGridDom } from '../presets/grid-dom';
 import { withErrorBoundary } from './ErrorBoundary';
 
 ModuleRegistry.registerModules([
@@ -46,7 +46,7 @@ const GridPreview = () => {
 
     const setShadowDomContainer = useSetAtom(shadowDomContainerAtom);
     const [container, setContainer] = useState<HTMLDivElement | null>(null);
-    const setGridRoot = useSetGridRoot();
+    const setGridDom = useSetGridDom();
 
     return (
         <Wrapper>
@@ -92,7 +92,7 @@ const GridPreview = () => {
                                     }
                                 }}
                                 onFirstDataRendered={() => {
-                                    setGridRoot(container.querySelector('.ag-root-wrapper') as HTMLDivElement);
+                                    setGridDom(container.querySelector('.ag-root-wrapper') as HTMLDivElement);
                                 }}
                                 key={updateCount}
                                 {...gridOptions}
