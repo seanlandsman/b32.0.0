@@ -61,7 +61,6 @@ const Menu = styled('div')`
 `;
 
 const MenuBottom = styled('div')`
-    z-index: 100000;
     position: absolute;
     left: 0;
     right: 0;
@@ -84,11 +83,13 @@ const MenuBottom = styled('div')`
 `;
 
 const Main = styled('div')`
+    flex-grow: 1;
+    min-width: 0;
     grid-area: main;
     padding-left: 10px;
     flex: 1;
     display: flex;
     flex-direction: column;
     position: relative;
-    gap: 30px;
+    gap: 20px;
 `;
