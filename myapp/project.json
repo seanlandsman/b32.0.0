@@ -1,0 +1,68 @@
+{
+    "name": "myapp",
+    "$schema": "../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "myapp/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nx/vite:build",
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "production",
+            "options": {
+                "outputPath": "myapp/dist"
+            },
+            "configurations": {
+                "development": {
+                    "mode": "development"
+                },
+                "production": {
+                    "mode": "production"
+                }
+            }
+        },
+        "serve": {
+            "executor": "@nx/vite:dev-server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "myapp:build"
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "myapp:build:development",
+                    "hmr": true
+                },
+                "production": {
+                    "buildTarget": "myapp:build:production",
+                    "hmr": false
+                }
+            }
+        },
+        "preview": {
+            "executor": "@nx/vite:preview-server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "myapp:build"
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "myapp:build:development"
+                },
+                "production": {
+                    "buildTarget": "myapp:build:production"
+                }
+            }
+        },
+        "test": {
+            "executor": "@nx/vite:test",
+            "outputs": ["{options.reportsDirectory}"],
+            "options": {
+                "reportsDirectory": "../coverage/myapp"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"]
+        }
+    },
+    "tags": []
+}
