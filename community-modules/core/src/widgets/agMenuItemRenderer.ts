@@ -2,7 +2,7 @@ import { Component } from './component';
 import { createIconNoSpan } from '../utils/icon';
 import { isNodeOrElement, loadTemplate } from '../utils/dom';
 import { setAriaExpanded } from '../utils/aria';
-import { IMenuItemComp, IMenuItemParams } from '../interfaces/menuItem';
+import type { IMenuItemComp, IMenuItemParams } from '../interfaces/menuItem';
 
 interface AgMenuItemRendererParams {
     cssClassPrefix?: string;

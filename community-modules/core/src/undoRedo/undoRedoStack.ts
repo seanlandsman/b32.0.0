@@ -1,5 +1,5 @@
-import { RowPinnedType } from "../interfaces/iRowNode";
-import { CellRange } from "../interfaces/IRangeService";
+import type { RowPinnedType } from "../interfaces/iRowNode";
+import type { CellRange } from "../interfaces/IRangeService";
 
 export interface CellValueChange {
     rowPinned: RowPinnedType;

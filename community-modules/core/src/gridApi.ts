@@ -1,5 +1,4 @@
-import { AlignedGridsService } from "./alignedGridsService";
-import { ColumnApi } from "./columns/columnApi";
+import type { AlignedGridsService } from "./alignedGridsService";
 import { ApplyColumnStateParams, ColumnModel, ColumnState, ISizeColumnsToFitParams } from "./columns/columnModel";
 import { Autowired, Bean, Context, Optional, PostConstruct } from "./context/context";
 import { CtrlsService } from "./ctrlsService";
@@ -44,7 +43,7 @@ import {
 import { IRowNode, RowPinnedType } from "./interfaces/iRowNode";
 import { AgEvent, AgEventListener, AgGlobalEventListener, ColumnEventType, FilterChangedEventSourceType, GridPreDestroyedEvent, SelectionEventSourceType } from "./events";
 import { EventService } from "./eventService";
-import { FilterManager } from "./filter/filterManager";
+import { type FilterManager } from "./filter/filterManager";
 import { FocusService } from "./focusService";
 import { GridBodyCtrl } from "./gridBodyComp/gridBodyCtrl";
 import { NavigationService } from "./gridBodyComp/navigationService";
@@ -100,7 +99,7 @@ import { AnimationFrameService } from "./misc/animationFrameService";
 import { ModuleNames } from "./modules/moduleNames";
 import { ModuleRegistry } from "./modules/moduleRegistry";
 import { PaginationProxy } from "./pagination/paginationProxy";
-import { PinnedRowModel } from "./pinnedRowModel/pinnedRowModel";
+import type { PinnedRowModel } from "./pinnedRowModel/pinnedRowModel";
 import { ICellRenderer } from "./rendering/cellRenderers/iCellRenderer";
 import {
     FlashCellsParams,
@@ -114,7 +113,7 @@ import { RowNodeBlockLoader } from "./rowNodeCache/rowNodeBlockLoader";
 import { SortController } from "./sortController";
 import { UndoRedoService } from "./undoRedo/undoRedoService";
 import { exists, missing } from "./utils/generic";
-import { iterateObject, removeAllReferences } from "./utils/object";
+import { iterateObject, removeAllReferences, unwrapUserComp } from "./utils/object";
 import { ValueCache } from "./valueService/valueCache";
 import { ValueService } from "./valueService/valueService";
 import { ISelectionService } from "./interfaces/iSelectionService";
@@ -147,8 +146,6 @@ export interface DetailGridInfo {
     id: string;
     /** Grid api of the detail grid. */
     api?: GridApi;
-    /** @deprecated v31 ColumnApi has been deprecated and all methods moved to the api. */
-    columnApi?: ColumnApi;
 }
 
 export interface StartEditingCellParams {
@@ -161,26 +158,19 @@ export interface StartEditingCellParams {
     /** The key to pass to the cell editor */
     key?: string;
 }
-
-export function unwrapUserComp<T>(comp: T): T {
-    const compAsAny = comp as any;
-    const isProxy = compAsAny != null && compAsAny.getFrameworkComponentInstance != null;
-    return isProxy ? compAsAny.getFrameworkComponentInstance() : comp;
-}
-
 @Bean('gridApi')
 export class GridApi<TData = any> {
     
     @Autowired('rowRenderer') private readonly rowRenderer: RowRenderer;
     @Autowired('navigationService') private readonly navigationService: NavigationService;
-    @Autowired('filterManager') private readonly filterManager: FilterManager;
+    @Optional('filterManager') private readonly filterManager: FilterManager;
     @Autowired('columnModel') private readonly columnModel: ColumnModel;
     @Autowired('selectionService') private readonly selectionService: ISelectionService;
     @Autowired('gridOptionsService') private readonly gos: GridOptionsService;
     @Autowired('valueService') private readonly valueService: ValueService;
-    @Autowired('alignedGridsService') private readonly alignedGridsService: AlignedGridsService;
+    @Optional('alignedGridsService') private readonly alignedGridsService?: AlignedGridsService;
     @Autowired('eventService') private readonly eventService: EventService;
-    @Autowired('pinnedRowModel') private readonly pinnedRowModel: PinnedRowModel;
+    @Optional('pinnedRowModel') private readonly pinnedRowModel?: PinnedRowModel;
     @Autowired('context') private readonly context: Context;
     @Autowired('rowModel') private readonly rowModel: IRowModel;
     @Autowired('sortController') private readonly sortController: SortController;
@@ -241,7 +231,7 @@ export class GridApi<TData = any> {
 
     /** Used internally by grid. Not intended to be used by the client. Interface may change between releases. */
     public __getAlignedGridService(): AlignedGridsService {
-        return this.alignedGridsService;
+        return this.alignedGridsService!;
     }
 
     /** Returns the `gridId` for the current grid as specified via the gridOptions property `gridId` or the auto assigned grid id if none was provided. */
@@ -365,22 +355,22 @@ export class GridApi<TData = any> {
 
     /** Gets the number of top pinned rows. */
     public getPinnedTopRowCount(): number {
-        return this.pinnedRowModel.getPinnedTopRowCount();
+        return this.pinnedRowModel?.getPinnedTopRowCount() ?? 0;
     }
 
     /** Gets the number of bottom pinned rows. */
     public getPinnedBottomRowCount(): number {
-        return this.pinnedRowModel.getPinnedBottomRowCount();
+        return this.pinnedRowModel?.getPinnedBottomRowCount() ?? 0;
     }
 
     /** Gets the top pinned row with the specified index. */
     public getPinnedTopRow(index: number): IRowNode | undefined {
-        return this.pinnedRowModel.getPinnedTopRow(index);
+        return this.pinnedRowModel?.getPinnedTopRow(index);
     }
 
     /** Gets the bottom pinned row with the specified index. */
     public getPinnedBottomRow(index: number): IRowNode | undefined {
-        return this.pinnedRowModel.getPinnedBottomRow(index);
+        return this.pinnedRowModel?.getPinnedBottomRow(index);
     }
 
     public expireValueCache(): void {
@@ -1709,7 +1699,6 @@ export class GridApi<TData = any> {
         this.paginationProxy.goToPage(page);
     }
 
-    // Methods migrated from old ColumnApi
 
     /**
      * Adjusts the size of columns to fit the available horizontal space.

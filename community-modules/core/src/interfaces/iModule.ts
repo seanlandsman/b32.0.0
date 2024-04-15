@@ -1,5 +1,5 @@
-import { ComponentMeta, ControllerMeta } from "../context/context";
-import { RowModelType } from "./iRowModel";
+import type { ComponentMeta, ControllerMeta } from "../context/context";
+import type { RowModelType } from "./iRowModel";
 
 export type ModuleValidationValidResult = {
   isValid: true

@@ -1,36 +1,40 @@
-import { UserCompDetails } from "../../../components/framework/userComponentFactory";
+import type { UserCompDetails } from "../../../components/framework/userComponentFactory";
 import { KeyCode } from '../../../constants/keyCode';
+import type {
+    DragItem} from "../../../dragAndDrop/dragAndDropService";
 import {
     DragAndDropService,
-    DragItem,
     DragSourceType
 } from "../../../dragAndDrop/dragAndDropService";
 import { Column } from "../../../entities/column";
-import {
+import type {
     ColumnEventType,
     ColumnHeaderMouseLeaveEvent,
-    ColumnHeaderMouseOverEvent,
+    ColumnHeaderMouseOverEvent} from "../../../events";
+import {
     Events
 } from "../../../events";
-import { ColumnGroup } from "../../../entities/columnGroup";
+import type { ColumnGroup } from "../../../entities/columnGroup";
 import { ProvidedColumnGroup } from "../../../entities/providedColumnGroup";
 import { SetLeftFeature } from "../../../rendering/features/setLeftFeature";
 import { last, removeFromArray } from "../../../utils/array";
 import { ManagedFocusFeature } from "../../../widgets/managedFocusFeature";
-import { ITooltipFeatureCtrl, TooltipFeature } from "../../../widgets/tooltipFeature";
-import { HeaderRowCtrl } from "../../row/headerRowCtrl";
-import { AbstractHeaderCellCtrl, IAbstractHeaderCellComp } from "../abstractCell/abstractHeaderCellCtrl";
+import type { ITooltipFeatureCtrl} from "../../../widgets/tooltipFeature";
+import { TooltipFeature } from "../../../widgets/tooltipFeature";
+import type { HeaderRowCtrl } from "../../row/headerRowCtrl";
+import type { IAbstractHeaderCellComp } from "../abstractCell/abstractHeaderCellCtrl";
+import { AbstractHeaderCellCtrl } from "../abstractCell/abstractHeaderCellCtrl";
 import { CssClassApplier } from "../cssClassApplier";
 import { HoverFeature } from "../hoverFeature";
 import { GroupResizeFeature } from "./groupResizeFeature";
 import { GroupWidthFeature } from "./groupWidthFeature";
-import { IHeaderGroupComp, IHeaderGroupParams } from "./headerGroupComp";
+import type { IHeaderGroupComp, IHeaderGroupParams } from "./headerGroupComp";
 import { HorizontalDirection } from "../../../constants/direction";
 import { ColumnMoveHelper } from "../../columnMoveHelper";
-import { HeaderPosition } from "../../common/headerPosition";
-import { WithoutGridCommon } from "../../../interfaces/iCommon";
-import { HeaderColumnId } from "../../../interfaces/iHeaderColumn";
-import { Beans } from "../../../rendering/beans";
+import type { HeaderPosition } from "../../common/headerPosition";
+import type { WithoutGridCommon } from "../../../interfaces/iCommon";
+import type { HeaderColumnId } from "../../../interfaces/iHeaderColumn";
+import type { Beans } from "../../../rendering/beans";
 
 export interface IHeaderGroupCellComp extends IAbstractHeaderCellComp {
     setResizableDisplayed(displayed: boolean): void;

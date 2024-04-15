@@ -1,12 +1,12 @@
-import { ColDef, ValueGetterFunc } from '../entities/colDef';
-import { Column } from '../entities/column';
-import { IFloatingFilterComp } from '../filter/floating/floatingFilter';
-import { AgPromise } from '../utils';
-import { IAfterGuiAttachedParams } from './iAfterGuiAttachedParams';
-import { IComponent } from './iComponent';
-import { AgGridCommon } from './iCommon';
-import { IRowModel } from './iRowModel';
-import { IRowNode } from './iRowNode';
+import type { ColDef, ValueGetterFunc } from '../entities/colDef';
+import type { Column } from '../entities/column';
+import type { IFloatingFilterComp } from '../filter/floating/floatingFilter';
+import type { AgPromise } from '../utils';
+import type { IAfterGuiAttachedParams } from './iAfterGuiAttachedParams';
+import type { IComponent } from './iComponent';
+import type { AgGridCommon } from './iCommon';
+import type { IRowModel } from './iRowModel';
+import type { IRowNode } from './iRowNode';
 
 export type IFilterType = string | { new(): IFilterComp; } | boolean;
 export type IFloatingFilterType = string | { new(): IFloatingFilterComp; };

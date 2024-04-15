@@ -1,5 +1,5 @@
-import { GridOptions } from "./entities/gridOptions";
-import { AgGridCommon } from "./interfaces/iCommon";
+import type { GridOptions } from "./entities/gridOptions";
+import type { AgGridCommon } from "./interfaces/iCommon";
 
 type GridOptionKey = keyof GridOptions;
 
@@ -152,7 +152,7 @@ export class PropertyKeys {
 
     public static ARRAY_PROPERTIES: KeysOfType<any[]>[] = [
         'sortingOrder', 'alignedGrids', 'rowData', 'columnDefs', 'excelStyles', 'pinnedTopRowData', 'pinnedBottomRowData', 'chartThemes',
-        'rowClass', 'paginationPageSizeSelector',
+        'rowClass', 'paginationPageSizeSelector', 'features'
     ];
 
     public static NUMBER_PROPERTIES: KeysOfType<number>[] = [

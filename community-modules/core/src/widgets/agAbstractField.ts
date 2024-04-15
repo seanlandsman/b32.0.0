@@ -1,4 +1,5 @@
-import { AgAbstractLabel, AgLabelParams } from './agAbstractLabel';
+import type { AgLabelParams } from './agAbstractLabel';
+import { AgAbstractLabel } from './agAbstractLabel';
 import { setFixedWidth } from '../utils/dom';
 import { Events } from '../eventKeys';
 import { getAriaLabel, setAriaLabel, setAriaLabelledBy } from '../utils/aria';

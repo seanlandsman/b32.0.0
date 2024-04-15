@@ -4,7 +4,7 @@ import { BeanStub } from "../context/beanStub";
 import { Autowired } from "../context/context";
 import { CtrlsService } from "../ctrlsService";
 import { Events } from "../eventKeys";
-import { FilterManager } from "../filter/filterManager";
+import { type FilterManager } from "../filter/filterManager";
 import { FocusService } from "../focusService";
 import { MenuService } from "../misc/menuService";
 import { isIOSUserAgent } from "../utils/browser";

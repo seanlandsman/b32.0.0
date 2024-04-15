@@ -1,4 +1,4 @@
-import { AgEvent } from "../events";
+import type { AgEvent } from "../events";
 import { BeanStub } from "../context/beanStub";
 
 export interface LoadCompleteEvent extends AgEvent {

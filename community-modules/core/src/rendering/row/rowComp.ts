@@ -1,15 +1,15 @@
 import { Component } from "../../widgets/component";
-import { ICellRendererComp, ICellRendererParams } from "../cellRenderers/iCellRenderer";
-import { Beans } from "../beans";
+import type { ICellRendererComp, ICellRendererParams } from "../cellRenderers/iCellRenderer";
+import type { Beans } from "../beans";
 import { addStylesToElement, setDomChildOrder } from "../../utils/dom";
-import { IRowComp, RowCtrl } from "./rowCtrl";
+import type { IRowComp, RowCtrl } from "./rowCtrl";
 import { CellComp } from "../cell/cellComp";
 import { getAllValuesInObject } from "../../utils/object";
 import { setAriaRole } from "../../utils/aria";
-import { CellCtrl, CellCtrlInstanceId } from "../cell/cellCtrl";
-import { UserCompDetails } from "../../components/framework/userComponentFactory";
-import { RowContainerType } from "../../gridBodyComp/rowContainer/rowContainerCtrl";
-import { RowStyle } from "../../entities/gridOptions";
+import type { CellCtrl, CellCtrlInstanceId } from "../cell/cellCtrl";
+import type { UserCompDetails } from "../../components/framework/userComponentFactory";
+import type { RowContainerType } from "../../gridBodyComp/rowContainer/rowContainerCtrl";
+import type { RowStyle } from "../../entities/gridOptions";
 
 export class RowComp extends Component {
 

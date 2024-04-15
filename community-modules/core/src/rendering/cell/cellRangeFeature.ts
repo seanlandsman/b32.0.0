@@ -1,11 +1,12 @@
-import { Beans } from "../beans";
-import {
+import type { Beans } from "../beans";
+import type {
     CellCtrl,
     ICellComp
 } from "./cellCtrl";
 import { includes, last } from "../../utils/array";
-import { CellRangeType, IRangeService, ISelectionHandle, ISelectionHandleFactory, SelectionHandleType } from "../../interfaces/IRangeService";
-import { Column } from "../../entities/column";
+import type { IRangeService, ISelectionHandle, ISelectionHandleFactory} from "../../interfaces/IRangeService";
+import { CellRangeType, SelectionHandleType } from "../../interfaces/IRangeService";
+import type { Column } from "../../entities/column";
 import { missing } from "../../utils/generic";
 import { setAriaSelected } from "../../utils/aria";
 

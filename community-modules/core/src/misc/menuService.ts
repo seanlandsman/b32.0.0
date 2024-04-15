@@ -8,7 +8,7 @@ import { RowNode } from "../entities/rowNode";
 import { CtrlsService } from "../ctrlsService";
 import { AnimationFrameService } from "./animationFrameService";
 import { IColumnChooserFactory, ShowColumnChooserParams } from "../interfaces/iColumnChooserFactory";
-import { FilterManager } from "../filter/filterManager";
+import { type FilterManager } from "../filter/filterManager";
 import { isIOSUserAgent } from "../utils/browser";
 import { warnOnce } from "../utils/function";
 import { RowRenderer } from "../rendering/rowRenderer";

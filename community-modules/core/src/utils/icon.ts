@@ -1,7 +1,7 @@
-import { Column } from '../entities/column';
+import type { Column } from '../entities/column';
 import { loadTemplate, isNodeOrElement } from './dom';
 import { setAriaRole } from './aria';
-import { GridOptionsService } from '../gridOptionsService';
+import type { GridOptionsService } from '../gridOptionsService';
 
 //
 // IMPORTANT NOTE!

@@ -1,7 +1,7 @@
-import { ColDef, ColGroupDef, ColumnMenuTab } from '../../entities/colDef';
+import type { ColDef, ColGroupDef, ColumnMenuTab } from '../../entities/colDef';
 import { ModuleNames } from '../../modules/moduleNames';
-import { Deprecations, OptionsValidator, Validations } from "../validationTypes";
-import { GridOptions } from '../../entities/gridOptions';
+import type { Deprecations, OptionsValidator, Validations } from "../validationTypes";
+import type { GridOptions } from '../../entities/gridOptions';
 
 const COLUMN_DEFINITION_DEPRECATIONS: Deprecations<ColDef | ColGroupDef> = {
     columnsMenuParams: { version: '31.1', message: 'Use `columnChooserParams` instead.' },

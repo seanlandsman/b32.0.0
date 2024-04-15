@@ -1,23 +1,23 @@
-import { Column } from "../../entities/column";
-import { RowNode } from "../../entities/rowNode";
-import { Beans } from "./../beans";
+import type { Column } from "../../entities/column";
+import type { RowNode } from "../../entities/rowNode";
+import type { Beans } from "./../beans";
 import { Component } from "../../widgets/component";
-import { ICellEditorComp, ICellEditorParams } from "../../interfaces/iCellEditor";
-import { ICellRendererComp } from "./../cellRenderers/iCellRenderer";
-import { CheckboxSelectionComponent } from "./../checkboxSelectionComponent";
-import { RowCtrl } from "./../row/rowCtrl";
-import { RowDragComp } from "./../row/rowDragComp";
+import type { ICellEditorComp, ICellEditorParams } from "../../interfaces/iCellEditor";
+import type { ICellRendererComp } from "./../cellRenderers/iCellRenderer";
+import type { CheckboxSelectionComponent } from "./../checkboxSelectionComponent";
+import type { RowCtrl } from "./../row/rowCtrl";
+import type { RowDragComp } from "./../row/rowDragComp";
 import { PopupEditorWrapper } from "./../cellEditors/popupEditorWrapper";
-import { DndSourceComp } from "./../dndSourceComp";
-import { TooltipParentComp } from "../../widgets/tooltipStateManager";
+import type { DndSourceComp } from "./../dndSourceComp";
+import type { TooltipParentComp } from "../../widgets/tooltipStateManager";
 import { setAriaRole } from "../../utils/aria";
 import { escapeString } from "../../utils/string";
 import { missing } from "../../utils/generic";
 import { addStylesToElement, clearElement, removeFromParent } from "../../utils/dom";
-import { CellCtrl, ICellComp } from "./cellCtrl";
-import { UserCompDetails } from "../../components/framework/userComponentFactory";
+import type { CellCtrl, ICellComp } from "./cellCtrl";
+import type { UserCompDetails } from "../../components/framework/userComponentFactory";
 import { browserSupportsPreventScroll } from "../../utils/browser";
-import { CellStyle } from "../../entities/colDef";
+import type { CellStyle } from "../../entities/colDef";
 
 export class CellComp extends Component implements TooltipParentComp {
 

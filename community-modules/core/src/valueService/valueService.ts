@@ -1,7 +1,7 @@
 import { ExpressionService } from "./expressionService";
 import { ColumnModel } from "../columns/columnModel";
 import { ValueGetterParams, KeyCreatorParams, ValueSetterParams } from "../entities/colDef";
-import { Autowired, Bean, PostConstruct } from "../context/context";
+import { Autowired, Bean, Optional, PostConstruct } from "../context/context";
 import { Column } from "../entities/column";
 import { CellValueChangedEvent, Events } from "../events";
 import { ValueCache } from "./valueCache";
@@ -16,7 +16,7 @@ import { DataTypeService } from "../columns/dataTypeService";
 @Bean('valueService')
 export class ValueService extends BeanStub {
 
-    @Autowired('expressionService') private expressionService: ExpressionService;
+    @Optional('expressionService') private expressionService?: ExpressionService;
     @Autowired('columnModel') private columnModel: ColumnModel;
     @Autowired('valueCache') private valueCache: ValueCache;
     @Autowired('dataTypeService') private dataTypeService: DataTypeService;
@@ -184,8 +184,10 @@ export class ValueService extends BeanStub {
         if (exists(valueSetter)) {
             if (typeof valueSetter === 'function') {
                 valueWasDifferent = valueSetter(params)
-            } else {
+            } else if(this.expressionService) {
                 valueWasDifferent = this.expressionService.evaluate(valueSetter, params);
+            }else{
+                valueWasDifferent = true;
             }
         } else {
             valueWasDifferent = this.setValueUsingField(rowNode.data, field, newValue, column.isFieldContainsDots());
@@ -218,7 +220,6 @@ export class ValueService extends BeanStub {
             rowPinned: rowNode.rowPinned,
             column: params.column,
             api: params.api!,
-            columnApi: params.columnApi!,
             colDef: params.colDef,
             context: params.context,
             data: rowNode.data,
@@ -246,7 +247,6 @@ export class ValueService extends BeanStub {
                     colDef: event.colDef,
                     column: event.column,
                     api: event.api,
-                    columnApi: event.columnApi,
                     context: event.context
                 });
             });
@@ -296,7 +296,7 @@ export class ValueService extends BeanStub {
         if (typeof valueGetter === 'function') {
             return valueGetter(params);
         }
-        return this.expressionService.evaluate(valueGetter, params);
+        return this.expressionService ? this.expressionService.evaluate(valueGetter, params) : null;
     }
 
     private executeValueGetter(valueGetter: string | Function, data: any, column: Column, rowNode: IRowNode): any {
@@ -322,7 +322,7 @@ export class ValueService extends BeanStub {
         if (typeof valueGetter === 'function') {
             result = valueGetter(params)
         } else {
-            result = this.expressionService.evaluate(valueGetter, params);
+            result = this.expressionService?.evaluate(valueGetter, params);
         }
 
         // if a turn is active, store the value in case the grid asks for it again

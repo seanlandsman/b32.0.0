@@ -1,9 +1,9 @@
-import { RowPosition } from "../entities/rowPositionUtils";
-import { SortModelItem } from "../sortController";
-import { AdvancedFilterModel } from "./advancedFilterModel";
-import { FilterModel } from "./iFilter";
-import { CellRangeType } from "./IRangeService";
-import { ServerSideRowGroupSelectionState, ServerSideRowSelectionState } from "./selectionState";
+import type { RowPosition } from "../entities/rowPositionUtils";
+import type { SortModelItem } from "../sortController";
+import type { AdvancedFilterModel } from "./advancedFilterModel";
+import type { FilterModel } from "./iFilter";
+import type { CellRangeType } from "./IRangeService";
+import type { ServerSideRowGroupSelectionState, ServerSideRowSelectionState } from "./selectionState";
 
 export interface FilterState { 
     filterModel?: FilterModel

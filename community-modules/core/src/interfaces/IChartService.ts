@@ -1,8 +1,8 @@
-import { ChartToolPanelName, ChartType, CrossFilterChartType, SeriesChartType } from "./iChartOptions";
-import { ChartRef } from "../entities/gridOptions";
-import { CellRangeParams } from "./IRangeService";
-import { IAggFunc } from "../entities/colDef";
-import { AgChartThemeOverrides, AgChartThemePalette } from "./iAgChartOptions";
+import type { ChartToolPanelName, ChartType, CrossFilterChartType, SeriesChartType } from "./iChartOptions";
+import type { ChartRef } from "../entities/gridOptions";
+import type { CellRangeParams } from "./IRangeService";
+import type { IAggFunc } from "../entities/colDef";
+import type { AgChartThemeOverrides, AgChartThemePalette } from "./iAgChartOptions";
 
 export interface GetChartImageDataUrlParams {
     /** The id of the created chart. */

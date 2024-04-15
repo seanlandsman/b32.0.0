@@ -1,7 +1,7 @@
-import { NumberSequence } from "../utils";
-import { RowBounds } from "./iRowModel";
-import { IRowNode } from "./iRowNode";
-import { ServerSideTransaction, ServerSideTransactionResult } from "./serverSideTransaction";
+import type { NumberSequence } from "../utils";
+import type { RowBounds } from "./iRowModel";
+import type { IRowNode } from "./iRowNode";
+import type { ServerSideTransaction, ServerSideTransactionResult } from "./serverSideTransaction";
 
 export interface IServerSideStore {
     clearDisplayIndexes(): void;

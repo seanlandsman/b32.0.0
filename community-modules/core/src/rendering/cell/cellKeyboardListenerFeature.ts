@@ -1,10 +1,10 @@
 import { BeanStub } from "../../context/beanStub";
-import { CellCtrl } from "./cellCtrl";
-import { Beans } from "../beans";
-import { Column } from "../../entities/column";
-import { RowNode } from "../../entities/rowNode";
+import type { CellCtrl } from "./cellCtrl";
+import type { Beans } from "../beans";
+import type { Column } from "../../entities/column";
+import type { RowNode } from "../../entities/rowNode";
 import { KeyCode } from "../../constants/keyCode";
-import { RowCtrl } from "../row/rowCtrl";
+import type { RowCtrl } from "../row/rowCtrl";
 import { isDeleteKey } from "../../utils/keyboard";
 import { Events } from "../../eventKeys";
 

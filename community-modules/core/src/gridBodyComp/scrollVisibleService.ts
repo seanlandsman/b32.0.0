@@ -3,7 +3,6 @@ import { BeanStub } from "../context/beanStub";
 import { Events, ScrollVisibilityChangedEvent } from "../events";
 import { CtrlsService } from "../ctrlsService";
 import { WithoutGridCommon } from "../interfaces/iCommon";
-import { debounce } from "../utils/function";
 import { ColumnAnimationService } from "../rendering/columnAnimationService";
 
 export interface SetScrollsVisibleParams {

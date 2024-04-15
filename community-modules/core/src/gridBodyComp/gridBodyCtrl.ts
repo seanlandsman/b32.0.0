@@ -19,7 +19,7 @@ import { MouseEventService } from "./mouseEventService";
 import { IRowModel } from "../interfaces/iRowModel";
 import { TouchListener, LongTapEvent } from "../widgets/touchListener";
 import { AnimationFrameService } from "../misc/animationFrameService";
-import { FilterManager } from "../filter/filterManager";
+import { type FilterManager } from "../filter/filterManager";
 import { MenuService, EventShowContextMenuParams } from "../misc/menuService";
 
 export enum RowAnimationCssClasses {
@@ -389,8 +389,8 @@ export class GridBodyCtrl extends BeanStub {
     private setFloatingHeights(): void {
         const { pinnedRowModel } = this;
 
-        let floatingTopHeight = pinnedRowModel.getPinnedTopTotalHeight();
-        let floatingBottomHeight = pinnedRowModel.getPinnedBottomTotalHeight();
+        const floatingTopHeight = pinnedRowModel.getPinnedTopTotalHeight();
+        const floatingBottomHeight = pinnedRowModel.getPinnedBottomTotalHeight();
         this.comp.setTopHeight(floatingTopHeight);
         this.comp.setBottomHeight(floatingBottomHeight);
         this.comp.setTopDisplay(floatingTopHeight ? 'inherit' : 'none');

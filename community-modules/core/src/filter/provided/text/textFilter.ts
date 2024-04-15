@@ -1,16 +1,17 @@
-import {
-    SimpleFilter,
+import type {
     ISimpleFilterParams,
     ISimpleFilterModel,
     ISimpleFilterModelType,
-    Tuple,
+    Tuple} from '../simpleFilter';
+import {
+    SimpleFilter,
     SimpleFilterModelFormatter,
 } from '../simpleFilter';
 import { AgInputTextField } from '../../../widgets/agInputTextField';
 import { makeNull } from '../../../utils/generic';
 import { _ } from '../../../utils';
-import { BaseColDefParams } from '../../../entities/colDef';
-import { IDoesFilterPassParams, IFilterOptionDef, IFilterParams } from '../../../interfaces/iFilter';
+import type { BaseColDefParams } from '../../../entities/colDef';
+import type { IDoesFilterPassParams, IFilterOptionDef, IFilterParams } from '../../../interfaces/iFilter';
 import { setAriaRole } from '../../../utils/aria';
 
 export interface TextFilterModel extends ISimpleFilterModel {
@@ -297,7 +298,7 @@ export class TextFilter extends SimpleFilter<TextFilterModel, string> {
     protected evaluateNonNullValue(values: Tuple<string>, cellValue: string, filterModel: TextFilterModel, params: IDoesFilterPassParams): boolean {
         const formattedValues = values.map(v => this.formatter(v)) || [];
         const cellValueFormatted = this.formatter(cellValue);
-        const {api, colDef, column, columnApi, context, textFormatter} = this.textFilterParams;
+        const {api, colDef, column, context, textFormatter} = this.textFilterParams;
 
         if (filterModel.type === SimpleFilter.BLANK) {
             return this.isBlank(cellValue);
@@ -309,7 +310,6 @@ export class TextFilter extends SimpleFilter<TextFilterModel, string> {
             api,
             colDef,
             column,
-            columnApi,
             context,
             node: params.node,
             data: params.data,

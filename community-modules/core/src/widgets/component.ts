@@ -228,7 +228,7 @@ export class Component extends BeanStub {
         this.wireQuerySelectors();
 
         // context will not be available when user sets template in constructor
-        if (!!this.getContext()) {
+        if (this.getContext()) {
             this.createChildComponentsFromTags(this.getGui(), paramsMap);
         }
     }
@@ -237,7 +237,7 @@ export class Component extends BeanStub {
     private createChildComponentsPreConstruct(): void {
         // ui exists if user sets template in constructor. when this happens, we have to wait for the context
         // to be autoWired first before we can create child components.
-        if (!!this.getGui()) {
+        if (this.getGui()) {
             this.createChildComponentsFromTags(this.getGui());
         }
     }

@@ -1,5 +1,5 @@
-import { RowNode } from "../entities/rowNode";
-import { Column } from "../entities/column";
+import type { RowNode } from "../entities/rowNode";
+import type { Column } from "../entities/column";
 
 // the class below contains a tree of row nodes. each node is
 // represented by a PathItem

@@ -4,15 +4,14 @@ import { Autowired, Bean, PostConstruct } from "../context/context";
 import { BeanStub } from "../context/beanStub";
 import { CtrlsService } from "../ctrlsService";
 import { RowContainerCtrl } from "../gridBodyComp/rowContainer/rowContainerCtrl";
-import { RowCssClassCalculator } from "./row/rowCssClassCalculator";
 import { ColumnGroup } from "../entities/columnGroup";
+import { HeaderRowContainerCtrl } from "../headerRendering/rowContainer/headerRowContainerCtrl";
 
 @Bean('autoWidthCalculator')
 export class AutoWidthCalculator extends BeanStub {
 
     @Autowired('rowRenderer') private rowRenderer: RowRenderer;
     @Autowired('ctrlsService') private ctrlsService: CtrlsService;
-    @Autowired('rowCssClassCalculator') public rowCssClassCalculator: RowCssClassCalculator;
 
     private centerRowContainerCtrl: RowContainerCtrl;
 
@@ -88,6 +87,18 @@ export class AutoWidthCalculator extends BeanStub {
     }
 
     /* tslint:disable */
+    private getHtmlElementForColumnHeader(container: HeaderRowContainerCtrl, column: ColumnGroup): HTMLElement | null;
+    private getHtmlElementForColumnHeader(container: HeaderRowContainerCtrl, column: Column): HTMLElement | null;
+    private getHtmlElementForColumnHeader(container: HeaderRowContainerCtrl, column: any): any {
+    /* tslint:enable */
+        const cellCtrl = container.getHeaderCtrlForColumn(column);
+
+        if (!cellCtrl) { return null; }
+
+        return cellCtrl.getGui();
+    }
+
+    /* tslint:disable */
     private getHeaderCellForColumn(column: ColumnGroup): HTMLElement | null;
     private getHeaderCellForColumn(column: Column): HTMLElement | null;
     private getHeaderCellForColumn(column: any): any {
@@ -95,7 +106,7 @@ export class AutoWidthCalculator extends BeanStub {
         let element: HTMLElement | null = null;
 
         this.ctrlsService.getHeaderRowContainerCtrls().forEach(container => {
-                const res = container.getHtmlElementForColumnHeader(column);
+                const res = this.getHtmlElementForColumnHeader(container, column);
                 if (res != null) { element = res; }
             }
         );

@@ -18,7 +18,7 @@ export class ReadOnlyFloatingFilter extends Component implements IFloatingFilter
 
     constructor() {
         super(/* html */`
-            <div class="ag-floating-filter-input" role="presentation">
+            <div class="ag-floating-filter-input readonly-filter" role="presentation">
                 <ag-input-text-field ref="eFloatingFilterText"></ag-input-text-field>
             </div>`);
     }

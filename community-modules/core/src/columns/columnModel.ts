@@ -119,7 +119,7 @@ export type Maybe<T> = T | null | undefined;
 @Bean('columnModel')
 export class ColumnModel extends BeanStub {
 
-    @Autowired('expressionService') private expressionService: ExpressionService;
+    @Optional('expressionService') private expressionService?: ExpressionService;
     @Autowired('columnFactory') private columnFactory: ColumnFactory;
     @Autowired('displayedGroupCreator') private displayedGroupCreator: DisplayedGroupCreator;
     @Autowired('ctrlsService') private ctrlsService: CtrlsService;
@@ -2748,11 +2748,11 @@ export class ColumnModel extends BeanStub {
             if (typeof headerValueGetter === 'function') {
                 // valueGetter is a function, so just call it
                 return headerValueGetter(params);
-            } else if (typeof headerValueGetter === 'string') {
+            } else if (typeof headerValueGetter === 'string' && this.expressionService) {
                 // valueGetter is an expression, so execute the expression
                 return this.expressionService.evaluate(headerValueGetter, params);
             }
-            console.warn('AG Grid: headerValueGetter must be a function or a string');
+            warnOnce('headerValueGetter must be a function or a string');
             return '';
         } else if (colDef.headerName != null) {
             return colDef.headerName;
@@ -3773,7 +3773,7 @@ export class ColumnModel extends BeanStub {
         if (params.resizingCols) {
             const allResizingCols = new Set(params.resizingCols);
             // find the last resizing col, as only cols after this one are affected by the resizing
-            let displayedCols = this.displayedColumnsCenter;
+            const displayedCols = this.displayedColumnsCenter;
             for (let i = displayedCols.length - 1; i >= 0; i--) {
                 if (allResizingCols.has(displayedCols[i])) {
                     flexAfterDisplayIndex = i;
@@ -4237,7 +4237,7 @@ export class ColumnModel extends BeanStub {
         // The exception is for columns that were added via `addGroupColumns`. These should appear at the end.
         // We don't have to worry about full updates, as in this case the arrays are correct, and they won't appear in the updated lists.
 
-        let existingColumnStateUpdates: { [colId: string]: ColumnState } = {};
+        const existingColumnStateUpdates: { [colId: string]: ColumnState } = {};
 
         const orderColumns = (
             updatedColumnState: { [colId: string]: ColumnState }, colList: Column[],

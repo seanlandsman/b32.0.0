@@ -1,4 +1,4 @@
-import { Bean, Autowired } from '../context/context';
+import { Bean, Autowired, Optional } from '../context/context';
 import { Column } from '../entities/column';
 import { ExpressionService } from '../valueService/expressionService';
 import { ValueFormatterParams } from '../entities/colDef';
@@ -8,7 +8,7 @@ import { IRowNode } from '../interfaces/iRowNode';
 @Bean('valueFormatterService')
 export class ValueFormatterService extends BeanStub {
 
-    @Autowired('expressionService') private expressionService: ExpressionService;
+    @Optional('expressionService') private expressionService?: ExpressionService;
 
     public formatValue(
         column: Column,
@@ -40,7 +40,7 @@ export class ValueFormatterService extends BeanStub {
             if (typeof formatter === 'function') {
                 result = formatter(params);
             } else {
-                result = this.expressionService.evaluate(formatter, params);
+                result = this.expressionService?.evaluate(formatter, params);
             }
         } else if (colDef.refData) {
             return colDef.refData[value] || '';

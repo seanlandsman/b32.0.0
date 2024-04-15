@@ -1,9 +1,9 @@
-import { IDateComp, IDateParams } from '../../../interfaces/dateComponent';
-import { UserComponentFactory } from '../../../components/framework/userComponentFactory';
-import { Context } from '../../../context/context';
-import { IAfterGuiAttachedParams } from '../../../interfaces/iAfterGuiAttachedParams';
+import type { IDateComp, IDateParams } from '../../../interfaces/dateComponent';
+import type { UserComponentFactory } from '../../../components/framework/userComponentFactory';
+import type { Context } from '../../../context/context';
+import type { IAfterGuiAttachedParams } from '../../../interfaces/iAfterGuiAttachedParams';
 import { setDisplayed } from '../../../utils/dom';
-import { WithoutGridCommon } from '../../../interfaces/iCommon';
+import type { WithoutGridCommon } from '../../../interfaces/iCommon';
 import { warnOnce } from '../../../utils/function';
 
 /** Provides sync access to async component. Date component can be lazy created - this class encapsulates

@@ -1,16 +1,17 @@
-import { AgEvent, AgEventListener, Events, RowEvent, RowSelectedEvent, SelectionEventSourceType } from "../events";
+import type { AgEvent, AgEventListener, RowEvent, RowSelectedEvent, SelectionEventSourceType } from "../events";
+import { Events } from "../events";
 import { EventService } from "../eventService";
-import { DetailGridInfo } from "../gridApi";
-import { IClientSideRowModel } from "../interfaces/iClientSideRowModel";
-import { IEventEmitter } from "../interfaces/iEventEmitter";
-import { IServerSideRowModel } from "../interfaces/iServerSideRowModel";
-import { IServerSideStore } from "../interfaces/IServerSideStore";
-import { Beans } from "../rendering/beans";
+import type { DetailGridInfo } from "../gridApi";
+import type { IClientSideRowModel } from "../interfaces/iClientSideRowModel";
+import type { IEventEmitter } from "../interfaces/iEventEmitter";
+import type { IServerSideRowModel } from "../interfaces/iServerSideRowModel";
+import type { IServerSideStore } from "../interfaces/IServerSideStore";
+import type { Beans } from "../rendering/beans";
 import { debounce } from "../utils/function";
 import { exists, missing, missingOrEmpty } from "../utils/generic";
-import { Column } from "./column";
-import { CellChangedEvent, DataChangedEvent, IRowNode, RowHighlightPosition, RowNodeEvent, RowNodeEventType, RowPinnedType, SetSelectedParams } from "../interfaces/iRowNode";
-import { CellEditRequestEvent } from "../events";
+import type { Column } from "./column";
+import type { CellChangedEvent, DataChangedEvent, IRowNode, RowHighlightPosition, RowNodeEvent, RowNodeEventType, RowPinnedType, SetSelectedParams } from "../interfaces/iRowNode";
+import type { CellEditRequestEvent } from "../events";
 import { FrameworkEventListenerService } from "../misc/frameworkEventListenerService";
 
 export class RowNode<TData = any> implements IEventEmitter, IRowNode<TData> {

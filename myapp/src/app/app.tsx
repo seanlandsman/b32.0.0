@@ -3,8 +3,8 @@ import { AgGridReact } from '@ag-grid-community/react'; // AG Grid Component
 import "@ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the grid
 import "@ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the grid
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-import { ModuleRegistry, ColDef, ColGroupDef, ValueGetterParams  } from '@ag-grid-community/core';
-import { useFilters } from '@ag-grid-community/core';
+import { ModuleRegistry, ColDef, ColGroupDef, ValueGetterParams } from '@ag-grid-community/core';
+import { useFilters, useGridApi, useAlignedGrids, useValidations, useExpressions } from '@ag-grid-community/core';
 import { useEffect, useMemo, useState } from "react";
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
@@ -40,10 +40,13 @@ const GridExample = () => {
     const [filterFeature, setFilterFeature] = useState<any>(null);
 
     useEffect(() => {
-        // useFilters().then((filterBeans: any) => {
-        //     console.log(filterBeans);
-        //     setFilterFeature(filterBeans);
-        // });
+        Promise.all([
+            //useGridApi(),
+           // useFilters(),
+           // useAlignedGrids(),
+          //  useValidations(),
+           // useExpressions(),
+        ]).then((f: any) => setFilterFeature((p: any) => ([...(p ?? []), ...f.flat()])));
     }, []);
 
     const gridOptions = useMemo(() => ({
@@ -53,6 +56,12 @@ const GridExample = () => {
             floatingFilter: true,
         }
     }), [filterFeature]);
+
+
+    const onRowClicked = (event: any) => {
+        console.log("Row clicked", event);
+    }
+
     return (
         <div style={{ width: "100%", height: "100%" }}>
             <div
@@ -60,7 +69,7 @@ const GridExample = () => {
                 className="ag-theme-quartz"
             >
                 {filterFeature === null ? null :
-                    <AgGridReact gridOptions={gridOptions} rowData={rowData} columnDefs={columnDefs} />
+                    <AgGridReact gridOptions={gridOptions} rowData={rowData} columnDefs={columnDefs} onRowClicked={onRowClicked} />
                 }
             </div>
         </div>

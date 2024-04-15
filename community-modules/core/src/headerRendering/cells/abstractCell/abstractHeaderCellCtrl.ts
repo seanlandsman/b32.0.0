@@ -52,7 +52,7 @@ export abstract class AbstractHeaderCellCtrl<TComp extends IAbstractHeaderCellCo
     private parentRowCtrl: HeaderRowCtrl;
 
     private isResizing: boolean;
-    private resizeToggleTimeout = 0;
+    private resizeToggleTimeout: any = 0;
     protected resizeMultiplier = 1;
 
     protected eGui: HTMLElement;

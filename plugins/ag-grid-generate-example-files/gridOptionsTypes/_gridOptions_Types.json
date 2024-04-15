@@ -49,6 +49,10 @@
     "typeName": "number[] | boolean",
     "typesToInclude": []
   },
+  "features": {
+    "typeName": "any[]",
+    "typesToInclude": []
+  },
   "components": {
     "typeName": "{\n        [p: string]: any;\n    }",
     "typesToInclude": []

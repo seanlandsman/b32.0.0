@@ -1,14 +1,35 @@
 import { GridOptions } from "../entities/gridOptions";
-import { fuzzyCheckStrings } from "../utils/fuzzyMatch";
+import { fuzzySuggestions } from "../utils/fuzzyMatch";
 import { iterateObject } from "../utils/object";
 import { warnOnce } from "../utils/function";
 import { DependencyValidator, OptionsValidation, OptionsValidator } from "./validationTypes";
-import { GRID_OPTIONS_VALIDATORS, GRID_OPTION_DEFAULTS } from "./rules/gridOptionsValidations";
+import { GRID_OPTIONS_VALIDATORS } from "./rules/gridOptionsValidations";
 import { COL_DEF_VALIDATORS } from "./rules/colDefValidations";
 import { BeanStub } from "../context/beanStub";
 import { Autowired, Bean, PostConstruct } from "../context/context";
 import { ColDef, ColGroupDef } from "../entities/colDef";
 import { ModuleRegistry } from "../modules/moduleRegistry";
+
+function fuzzyCheckStrings(
+    inputValues: string[],
+    validValues: string[],
+    allSuggestions: string[]
+): { [p: string]: string[]; } {
+    const fuzzyMatches: { [p: string]: string[]; } = {};
+    const invalidInputs: string[] = inputValues.filter(inputValue =>
+        !validValues.some(
+            (validValue) => validValue === inputValue
+        )
+    );
+
+    if (invalidInputs.length > 0) {
+        invalidInputs.forEach(invalidInput =>
+            fuzzyMatches[invalidInput] = fuzzySuggestions(invalidInput, allSuggestions).values
+        );
+    }
+
+    return fuzzyMatches;
+}
 
 @Bean('validationService')
 export class ValidationService extends BeanStub {

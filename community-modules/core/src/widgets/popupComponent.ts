@@ -1,5 +1,5 @@
 import { Component } from "./component";
-import { IPopupComponent } from "../interfaces/iPopupComponent";
+import type { IPopupComponent } from "../interfaces/iPopupComponent";
 
 export class PopupComponent extends Component implements IPopupComponent<any> {
 

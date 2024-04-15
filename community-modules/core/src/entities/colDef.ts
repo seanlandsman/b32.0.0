@@ -1,16 +1,16 @@
-import { CellClickedEvent, CellContextMenuEvent, CellDoubleClickedEvent } from "../events";
-import { ICellEditorParams } from "../interfaces/iCellEditor";
-import { AgGridCommon } from "../interfaces/iCommon";
-import { IFilterDef } from '../interfaces/iFilter';
-import { ICellRendererParams } from "../rendering/cellRenderers/iCellRenderer";
-import { IRowDragItem } from "../rendering/row/rowDragComp";
-import { ITooltipParams } from "../rendering/tooltipComponent";
-import { Column } from "./column";
-import { ColumnGroup, ColumnGroupShowType } from "./columnGroup";
-import { RowClassParams, GetMainMenuItems, GetContextMenuItems } from "./gridOptions";
-import { ProvidedColumnGroup } from "./providedColumnGroup";
-import { IRowNode } from "../interfaces/iRowNode";
-import { MenuItemDef } from "../interfaces/menuItem";
+import type { CellClickedEvent, CellContextMenuEvent, CellDoubleClickedEvent } from "../events";
+import type { ICellEditorParams } from "../interfaces/iCellEditor";
+import type { AgGridCommon } from "../interfaces/iCommon";
+import type { IFilterDef } from '../interfaces/iFilter';
+import type { ICellRendererParams } from "../rendering/cellRenderers/iCellRenderer";
+import type { IRowDragItem } from "../rendering/row/rowDragComp";
+import type { ITooltipParams } from "../rendering/tooltipComponent";
+import type { Column } from "./column";
+import type { ColumnGroup, ColumnGroupShowType } from "./columnGroup";
+import type { RowClassParams, GetMainMenuItems, GetContextMenuItems } from "./gridOptions";
+import type { ProvidedColumnGroup } from "./providedColumnGroup";
+import type { IRowNode } from "../interfaces/iRowNode";
+import type { MenuItemDef } from "../interfaces/menuItem";
 
 /** AbstractColDef can be a group or a column definition */
 export interface AbstractColDef<TData = any, TValue = any> {

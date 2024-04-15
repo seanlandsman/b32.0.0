@@ -1,11 +1,11 @@
 import { PopupComponent } from '../widgets/popupComponent';
-import { IComponent } from '../interfaces/iComponent';
+import type { IComponent } from '../interfaces/iComponent';
 import { escapeString } from '../utils/string';
-import { Column } from '../entities/column';
-import { ColumnGroup } from '../entities/columnGroup';
-import { ColGroupDef, ColDef } from '../entities/colDef';
-import { AgGridCommon } from '../interfaces/iCommon';
-import { IRowNode } from '../interfaces/iRowNode';
+import type { Column } from '../entities/column';
+import type { ColumnGroup } from '../entities/columnGroup';
+import type { ColGroupDef, ColDef } from '../entities/colDef';
+import type { AgGridCommon } from '../interfaces/iCommon';
+import type { IRowNode } from '../interfaces/iRowNode';
 
 export type TooltipLocation =
     | 'advancedFilter'

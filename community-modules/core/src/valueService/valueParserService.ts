@@ -1,4 +1,4 @@
-import { Bean, Autowired } from '../context/context';
+import { Bean, Autowired, Optional } from '../context/context';
 import { BeanStub } from '../context/beanStub';
 import { ExpressionService } from './expressionService';
 import { Column } from '../entities/column';
@@ -8,7 +8,7 @@ import { exists } from '../utils/generic';
 
 @Bean('valueParserService')
 export class ValueParserService extends BeanStub {
-    @Autowired('expressionService') private expressionService: ExpressionService;
+    @Optional('expressionService') private expressionService?: ExpressionService;
 
     public parseValue(column: Column, rowNode: IRowNode | null, newValue: any, oldValue: any): any {
         const colDef = column.getColDef();
@@ -27,7 +27,9 @@ export class ValueParserService extends BeanStub {
             if (typeof valueParser === 'function') {
                 return valueParser(params);
             }
-            return this.expressionService.evaluate(valueParser, params);
+            if (this.expressionService) {
+                return this.expressionService.evaluate(valueParser, params);
+            }
         }
         return newValue;
     }

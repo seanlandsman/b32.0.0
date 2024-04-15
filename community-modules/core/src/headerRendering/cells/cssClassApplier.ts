@@ -1,13 +1,13 @@
-import { AbstractColDef, HeaderClassParams, ToolPanelClassParams } from "../../entities/colDef";
-import { GridOptionsService } from "../../gridOptionsService";
-import { ColumnGroup } from "../../entities/columnGroup";
-import { Column } from "../../entities/column";
-import { ProvidedColumnGroup } from "../../entities/providedColumnGroup";
+import type { AbstractColDef, HeaderClassParams, ToolPanelClassParams } from "../../entities/colDef";
+import type { GridOptionsService } from "../../gridOptionsService";
+import type { ColumnGroup } from "../../entities/columnGroup";
+import type { Column } from "../../entities/column";
+import type { ProvidedColumnGroup } from "../../entities/providedColumnGroup";
 import { missing } from "../../utils/generic";
-import { IAbstractHeaderCellComp } from "./abstractCell/abstractHeaderCellCtrl";
-import { ICellComp } from "../../rendering/cell/cellCtrl";
-import { ColumnModel } from "../../columns/columnModel";
-import { WithoutGridCommon } from "../../interfaces/iCommon";
+import type { IAbstractHeaderCellComp } from "./abstractCell/abstractHeaderCellCtrl";
+import type { ICellComp } from "../../rendering/cell/cellCtrl";
+import type { ColumnModel } from "../../columns/columnModel";
+import type { WithoutGridCommon } from "../../interfaces/iCommon";
 
 const CSS_FIRST_COLUMN = 'ag-column-first';
 const CSS_LAST_COLUMN = 'ag-column-last';

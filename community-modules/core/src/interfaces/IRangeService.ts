@@ -1,8 +1,8 @@
-import { Column } from "../entities/column";
-import { CellPosition } from "../entities/cellPositionUtils";
-import { RowPosition } from "../entities/rowPositionUtils";
-import { CellCtrl } from "../rendering/cell/cellCtrl";
-import { RowPinnedType } from "../interfaces/iRowNode";
+import type { Column } from "../entities/column";
+import type { CellPosition } from "../entities/cellPositionUtils";
+import type { RowPosition } from "../entities/rowPositionUtils";
+import type { CellCtrl } from "../rendering/cell/cellCtrl";
+import type { RowPinnedType } from "../interfaces/iRowNode";
 
 export interface IRangeService {
     isEmpty(): boolean;

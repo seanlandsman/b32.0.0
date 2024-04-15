@@ -12,7 +12,7 @@ import {
     ViewEncapsulation
 } from "@angular/core";
 
-import { AgPromise, ComponentUtil, GridApi, ColumnApi, GridOptions, GridParams, Module, createGrid } from "@ag-grid-community/core";
+import { AgPromise, ComponentUtil, GridApi, GridOptions, GridParams, Module, createGrid } from "@ag-grid-community/core";
 
 // @START_IMPORTS@
 import {
@@ -216,11 +216,6 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
 
     /** Grid Api available after onGridReady event has fired. */
     public api: GridApi<TData>;
-    /**
-     * @deprecated v31 - The `columnApi` has been deprecated and all the methods are now present of the `api`.
-     * Please use the `api` instead.
-     */
-    public columnApi: ColumnApi;
 
     constructor(elementDef: ElementRef,
         private viewContainerRef: ViewContainerRef,
@@ -249,7 +244,6 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
           const api = createGrid(this._nativeElement, mergedGridOps, this.gridParams);
           if (api) {
                this.api = api;
-               this.columnApi = new ColumnApi(api);
           }
 
           // For RxJs compatibility we need to check for observed v7+ or observers v6
@@ -340,6 +334,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
      @Input() public modules: Module[] | undefined;
 
     // @START@
+    @Input() public features: any[] | undefined = undefined;
     /** Specifies the status bar components to use in the status bar.
          */
     @Input() public statusBar: { statusPanels: StatusPanelDef[]; } | undefined = undefined;

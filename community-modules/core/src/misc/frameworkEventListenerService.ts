@@ -1,5 +1,5 @@
-import { IFrameworkOverrides } from "../interfaces/iFrameworkOverrides";
-import { AgEventListener, AgGlobalEventListener } from "../events";
+import type { IFrameworkOverrides } from "../interfaces/iFrameworkOverrides";
+import type { AgEventListener, AgGlobalEventListener } from "../events";
 
 
 export class FrameworkEventListenerService {

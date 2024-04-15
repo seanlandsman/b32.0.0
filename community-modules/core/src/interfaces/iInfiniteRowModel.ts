@@ -1,5 +1,5 @@
-import { IRowModel } from "./iRowModel";
-import { IDatasource } from "./iDatasource";
+import type { IRowModel } from "./iRowModel";
+import type { IDatasource } from "./iDatasource";
 
 export interface IInfiniteRowModel extends IRowModel {
     setDatasource(datasource: IDatasource | undefined): void;

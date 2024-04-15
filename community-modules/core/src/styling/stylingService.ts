@@ -1,5 +1,5 @@
 import { CellClassParams, ColDef } from "../entities/colDef";
-import { Autowired, Bean } from "../context/context";
+import { Autowired, Bean, Optional } from "../context/context";
 import { ExpressionService } from "../valueService/expressionService";
 import { BeanStub } from "../context/beanStub";
 import { RowClassParams } from "../entities/gridOptions";
@@ -7,7 +7,7 @@ import { RowClassParams } from "../entities/gridOptions";
 @Bean('stylingService')
 export class StylingService extends BeanStub {
 
-    @Autowired('expressionService') private expressionService: ExpressionService;
+    @Optional('expressionService') private expressionService?: ExpressionService;
 
     public processAllCellClasses(
         colDef: ColDef,
@@ -50,7 +50,7 @@ export class StylingService extends BeanStub {
                 let resultOfRule: any;
 
                 if (typeof rule === 'string') {
-                    resultOfRule = this.expressionService.evaluate(rule, params);
+                    resultOfRule = this.expressionService?.evaluate(rule, params);
                 } else if (typeof rule === 'function') {
                     resultOfRule = rule(params);
                 }

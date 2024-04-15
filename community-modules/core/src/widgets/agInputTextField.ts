@@ -1,4 +1,5 @@
-import { AgAbstractInputField, AgInputFieldParams } from './agAbstractInputField';
+import type { AgInputFieldParams } from './agAbstractInputField';
+import { AgAbstractInputField } from './agAbstractInputField';
 import { exists } from '../utils/generic';
 import { isEventFromPrintableCharacter } from '../utils/keyboard';
 

@@ -1,6 +1,7 @@
-import { ICellEditorParams } from "../../interfaces/iCellEditor";
-import { AgInputNumberField } from "../../widgets/agInputNumberField";
-import { CellEditorInput, SimpleCellEditor } from "./simpleCellEditor";
+import type { ICellEditorParams } from "../../interfaces/iCellEditor";
+import type { AgInputNumberField } from "../../widgets/agInputNumberField";
+import type { CellEditorInput} from "./simpleCellEditor";
+import { SimpleCellEditor } from "./simpleCellEditor";
 import { exists } from "../../utils/generic";
 import { KeyCode } from "../../constants/keyCode";
 

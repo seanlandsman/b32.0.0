@@ -4,7 +4,7 @@ import { Autowired, Bean, Optional, PostConstruct } from "../context/context";
 import { CtrlsService } from "../ctrlsService";
 import { Events } from "../eventKeys";
 import { NewColumnsLoadedEvent, PaginationChangedEvent, RangeSelectionChangedEvent, StateUpdatedEvent } from "../events";
-import { FilterManager } from "../filter/filterManager";
+import { type FilterManager } from "../filter/filterManager";
 import { FocusService } from "../focusService";
 import {
     AggregationColumnState,
@@ -399,7 +399,7 @@ export class StateService extends BeanStub {
         if (!this.columnModel.isSecondaryColumnsPresent()) { return; }
 
         if (columnStates) {
-            let secondaryColumnStates: ColumnState[] = [];
+            const secondaryColumnStates: ColumnState[] = [];
             for (const columnState of columnStates) {
                 if (this.columnModel.getSecondaryColumn(columnState.colId)) {
                     secondaryColumnStates.push(columnState);

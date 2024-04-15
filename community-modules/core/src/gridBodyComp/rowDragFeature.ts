@@ -18,7 +18,7 @@ import { ISelectionService } from "../interfaces/iSelectionService";
 import { MouseEventService } from "./mouseEventService";
 import { last } from '../utils/array';
 import { SortController } from "../sortController";
-import { FilterManager } from "../filter/filterManager";
+import { type FilterManager } from "../filter/filterManager";
 import { BeanStub } from "../context/beanStub";
 import { missingOrEmpty } from "../utils/generic";
 import { warnOnce } from "../utils/function";

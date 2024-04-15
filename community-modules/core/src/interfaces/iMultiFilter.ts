@@ -1,6 +1,6 @@
-import { IProvidedFilter } from "../filter/provided/providedFilter";
-import { AgPromise } from "../utils";
-import { IFilter, IFilterComp, IFilterDef, IFilterParams, IFilterType, IFloatingFilterType, ProvidedFilterModel } from "./iFilter";
+import type { IProvidedFilter } from "../filter/provided/providedFilter";
+import type { AgPromise } from "../utils";
+import type { IFilter, IFilterComp, IFilterDef, IFilterParams, IFilterType, IFloatingFilterType, ProvidedFilterModel } from "./iFilter";
 
 /** Interface contract for the public aspects of the ProvidedFilter implementation(s). */
 export interface IMultiFilter extends IProvidedFilter {

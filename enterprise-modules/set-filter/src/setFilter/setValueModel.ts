@@ -100,6 +100,7 @@ export class SetValueModel<V> implements IEventEmitter {
     private filteringKeys: SetValueModelFilteringKeys;
 
     private initialised: boolean = false;
+    private DEFAULT_FORMATTER: TextFormatter = (from: string) => from
 
     constructor(params: SetValueModelParams<V>) {
         const {
@@ -137,7 +138,7 @@ export class SetValueModel<V> implements IEventEmitter {
         this.caseFormat = params.caseFormat;
         this.createKey = params.createKey;
         this.usingComplexObjects = !!params.usingComplexObjects;
-        this.formatter = textFormatter || TextFilter.DEFAULT_FORMATTER;
+        this.formatter = textFormatter || this.DEFAULT_FORMATTER;
         this.doesRowPassOtherFilters = doesRowPassOtherFilter;
         this.suppressSorting = suppressSorting || false;
         this.convertValuesToStrings = !!convertValuesToStrings;
@@ -220,7 +221,7 @@ export class SetValueModel<V> implements IEventEmitter {
             const currentSuppressSorting = this.suppressSorting;
 
             this.filterParams = filterParams;
-            this.formatter = textFormatter || TextFilter.DEFAULT_FORMATTER;
+            this.formatter = textFormatter || this.DEFAULT_FORMATTER;
 
             this.suppressSorting = suppressSorting || false;
             this.providedValues = values ?? null;

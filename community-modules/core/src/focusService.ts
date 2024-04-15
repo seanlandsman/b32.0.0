@@ -25,7 +25,7 @@ import { NavigateToNextHeaderParams, TabToNextHeaderParams } from "./interfaces/
 import { WithoutGridCommon } from "./interfaces/iCommon";
 import { FOCUSABLE_EXCLUDE, FOCUSABLE_SELECTOR, isVisible } from "./utils/dom";
 import { TabGuardClassNames } from "./widgets/tabGuardCtrl";
-import { FilterManager } from "./filter/filterManager";
+import { type FilterManager } from "./filter/filterManager";
 import { IAdvancedFilterService } from "./interfaces/iAdvancedFilterService";
 
 @Bean('focusService')
@@ -40,7 +40,7 @@ export class FocusService extends BeanStub {
     @Autowired('cellPositionUtils') private readonly cellPositionUtils: CellPositionUtils;
     @Autowired('navigationService') public navigationService: NavigationService;
     @Autowired('ctrlsService') public ctrlsService: CtrlsService;
-    @Autowired('filterManager') public filterManager: FilterManager;
+    @Optional('filterManager') public filterManager: FilterManager;
 
     @Optional('rangeService') private readonly rangeService?: IRangeService;
     @Optional('advancedFilterService') public readonly advancedFilterService?: IAdvancedFilterService;

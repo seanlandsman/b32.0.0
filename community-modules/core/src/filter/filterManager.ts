@@ -13,18 +13,22 @@ import { ModuleNames } from '../modules/moduleNames';
 import { ModuleRegistry } from '../modules/moduleRegistry';
 import { BeanStub } from '../context/beanStub';
 import { convertToSet } from '../utils/set';
+import { unwrapUserComp } from '../utils/object';
 import { exists } from '../utils/generic';
 import { mergeDeep, cloneObject } from '../utils/object';
 import { RowRenderer } from '../rendering/rowRenderer';
 import { WithoutGridCommon } from '../interfaces/iCommon';
 import { FilterComponent } from '../components/framework/componentTypes';
 import { IFloatingFilterParams, IFloatingFilterParentCallback } from './floating/floatingFilter';
-import { unwrapUserComp } from '../gridApi';
 import { AdvancedFilterModel } from '../interfaces/advancedFilterModel';
 import { IAdvancedFilterService } from '../interfaces/iAdvancedFilterService';
 import { warnOnce } from '../utils/function';
 import { DataTypeService } from '../columns/dataTypeService';
-import { QuickFilterService } from './quickFilterService';
+// import { EVENT_QUICK_FILTER_CHANGED } from './quickFilterService';
+//import { QuickFilterService } from './quickFilterService';
+const EVENT_QUICK_FILTER_CHANGED = 'quickFilterChanged';
+
+type QuickFilterService = any;
 
 export type FilterRequestSource = 'COLUMN_MENU' | 'TOOLBAR' | 'NO_UI';
 
@@ -90,7 +94,7 @@ export class FilterManager extends BeanStub {
             ({ enabled }: AdvancedFilterEnabledChangedEvent) => this.onAdvancedFilterEnabledChanged(enabled));
 
         this.addManagedListener(this.eventService, Events.EVENT_DATA_TYPES_INFERRED, () => this.processFilterModelUpdateQueue());
-        this.addManagedListener(this.quickFilterService, QuickFilterService.EVENT_QUICK_FILTER_CHANGED, () => this.onFilterChanged({ source: 'quickFilter' }));
+        this.addManagedListener(this.quickFilterService, EVENT_QUICK_FILTER_CHANGED, () => this.onFilterChanged({ source: 'quickFilter' }));
 
         this.initialFilterModel = {
             ...this.gos.get('initialState')?.filter?.filterModel ?? {}

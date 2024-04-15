@@ -1,4 +1,4 @@
-import { ColDef, ColGroupDef } from "../entities/colDef";
+import type { ColDef, ColGroupDef } from "../entities/colDef";
 
 type ColKey = keyof (ColDef) | (keyof ColGroupDef);
 

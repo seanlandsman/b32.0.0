@@ -1,4 +1,5 @@
-import { AgInputFieldParams, AgAbstractInputField } from "./agAbstractInputField";
+import type { AgInputFieldParams} from "./agAbstractInputField";
+import { AgAbstractInputField } from "./agAbstractInputField";
 
 interface IInputRange extends AgInputFieldParams {
     min?: number;

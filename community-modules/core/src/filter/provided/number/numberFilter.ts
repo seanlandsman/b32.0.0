@@ -1,8 +1,10 @@
-import { ISimpleFilterModel, SimpleFilter, SimpleFilterModelFormatter, Tuple } from '../simpleFilter';
-import { ScalarFilter, Comparator, IScalarFilterParams } from '../scalarFilter';
+import type { ISimpleFilterModel, Tuple } from '../simpleFilter';
+import { SimpleFilter, SimpleFilterModelFormatter } from '../simpleFilter';
+import type { Comparator, IScalarFilterParams } from '../scalarFilter';
+import { ScalarFilter } from '../scalarFilter';
 import { makeNull } from '../../../utils/generic';
 import { AgInputTextField } from '../../../widgets/agInputTextField';
-import { IFilterOptionDef, IFilterParams } from '../../../interfaces/iFilter';
+import type { IFilterOptionDef, IFilterParams } from '../../../interfaces/iFilter';
 import { setAriaRole } from '../../../utils/aria';
 import { AgInputNumberField } from '../../../widgets/agInputNumberField';
 

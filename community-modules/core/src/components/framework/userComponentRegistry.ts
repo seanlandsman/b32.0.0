@@ -1,23 +1,16 @@
 import { BeanStub } from "../../context/beanStub";
 import { Bean, PostConstruct } from "../../context/context";
-import { ReadOnlyFloatingFilter } from "../../filter/floating/provided/readOnlyFloatingFilter";
-import { DateFilter } from "../../filter/provided/date/dateFilter";
-import { DateFloatingFilter } from "../../filter/provided/date/dateFloatingFilter";
-import { DefaultDateComponent } from "../../filter/provided/date/defaultDateComponent";
-import { NumberFilter } from "../../filter/provided/number/numberFilter";
-import { NumberFloatingFilter } from "../../filter/provided/number/numberFloatingFilter";
-import { TextFilter } from "../../filter/provided/text/textFilter";
-import { TextFloatingFilter } from "../../filter/provided/text/textFloatingFilter";
+// import { DefaultDateComponent } from "../../filter/provided/date/defaultDateComponent";
 import { HeaderComp } from "../../headerRendering/cells/column/headerComp";
 import { SortIndicatorComp } from "../../headerRendering/cells/column/sortIndicatorComp";
 import { HeaderGroupComp } from "../../headerRendering/cells/columnGroup/headerGroupComp";
 import { ModuleNames } from "../../modules/moduleNames";
 import { ModuleRegistry } from "../../modules/moduleRegistry";
-import { LargeTextCellEditor } from "../../rendering/cellEditors/largeTextCellEditor";
-import { SelectCellEditor } from "../../rendering/cellEditors/selectCellEditor";
-import { TextCellEditor } from "../../rendering/cellEditors/textCellEditor";
-import { AnimateShowChangeCellRenderer } from "../../rendering/cellRenderers/animateShowChangeCellRenderer";
-import { AnimateSlideCellRenderer } from "../../rendering/cellRenderers/animateSlideCellRenderer";
+// import { LargeTextCellEditor } from "../../rendering/cellEditors/largeTextCellEditor";
+// import { SelectCellEditor } from "../../rendering/cellEditors/selectCellEditor";
+// import { TextCellEditor } from "../../rendering/cellEditors/textCellEditor";
+// import { AnimateShowChangeCellRenderer } from "../../rendering/cellRenderers/animateShowChangeCellRenderer";
+// import { AnimateSlideCellRenderer } from "../../rendering/cellRenderers/animateSlideCellRenderer";
 import { GroupCellRenderer } from "../../rendering/cellRenderers/groupCellRenderer";
 import { LoadingCellRenderer } from "../../rendering/cellRenderers/loadingCellRenderer";
 import { SkeletonCellRenderer } from "../../rendering/cellRenderers/skeletonCellRenderer";
@@ -27,34 +20,30 @@ import { TooltipComponent } from "../../rendering/tooltipComponent";
 import { doOnce } from "../../utils/function";
 import { iterateObject } from '../../utils/object';
 import { fuzzySuggestions } from '../../utils/fuzzyMatch';
-import { NumberCellEditor } from "../../rendering/cellEditors/numberCellEditor";
-import { DateCellEditor } from "../../rendering/cellEditors/dateCellEditor";
-import { DateStringCellEditor } from "../../rendering/cellEditors/dateStringCellEditor";
+// import { NumberCellEditor } from "../../rendering/cellEditors/numberCellEditor";
+// import { DateCellEditor } from "../../rendering/cellEditors/dateCellEditor";
+// import { DateStringCellEditor } from "../../rendering/cellEditors/dateStringCellEditor";
 import { CheckboxCellRenderer } from "../../rendering/cellRenderers/checkboxCellRenderer";
-import { CheckboxCellEditor } from "../../rendering/cellEditors/checkboxCellEditor";
+// import { CheckboxCellEditor } from "../../rendering/cellEditors/checkboxCellEditor";
 import { AgMenuItemRenderer } from "../../widgets/agMenuItemRenderer";
 
 @Bean('userComponentRegistry')
 export class UserComponentRegistry extends BeanStub {
 
+    public static featureComps: { [key: string]: any } = {}
+
     private agGridDefaults: { [key: string]: any } = {
         //date
-        agDateInput: DefaultDateComponent,
+        // agDateInput: DefaultDateComponent,
 
         //header
         agColumnHeader: HeaderComp,
         agColumnGroupHeader: HeaderGroupComp,
         agSortIndicator: SortIndicatorComp,
 
-        //floating filters
-        agTextColumnFloatingFilter: TextFloatingFilter,
-        agNumberColumnFloatingFilter: NumberFloatingFilter,
-        agDateColumnFloatingFilter: DateFloatingFilter,
-        agReadOnlyFloatingFilter: ReadOnlyFloatingFilter,
-
         // renderers
-        agAnimateShowChangeCellRenderer: AnimateShowChangeCellRenderer,
-        agAnimateSlideCellRenderer: AnimateSlideCellRenderer,
+        // agAnimateShowChangeCellRenderer: AnimateShowChangeCellRenderer,
+        // agAnimateSlideCellRenderer: AnimateSlideCellRenderer,
         agGroupCellRenderer: GroupCellRenderer,
         agGroupRowRenderer: GroupCellRenderer,
         agLoadingCellRenderer: LoadingCellRenderer,
@@ -62,19 +51,14 @@ export class UserComponentRegistry extends BeanStub {
         agCheckboxCellRenderer: CheckboxCellRenderer,
 
         //editors
-        agCellEditor: TextCellEditor,
-        agTextCellEditor: TextCellEditor,
-        agNumberCellEditor: NumberCellEditor,
-        agDateCellEditor: DateCellEditor,
-        agDateStringCellEditor: DateStringCellEditor,
-        agSelectCellEditor: SelectCellEditor,
-        agLargeTextCellEditor: LargeTextCellEditor,
-        agCheckboxCellEditor: CheckboxCellEditor,
-
-        //filter
-        agTextColumnFilter: TextFilter,
-        agNumberColumnFilter: NumberFilter,
-        agDateColumnFilter: DateFilter,
+        // agCellEditor: TextCellEditor,
+        // agTextCellEditor: TextCellEditor,
+        // agNumberCellEditor: NumberCellEditor,
+        // agDateCellEditor: DateCellEditor,
+        // agDateStringCellEditor: DateStringCellEditor,
+        // agSelectCellEditor: SelectCellEditor,
+        // agLargeTextCellEditor: LargeTextCellEditor,
+        // agCheckboxCellEditor: CheckboxCellEditor,
 
         //overlays
         agLoadingOverlay: LoadingOverlayComponent,
@@ -103,6 +87,10 @@ export class UserComponentRegistry extends BeanStub {
 
     private jsComps: { [key: string]: any } = {};
 
+    private getDefaults(): { [key: string]: any } {
+        return {...this.agGridDefaults, ...UserComponentRegistry.featureComps};
+    }
+
     @PostConstruct
     private init(): void {
         const comps = this.gos.get('components');
@@ -113,12 +101,12 @@ export class UserComponentRegistry extends BeanStub {
 
     public registerDefaultComponent(name: string, component: any) {
 
-        if (this.agGridDefaults[name]) {
+        if (this.getDefaults()[name]) {
             console.error(`Trying to overwrite a default component. You should call registerComponent`);
             return;
         }
 
-        this.agGridDefaults[name] = component;
+        this.getDefaults()[name] = component;
     }
 
     private registerJsComponent(name: string, component: any) {
@@ -143,7 +131,7 @@ export class UserComponentRegistry extends BeanStub {
             return createResult(jsComponent, isFwkComp);
         }
 
-        const defaultComponent = this.agGridDefaults[name];
+        const defaultComponent = this.getDefaults()[name] ?? UserComponentRegistry.featureComps[name];
         if (defaultComponent) {
             return createResult(defaultComponent, false);
         }
@@ -161,7 +149,7 @@ export class UserComponentRegistry extends BeanStub {
     private warnAboutMissingComponent(propertyName: string, componentName: string) {
         const validComponents = [
             // Don't include the old names / internals in potential suggestions
-            ...Object.keys(this.agGridDefaults).filter(k => !['agCellEditor', 'agGroupRowRenderer', 'agSortIndicator'].includes(k)),
+            ...Object.keys(this.getDefaults()).filter(k => !['agCellEditor', 'agGroupRowRenderer', 'agSortIndicator'].includes(k)),
             ...Object.keys(this.jsComps)];
         const suggestions = fuzzySuggestions(componentName, validComponents, true, 0.8).values;
 

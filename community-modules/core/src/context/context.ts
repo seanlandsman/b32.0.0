@@ -1,5 +1,5 @@
-import { ILogger } from "../iLogger";
-import { Component } from "../widgets/component";
+import type { ILogger } from "../iLogger";
+import type { Component } from "../widgets/component";
 import { exists, values } from "../utils/generic";
 import { iterateObject } from "../utils/object";
 import { getFunctionName } from "../utils/function";
@@ -441,7 +441,6 @@ export type BeanName =
 | 'chartTranslationService'
 | 'chartService'
 | 'clipboardService'
-| 'columnApi'
 | 'columnChooserFactory'
 | 'columnController'
 | 'columnDefFactory'

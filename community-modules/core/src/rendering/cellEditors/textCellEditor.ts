@@ -1,6 +1,7 @@
-import { ICellEditorParams } from "../../interfaces/iCellEditor";
-import { AgInputTextField } from "../../widgets/agInputTextField";
-import { CellEditorInput, SimpleCellEditor } from "./simpleCellEditor";
+import type { ICellEditorParams } from "../../interfaces/iCellEditor";
+import type { AgInputTextField } from "../../widgets/agInputTextField";
+import type { CellEditorInput} from "./simpleCellEditor";
+import { SimpleCellEditor } from "./simpleCellEditor";
 import { exists } from "../../utils/generic";
 
 export interface ITextCellEditorParams<TData = any, TValue = any, TContext = any> extends ICellEditorParams<TData, TValue, TContext> {

@@ -1,7 +1,7 @@
 import { Autowired } from "../../context/context";
 import { ICellRenderer } from "./iCellRenderer";
 import { Component } from "../../widgets/component";
-import { FilterManager } from "../../filter/filterManager";
+import { type FilterManager } from "../../filter/filterManager";
 import { clearElement } from "../../utils/dom";
 import { missing, exists } from "../../utils/generic";
 

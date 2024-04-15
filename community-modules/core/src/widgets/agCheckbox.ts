@@ -1,6 +1,8 @@
-import { Events, CheckboxChangedEvent } from "../events";
-import { AgAbstractInputField, AgInputFieldParams } from './agAbstractInputField';
-import { LabelAlignment } from './agAbstractLabel';
+import type { CheckboxChangedEvent } from "../events";
+import { Events } from "../events";
+import type { AgInputFieldParams } from './agAbstractInputField';
+import { AgAbstractInputField } from './agAbstractInputField';
+import type { LabelAlignment } from './agAbstractLabel';
 
 export interface AgCheckboxParams extends AgInputFieldParams {
     readOnly?: boolean;

@@ -17,7 +17,7 @@ import { HeaderPosition } from "../common/headerPosition";
 import { ColumnGroup } from "../../entities/columnGroup";
 import { HeaderCellCtrl } from "../cells/column/headerCellCtrl";
 import { HeaderGroupCellCtrl } from "../cells/columnGroup/headerGroupCellCtrl";
-import { FilterManager } from "../../filter/filterManager";
+import { type FilterManager } from "../../filter/filterManager";
 
 export interface IHeaderRowContainerComp {
     setCenterWidth(width: string): void;
@@ -241,18 +241,6 @@ export class HeaderRowContainerCtrl extends BeanStub {
 
             if (ctrl) { return ctrl; }
         }
-    }
-
-    /* tslint:disable */
-    public getHtmlElementForColumnHeader(column: ColumnGroup): HTMLElement | null;
-    public getHtmlElementForColumnHeader(column: Column): HTMLElement | null;
-    public getHtmlElementForColumnHeader(column: any): any {
-    /* tslint:enable */
-        const cellCtrl = this.getHeaderCtrlForColumn(column);
-
-        if (!cellCtrl) { return null; }
-
-        return cellCtrl.getGui();
     }
 
     public getRowType(rowIndex: number): HeaderRowType | undefined {

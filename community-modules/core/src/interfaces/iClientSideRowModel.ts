@@ -1,9 +1,9 @@
-import { IRowModel } from './iRowModel';
-import { RowNodeTransaction } from './rowNodeTransaction';
-import { RowDataTransaction } from './rowDataTransaction';
-import { RowNode } from '../entities/rowNode';
-import { RowHighlightPosition } from '../interfaces/iRowNode';
-import { ChangedPath } from '../utils/changedPath';
+import type { IRowModel } from './iRowModel';
+import type { RowNodeTransaction } from './rowNodeTransaction';
+import type { RowDataTransaction } from './rowDataTransaction';
+import type { RowNode } from '../entities/rowNode';
+import type { RowHighlightPosition } from '../interfaces/iRowNode';
+import type { ChangedPath } from '../utils/changedPath';
 
 export type ClientSideRowModelStep = `${ClientSideRowModelSteps}`;
 export enum ClientSideRowModelSteps {

@@ -1,10 +1,10 @@
 import { BeanStub } from "../../context/beanStub";
-import { CellClassParams, CellClassRules } from "../../entities/colDef";
-import { CellCtrl, ICellComp } from "./cellCtrl";
-import { Column } from "../../entities/column";
-import { RowNode } from "../../entities/rowNode";
-import { Beans } from "../beans";
-import { CellStyleFunc, CellStyle } from "../../entities/colDef";
+import type { CellClassParams, CellClassRules } from "../../entities/colDef";
+import type { CellCtrl, ICellComp } from "./cellCtrl";
+import type { Column } from "../../entities/column";
+import type { RowNode } from "../../entities/rowNode";
+import type { Beans } from "../beans";
+import type { CellStyleFunc, CellStyle } from "../../entities/colDef";
 
 export class CellCustomStyleFeature extends BeanStub {
 

@@ -1,22 +1,24 @@
-import { HeaderRowCtrl } from "../../row/headerRowCtrl";
-import { AbstractHeaderCellCtrl, IAbstractHeaderCellComp } from "../abstractCell/abstractHeaderCellCtrl";
+import type { HeaderRowCtrl } from "../../row/headerRowCtrl";
+import type { IAbstractHeaderCellComp } from "../abstractCell/abstractHeaderCellCtrl";
+import { AbstractHeaderCellCtrl } from "../abstractCell/abstractHeaderCellCtrl";
 import { KeyCode } from '../../../constants/keyCode';
 import { Autowired } from '../../../context/context';
 import { Column } from '../../../entities/column';
-import { Events, FilterChangedEvent } from '../../../events';
-import { FilterManager } from '../../../filter/filterManager';
-import { IFloatingFilter } from '../../../filter/floating/floatingFilter';
+import type { FilterChangedEvent } from '../../../events';
+import { Events } from '../../../events';
+import { type FilterManager } from '../../../filter/filterManager';
+import type { IFloatingFilter } from '../../../filter/floating/floatingFilter';
 import { ColumnHoverService } from '../../../rendering/columnHoverService';
 import { SetLeftFeature } from '../../../rendering/features/setLeftFeature';
-import { AgPromise } from '../../../utils';
+import type { AgPromise } from '../../../utils';
 import { isElementChildOfClass } from '../../../utils/dom';
 import { createIconNoSpan } from '../../../utils/icon';
 import { ManagedFocusFeature } from '../../../widgets/managedFocusFeature';
 import { HoverFeature } from '../hoverFeature';
-import { UserCompDetails } from "../../../components/framework/userComponentFactory";
+import type { UserCompDetails } from "../../../components/framework/userComponentFactory";
 import { setAriaLabel } from "../../../utils/aria";
 import { warnOnce } from "../../../utils/function";
-import { Beans } from "../../../rendering/beans";
+import type { Beans } from "../../../rendering/beans";
 
 export interface IHeaderFilterCellComp extends IAbstractHeaderCellComp {
     addOrRemoveBodyCssClass(cssClassName: string, on: boolean): void;

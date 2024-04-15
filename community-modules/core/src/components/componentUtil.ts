@@ -1,11 +1,12 @@
-import { GridOptions } from '../entities/gridOptions';
-import { GridApi } from '../gridApi';
-import { ComponentStateChangedEvent, Events } from '../events';
+import type { GridOptions } from '../entities/gridOptions';
+import type { GridApi } from '../gridApi';
+import type { ComponentStateChangedEvent} from '../events';
+import { Events } from '../events';
 import { PropertyKeys } from '../propertyKeys';
 import { iterateObject } from '../utils/object';
 import { includes } from '../utils/array';
 import { values } from '../utils/generic';
-import { WithoutGridCommon } from '../interfaces/iCommon';
+import type { WithoutGridCommon } from '../interfaces/iCommon';
 
 export class ComponentUtil {
 

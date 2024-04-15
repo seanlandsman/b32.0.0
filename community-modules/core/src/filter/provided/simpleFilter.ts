@@ -1,20 +1,21 @@
-import { IDoesFilterPassParams, IFilterOptionDef, IFilterParams, ProvidedFilterModel } from '../../interfaces/iFilter';
+import type { IDoesFilterPassParams, IFilterOptionDef, IFilterParams, ProvidedFilterModel } from '../../interfaces/iFilter';
 import { OptionsFactory } from './optionsFactory';
-import { IProvidedFilter, IProvidedFilterParams, ProvidedFilter } from './providedFilter';
+import type { IProvidedFilter, IProvidedFilterParams} from './providedFilter';
+import { ProvidedFilter } from './providedFilter';
 import { AgPromise } from '../../utils';
 import { AgSelect } from '../../widgets/agSelect';
 import { AgRadioButton } from '../../widgets/agRadioButton';
 import { areEqual } from '../../utils/array';
 import { setDisplayed, setDisabled, removeFromParent } from '../../utils/dom';
 import { FILTER_LOCALE_TEXT } from '../filterLocaleText';
-import { AgInputTextField } from '../../widgets/agInputTextField';
+import type { AgInputTextField } from '../../widgets/agInputTextField';
 import { Component } from '../../widgets/component';
 import { AgAbstractInputField } from '../../widgets/agAbstractInputField';
-import { IAfterGuiAttachedParams } from '../../interfaces/iAfterGuiAttachedParams';
-import { ListOption } from '../../widgets/agList';
-import { IFloatingFilterParent } from '../floating/floatingFilter';
+import type { IAfterGuiAttachedParams } from '../../interfaces/iAfterGuiAttachedParams';
+import type { ListOption } from '../../widgets/agList';
+import type { IFloatingFilterParent } from '../floating/floatingFilter';
 import { warnOnce, isFunction } from '../../utils/function';
-import { LocaleService } from '../../localeService';
+import type { LocaleService } from '../../localeService';
 
 export type JoinOperator = 'AND' | 'OR';
 
@@ -405,7 +406,7 @@ export abstract class SimpleFilter<M extends ISimpleFilterModel, V, E = AgInputT
         const isCombined = (model as any).operator;
 
         if (isCombined) {
-            let combinedModel = model as ICombinedSimpleModel<M>;
+            const combinedModel = model as ICombinedSimpleModel<M>;
             if (!combinedModel.conditions) {
                 combinedModel.conditions = [
                     combinedModel.condition1,

@@ -1,6 +1,7 @@
 import { Component } from "./component";
 import { isNodeOrElement, clearElement } from "../utils/dom";
-import { TabGuardCtrl, ITabGuard, TabGuardClassNames } from "./tabGuardCtrl";
+import type { ITabGuard} from "./tabGuardCtrl";
+import { TabGuardCtrl, TabGuardClassNames } from "./tabGuardCtrl";
 import { setAriaRole } from "../utils/aria";
 
 export class TabGuardComp extends Component {

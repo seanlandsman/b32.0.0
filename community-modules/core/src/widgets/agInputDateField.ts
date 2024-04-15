@@ -1,4 +1,5 @@
-import { AgInputTextField, AgInputTextFieldParams } from "./agInputTextField";
+import type { AgInputTextFieldParams } from "./agInputTextField";
+import { AgInputTextField } from "./agInputTextField";
 import { addOrRemoveAttribute } from "../utils/dom";
 import { parseDateTimeFromString, serialiseDate } from "../utils/date";
 import { isBrowserSafari } from "../utils/browser";

@@ -1,24 +1,3 @@
-export function fuzzyCheckStrings(
-    inputValues: string[],
-    validValues: string[],
-    allSuggestions: string[]
-): { [p: string]: string[]; } {
-    const fuzzyMatches: { [p: string]: string[]; } = {};
-    const invalidInputs: string[] = inputValues.filter(inputValue =>
-        !validValues.some(
-            (validValue) => validValue === inputValue
-        )
-    );
-
-    if (invalidInputs.length > 0) {
-        invalidInputs.forEach(invalidInput =>
-            fuzzyMatches[invalidInput] = fuzzySuggestions(invalidInput, allSuggestions).values
-        );
-    }
-
-    return fuzzyMatches;
-}
-
 /**
  *
  * @param {String} inputValue The value to be compared against a list of strings

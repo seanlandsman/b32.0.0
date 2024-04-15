@@ -1,6 +1,6 @@
-import { AgEvent, AgEventListener } from "../events";
+import type { AgEvent, AgEventListener } from "../events";
 import { EventService } from "../eventService";
-import { IEventEmitter } from "../interfaces/iEventEmitter";
+import type { IEventEmitter } from "../interfaces/iEventEmitter";
 import { areEventsNear } from "../utils/mouse";
 
 export interface TapEvent extends AgEvent {
@@ -22,7 +22,7 @@ export class TouchListener implements IEventEmitter {
 
     private eElement: Element;
 
-    private destroyFuncs: Function[] = [];
+    private destroyFuncs: (()=>void)[] = [];
 
     private moved: boolean;
 

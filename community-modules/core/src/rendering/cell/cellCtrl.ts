@@ -1,17 +1,19 @@
-import { Beans } from "./../beans";
-import { Column } from "../../entities/column";
-import { CellStyle } from "../../entities/colDef";
-import { RowNode } from "../../entities/rowNode";
-import { CellChangedEvent } from "../../interfaces/iRowNode";
-import { CellPosition } from "../../entities/cellPositionUtils";
-import {
+import type { Beans } from "./../beans";
+import type { Column } from "../../entities/column";
+import type { CellStyle } from "../../entities/colDef";
+import type { RowNode } from "../../entities/rowNode";
+import type { CellChangedEvent } from "../../interfaces/iRowNode";
+import type { CellPosition } from "../../entities/cellPositionUtils";
+import type {
     CellContextMenuEvent,
     CellEditingStartedEvent,
     CellEditingStoppedEvent,
     CellEvent,
     CellFocusedEvent,
-    Events,
     FlashCellsEvent
+} from "../../events";
+import {
+    Events
 } from "../../events";
 import { CellRangeFeature } from "./cellRangeFeature";
 import { exists, makeNull } from "../../utils/generic";
@@ -19,15 +21,16 @@ import { BeanStub } from "../../context/beanStub";
 import { CellPositionFeature } from "./cellPositionFeature";
 import { escapeString } from "../../utils/string";
 import { CellCustomStyleFeature } from "./cellCustomStyleFeature";
-import { TooltipFeature, ITooltipFeatureCtrl } from "../../widgets/tooltipFeature";
-import { RowPosition } from "../../entities/rowPositionUtils";
-import { RowCtrl } from "../row/rowCtrl";
+import type { ITooltipFeatureCtrl } from "../../widgets/tooltipFeature";
+import { TooltipFeature } from "../../widgets/tooltipFeature";
+import type { RowPosition } from "../../entities/rowPositionUtils";
+import type { RowCtrl } from "../row/rowCtrl";
 import { CellMouseListenerFeature } from "./cellMouseListenerFeature";
 import { CellKeyboardListenerFeature } from "./cellKeyboardListenerFeature";
-import { ICellRenderer, ICellRendererParams } from "../cellRenderers/iCellRenderer";
-import { ICellEditor, ICellEditorParams } from "../../interfaces/iCellEditor";
+import type { ICellRenderer, ICellRendererParams } from "../cellRenderers/iCellRenderer";
+import type { ICellEditor, ICellEditorParams } from "../../interfaces/iCellEditor";
 import { KeyCode } from "../../constants/keyCode";
-import { UserCompDetails } from "../../components/framework/userComponentFactory";
+import type { UserCompDetails } from "../../components/framework/userComponentFactory";
 import { CheckboxSelectionComponent } from "../checkboxSelectionComponent";
 import { DndSourceComp } from "../dndSourceComp";
 import { warnOnce } from "../../utils/function";
@@ -36,8 +39,8 @@ import { getValueUsingField } from "../../utils/object";
 import { getElementSize } from "../../utils/dom";
 import { setAriaColIndex } from "../../utils/aria";
 import { CssClassApplier } from "../../headerRendering/cells/cssClassApplier";
-import { FlashCellsParams } from "../rowRenderer";
-import { BrandedType } from "../../utils";
+import type { FlashCellsParams } from "../rowRenderer";
+import type { BrandedType } from "../../utils";
 
 const CSS_CELL = 'ag-cell';
 const CSS_AUTO_HEIGHT = 'ag-cell-auto-height';

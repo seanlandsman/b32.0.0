@@ -1,7 +1,7 @@
 /************************************************************************************************
  * If you change the GridOptions interface, you must also update PropertyKeys to be consistent. *
  ************************************************************************************************/
-import {
+import type {
     AdvancedFilterBuilderVisibleChangedEvent,
     AsyncTransactionsFlushed,
     BodyScrollEndEvent,
@@ -95,27 +95,27 @@ import {
     FillStartEvent,
     FillEndEvent,
 } from "../events";
-import { HeaderPosition } from "../headerRendering/common/headerPosition";
-import {
+import type { HeaderPosition } from "../headerRendering/common/headerPosition";
+import type {
     CsvExportParams,
     ProcessCellForExportParams,
     ProcessGroupHeaderForExportParams,
     ProcessHeaderForExportParams,
 } from "../interfaces/exportParams";
-import { AgChartTheme, AgChartThemeOverrides } from "../interfaces/iAgChartOptions";
-import { ChartMenuOptions, ChartToolPanelsDef } from "../interfaces/iChartOptions";
-import { AgGridCommon } from "../interfaces/iCommon";
-import { IDatasource } from "../interfaces/iDatasource";
-import { ExcelExportParams, ExcelStyle } from "../interfaces/iExcelCreator";
-import { RowModelType } from "../interfaces/iRowModel";
-import { IServerSideDatasource } from "../interfaces/iServerSideDatasource";
-import { StatusPanelDef } from "../interfaces/iStatusPanel";
-import { IViewportDatasource } from "../interfaces/iViewportDatasource";
-import { IRowDragItem } from "../rendering/row/rowDragComp";
-import { ILoadingCellRendererParams } from "../rendering/cellRenderers/loadingCellRenderer";
-import { CellPosition } from "./cellPositionUtils";
-import { ColDef, ColGroupDef, ColTypeDef, IAggFunc, SortDirection } from "./colDef";
-import {
+import type { AgChartTheme, AgChartThemeOverrides } from "../interfaces/iAgChartOptions";
+import type { ChartMenuOptions, ChartToolPanelsDef } from "../interfaces/iChartOptions";
+import type { AgGridCommon } from "../interfaces/iCommon";
+import type { IDatasource } from "../interfaces/iDatasource";
+import type { ExcelExportParams, ExcelStyle } from "../interfaces/iExcelCreator";
+import type { RowModelType } from "../interfaces/iRowModel";
+import type { IServerSideDatasource } from "../interfaces/iServerSideDatasource";
+import type { StatusPanelDef } from "../interfaces/iStatusPanel";
+import type { IViewportDatasource } from "../interfaces/iViewportDatasource";
+import type { IRowDragItem } from "../rendering/row/rowDragComp";
+import type { ILoadingCellRendererParams } from "../rendering/cellRenderers/loadingCellRenderer";
+import type { CellPosition } from "./cellPositionUtils";
+import type { ColDef, ColGroupDef, ColTypeDef, IAggFunc, SortDirection } from "./colDef";
+import type {
     FillOperationParams,
     GetChartToolbarItemsParams,
     GetContextMenuItemsParams,
@@ -147,18 +147,20 @@ import {
     GetChartMenuItemsParams
 } from "../interfaces/iCallbackParams";
 
-import { SideBarDef } from "../interfaces/iSideBar";
-import { IRowNode } from "../interfaces/iRowNode";
-import { DataTypeDefinition } from "./dataType";
-import { AdvancedFilterModel } from "../interfaces/advancedFilterModel";
-import { IAdvancedFilterBuilderParams } from "../interfaces/iAdvancedFilterBuilderParams";
-import { AlignedGrid } from "../interfaces/iAlignedGrid";
-import { GridState } from "../interfaces/gridState";
-import { SizeColumnsToContentStrategy, SizeColumnsToFitProvidedWidthStrategy, SizeColumnsToFitGridStrategy } from "../interfaces/autoSizeStrategy";
-import { Column } from "./column";
-import { MenuItemDef } from "../interfaces/menuItem";
+import type { SideBarDef } from "../interfaces/iSideBar";
+import type { IRowNode } from "../interfaces/iRowNode";
+import type { DataTypeDefinition } from "./dataType";
+import type { AdvancedFilterModel } from "../interfaces/advancedFilterModel";
+import type { IAdvancedFilterBuilderParams } from "../interfaces/iAdvancedFilterBuilderParams";
+import type { AlignedGrid } from "../interfaces/iAlignedGrid";
+import type { GridState } from "../interfaces/gridState";
+import type { SizeColumnsToContentStrategy, SizeColumnsToFitProvidedWidthStrategy, SizeColumnsToFitGridStrategy } from "../interfaces/autoSizeStrategy";
+import type { Column } from "./column";
+import type { MenuItemDef } from "../interfaces/menuItem";
 
 export interface GridOptions<TData = any> {
+
+    features?: any[];
 
     // ******************************************************************************************************
     // If you change the properties on this interface, you must also update PropertyKeys to be consistent. *
@@ -2274,10 +2276,6 @@ export interface GridOptions<TData = any> {
      * @deprecated Since v31 api is no longer attached to GridOptions. See https://ag-grid.com/javascript-data-grid/grid-interface/#grid-api for how to access the api in your framework.
      */
     api?: never;
-    /**
-     * @deprecated Since v31 `columnApi` is deprecated and all methods are now on the grid `api`. See https://ag-grid.com/javascript-data-grid/grid-interface/#grid-api for how to access the api in your framework.
-     */
-    columnApi?: never;
 }
 
 export type RowGroupingDisplayType = 'singleColumn' | 'multipleColumns' | 'groupRows' | 'custom';

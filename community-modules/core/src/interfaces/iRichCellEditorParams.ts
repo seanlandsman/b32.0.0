@@ -1,4 +1,4 @@
-import { ICellEditorParams } from "./iCellEditor";
+import type { ICellEditorParams } from "./iCellEditor";
 
 export interface RichCellEditorValuesCallback<TData = any, TValue = any> {
     (params: ICellEditorParams<TData, TValue>): TValue[] | Promise<TValue[]>;

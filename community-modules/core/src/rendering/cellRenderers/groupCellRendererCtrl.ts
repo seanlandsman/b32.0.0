@@ -2,7 +2,7 @@ import { ColumnModel } from "../../columns/columnModel";
 import { UserCompDetails, UserComponentFactory } from "../../components/framework/userComponentFactory";
 import { KeyCode } from "../../constants/keyCode";
 import { BeanStub } from "../../context/beanStub";
-import { Autowired } from "../../context/context";
+import { Autowired, Optional } from "../../context/context";
 import { CtrlsService } from "../../ctrlsService";
 import { CellRendererSelectorFunc, ColumnFunctionCallbackParams } from "../../entities/colDef";
 import { Column } from "../../entities/column";
@@ -85,7 +85,7 @@ export type GroupCellRendererParams<TData = any, TValue = any> = IGroupCellRende
 
 export class GroupCellRendererCtrl extends BeanStub {
 
-    @Autowired('expressionService') private expressionService: ExpressionService;
+    @Optional('expressionService') private expressionService?: ExpressionService;
     @Autowired('valueFormatterService') private valueFormatterService: ValueFormatterService;
     @Autowired('columnModel') private columnModel: ColumnModel;
     @Autowired('userComponentFactory') private userComponentFactory: UserComponentFactory;
@@ -404,7 +404,7 @@ export class GroupCellRendererCtrl extends BeanStub {
 
             if (typeof footerValueGetter === 'function') {
                 footerValue = footerValueGetter(paramsClone);
-            } else if (typeof footerValueGetter === 'string') {
+            } else if (typeof footerValueGetter === 'string' && this.expressionService) {
                 footerValue = this.expressionService.evaluate(footerValueGetter, paramsClone);
             } else {
                 console.warn('AG Grid: footerValueGetter should be either a function or a string (expression)');

@@ -1,8 +1,6 @@
 import { Autowired, Bean, Context, Optional, PostConstruct } from "../context/context";
 import { ColumnModel } from "../columns/columnModel";
 import { HeaderNavigationService } from "../headerRendering/common/headerNavigationService";
-import { GridApi } from "../gridApi";
-import { ExpressionService } from "../valueService/expressionService";
 import { RowRenderer } from "./rowRenderer";
 import { TemplateService } from "../templateService";
 import { ValueService } from "../valueService/valueService";
@@ -20,7 +18,7 @@ import { UserComponentFactory } from "../components/framework/userComponentFacto
 import { DragService } from "../dragAndDrop/dragService";
 import { DragAndDropService } from "../dragAndDrop/dragAndDropService";
 import { SortController } from "../sortController";
-import { FilterManager } from "../filter/filterManager";
+import { type FilterManager } from "../filter/filterManager";
 import { RowContainerHeightService } from "./rowContainerHeightService";
 import { IFrameworkOverrides } from "../interfaces/iFrameworkOverrides";
 import { CellPositionUtils } from "../entities/cellPositionUtils";
@@ -57,7 +55,6 @@ export class Beans {
     @Autowired('paginationProxy') public readonly paginationProxy: PaginationProxy;
     @Autowired('context') public readonly context: Context;
     @Autowired('gridOptionsService') public readonly gos: GridOptionsService;
-    @Autowired('expressionService') public readonly expressionService: ExpressionService;
     @Autowired('environment') public readonly environment: Environment;
     @Autowired('rowRenderer') public readonly rowRenderer: RowRenderer;
     @Autowired('templateService') public readonly templateService: TemplateService;

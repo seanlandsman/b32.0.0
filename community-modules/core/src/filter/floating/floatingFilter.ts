@@ -1,8 +1,8 @@
-import { Column } from '../../entities/column';
-import { FilterChangedEvent } from '../../events';
-import { IComponent } from '../../interfaces/iComponent';
-import { IFilter, IFilterParams, ProvidedFilterModel } from '../../interfaces/iFilter';
-import { AgGridCommon } from '../../interfaces/iCommon';
+import type { Column } from '../../entities/column';
+import type { FilterChangedEvent } from '../../events';
+import type { IComponent } from '../../interfaces/iComponent';
+import type { IFilter, IFilterParams, ProvidedFilterModel } from '../../interfaces/iFilter';
+import type { AgGridCommon } from '../../interfaces/iCommon';
 
 export interface IFloatingFilterParent {
     /**

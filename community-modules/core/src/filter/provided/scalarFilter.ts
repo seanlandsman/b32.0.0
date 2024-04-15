@@ -1,6 +1,7 @@
-import { AgInputTextField } from "../../widgets/agInputTextField";
-import { SimpleFilter, ISimpleFilterParams, ISimpleFilterModel, ISimpleFilterModelType, Tuple } from "./simpleFilter";
-import { IFilterParams } from "../../interfaces/iFilter";
+import type { AgInputTextField } from "../../widgets/agInputTextField";
+import type { ISimpleFilterParams, ISimpleFilterModel, ISimpleFilterModelType, Tuple } from "./simpleFilter";
+import { SimpleFilter } from "./simpleFilter";
+import type { IFilterParams } from "../../interfaces/iFilter";
 
 /**
  * Parameters provided by the grid to the `init` method of a `ScalarFilter`.
