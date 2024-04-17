@@ -132,7 +132,7 @@ export class ValueService extends BeanStub {
             if (typeof valueParser === 'function') {
                 return valueParser(params);
             }
-            return this.expressionService.evaluate(valueParser, params);
+            return this.expressionService?.evaluate(valueParser, params);
         }
         return newValue;
     }
@@ -167,7 +167,7 @@ export class ValueService extends BeanStub {
             if (typeof formatter === 'function') {
                 result = formatter(params);
             } else {
-                result = this.expressionService.evaluate(formatter, params);
+                result = this.expressionService?.evaluate(formatter, params);
             }
         } else if (colDef.refData) {
             return colDef.refData[value] || '';

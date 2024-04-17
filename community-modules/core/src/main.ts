@@ -11,6 +11,7 @@ globalObj.MouseEvent = typeof MouseEvent === 'undefined' ? {} : MouseEvent;
 
 export { useFilters } from './features/filters';
 export { useGridApi } from './features/gridApi';
+ export { useGridApi2 } from './features/gridApi2';
 export { useAlignedGrids } from './features/gridApi';
 export { useValidations, useExpressions } from './features/gridApi';
 
@@ -76,7 +77,7 @@ export type { IMultiFilter, IMultiFilterModel, IMultiFilterComp, IMultiFilterPar
 export { FilterWrapperComp } from './filter/filterWrapperComp';
 
 export type { IProvidedFilter, IProvidedFilterParams, ProvidedFilterParams } from './filter/provided/providedFilter';
-export type { ProvidedFilter } from "./filter/provided/providedFilter";
+export { ProvidedFilter } from "./filter/provided/providedFilter";
 export type { ISimpleFilter, SimpleFilter, ISimpleFilterParams, SimpleFilterParams, ISimpleFilterModel, ICombinedSimpleModel, JoinOperator, IFilterPlaceholderFunctionParams, FilterPlaceholderFunction } from "./filter/provided/simpleFilter";
 export type { IScalarFilterParams, ScalarFilterParams } from './filter/provided/scalarFilter';
 export type { ScalarFilter } from "./filter/provided/scalarFilter";
@@ -221,7 +222,6 @@ export type { IRowComp } from './rendering/row/rowCtrl';
 export { RowCtrl } from "./rendering/row/rowCtrl";
 export type { FlashCellsParams, GetCellRendererInstancesParams, RefreshCellsParams, RedrawRowsParams, GetCellEditorInstancesParams } from './rendering/rowRenderer';
 export { RowRenderer } from "./rendering/rowRenderer";
-export { ValueFormatterService } from "./rendering/valueFormatterService";
 export type { ILoadingCellRenderer, ILoadingCellRendererComp, ILoadingCellRendererParams } from "./rendering/cellRenderers/loadingCellRenderer";
 export { CssClassManager } from "./rendering/cssClassManager";
 export type { ICheckboxCellRendererParams } from './rendering/cellRenderers/checkboxCellRenderer';
@@ -372,7 +372,6 @@ export * from "./utils/index"; // please leave this as is - we want it to be exp
 export type { ColumnSortState } from "./utils/aria";
 export { ValueService } from "./valueService/valueService";
 export { ValueCache } from "./valueService/valueCache";
-export { ValueParserService } from "./valueService/valueParserService";
 
 //state
 export type {

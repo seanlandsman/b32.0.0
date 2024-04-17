@@ -61,7 +61,6 @@ import { OverlayWrapperComponent } from "./rendering/overlays/overlayWrapperComp
 import { RowCssClassCalculator } from "./rendering/row/rowCssClassCalculator";
 import { RowContainerHeightService } from "./rendering/rowContainerHeightService";
 import { RowRenderer } from "./rendering/rowRenderer";
-import { ValueFormatterService } from "./rendering/valueFormatterService";
 import { RowNodeBlockLoader } from "./rowNodeCache/rowNodeBlockLoader";
 import { RowNodeSorter } from "./rowNodes/rowNodeSorter";
 import { SelectableService } from "./rowNodes/selectableService";
@@ -69,14 +68,12 @@ import { SelectionService } from "./selectionService";
 import { SortController } from "./sortController";
 import { StylingService } from "./styling/stylingService";
 import { SyncService } from "./syncService";
-import { TemplateService } from "./templateService";
 import { UndoRedoService } from "./undoRedo/undoRedoService";
 import { errorOnce, warnOnce } from "./utils/function";
 import { missing } from "./utils/generic";
 import { mergeDeep } from "./utils/object";
 import { ChangeDetectionService } from "./valueService/changeDetectionService";
 import { ValueCache } from "./valueService/valueCache";
-import { ValueParserService } from "./valueService/valueParserService";
 import { ValueService } from "./valueService/valueService";
 import { VanillaFrameworkOverrides } from "./vanillaFrameworkOverrides";
 import { AgCheckbox } from "./widgets/agCheckbox";
@@ -391,6 +388,8 @@ export class GridCoreCreator {
             return;
         }
 
+        Promise.all(gridOptions.features ?? []).then((f: any) => f.flat());
+
         // beans should only contain SERVICES, it should NEVER contain COMPONENTS
         const beans = [
             Beans, RowPositionUtils, CellPositionUtils, HeaderPositionUtils,
@@ -402,12 +401,12 @@ export class GridCoreCreator {
             PaginationProxy, RowRenderer, ColumnFactory, 
             NavigationService, ValueCache, ValueService, LoggerFactory,
             AutoWidthCalculator, StandardMenuFactory, DragAndDropService,
-            FocusService, MouseEventService, Environment, CellNavigationService, ValueFormatterService,
+            FocusService, MouseEventService, Environment, CellNavigationService,
             StylingService, ScrollVisibleService, SortController, ColumnHoverService, ColumnAnimationService,
             SelectableService, AutoGroupColService, ChangeDetectionService, AnimationFrameService,
             UndoRedoService, AgStackComponentsRegistry, ColumnDefFactory,
             RowCssClassCalculator, RowNodeBlockLoader, RowNodeSorter, CtrlsService,
-            PinnedWidthService, RowNodeEventThrottle, CtrlsFactory, DataTypeService, ValueParserService,
+            PinnedWidthService, RowNodeEventThrottle, CtrlsFactory, DataTypeService,
             SyncService, OverlayService, StateService, ExpansionService,
             ApiEventService, AriaAnnouncementService, MenuService, ...(gridOptions.features ?? [])
         ];

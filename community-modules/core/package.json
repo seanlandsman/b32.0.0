@@ -23,6 +23,7 @@
     "type": "git",
     "url": "https://github.com/ag-grid/ag-grid.git"
   },
+  "sideEffects": false,
   "keywords": [
     "ag",
     "ag-grid",

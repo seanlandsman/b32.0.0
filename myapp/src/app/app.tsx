@@ -7,6 +7,7 @@ import { ModuleRegistry, ColDef, ColGroupDef, ValueGetterParams } from '@ag-grid
 import { useFilters, useGridApi, useAlignedGrids, useValidations, useExpressions } from '@ag-grid-community/core';
 import { useEffect, useMemo, useState } from "react";
 
+
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 const CustomButtonComponent = () => {
     return <button onClick={() => window.alert("clicked")}>Push Me!</button>;
@@ -41,11 +42,11 @@ const GridExample = () => {
 
     useEffect(() => {
         Promise.all([
-            //useGridApi(),
-           // useFilters(),
-           // useAlignedGrids(),
-          //  useValidations(),
-           // useExpressions(),
+           // useGridApi(),
+           useFilters(),
+           //useAlignedGrids(), 
+           useValidations(),
+           useExpressions(),
         ]).then((f: any) => setFilterFeature((p: any) => ([...(p ?? []), ...f.flat()])));
     }, []);
 
