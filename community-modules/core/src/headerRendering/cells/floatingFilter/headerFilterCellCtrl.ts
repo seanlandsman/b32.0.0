@@ -2,13 +2,13 @@ import type { HeaderRowCtrl } from "../../row/headerRowCtrl";
 import type { IAbstractHeaderCellComp } from "../abstractCell/abstractHeaderCellCtrl";
 import { AbstractHeaderCellCtrl } from "../abstractCell/abstractHeaderCellCtrl";
 import { KeyCode } from '../../../constants/keyCode';
-import { Autowired } from '../../../context/context';
 import { Column } from '../../../entities/column';
 import type { FilterChangedEvent } from '../../../events';
 import { Events } from '../../../events';
 import { type FilterManager } from '../../../filter/filterManager';
 import type { IFloatingFilter } from '../../../filter/floating/floatingFilter';
 import { ColumnHoverService } from '../../../rendering/columnHoverService';
+import { ColumnEvent } from '../../../events';
 import { SetLeftFeature } from '../../../rendering/features/setLeftFeature';
 import type { AgPromise } from '../../../utils';
 import { isElementChildOfClass } from '../../../utils/dom';
@@ -271,7 +271,8 @@ export class HeaderFilterCellCtrl extends AbstractHeaderCellCtrl<IHeaderFilterCe
         if (!this.active) { return; }
         const { filterManager } = this.beans;
 
-        const syncWithFilter = (filterChangedEvent: FilterChangedEvent | null) => {
+        const syncWithFilter = (event: ColumnEvent | null) => {
+            if (event?.source === 'filterDestroyed') { return; }
             const compPromise = this.comp.getFloatingFilterComp();
 
             if (!compPromise) { return; }
@@ -279,7 +280,11 @@ export class HeaderFilterCellCtrl extends AbstractHeaderCellCtrl<IHeaderFilterCe
             compPromise.then(comp => {
                 if (comp) {
                     const parentModel = filterManager.getCurrentFloatingFilterParentModel(this.column);
-                    comp.onParentModelChanged(parentModel, filterChangedEvent);
+                    comp.onParentModelChanged(parentModel, event ? this.gos.addGridCommonParams<FilterChangedEvent>({
+                        columns: event.columns ?? [],
+                        type: Events.EVENT_FILTER_CHANGED,
+                        source: event.source === 'api' ? 'api' : 'columnFilter'
+                    }) : null);
                 }
             });
         };

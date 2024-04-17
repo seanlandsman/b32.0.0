@@ -260,6 +260,7 @@ export default defineMarkdocConfig({
             attributes: {
                 id: { type: String },
                 title: { type: String },
+                playlist: { type: String },
                 showHeader: { type: Boolean },
             },
         },
@@ -272,7 +273,7 @@ export default defineMarkdocConfig({
             },
         },
         openInCTA: {
-            render: component('./src/components/open-in-cta/OpenInCTA.astro'),
+            render: component('../../external/ag-website-shared/src/components/open-in-cta/OpenInCTA.astro'),
             attributes: {
                 type: { type: String, required: true },
                 href: { type: String, required: true },
