@@ -1,24 +1,21 @@
-import type { HeaderRowCtrl } from "../../row/headerRowCtrl";
-import type { IAbstractHeaderCellComp } from "../abstractCell/abstractHeaderCellCtrl";
-import { AbstractHeaderCellCtrl } from "../abstractCell/abstractHeaderCellCtrl";
+import type { UserCompDetails } from "../../../components/framework/userComponentFactory";
 import { KeyCode } from '../../../constants/keyCode';
 import { Column } from '../../../entities/column';
 import type { FilterChangedEvent } from '../../../events';
-import { Events } from '../../../events';
-import { type FilterManager } from '../../../filter/filterManager';
+import { ColumnEvent, Events } from '../../../events';
 import type { IFloatingFilter } from '../../../filter/floating/floatingFilter';
-import { ColumnHoverService } from '../../../rendering/columnHoverService';
-import { ColumnEvent } from '../../../events';
+import type { Beans } from "../../../rendering/beans";
 import { SetLeftFeature } from '../../../rendering/features/setLeftFeature';
 import type { AgPromise } from '../../../utils';
+import { setAriaLabel } from "../../../utils/aria";
 import { isElementChildOfClass } from '../../../utils/dom';
+import { warnOnce } from "../../../utils/function";
 import { createIconNoSpan } from '../../../utils/icon';
 import { ManagedFocusFeature } from '../../../widgets/managedFocusFeature';
+import type { HeaderRowCtrl } from "../../row/headerRowCtrl";
+import type { IAbstractHeaderCellComp } from "../abstractCell/abstractHeaderCellCtrl";
+import { AbstractHeaderCellCtrl } from "../abstractCell/abstractHeaderCellCtrl";
 import { HoverFeature } from '../hoverFeature';
-import type { UserCompDetails } from "../../../components/framework/userComponentFactory";
-import { setAriaLabel } from "../../../utils/aria";
-import { warnOnce } from "../../../utils/function";
-import type { Beans } from "../../../rendering/beans";
 
 export interface IHeaderFilterCellComp extends IAbstractHeaderCellComp {
     addOrRemoveBodyCssClass(cssClassName: string, on: boolean): void;
