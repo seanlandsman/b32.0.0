@@ -1,8 +1,8 @@
 import type { UserCompDetails } from "../../../components/framework/userComponentFactory";
 import { KeyCode } from '../../../constants/keyCode';
 import { Column } from '../../../entities/column';
-import type { FilterChangedEvent } from '../../../events';
-import { ColumnEvent, Events } from '../../../events';
+import type { FilterChangedEvent , ColumnEvent} from '../../../events';
+import { Events } from '../../../events';
 import type { IFloatingFilter } from '../../../filter/floating/floatingFilter';
 import type { Beans } from "../../../rendering/beans";
 import { SetLeftFeature } from '../../../rendering/features/setLeftFeature';
