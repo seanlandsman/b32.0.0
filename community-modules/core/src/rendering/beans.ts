@@ -2,14 +2,12 @@ import { Autowired, Bean, Context, Optional, PostConstruct } from "../context/co
 import { ColumnModel } from "../columns/columnModel";
 import { HeaderNavigationService } from "../headerRendering/common/headerNavigationService";
 import { RowRenderer } from "./rowRenderer";
-import { TemplateService } from "../templateService";
 import { ValueService } from "../valueService/valueService";
 import { EventService } from "../eventService";
 import { ColumnAnimationService } from "./columnAnimationService";
 import { IRangeService, ISelectionHandleFactory } from "../interfaces/IRangeService";
 import { FocusService } from "../focusService";
 import { PopupService } from "../widgets/popupService";
-import { ValueFormatterService } from "./valueFormatterService";
 import { StylingService } from "../styling/stylingService";
 import { ColumnHoverService } from "./columnHoverService";
 import { PaginationProxy } from "../pagination/paginationProxy";
@@ -39,7 +37,6 @@ import { RowNodeEventThrottle } from "../entities/rowNodeEventThrottle";
 import { GridOptionsService } from "../gridOptionsService";
 import { LocaleService } from "../localeService";
 import { Environment } from "../environment";
-import { ValueParserService } from "../valueService/valueParserService";
 import { SyncService } from "../syncService";
 import { AriaAnnouncementService } from "./ariaAnnouncementService";
 
@@ -57,7 +54,6 @@ export class Beans {
     @Autowired('gridOptionsService') public readonly gos: GridOptionsService;
     @Autowired('environment') public readonly environment: Environment;
     @Autowired('rowRenderer') public readonly rowRenderer: RowRenderer;
-    @Autowired('templateService') public readonly templateService: TemplateService;
     @Autowired('valueService') public readonly valueService: ValueService;
     @Autowired('eventService') public readonly eventService: EventService;
     @Autowired('columnModel') public readonly columnModel: ColumnModel;
@@ -66,7 +62,6 @@ export class Beans {
     @Autowired('columnAnimationService') public readonly columnAnimationService: ColumnAnimationService;
     @Autowired('focusService') public readonly focusService: FocusService;
     @Autowired('popupService') public readonly popupService: PopupService;
-    @Autowired('valueFormatterService') public readonly valueFormatterService: ValueFormatterService;
     @Autowired('stylingService') public readonly stylingService: StylingService;
     @Autowired('columnHoverService') public readonly columnHoverService: ColumnHoverService;
     @Autowired('userComponentFactory') public readonly userComponentFactory: UserComponentFactory;
@@ -89,7 +84,6 @@ export class Beans {
     @Autowired('valueCache') public readonly valueCache: ValueCache;
     @Autowired('rowNodeEventThrottle') public readonly rowNodeEventThrottle: RowNodeEventThrottle;
     @Autowired('localeService') public readonly localeService: LocaleService;
-    @Autowired('valueParserService') public readonly valueParserService: ValueParserService;
     @Autowired('syncService') public readonly syncService: SyncService;
     @Autowired('ariaAnnouncementService') public readonly ariaAnnouncementService: AriaAnnouncementService;
     

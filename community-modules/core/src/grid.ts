@@ -10,20 +10,19 @@ import { AgComponentUtils } from "./components/framework/agComponentUtils";
 import { ComponentMetadataProvider } from "./components/framework/componentMetadataProvider";
 import { UserComponentFactory } from "./components/framework/userComponentFactory";
 import { UserComponentRegistry } from "./components/framework/userComponentRegistry";
-import type { ComponentMeta, ContextParams } from "./context/context";
-import { Context } from "./context/context";
+import { ComponentMeta, Context, ContextParams } from "./context/context";
 import { CtrlsFactory } from "./ctrlsFactory";
 import { CtrlsService } from "./ctrlsService";
 import { DragAndDropService } from "./dragAndDrop/dragAndDropService";
 import { DragService } from "./dragAndDrop/dragService";
 import { CellPositionUtils } from "./entities/cellPositionUtils";
-import type { GridOptions } from "./entities/gridOptions";
+import { GridOptions } from "./entities/gridOptions";
 import { RowNodeEventThrottle } from "./entities/rowNodeEventThrottle";
 import { RowPositionUtils } from "./entities/rowPositionUtils";
 import { Environment } from "./environment";
 import { EventService } from "./eventService";
 import { FocusService } from "./focusService";
-import type { GridApi } from "./gridApi";
+import { GridApi } from "./gridApi";
 import { FakeHScrollComp } from "./gridBodyComp/fakeHScrollComp";
 import { FakeVScrollComp } from "./gridBodyComp/fakeVScrollComp";
 import { MouseEventService } from "./gridBodyComp/mouseEventService";
@@ -37,7 +36,7 @@ import { StandardMenuFactory } from "./headerRendering/cells/column/standardMenu
 import { HeaderNavigationService } from "./headerRendering/common/headerNavigationService";
 import { HeaderPositionUtils } from "./headerRendering/common/headerPosition";
 import { HorizontalResizeService } from "./headerRendering/common/horizontalResizeService";
-import type { IFrameworkOverrides } from "./interfaces/iFrameworkOverrides";
+import { IFrameworkOverrides } from "./interfaces/iFrameworkOverrides";
 import type { Module } from "./interfaces/iModule";
 import type { RowModelType } from "./interfaces/iRowModel";
 import { LocaleService } from "./localeService";
@@ -208,12 +207,15 @@ export class GridCoreCreator {
 
     public create(eGridDiv: HTMLElement, providedOptions: GridOptions, createUi: (context: Context) => void, acceptChanges?: (context: Context) => void, params?: GridParams): GridApi {
 
-        // Ensure we do not mutate the provided gridOptions / global gridOptions
-        const mergedGridOps: GridOptions = {};
+        let mergedGridOps: GridOptions = {};
         if (GlobalGridOptions.gridOptions) {
+            // Merge deep to avoid leaking changes to the global options
             mergeDeep(mergedGridOps, GlobalGridOptions.gridOptions, true, true);
+            // Shallow copy to ensure context reference is maintained
+            mergedGridOps = {...mergedGridOps, ...providedOptions};
+        }else{
+            mergedGridOps = providedOptions;
         }
-        mergeDeep(mergedGridOps, providedOptions, true, true);
         const gridOptions = GridOptionsService.getCoercedGridOptions(mergedGridOps);
         
         const debug = !!gridOptions.debug;
@@ -397,7 +399,7 @@ export class GridCoreCreator {
             RowContainerHeightService, HorizontalResizeService, LocaleService,
             DragService, DisplayedGroupCreator, EventService, GridOptionsService,
             PopupService, SelectionService, ColumnModel, HeaderNavigationService,
-            PaginationProxy, RowRenderer, ColumnFactory, TemplateService,
+            PaginationProxy, RowRenderer, ColumnFactory, 
             NavigationService, ValueCache, ValueService, LoggerFactory,
             AutoWidthCalculator, StandardMenuFactory, DragAndDropService,
             FocusService, MouseEventService, Environment, CellNavigationService, ValueFormatterService,

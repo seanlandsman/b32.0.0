@@ -195,12 +195,8 @@ export class RowCtrl extends BeanStub {
         return this.tabIndex;
     }
 
-    public isSticky(): boolean {
+    private isSticky(): boolean {
         return this.rowNode.sticky;
-    }
-
-    public getBeans(): Beans {
-        return this.beans;
     }
 
     public getInstanceId(): RowCtrlInstanceId {
@@ -420,7 +416,7 @@ export class RowCtrl extends BeanStub {
         return cellCtrl ? cellCtrl.getGui() : null;
     }
 
-    public executeProcessRowPostCreateFunc(): void {
+    private executeProcessRowPostCreateFunc(): void {
         const func = this.gos.getCallback('processRowPostCreate');
         if (!func || !this.areAllContainersReady()) { return; }
 
@@ -655,10 +651,6 @@ export class RowCtrl extends BeanStub {
 
     public isFullWidth(): boolean {
         return this.rowType !== RowType.Normal;
-    }
-
-    public getRowType(): RowType {
-        return this.rowType;
     }
 
     public refreshFullWidth(): boolean {
@@ -1363,10 +1355,6 @@ export class RowCtrl extends BeanStub {
         );
 
         this.beans.ariaAnnouncementService.announceValue(label);
-    }
-
-    public isUseAnimationFrameForCreate(): boolean {
-        return this.useAnimationFrameForCreate;
     }
 
     public addHoverFunctionality(eRow: HTMLElement): void {

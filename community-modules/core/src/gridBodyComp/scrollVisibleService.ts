@@ -51,7 +51,7 @@ export class ScrollVisibleService extends BeanStub {
     }
 
     private updateImpl(): void {
-        const centerRowCtrl = this.ctrlsService.getCenterRowContainerCtrl();
+        const centerRowCtrl = this.ctrlsService.get('center');
 
         if (!centerRowCtrl || this.columnAnimationService.isActive()) { return; }
 

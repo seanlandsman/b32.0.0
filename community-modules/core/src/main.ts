@@ -367,7 +367,6 @@ export { GridCtrl } from "./gridComp/gridCtrl";
 export { Logger, LoggerFactory } from "./logger";
 export type { SortModelItem } from './sortController';
 export { SortController } from "./sortController";
-export { TemplateService } from "./templateService";
 export { LocaleService } from './localeService';
 export * from "./utils/index"; // please leave this as is - we want it to be explicit for build reasons
 export type { ColumnSortState } from "./utils/aria";

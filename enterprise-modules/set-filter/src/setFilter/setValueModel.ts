@@ -8,7 +8,6 @@ import {
     SetFilterValuesFuncParams,
     TextFilter,
     TextFormatter,
-    ValueFormatterService,
     IEventEmitter,
     EventService,
     RowNode,
@@ -31,7 +30,6 @@ export enum SetFilterModelValuesType {
 }
 
 export interface SetValueModelParams<V> {
-    valueFormatterService: ValueFormatterService,
     gos: GridOptionsService,
     columnModel: ColumnModel,
     valueService: ValueService,
@@ -111,7 +109,6 @@ export class SetValueModel<V> implements IEventEmitter {
             groupingTreeList,
             filterParams,
             gos,
-            valueFormatterService,
             valueFormatter,
             addManagedListener
         } = params;
@@ -192,7 +189,7 @@ export class SetValueModel<V> implements IEventEmitter {
             treeListFormatter,
             treeDataTreeList || groupingTreeList
         ) : new FlatSetDisplayValueModel<V>(
-            valueFormatterService,
+            valueService,
             valueFormatter,
             this.formatter,
             column

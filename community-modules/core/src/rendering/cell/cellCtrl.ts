@@ -138,6 +138,7 @@ export class CellCtrl extends BeanStub {
     }
 
     public shouldRestoreFocus(): boolean {
+        // Used in React to determine if the cell should restore focus after re-rendering
         return this.beans.focusService.shouldRestoreFocus(this.cellPosition);
     }
 
@@ -337,15 +338,6 @@ export class CellCtrl extends BeanStub {
     public getInstanceId(): CellCtrlInstanceId {
         return this.instanceId;
     }
-    public getIncludeSelection(): boolean {
-        return this.includeSelection;
-    }
-    public getIncludeRowDrag(): boolean {
-        return this.includeRowDrag;
-    }
-    public getIncludeDndSource(): boolean {
-        return this.includeDndSource;
-    }
     public getColumnIdSanitised(): string {
         return this.colIdSanitised;
     }
@@ -357,7 +349,7 @@ export class CellCtrl extends BeanStub {
         return colDef.cellRenderer != null || colDef.cellRendererSelector != null;
     }
     public getValueToDisplay(): any {
-        return this.valueFormatted != null ? this.valueFormatted : this.value;
+        return this.valueFormatted ?? this.value;
     }
 
     private showValue(forceNewCellRendererInstance = false): void {
@@ -372,7 +364,7 @@ export class CellCtrl extends BeanStub {
             compDetails = this.beans.userComponentFactory.getCellRendererDetails(this.column.getColDef(), params);
         }
         this.cellComp.setRenderDetails(compDetails, valueToDisplay, forceNewCellRendererInstance);
-        this.refreshHandle();
+        this.cellRangeFeature?.refreshHandle();
     }
 
     private setupControlComps(): void {
@@ -442,7 +434,7 @@ export class CellCtrl extends BeanStub {
         if (this.editing === editing) { return; }
 
         this.editing = editing;
-        this.refreshHandle();
+        this.cellRangeFeature?.refreshHandle();
     }
 
     // pass in 'true' to cancel the editing.
@@ -579,7 +571,7 @@ export class CellCtrl extends BeanStub {
                     this.disableTooltipFeature();
                 }
                 this.enableTooltipFeature(value, shouldDisplayTooltip);
-                this.refreshToolTip();
+                this.tooltipFeature?.refreshToolTip();
             }
 
         });
@@ -588,7 +580,7 @@ export class CellCtrl extends BeanStub {
     }
 
     private parseValue(newValue: any): any {
-        return this.beans.valueParserService.parseValue(this.column, this.rowNode, newValue, this.getValue());
+        return this.beans.valueService.parseValue(this.column, this.rowNode, newValue, this.getValue());
     }
 
     public setFocusOutOnEditor(): void {
@@ -688,7 +680,7 @@ export class CellCtrl extends BeanStub {
             this.cellCustomStyleFeature?.applyClassesFromColDef();
         }
 
-        this.refreshToolTip();
+        this.tooltipFeature?.refreshToolTip();
 
         // we do cellClassRules even if the value has not changed, so that users who have rules that
         // look at other parts of the row (where the other part of the row might of changed) will work.
@@ -781,8 +773,8 @@ export class CellCtrl extends BeanStub {
         return this.callValueFormatter(value) ?? value;
     }
 
-    private callValueFormatter(value: any): any {
-        return this.beans.valueFormatterService.formatValue(this.column, this.rowNode, value);
+    private callValueFormatter(value: any): string | null {
+        return this.beans.valueService.formatValue(this.column, this.rowNode, value);
     }
 
     private updateAndFormatValue(compareValues: boolean): boolean {
@@ -810,10 +802,6 @@ export class CellCtrl extends BeanStub {
 
     public getValue(): any {
         return this.value;
-    }
-
-    public getValueFormatted(): string {
-        return this.valueFormatted;
     }
 
     private addDomData(): void {
@@ -853,10 +841,6 @@ export class CellCtrl extends BeanStub {
 
     public getGui(): HTMLElement {
         return this.eGui;
-    }
-
-    public refreshToolTip(): void {
-        this.tooltipFeature?.refreshToolTip();
     }
 
     public getColSpanningList(): Column[] {
@@ -900,22 +884,8 @@ export class CellCtrl extends BeanStub {
         return this.rowNode;
     }
 
-    public getBeans(): Beans {
-        return this.beans;
-    }
-
     public isPrintLayout(): boolean {
         return this.printLayout;
-    }
-
-    public appendChild(htmlElement: HTMLElement): void {
-        this.eGui.appendChild(htmlElement);
-    }
-
-    public refreshHandle(): void {
-        if (this.cellRangeFeature) {
-            this.cellRangeFeature.refreshHandle();
-        }
     }
 
     public getCellPosition(): CellPosition {

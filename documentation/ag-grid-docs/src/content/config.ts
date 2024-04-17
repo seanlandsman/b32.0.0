@@ -1,4 +1,4 @@
-import { ICON_MAP } from '@components/icon/Icon';
+import { ICON_MAP } from '@ag-website-shared/components/icon/Icon';
 import { defineCollection, z } from 'astro:content';
 
 const docs = defineCollection({
@@ -70,9 +70,6 @@ const menu = defineCollection({
     type: 'data',
     schema: z.object({
         header: z.object({
-            items: z.array(level1MenuItem),
-        }),
-        product: z.object({
             items: z.array(level1MenuItem),
         }),
         api: z.object({

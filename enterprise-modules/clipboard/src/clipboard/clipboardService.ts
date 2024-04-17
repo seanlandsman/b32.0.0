@@ -40,9 +40,7 @@ import {
     Optional,
     CtrlsService,
     WithoutGridCommon,
-    ProcessRowGroupForExportParams,
-    ValueFormatterService,
-    ValueParserService
+    ProcessRowGroupForExportParams
 } from "@ag-grid-community/core";
 
 interface RowCallback {
@@ -84,8 +82,6 @@ export class ClipboardService extends BeanStub implements IClipboardService {
     @Autowired('cellNavigationService') private cellNavigationService: CellNavigationService;
     @Autowired('cellPositionUtils') public cellPositionUtils: CellPositionUtils;
     @Autowired('rowPositionUtils') public rowPositionUtils: RowPositionUtils;
-    @Autowired('valueFormatterService') private valueFormatterService: ValueFormatterService;
-    @Autowired('valueParserService') private valueParserService: ValueParserService;
     
     @Optional('rangeService') private rangeService?: IRangeService;
 
@@ -409,6 +405,18 @@ export class ClipboardService extends BeanStub implements IClipboardService {
         this.iterateActiveRanges(false, rowCallback);
     }
 
+    private getDisplayedColumnsStartingAt(column: Column): Column[] {
+        let currentColumn: Column | null = column;
+        const columns: Column[] = [];
+
+        while (currentColumn != null) {
+            columns.push(currentColumn);
+            currentColumn = this.columnModel.getDisplayedColAfter(currentColumn);
+        }
+
+        return columns;
+    }
+
     private pasteStartingFromFocusedCell(
         parsedData: string[][],
         cellsToFlash: any,
@@ -419,7 +427,7 @@ export class ClipboardService extends BeanStub implements IClipboardService {
         if (!focusedCell) { return; }
 
         const currentRow: RowPosition = { rowIndex: focusedCell.rowIndex, rowPinned: focusedCell.rowPinned };
-        const columnsToPasteInto = this.columnModel.getDisplayedColumnsStartingAt(focusedCell.column);
+        const columnsToPasteInto = this.getDisplayedColumnsStartingAt(focusedCell.column);
 
         if (this.isPasteSingleValueIntoRange(parsedData)) {
             this.pasteSingleValueIntoRange(parsedData, updatedRowNodes, cellsToFlash, changedPath);
@@ -710,7 +718,7 @@ export class ClipboardService extends BeanStub implements IClipboardService {
 
     private clearCellValue(rowNode: RowNode, column: Column): void {
         if (!column.isCellEditable(rowNode)) { return; }
-        const emptyValue = this.valueParserService.parseValue(column, rowNode, '', rowNode.getValueFromValueService(column)) ?? null;
+        const emptyValue = this.valueService.parseValue(column, rowNode, '', rowNode.getValueFromValueService(column)) ?? null;
         rowNode.setDataValue(column, emptyValue, 'clipboardService');
     }
 
@@ -935,7 +943,7 @@ export class ClipboardService extends BeanStub implements IClipboardService {
             }
             const value = node.groupData?.[column.getId()];
             if (!value || !node.rowGroupColumn || node.rowGroupColumn.getColDef().useValueFormatterForExport === false) { return value; }
-            return this.valueFormatterService.formatValue(node.rowGroupColumn, node, value) ?? value;
+            return this.valueService.formatValue(node.rowGroupColumn, node, value) ?? value;
         }
         let value = getValueFromNode();
 
@@ -959,8 +967,8 @@ export class ClipboardService extends BeanStub implements IClipboardService {
                 node,
                 column,
                 type: 'clipboard',
-                formatValue: (valueToFormat: any) => this.valueFormatterService.formatValue(column, node, valueToFormat) ?? valueToFormat,
-                parseValue: (valueToParse: string) => this.valueParserService.parseValue(column, node, valueToParse, this.valueService.getValue(column, node))
+                formatValue: (valueToFormat: any) => this.valueService.formatValue(column, node, valueToFormat) ?? valueToFormat,
+                parseValue: (valueToParse: string) => this.valueService.parseValue(column, node, valueToParse, this.valueService.getValue(column, node))
             });
         }
         return value;
@@ -991,17 +999,20 @@ export class ClipboardService extends BeanStub implements IClipboardService {
                 node: rowNode,
                 value,
                 type,
-                formatValue: (valueToFormat: any) => this.valueFormatterService.formatValue(column, rowNode ?? null, valueToFormat) ?? valueToFormat,
-                parseValue: (valueToParse: string) => this.valueParserService.parseValue(column, rowNode ?? null, valueToParse, this.valueService.getValue(column, rowNode))
+                formatValue: (valueToFormat: any) => this.valueService.formatValue(column, rowNode ?? null, valueToFormat) ?? valueToFormat,
+                parseValue: (valueToParse: string) => this.valueService.parseValue(column, rowNode ?? null, valueToParse, this.valueService.getValue(column, rowNode))
 
             };
 
             return func(params);
         }
+
         if (canParse && column.getColDef().useValueParserForImport !== false) {
-            return this.valueParserService.parseValue(column, rowNode ?? null, value, this.valueService.getValue(column, rowNode));
-        } else if (canFormat && column.getColDef().useValueFormatterForExport !== false) {
-            return this.valueFormatterService.formatValue(column, rowNode ?? null, value) ?? value as any;
+            return this.valueService.parseValue(column, rowNode ?? null, value, this.valueService.getValue(column, rowNode));
+        }
+
+        if (canFormat && column.getColDef().useValueFormatterForExport !== false) {
+            return this.valueService.formatValue(column, rowNode ?? null, value) ?? value as any;
         }
 
         return value;

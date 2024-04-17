@@ -1,17 +1,17 @@
-import { ExpressionService } from "./expressionService";
 import { ColumnModel } from "../columns/columnModel";
-import { ValueGetterParams, KeyCreatorParams, ValueSetterParams } from "../entities/colDef";
-import { Autowired, Bean, Optional, PostConstruct } from "../context/context";
-import { Column } from "../entities/column";
-import { CellValueChangedEvent, Events } from "../events";
-import { ValueCache } from "./valueCache";
-import { BeanStub } from "../context/beanStub";
-import { getValueUsingField } from "../utils/object";
-import { missing, exists } from "../utils/generic";
-import { warnOnce } from "../utils/function";
-import { IRowNode } from "../interfaces/iRowNode";
-import { RowNode } from "../entities/rowNode";
 import { DataTypeService } from "../columns/dataTypeService";
+import { BeanStub } from "../context/beanStub";
+import { Autowired, Bean, Optional, PostConstruct } from "../context/context";
+import { KeyCreatorParams, ValueFormatterParams, ValueGetterParams, ValueParserParams, ValueSetterParams } from "../entities/colDef";
+import { Column } from "../entities/column";
+import { RowNode } from "../entities/rowNode";
+import { CellValueChangedEvent, Events } from "../events";
+import { IRowNode } from "../interfaces/iRowNode";
+import { warnOnce } from "../utils/function";
+import { exists, missing } from "../utils/generic";
+import { getValueUsingField } from "../utils/object";
+import { ExpressionService } from "./expressionService";
+import { ValueCache } from "./valueCache";
 
 @Bean('valueService')
 export class ValueService extends BeanStub {
@@ -110,6 +110,72 @@ export class ValueService extends BeanStub {
             if (openedGroup != null) {
                 return openedGroup;
             }
+        }
+
+        return result;
+    }
+
+    public parseValue(column: Column, rowNode: IRowNode | null, newValue: any, oldValue: any): any {
+        const colDef = column.getColDef();
+        const params: ValueParserParams = this.gos.addGridCommonParams({
+            node: rowNode,
+            data: rowNode?.data,
+            oldValue,
+            newValue,
+            colDef,
+            column
+        });
+
+        const valueParser = colDef.valueParser;
+
+        if (exists(valueParser)) {
+            if (typeof valueParser === 'function') {
+                return valueParser(params);
+            }
+            return this.expressionService.evaluate(valueParser, params);
+        }
+        return newValue;
+    }
+
+    public formatValue(
+        column: Column,
+        node: IRowNode | null,
+        value: any,
+        suppliedFormatter?: (value: any) => string,
+        useFormatterFromColumn = true
+    ): string | null {
+        let result: string | null = null;
+        let formatter: ((value: any) => string) | string | undefined;
+
+        const colDef = column.getColDef();
+
+        if (suppliedFormatter) {
+            // use supplied formatter if provided, e.g. set filter items can have their own value formatters
+            formatter = suppliedFormatter;
+        } else if (useFormatterFromColumn) {
+            formatter = colDef.valueFormatter;
+        }
+
+        if (formatter) {
+            const params: ValueFormatterParams = this.gos.addGridCommonParams({
+                value,
+                node,
+                data: node ? node.data : null,
+                colDef,
+                column
+            });
+            if (typeof formatter === 'function') {
+                result = formatter(params);
+            } else {
+                result = this.expressionService.evaluate(formatter, params);
+            }
+        } else if (colDef.refData) {
+            return colDef.refData[value] || '';
+        }
+
+        // if we don't do this, then arrays get displayed as 1,2,3, but we want 1, 2, 3 (i.e. with spaces)
+        if (result == null && Array.isArray(value)) {
+            result = value.join(', ');
         }
 
         return result;
