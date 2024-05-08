@@ -1,7 +1,7 @@
 // TODO remove this file once AG-10555 is implemented
 
 const selectors: [string, number][] = [
-    ['.ag-row-group-indent-%', 50],
+    // ['.ag-row-group-indent-%', 50],
     ['.ag-column-select-indent-%', 10],
     ['.ag-set-filter-indent-%', 10],
     ['.ag-filter-toolpanel-group-level-%-header', 10],
