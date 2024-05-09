@@ -51,6 +51,7 @@ export const FILES_PATH_MAP: Record<string, string | GlobConfig> = {
 
     // Community modules
     '@ag-grid-community/core/dist/**': 'community-modules/core/dist/**/*.{cjs,js,map}',
+    '@ag-grid-community/core/feature/**': 'community-modules/core/dist/package/feature/**/*.{cjs,js,map}',
     '@ag-grid-community/client-side-row-model/dist/**':
         'community-modules/client-side-row-model/dist/**/*.{cjs,js,map}',
     '@ag-grid-community/csv-export/dist/**': 'community-modules/csv-export/dist/**/*.{cjs,js,map}',

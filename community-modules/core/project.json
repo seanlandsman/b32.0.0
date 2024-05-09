@@ -58,14 +58,18 @@
       ],
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "community-modules/core/dist/package",
+        "outputPath": "community-modules/core/dist",
         "main": "community-modules/core/src/main.ts",
         "tsConfig": "community-modules/core/tsconfig.lib.json",
         "esbuildConfig": "esbuild.config.cjs",
+        "additionalEntryPoints": [
+          "community-modules/core/src/mainQuickFilter.ts"
+        ],
         "platform": "browser",
         "target": "es6",
         "format": ["cjs", "esm"],
-        "sourcemap": true
+        "sourcemap": true,
+        "metafile": true
       },
       "configurations": {
         "watch": {

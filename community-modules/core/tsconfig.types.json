@@ -5,7 +5,8 @@
     "emitDeclarationOnly": true
   },
   "include": [
-    "src/main.ts"
+    "src/main.ts",
+    "src/mainQuickFilter.ts",
   ],
   "exclude": [
     "src/main-styles.ts",

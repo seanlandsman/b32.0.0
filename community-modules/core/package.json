@@ -5,14 +5,22 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "main": "./dist/package/main.cjs.js",
-  "types": "./dist/types/src/main.d.ts",
-  "module": "./dist/package/main.esm.mjs",
+  "main": "./main.cjs.js",
+  "types": "./types/src/main.d.ts",
+  "module": "./main.esm.mjs",
   "exports": {
-    "import": "./dist/package/main.esm.mjs",
-    "require": "./dist/package/main.cjs.js",
-    "types": "./dist/types/src/main.d.ts",
-    "default": "./dist/package/main.cjs.js"
+    ".": {
+    "import": "./main.esm.mjs",
+    "require": "./main.cjs.js",
+    "types": "./types/src/main.d.ts",
+    "default": "./main.cjs.js"
+    },
+    "./quickFilter": {
+      "types": "./types/src/mainQuickFilter.d.ts",
+      "require": "./package/mainQuickFilter.cjs.js",
+      "default": "./package/mainQuickFilter.cjs.js",
+      "import": "./package/mainQuickFilter.esm.mjs"
+    }
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",

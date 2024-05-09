@@ -102,6 +102,7 @@ export {Events} from "@ag-grid-community/core";
 export {ExcelFactoryMode} from "@ag-grid-community/core";
 export {ExpansionService} from "@ag-grid-community/core";
 export {ExpressionService} from "@ag-grid-community/core";
+export {FeatureRegistry} from "@ag-grid-community/core";
 export {FilterManager} from "@ag-grid-community/core";
 export {FilterWrapperComp} from "@ag-grid-community/core";
 export {FloatingFilterMapper} from "@ag-grid-community/core";
@@ -215,6 +216,7 @@ export {VirtualList} from "@ag-grid-community/core";
 export {VirtualListDragFeature} from "@ag-grid-community/core";
 export {_} from "@ag-grid-community/core";
 export {createGrid} from "@ag-grid-community/core";
+export {exists} from "@ag-grid-community/core";
 export {getRowContainerTypeForName} from "@ag-grid-community/core";
 export {provideGlobalGridOptions} from "@ag-grid-community/core";
 /** AUTO_GENERATED_END **/
