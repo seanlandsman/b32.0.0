@@ -1,1 +1,1 @@
-export { MasterDetailModule } from './masterDetailModule';
+export { MasterDetailModule, useMasterDetail } from './masterDetailModule';

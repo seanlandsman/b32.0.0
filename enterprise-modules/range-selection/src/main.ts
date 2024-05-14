@@ -1,1 +1,1 @@
-export { RangeSelectionModule } from "./rangeSelectionModule";
+export { RangeSelectionModule, useRangeSelection } from "./rangeSelectionModule";

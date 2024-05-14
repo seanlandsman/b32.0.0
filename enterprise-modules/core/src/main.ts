@@ -1,3 +1,3 @@
-export { EnterpriseCoreModule } from "./agGridEnterpriseModule";
+export { EnterpriseCoreModule, useEnterpriseCore } from "./agGridEnterpriseModule";
 export {GridLicenseManager as LicenseManager} from "./license/gridLicenseManager";
 export {ILicenseManager} from "./license/shared/licenseManager";

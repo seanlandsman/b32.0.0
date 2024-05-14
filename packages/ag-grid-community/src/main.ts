@@ -1,12 +1,15 @@
 /*
 * Used for umd bundles without styles, as well as cjs/esm packaging
 */
-import {ModuleRegistry} from '@ag-grid-community/core';
-import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
-import {InfiniteRowModelModule} from '@ag-grid-community/infinite-row-model'
-import {CsvExportModule} from '@ag-grid-community/csv-export'
+import {useClientSideRowModel} from '@ag-grid-community/client-side-row-model'
+import {useInfiniteRowModel} from '@ag-grid-community/infinite-row-model'
+import {useCsvExport} from '@ag-grid-community/csv-export'
 
-ModuleRegistry.__registerModules([ClientSideRowModelModule, InfiniteRowModelModule, CsvExportModule], false, undefined);
+export function useAgGridCommunity() {
+    useClientSideRowModel();
+    useInfiniteRowModel();
+    useCsvExport();
+}
 
 // do not export from "@ag-grid-community/core" - this is handled below
 /** AUTO_GENERATED_START **/

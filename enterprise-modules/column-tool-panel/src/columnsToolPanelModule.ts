@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { PrimaryColsHeaderPanel } from "./columnToolPanel/primaryColsHeaderPanel";
 import { PrimaryColsListPanel } from "./columnToolPanel/primaryColsListPanel";
@@ -28,3 +28,7 @@ export const ColumnsToolPanelModule: Module = {
         SideBarModule
     ]
 };
+
+export function useColumnsToolPanel(): void {
+    ModuleRegistry.__registerModules([ColumnsToolPanelModule],false, undefined);
+}

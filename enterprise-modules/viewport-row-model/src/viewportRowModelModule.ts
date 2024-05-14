@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { VERSION } from "./version";
 import { ViewportRowModel } from "./viewportRowModel/viewportRowModel";
@@ -12,3 +12,7 @@ export const ViewportRowModelModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useViewportRowModel(): void {
+    ModuleRegistry.__registerModules([ViewportRowModelModule],false, undefined);
+}

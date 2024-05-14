@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { HorizontalResizeComp } from "./sideBar/horizontalResizeComp";
 import { SideBarComp } from "./sideBar/sideBarComp";
@@ -20,3 +20,7 @@ export const SideBarModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useSideBar(): void {
+    ModuleRegistry.__registerModules([SideBarModule],false, undefined);
+}

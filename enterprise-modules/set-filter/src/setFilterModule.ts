@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from '@ag-grid-community/core';
+import { Module, ModuleNames, ModuleRegistry } from '@ag-grid-community/core';
 import { EnterpriseCoreModule } from '@ag-grid-enterprise/core';
 import { SetFilter } from './setFilter/setFilter';
 import { SetFloatingFilterComp } from './setFilter/setFloatingFilter';
@@ -16,3 +16,7 @@ export const SetFilterModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useSetFilter(): void {
+    ModuleRegistry.__registerModules([SetFilterModule],false, undefined);
+}

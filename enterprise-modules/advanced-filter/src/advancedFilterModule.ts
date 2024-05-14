@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { AdvancedFilterComp } from "./advancedFilter/advancedFilterComp";
 import { AdvancedFilterExpressionService } from "./advancedFilter/advancedFilterExpressionService";
@@ -16,3 +16,7 @@ export const AdvancedFilterModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useAdvancedFilter(): void {
+    ModuleRegistry.__registerModules([AdvancedFilterModule],false, undefined);
+}

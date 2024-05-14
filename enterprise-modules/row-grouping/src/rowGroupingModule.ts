@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { AggregationStage } from "./rowGrouping/aggregationStage";
 import { GroupStage } from "./rowGrouping/groupStage";
@@ -26,3 +26,7 @@ export const RowGroupingModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useRowGrouping(): void {
+    ModuleRegistry.__registerModules([RowGroupingModule],false, undefined);
+}

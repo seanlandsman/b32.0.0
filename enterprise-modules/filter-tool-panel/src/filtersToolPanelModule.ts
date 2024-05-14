@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { FiltersToolPanelHeaderPanel } from "./filterToolPanel/filtersToolPanelHeaderPanel";
 import { FiltersToolPanelListPanel } from "./filterToolPanel/filtersToolPanelListPanel";
@@ -22,3 +22,7 @@ export const FiltersToolPanelModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useFiltersToolPanel(): void {
+    ModuleRegistry.__registerModules([FiltersToolPanelModule],false, undefined);
+}

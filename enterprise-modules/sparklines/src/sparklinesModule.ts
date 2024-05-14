@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from '@ag-grid-community/core';
+import { Module, ModuleNames, ModuleRegistry } from '@ag-grid-community/core';
 import { EnterpriseCoreModule } from '@ag-grid-enterprise/core';
 import { SparklineCellRenderer } from './sparklineCellRenderer';
 import { SparklineTooltipSingleton } from './tooltip/sparklineTooltipSingleton';
@@ -11,3 +11,7 @@ export const SparklinesModule: Module = {
     userComponents: [{ componentName: 'agSparklineCellRenderer', componentClass: SparklineCellRenderer }],
     dependantModules: [EnterpriseCoreModule],
 };
+
+export function useSparklines(): void {
+    ModuleRegistry.__registerModules([SparklinesModule],false, undefined);
+}

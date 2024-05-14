@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { ExcelCreator } from "./excelExport/excelCreator";
 import { CsvCreator, GridSerializer } from "@ag-grid-community/csv-export";
@@ -20,3 +20,8 @@ export const ExcelExportModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+
+export function useExcelExport(): void {
+    ModuleRegistry.__registerModules([ExcelExportModule],false, undefined);
+}

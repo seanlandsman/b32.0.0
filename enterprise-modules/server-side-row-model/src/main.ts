@@ -1,1 +1,1 @@
-export { ServerSideRowModelModule } from "./serverSideRowModelModule";
+export { ServerSideRowModelModule, useServerSideRowModel } from "./serverSideRowModelModule";

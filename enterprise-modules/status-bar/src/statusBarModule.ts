@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { StatusBarService } from "./statusBar/statusBarService";
 import { StatusBar } from "./statusBar/statusBar";
@@ -29,3 +29,7 @@ export const StatusBarModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useStatusBar(): void {
+    ModuleRegistry.__registerModules([StatusBarModule],false, undefined);
+}

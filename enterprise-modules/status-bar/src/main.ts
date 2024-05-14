@@ -1,1 +1,1 @@
-export { StatusBarModule } from "./statusBarModule";
+export { StatusBarModule, useStatusBar } from "./statusBarModule";

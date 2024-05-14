@@ -1,28 +1,27 @@
 /*
 * Used for umd bundles with styles
 */
-import {ModuleRegistry} from '@ag-grid-community/core';
-import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
-import {InfiniteRowModelModule} from '@ag-grid-community/infinite-row-model'
-import {CsvExportModule} from '@ag-grid-community/csv-export'
-import {AdvancedFilterModule} from "@ag-grid-enterprise/advanced-filter";
-import {GridChartsModule} from "@ag-grid-enterprise/charts";
-import {ClipboardModule} from "@ag-grid-enterprise/clipboard";
-import {ColumnsToolPanelModule} from "@ag-grid-enterprise/column-tool-panel";
-import {ExcelExportModule} from "@ag-grid-enterprise/excel-export";
-import {FiltersToolPanelModule} from "@ag-grid-enterprise/filter-tool-panel";
-import {MasterDetailModule} from "@ag-grid-enterprise/master-detail";
-import {MenuModule} from "@ag-grid-enterprise/menu";
-import {MultiFilterModule} from "@ag-grid-enterprise/multi-filter";
-import {RangeSelectionModule} from "@ag-grid-enterprise/range-selection";
-import {RichSelectModule} from "@ag-grid-enterprise/rich-select";
-import {RowGroupingModule} from "@ag-grid-enterprise/row-grouping";
-import {ServerSideRowModelModule} from "@ag-grid-enterprise/server-side-row-model";
-import {SetFilterModule} from "@ag-grid-enterprise/set-filter";
-import {SideBarModule} from "@ag-grid-enterprise/side-bar";
-import {SparklinesModule} from "@ag-grid-enterprise/sparklines";
-import {StatusBarModule} from "@ag-grid-enterprise/status-bar";
-import {ViewportRowModelModule} from "@ag-grid-enterprise/viewport-row-model";
+import {useClientSideRowModel} from '@ag-grid-community/client-side-row-model'
+import {useInfiniteRowModel} from '@ag-grid-community/infinite-row-model'
+import {useCsvExport} from '@ag-grid-community/csv-export'
+import {useAdvancedFilter} from "@ag-grid-enterprise/advanced-filter";
+import {useGridCharts} from "@ag-grid-enterprise/charts";
+import {useClipboard} from "@ag-grid-enterprise/clipboard";
+import {useColumnsToolPanel} from "@ag-grid-enterprise/column-tool-panel";
+import {useExcelExport} from "@ag-grid-enterprise/excel-export";
+import {useFiltersToolPanel} from "@ag-grid-enterprise/filter-tool-panel";
+import {useMasterDetail} from "@ag-grid-enterprise/master-detail";
+import {useMenu} from "@ag-grid-enterprise/menu";
+import {useMultiFilter} from "@ag-grid-enterprise/multi-filter";
+import {useRangeSelection} from "@ag-grid-enterprise/range-selection";
+import {useRichSelect} from "@ag-grid-enterprise/rich-select";
+import {useRowGrouping} from "@ag-grid-enterprise/row-grouping";
+import {useServerSideRowModel} from "@ag-grid-enterprise/server-side-row-model";
+import {useSetFilter} from "@ag-grid-enterprise/set-filter";
+import {useSideBar} from "@ag-grid-enterprise/side-bar";
+import {useSparklines} from "@ag-grid-enterprise/sparklines";
+import {useStatusBar} from "@ag-grid-enterprise/status-bar";
+import {useViewportRowModel} from "@ag-grid-enterprise/viewport-row-model";
 
 import '@ag-grid-community/styles/ag-grid-no-native-widgets.css';
 import '@ag-grid-community/styles/ag-grid.css';
@@ -40,28 +39,29 @@ import '@ag-grid-community/styles/agGridClassicFont.css';
 import '@ag-grid-community/styles/agGridMaterialFont.css';
 import '@ag-grid-community/styles/agGridQuartzFont.css';
 
-ModuleRegistry.__registerModules([ClientSideRowModelModule,
-    InfiniteRowModelModule,
-    CsvExportModule,
-    AdvancedFilterModule,
-    GridChartsModule,
-    ClipboardModule,
-    ColumnsToolPanelModule,
-    ExcelExportModule,
-    FiltersToolPanelModule,
-    MasterDetailModule,
-    MenuModule,
-    MultiFilterModule,
-    RangeSelectionModule,
-    RichSelectModule,
-    RowGroupingModule,
-    ServerSideRowModelModule,
-    SetFilterModule,
-    SideBarModule,
-    SparklinesModule,
-    StatusBarModule,
-    ViewportRowModelModule
-], false, undefined);
+export function useAgGridEnterprise() {
+    useClientSideRowModel(),
+    useInfiniteRowModel(),
+    useCsvExport(),
+    useAdvancedFilter(),
+    useGridCharts(),
+    useClipboard(),
+    useColumnsToolPanel(),
+    useExcelExport(),
+    useFiltersToolPanel(),
+    useMasterDetail(),
+    useMenu(),
+    useMultiFilter(),
+    useRangeSelection(),
+    useRichSelect(),
+    useRowGrouping(),
+    useServerSideRowModel(),
+    useSetFilter(),
+    useSideBar(),
+    useSparklines(),
+    useStatusBar(),
+    useViewportRowModel()
+};
 
 // do not export from "ag-grid-community" - this is handled below
 /** AUTO_GENERATED_START **/

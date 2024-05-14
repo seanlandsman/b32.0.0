@@ -1,1 +1,1 @@
-export { RichSelectModule } from "./richSelectModule";
+export { RichSelectModule, useRichSelect } from "./richSelectModule";

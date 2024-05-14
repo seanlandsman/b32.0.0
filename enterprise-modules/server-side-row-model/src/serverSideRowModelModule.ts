@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { ServerSideRowModel } from "./serverSideRowModel/serverSideRowModel";
 import { StoreUtils } from "./serverSideRowModel/stores/storeUtils";
@@ -25,3 +25,7 @@ export const ServerSideRowModelModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useServerSideRowModel(): void {
+    ModuleRegistry.__registerModules([ServerSideRowModelModule],false, undefined);
+}

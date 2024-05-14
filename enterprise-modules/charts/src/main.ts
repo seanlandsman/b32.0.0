@@ -1,4 +1,4 @@
-export { GridChartsModule } from "./gridChartsModule";
+export { GridChartsModule, useGridCharts } from "./gridChartsModule";
 export * from './agGridCoreExtension';
 import { time, AgCharts } from "ag-charts-community";
 

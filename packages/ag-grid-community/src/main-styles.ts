@@ -1,10 +1,10 @@
 /*
 * Used for umd bundles with styles
 */
-import {ModuleRegistry} from '@ag-grid-community/core';
-import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
-import {InfiniteRowModelModule} from '@ag-grid-community/infinite-row-model'
-import {CsvExportModule} from '@ag-grid-community/csv-export'
+import {useClientSideRowModel} from '@ag-grid-community/client-side-row-model'
+import {useInfiniteRowModel} from '@ag-grid-community/infinite-row-model'
+import {useCsvExport} from '@ag-grid-community/csv-export'
+
 import '@ag-grid-community/styles/ag-grid-no-native-widgets.css';
 import '@ag-grid-community/styles/ag-grid.css';
 import '@ag-grid-community/styles/ag-theme-alpine-no-font.css';
@@ -21,8 +21,11 @@ import '@ag-grid-community/styles/agGridClassicFont.css';
 import '@ag-grid-community/styles/agGridMaterialFont.css';
 import '@ag-grid-community/styles/agGridQuartzFont.css';
 
-ModuleRegistry.__registerModules([ClientSideRowModelModule, InfiniteRowModelModule, CsvExportModule], false, undefined);
-
+export function useAgGridCommunity() {
+    useClientSideRowModel();
+    useInfiniteRowModel();
+    useCsvExport();
+}
 // do not export from "@ag-grid-community/core" - this is handled below
 /** AUTO_GENERATED_START **/
 export {ALWAYS_SYNC_GLOBAL_EVENTS} from "@ag-grid-community/core";

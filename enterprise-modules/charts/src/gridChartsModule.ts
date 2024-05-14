@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { RangeSelectionModule } from "@ag-grid-enterprise/range-selection";
 import { ChartService } from "./charts/chartService";
@@ -35,3 +35,7 @@ export const GridChartsModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useGridCharts(): void {
+    ModuleRegistry.__registerModules([GridChartsModule],false, undefined);
+}

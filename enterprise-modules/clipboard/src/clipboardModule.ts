@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { CsvExportModule } from "@ag-grid-community/csv-export";
 import { ClipboardService } from "./clipboard/clipboardService";
@@ -13,3 +13,7 @@ export const ClipboardModule: Module = {
         CsvExportModule
     ]
 };
+
+export function useClipboard(): void {
+    ModuleRegistry.__registerModules([ClipboardModule],false, undefined);
+}

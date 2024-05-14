@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { GridLicenseManager as LicenseManager } from "./license/gridLicenseManager";
 import { WatermarkComp } from "./license/watermark";
 
@@ -13,3 +13,7 @@ export const EnterpriseCoreModule: Module = {
         { componentName: 'AgWatermark', componentClass: WatermarkComp }
     ]
 };
+
+export function useEnterpriseCore(): void {
+    ModuleRegistry.__registerModules([EnterpriseCoreModule],false, undefined);
+}

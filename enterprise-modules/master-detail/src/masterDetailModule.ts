@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { DetailCellRenderer } from "./masterDetail/detailCellRenderer";
 import { DetailCellRendererCtrl } from "./masterDetail/detailCellRendererCtrl";
@@ -18,3 +18,7 @@ export const MasterDetailModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useMasterDetail(): void {
+    ModuleRegistry.__registerModules([MasterDetailModule],false, undefined);
+}

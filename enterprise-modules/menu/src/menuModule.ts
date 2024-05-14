@@ -1,4 +1,4 @@
-import { Module, ModuleNames } from "@ag-grid-community/core";
+import { Module, ModuleNames, ModuleRegistry } from "@ag-grid-community/core";
 import { EnterpriseCoreModule } from "@ag-grid-enterprise/core";
 import { EnterpriseMenuFactory } from "./menu/enterpriseMenu";
 import { ContextMenuFactory } from "./menu/contextMenu";
@@ -17,3 +17,7 @@ export const MenuModule: Module = {
         EnterpriseCoreModule
     ]
 };
+
+export function useMenu(): void {
+    ModuleRegistry.__registerModules([MenuModule],false, undefined);
+}
