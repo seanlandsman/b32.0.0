@@ -22,6 +22,8 @@
     "yarn": "^1.22.21"
   },
   "dependencies": {
+    "@types/react": "18.3.28",
+    "algoliasearch": "4.27.0",
     "fs-extra": "^11.3.4",
     "js-yaml": "^4.1.1",
     "tslib": "^2.8.1"
