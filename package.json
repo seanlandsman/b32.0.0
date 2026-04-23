@@ -126,24 +126,5 @@
       "**/vue-class-component"
     ]
   },
-  "packageManager": "yarn@1.22.21",
-  "resolutions": {
-    "**/astro/devalue": "5.6.2",
-    "**/astro/unstorage/h3": "1.15.5",
-    "**/axios/form-data": "4.0.4",
-    "**/jsdom/form-data": "4.0.4",
-    "**/node-fetch/form-data": "3.0.4",
-    "**/@babel/core": "7.27.1",
-    "**/prismjs": "1.30.0",
-    "**/jpeg-js": "0.4.0",
-    "**/tough-cookie": "^4.1.3",
-    "dependency-cruiser/**/cross-spawn": "7.0.6",
-    "@modelcontextprotocol/sdk": "1.26.0",
-    "@nx/devkit/**/ejs": "3.1.10",
-    "@nx/devkit/**/ejs/jake": "10.9.4",
-    "**/flatted": "3.4.0",
-    "**/undici": "6.24.0",
-    "**/lodash": "4.18.1",
-    "**/lodash-es": "4.18.1"
-  }
+  "packageManager": "yarn@1.22.21"
 }
