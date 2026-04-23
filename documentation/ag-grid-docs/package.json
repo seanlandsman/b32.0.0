@@ -70,7 +70,7 @@
     "classnames": "^2.5.1",
     "codesandbox-import-utils": "2.2.3",
     "dompurify": "^3.4.0",
-    "esprima-next": "^5.8.4",
+    "esprima-next": "^6.0.3",
     "downshift": "^9.3.2",
     "gif-frames": "^1.0.1",
     "he": "^1.2.0",

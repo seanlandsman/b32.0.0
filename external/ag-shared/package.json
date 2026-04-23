@@ -36,7 +36,7 @@
   "devDependencies": {
     "typescript": "^5.4.5",
     "glob": "^11.1.0",
-    "@nx/devkit": "^18.3.5",
+    "@nx/devkit": "^20.8.4",
     "@types/yargs": "^17.0.35",
     "@swc/helpers": "0.5.21",
     "tinypool": "^2.1.0",
