@@ -45,16 +45,16 @@
     "@playwright/test": "^1.59.1",
     "@swc-node/register": "1.11.1",
     "@swc/cli": "0.3.14",
-    "@swc/core": "1.15.26",
+    "@swc/core": "1.15.30",
     "@swc/helpers": "0.5.21",
     "@types/node": "^22.15.3",
     "@types/node-fetch": "2.6.13",
     "@types/postcss-import": "^14.0.3",
     "@types/postcss-url": "^10.0.4",
     "@types/prompts": "^2.4.9",
-    "@typescript-eslint/eslint-plugin": "8.58.2",
-    "@typescript-eslint/parser": "8.58.2",
-    "@vue/compiler-sfc": "3.5.32",
+    "@typescript-eslint/eslint-plugin": "8.59.0",
+    "@typescript-eslint/parser": "8.59.0",
+    "@vue/compiler-sfc": "3.5.33",
     "JSONStream": "1.3.5",
     "autoprefixer": "^10.5.0",
     "bent": "^7.3.12",
@@ -65,8 +65,8 @@
     "eslint": "^10.2.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import-x": "4.16.2",
-    "eslint-plugin-react-hooks": "7.0.1",
-    "eslint-plugin-sonarjs": "4.0.2",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-sonarjs": "4.0.3",
     "eslint-plugin-unicorn": "64.0.0",
     "event-stream": "4.0.1",
     "glob": "^11.1.0",
@@ -125,6 +125,9 @@
       "**/vue-template-compiler",
       "**/vue-class-component"
     ]
+  },
+  "resolutions": {
+    "**/baseline-browser-mapping": "2.10.21"
   },
   "packageManager": "yarn@1.22.21"
 }
