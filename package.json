@@ -22,6 +22,8 @@
     "yarn": "^1.22.21"
   },
   "dependencies": {
+    "@carbon/icons-react": "^11.79.0",
+    "@types/jasmine": "~4.6.6",
     "@types/react": "18.3.28",
     "algoliasearch": "4.27.0",
     "fs-extra": "^11.3.4",
@@ -71,7 +73,7 @@
     "event-stream": "4.0.1",
     "glob": "^11.1.0",
     "globals": "^15.2.0",
-    "knip": "6.4.1",
+    "knip": "6.6.1",
     "node-fetch": "2.7.0",
     "nx": "20.3.1",
     "octokit": "^5.0.5",
